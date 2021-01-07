@@ -10,6 +10,14 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log('login success code ' + res.code)
+        wx.getUserInfo({
+          lang: 'zh_CN',
+          success(res) {
+            console.log('user info ' + res.userInfo.city +
+              ' ' + res.userInfo.province)            
+          }
+        })
       }
     })
     // 获取用户信息
