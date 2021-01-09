@@ -57,6 +57,7 @@ Page({
   },
 
   NavChange(e) {
+
     this.setData({
       pageName: e.currentTarget.dataset.cur
     })

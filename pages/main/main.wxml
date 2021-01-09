@@ -1,8 +1,19 @@
 <!--pages/main/main.wxml-->
-<view class="bg-gradual-red padding radius text-center shadow-blur">
-  <text>main page</text>
-</view>
-<view class="bg-orange padding radius text-center heihei">
-  <view class="text-lg">魅红</view>
-  <view class="margin-top-sm text-Abc">#f43f3b - #ec008c</view>
-</view>
+<scroll-view scroll-y class="scrollPage">
+  <!-- 顶部新闻滚动图 -->
+  <swiper class="screen-swiper square-dot" style="height: 544rpx;" indicator-dots="false" circular="true" autoplay="true"
+    interval="5000" duration="500">
+    <swiper-item wx:for="{{swiperList}}" bindtap="tapSwiper" data-id="{{item.id}}" wx:key>
+      <image src="{{item.url}}" mode="aspectFill"></image>
+    </swiper-item>
+  </swiper>
+
+  <view class="search-container">
+    <view class="cu-bar" style="width: 90%;">
+      <view class="search-form round shadow-warp" style="height: 76rpx; width: 100%;">
+        <text class="cuIcon-search" style="font-size: 36rpx; color: #cccccc"></text>
+        <input type="text" placeholder="搜楼盘，搜学校" confirm-type="search" style="font-size: 26rpx;" placeholder-style="color: #cccccc"></input>
+      </view>
+    </view>
+  </view>
+</scroll-view>

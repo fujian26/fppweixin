@@ -11,11 +11,43 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         console.log('login success code ' + res.code)
+        var loginCode = res.code
         wx.getUserInfo({
           lang: 'zh_CN',
           success(res) {
             console.log('user info ' + res.userInfo.city +
-              ' ' + res.userInfo.province)            
+              ' ' + res.userInfo.province)
+            let app = getApp()
+            wx.request({
+              url: app.globalData.baseUrl + '/wx/obtainSession',
+              header: {
+                'token': app.globalData.token,
+                'content-type': 'application/json'
+              },
+              data: {
+                loginCode: loginCode,
+                rawData: res.rawData,
+                signature: res.signature,
+                encryptedData: res.encryptedData,
+                iv: res.iv,
+                nickName: res.userInfo.nickName,
+                avatarUrl: res.userInfo.avatarUrl,
+                gender: res.userInfo.gender,
+                country: res.userInfo.gender,
+                province: res.userInfo.province,
+                city: res.userInfo.city
+              },
+              success(res) {
+                console.log('obtainSession success res ' + res.data.data)
+                app.globalData.token = res.data.data
+              },
+              fail(res) {
+                console.log('obtainSession fail res ' + res.errMsg)
+              }
+            })
+          },
+          fail(res) {
+            console.log('get userinfo fail ' + res.errMsg)
           }
         })
       }
@@ -44,16 +76,18 @@ App({
       success: e => {
         this.globalData.StatusBar = e.statusBarHeight;
         let capsule = wx.getMenuButtonBoundingClientRect();
-		if (capsule) {
-		 	this.globalData.Custom = capsule;
-			this.globalData.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight;
-		} else {
-			this.globalData.CustomBar = e.statusBarHeight + 50;
-		}
+        if (capsule) {
+          this.globalData.Custom = capsule;
+          this.globalData.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight;
+        } else {
+          this.globalData.CustomBar = e.statusBarHeight + 50;
+        }
       }
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    baseUrl: 'http://localhost:8081',
+    token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmdWppYW4iLCJpYXQiOjE2MTAxODQ2NzIsImV4cCI6MTYxMDI3MTA3Mn0.WNOnfMFHJjZP2l8pcnEt3FYn2c4RRiLo7SODtirMoU_yYIZxWhwaCwPA-Jn3a_C7uTKjDtwvQwNbGioPiP6Lgw'
   }
 })

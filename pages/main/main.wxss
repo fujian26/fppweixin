@@ -1,2 +1,12 @@
 /* pages/main/main.wxss */
 
+.search-container {
+  height: 76rpx;
+  width: 100%;
+  position: fixed;
+  background-color: transparent;
+  top: 510rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

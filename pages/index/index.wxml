@@ -1,5 +1,4 @@
 <!--index.wxml-->
-<view class="bg-gradual-blue padding" style="height: 200rpx;"></view>
 <main wx:if="{{pageName == 'main'}}"></main>
 <map wx:if="{{pageName == 'map'}}"></map>
 <msg wx:if="{{pageName == 'msg'}}"></msg>
