@@ -1,13 +1,34 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<view class="bg-gradual-blue padding" style="height: 200rpx;"></view>
+<main wx:if="{{pageName == 'main'}}"></main>
+<map wx:if="{{pageName == 'map'}}"></map>
+<msg wx:if="{{pageName == 'msg'}}"></msg>
+<me wx:if="{{pageName == 'me'}}"></me>
+<view class="cu-bar tabbar bg-white shadow foot" style="height: 120rpx">
+  <view class="action" bindtap="NavChange" data-cur="main">
+    <view class='cuIcon-cu-image'>
+      <image wx:if="{{pageName=='main'}}" style="width: 74rpx; height: 74rpx;" src="/images/nav/nav_home_high.png">
+      </image>
+      <image src="/images/nav/nav_home.png" style="width: 40rpx; height: 40rpx;" wx:else></image>
+    </view>
+    <view class="{{pageName=='main'?'nav-text-high':'nav-text'}}">首页</view>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class="action" bindtap="NavChange" data-cur="map">
+    <image wx:if="{{pageName=='map'}}" style="width: 74rpx; height: 74rpx;" src="/images/nav/nav_map_high.png">
+    </image>
+    <image src="/images/nav/nav_map.png" style="width: 40rpx; height: 40rpx;" wx:else></image>
+    <view class="{{pageName=='map'?'nav-text-high':'nav-text'}}">地图</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="msg">
+    <image wx:if="{{pageName=='msg'}}" style="width: 74rpx; height: 74rpx;" src="/images/nav/nav_msg_high.png">
+    </image>
+    <image src="/images/nav/nav_msg.png" style="width: 40rpx; height: 40rpx;" wx:else></image>
+    <view class="{{pageName=='msg'?'nav-text-high':'nav-text'}}">消息</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="me">
+    <image wx:if="{{pageName=='me'}}" style="width: 74rpx; height: 74rpx;" src="/images/nav/nav_me_high.png">
+    </image>
+    <image src="/images/nav/nav_me.png" style="width: 40rpx; height: 40rpx;" wx:else></image>
+    <view class="{{pageName=='me'?'nav-text-high':'nav-text'}}">我的</view>
   </view>
 </view>

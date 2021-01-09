@@ -3,11 +3,15 @@
 const app = getApp()
 
 Page({
+  options: {
+    addGlobalClass: true,
+  },
+  
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    pageName: 'main'
   },
   // 事件处理函数
   bindViewTap() {
@@ -50,5 +54,11 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+
+  NavChange(e) {
+    this.setData({
+      pageName: e.currentTarget.dataset.cur
+    })
+  },
 })

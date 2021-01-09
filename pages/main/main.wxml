@@ -1,0 +1,8 @@
+<!--pages/main/main.wxml-->
+<view class="bg-gradual-red padding radius text-center shadow-blur">
+  <text>main page</text>
+</view>
+<view class="bg-orange padding radius text-center heihei">
+  <view class="text-lg">魅红</view>
+  <view class="margin-top-sm text-Abc">#f43f3b - #ec008c</view>
+</view>
