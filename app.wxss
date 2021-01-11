@@ -15,7 +15,3 @@
 .scrollPage {
   height: 100vh;  
 }
-
-.heihei {
-  background-color: aqua;
-}

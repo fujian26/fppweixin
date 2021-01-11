@@ -1,2 +1,3 @@
 <!--pages/msg/msg.wxml-->
+<basebar></basebar>
 <text>pages/msg/msg.wxml</text>
