@@ -1,2 +1,7 @@
 <!--components/basebar/basebar.wxml-->
-<view style="width: 100%; height: 100rpx; background-color: #3E66D5"></view>
+<view class="statusbar" style="height: {{tabbarHeight}}px;"></view>
+<view class="tabbar">
+  <text class="cuIcon-{{leftAction}} left" bindtap="tapLeft"></text>
+  <text class="center">{{centerText}}</text>
+  <text class="cuIcon-{{rightIcon}} right" bindtap="tapRight"></text>
+</view>

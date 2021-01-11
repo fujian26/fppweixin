@@ -166,7 +166,8 @@ Component({
           if (res.data.code != 0) {
             console.log('getHotSchools success code != 0, msg ' + res.data.msg)
             wx.showToast({
-              title: '获取热门学校错误 ' + res.data.msg
+              title: '获取热门学校错误 ' + res.data.msg,
+              icon: 'none'
             })
           } else {
             console.log('获取热门学校成功，数量: ' + res.data.data.length)
@@ -192,7 +193,8 @@ Component({
         fail(res) {
           console.log('getHotSchools fail res ' + res.errMsg)
           wx.showToast({
-            title: '获取热门学校错误 ' + res.errMsg
+            title: '获取热门学校错误 ' + res.errMsg,
+            icon: 'none'
           })
         }
       })

@@ -1,1 +1,36 @@
 /* components/basebar/basebar.wxss */
+.statusbar {
+  width: 100%; 
+  background-color: #3E66D5;
+}
+
+.tabbar {
+  width: 100%;  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+  background-color: #3E66D5;
+}
+
+.tabbar .left {
+  color: white;
+  font-size: 36rpx;
+  padding-left: 28rpx;
+  padding-right: 28rpx;
+}
+
+.tabbar .right {
+  color: white;
+  font-size: 36rpx;
+  padding-left: 28rpx;
+  padding-right: 28rpx;
+}
+
+.tabbar .center {
+  flex: 1;
+  text-align: center;
+  color: white;
+  font-size: 30rpx;
+}
