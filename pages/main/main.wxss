@@ -1,12 +1,135 @@
 /* pages/main/main.wxss */
 
 .search-container {
+  display: flex;
   height: 76rpx;
   width: 100%;
-  position: fixed;
-  background-color: transparent;
+  position: absolute;
   top: 510rpx;
-  display: flex;
+  background-color: transparent;
   justify-content: center;
   align-items: center;
+}
+
+.below-search-items {
+  display: flex;
+  margin-top: 70rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-bottom: 48rpx;
+  color: #666666;
+  font-size: 20rpx;
+}
+
+.below-search-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hot-msgs {
+  padding-left: 28rpx;
+  padding-right: 28rpx;
+  padding-top: 16rpx;
+  padding-bottom: 16rpx;
+  background-color: #f6f6f6;
+}
+
+.hot-msg {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 26rpx;
+  padding-right: 26rpx;
+  padding-top: 12rpx;
+  padding-bottom: 12rpx;
+  border-radius: 28rpx;
+  background-color: white;
+}
+
+.hot-msg text {
+  color: #666666;
+  font-size: 22rpx;
+}
+
+.cards-line {
+  display: flex;
+  flex-direction: row;
+  padding-left: 26rpx;
+  padding-right: 26rpx;
+}
+
+.cards-line .item {
+  flex: 1;
+}
+
+.cards-line .item image {
+  width: 100%;
+  height: 140rpx;
+}
+
+.cards-line .divide {
+  width: 16rpx;
+  height: 20rpx;
+}
+
+.hot-schools-label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 32rpx;
+  margin-bottom: 32rpx;
+  margin-left: 26rpx;
+  margin-right: 26rpx;
+}
+
+.hot-schools-label .label {
+  margin-left: 10rpx;
+  color: #333333;
+  font-size: 32rpx;
+}
+
+.hot-schools-label .more {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #cccccc;
+  font-size: 20rpx;
+}
+
+.hot-schools-label .more image {
+  width: 11rpx;
+  height: 18rpx;
+  margin-left: 9rpx;
+}
+
+.hot-schools {
+  display: flex;
+  flex-direction: row;
+  padding: 4rpx;
+}
+
+.hot-school {
+  width: 300rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 16rpx;
+  border-radius: 14rpx;
+  box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.hot-school .text {
+  color: #333333;
+  font-size: 20rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.hot-school image {
+  width: 100%;
+  height: 200rpx;
+  border-top-left-radius: 14rpx;
+  border-top-right-radius: 14rpx;
 }

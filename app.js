@@ -74,7 +74,7 @@ App({
     })
     wx.getSystemInfo({
       success: e => {
-        this.globalData.StatusBar = e.statusBarHeight;
+        this.globalData.StatusBar = e.statusBarHeight;      
         let capsule = wx.getMenuButtonBoundingClientRect();
         if (capsule) {
           this.globalData.Custom = capsule;
@@ -88,6 +88,6 @@ App({
   globalData: {
     userInfo: null,
     baseUrl: 'http://localhost:8081',
-    token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmdWppYW4iLCJpYXQiOjE2MTAxODQ2NzIsImV4cCI6MTYxMDI3MTA3Mn0.WNOnfMFHJjZP2l8pcnEt3FYn2c4RRiLo7SODtirMoU_yYIZxWhwaCwPA-Jn3a_C7uTKjDtwvQwNbGioPiP6Lgw'
+    token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmdWppYW4iLCJpYXQiOjE2MTAzNTEyNzcsImV4cCI6MTYxMDQzNzY3N30.4pyRVwTxX_y2dnXtpFv8C4M8ejH_0ugKyyHJ33ZsajmLxNDo_b-5JrU-MTeSv-I29lC8vllMn8pkrpmpH08Qdg'
   }
 })

@@ -1,13 +1,14 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/main/main",
-    "pages/logs/logs", 
+    "pages/logs/logs",
     "pages/map/map",
     "pages/msg/msg",
-    "pages/me/me"
+    "pages/me/me",
+    "pages/school/detail/detail"
   ],
-  "window":{
+  "window": {
     "navigationBarBackgroundColor": "#39b54a",
     "navigationBarTitleText": "Color UI",
     "navigationStyle": "custom",
@@ -16,6 +17,6 @@
   "style": "v2",
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom"
-  },  
+  },
   "sitemapLocation": "sitemap.json"
 }

@@ -1,19 +1,82 @@
 <!--pages/main/main.wxml-->
-<scroll-view scroll-y class="scrollPage">
+<scroll-view scroll-y class="scrollPage" bindscroll="onScrolled"
+  style="background-color: #ffffff; padding-bottom: 100rpx;">
   <!-- 顶部新闻滚动图 -->
-  <swiper class="screen-swiper square-dot" style="height: 544rpx;" indicator-dots="false" circular="true" autoplay="true"
-    interval="5000" duration="500">
-    <swiper-item wx:for="{{swiperList}}" bindtap="tapSwiper" data-id="{{item.id}}" wx:key>
+  <swiper class="screen-swiper square-dot" style="height: 544rpx;" indicator-dots="false" circular="true"
+    autoplay="true" interval="5000" duration="500">
+    <swiper-item wx:for="{{swiperList}}" bindtap="tapSwiper" data-id="{{item.id}}" wx:key="id">
       <image src="{{item.url}}" mode="aspectFill"></image>
     </swiper-item>
   </swiper>
 
+  <!-- 搜索框 -->
   <view class="search-container">
     <view class="cu-bar" style="width: 90%;">
-      <view class="search-form round shadow-warp" style="height: 76rpx; width: 100%;">
+      <view class="search-form round shadow-warp" style="height: 76rpx; width: 100%; background-color: white">
         <text class="cuIcon-search" style="font-size: 36rpx; color: #cccccc"></text>
-        <input type="text" placeholder="搜楼盘，搜学校" confirm-type="search" style="font-size: 26rpx;" placeholder-style="color: #cccccc"></input>
+        <input type="text" placeholder="搜楼盘，搜学校" confirm-type="search" style="font-size: 26rpx;"
+          placeholder-style="color: #cccccc" bindconfirm="searchConfirm"></input>
       </view>
     </view>
   </view>
+
+  <!-- 差学校、找房屋... -->
+  <view class="below-search-items">
+    <view wx:for="{{belowSearchItems}}" class="below-search-item" bindtap="belowSearchItemTap" data-id="{{item.id}}"
+      wx:key="id">
+      <image src="{{item.image}}" style="width: 120rpx; height: 120rpx;"></image>
+      <view>{{item.str}}</view>
+    </view>
+  </view>
+
+  <!-- 热点新闻条 -->
+  <view class="hot-msgs">
+    <view class="hot-msg" bindtap="hotMsgTap">
+      <image src="/images/hot_msg.png" style="width: 24rpx; height: 30rpx;" />
+      <text style="margin-left: 14rpx">{{hotMsg}}</text>
+    </view>
+  </view>
+
+  <!-- 小学划片、小升初... -->
+  <view class="cards-line" style="margin-top: 34rpx;">
+    <view class="item" wx:for="{{cardsline1}}" style="flex: {{item.flex}}; margin-left: {{item.marginLeft}}rpx;"
+      data-id="{{item.id}}" bindtap="cardTap" wx:key="id">
+      <image src="{{item.image}}" />
+    </view>
+  </view>
+  <view class="cards-line" style="margin-top: 8rpx; margin-bottom: 34rpx;">
+    <view class="item" wx:for="{{cardsline2}}" style="flex: {{item.flex}}; margin-left: {{item.marginLeft}}rpx"
+      data-id="{{item.id}}" bindtap="cardTap" wx:key="id">
+      <image src="{{item.image}}" />
+    </view>
+  </view>
+
+  <view style="height:16rpx; background-color: #f6f6f6" />
+
+  <!-- 热门学校 -->
+  <view class="hot-schools-label">
+    <image src="/images/hot_school.png" style="width: 34rpx; height: 34rpx;" />
+    <view class="label">热门学校</view>
+    <view style="flex: 1"></view>
+    <view class="more" bindtap="hotSchoolMoreTap">
+      <view>更多</view>
+      <image src="/images/arrow_grey_right.png" />
+    </view>
+  </view>
+  <scroll-view scroll-x="true" style="margin-left: 26rpx; margin-bottom: 36rpx;">
+    <view class="hot-schools" style="width: {{hotSchools.length * 338}}rpx">
+      <view class="hot-school" wx:for="{{hotSchools}}" data-id="{{item.school.id}}" bindtap="hotSchoolItemTap"
+        wx:key="id">
+        <image src="{{item.school.logoPicUrl}}" />
+        <view class="text">{{item.school.name}}</view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view style="height:16rpx; background-color: #f6f6f6" />
+
+  
+
+  <!-- 底部占位 -->
+  <view style="height: 100rpx; background-color: #ffffff"></view>
 </scroll-view>
