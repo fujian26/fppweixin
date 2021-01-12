@@ -147,7 +147,24 @@ Component({
     },
 
     hotSchoolItemTap(event) {
-      console.log('hotSchoolItemTap school id ' + event.currentTarget.dataset.id)
+      var index = event.currentTarget.dataset.index
+      console.log('hotSchoolItemTap school index ' + index)
+      var shcoolExt = this.data.hotSchools[index]
+      wx.setStorage({
+        data: shcoolExt,
+        key: 'schoolExt',
+        success(res) {          
+          wx.navigateTo({
+            url: '/pages/school/basic/basic',
+            fail(res) {
+              console.log('main.js navigateTo fail ' + res.errMsg)
+            }
+          })
+        },
+        fail(res) {
+          console.log('main.js setStorage school fail ' + res.errMsg)
+        }
+      })
     },
 
     getHotSchools() {

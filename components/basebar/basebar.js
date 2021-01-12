@@ -18,8 +18,7 @@ Component({
     rightIcon: {
       type: String,
       value: 'more'
-    },
-    rigthFunction: Object
+    }
   },
 
   observers: {
@@ -38,11 +37,14 @@ Component({
    */
   methods: {
     tapLeft(event) {
-      console.log('tapLeft')
+      this.triggerEvent('tapLeft')
+      wx.navigateBack()
     },
 
     tapRight(event) {
-      console.log('tapRight')
+      var eventDetail = {} // detail对象，提供给事件监听函数
+      var eventOption = {} // 触发事件的选项
+      this.triggerEvent('tapRight', eventDetail, eventOption)
     }
   }
 })

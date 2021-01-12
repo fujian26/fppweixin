@@ -1,1 +1,55 @@
 /* pages/school/basic/basic.wxss */
+.top-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-top: 48rpx;
+}
+
+.top-container .left {  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-container .left image {
+  width: 206rpx;
+  height: 206rpx;  
+}
+
+.top-container .left .important {  
+  padding: 10rpx 20rpx;
+  font-size: 26rpx;
+  border-radius: 12rpx;
+  color: white;
+  background-color: #3E66D5;
+}
+
+.top-container .right {
+  flex: 1;
+}
+
+.title {
+  color: #000000;
+  font-size: 32rpx;
+}
+
+.lv-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 4rpx;
+}
+
+.label {
+  color: #666666;
+  font-size: 26rpx;
+}
+
+.value {
+  color: #000000;
+  font-size: 26rpx;
+  margin-left: 4rpx;
+}

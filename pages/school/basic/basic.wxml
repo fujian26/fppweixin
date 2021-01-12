@@ -1,2 +1,25 @@
 <!--pages/school/basic/basic.wxml-->
+<basebar leftAction="back" centerText="{{schoolExt.school.name}}" bind:tapRight="rightTapFromBar"></basebar>
+<scroll-view scroll-y="true" class="scrollPage">
 
+  <!-- 学校logo、名称 -->
+  <view class="top-container">
+
+    <view class="left">
+      <image src="{{logoUrl}}" />
+      <view wx:if="{{importantStr != null}}" class="important">{{importantStr}}</view>
+    </view>
+
+    <view class="right">
+      <!-- 学校名称 -->
+      <view class="title">{{schoolExt.school.name}}</view>
+      <!-- 学段 -->
+      <view class="lv-container text-one-line" style="margin-top: 12rpx;">
+        <view class="label">学段：</view>
+        <view class="value">{{typeStr}}阿发发生发发看看撒放大了发卡阿发发生发发看看撒放大了发卡</view>
+      </view>
+    </view>
+
+  </view>
+
+</scroll-view>

@@ -1,6 +1,5 @@
 <!--pages/main/main.wxml-->
-<scroll-view scroll-y class="scrollPage" bindscroll="onScrolled"
-  style="background-color: #ffffff; padding-bottom: 100rpx;">
+<scroll-view scroll-y class="scrollPage" bindscroll="onScrolled">
   <!-- 顶部新闻滚动图 -->
   <swiper class="screen-swiper square-dot" style="height: 544rpx;" indicator-dots="false" circular="true"
     autoplay="true" interval="5000" duration="500">
@@ -65,7 +64,7 @@
   </view>
   <scroll-view scroll-x="true" style="margin-left: 26rpx; margin-bottom: 36rpx;">
     <view class="hot-schools" style="width: {{hotSchools.length * 338}}rpx">
-      <view class="hot-school" wx:for="{{hotSchools}}" data-id="{{item.school.id}}" bindtap="hotSchoolItemTap"
+      <view class="hot-school" wx:for="{{hotSchools}}" data-index="{{index}}" data-id="{{item.school.id}}" bindtap="hotSchoolItemTap"
         wx:key="id">
         <image src="{{item.school.logoPicUrl}}" />
         <view class="text">{{item.school.name}}</view>

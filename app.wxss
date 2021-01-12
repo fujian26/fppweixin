@@ -13,5 +13,15 @@
 }
 
 .scrollPage {
-  height: 100vh;  
+  height: 100vh;
+  padding-bottom: 100rpx;
+  background-color: #ffffff;
+}
+
+.text-one-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
