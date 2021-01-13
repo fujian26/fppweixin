@@ -10,6 +10,18 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    bgColor: {
+      type: String,
+      value: '#3E66D5'
+    },
+    iconColor: {
+      type: String,
+      value: '#ffffff'
+    },
+    centerColor: {
+      type: String,
+      value: '#ffffff'
+    },
     leftAction: {
       type: String,
       value: 'back'
@@ -37,6 +49,7 @@ Component({
    */
   methods: {
     tapLeft(event) {
+      console.log('basebar left tap')
       this.triggerEvent('tapLeft')
       wx.navigateBack()
     },

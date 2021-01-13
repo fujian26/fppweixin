@@ -1,2 +1,158 @@
 <!--pages/school/detail/detail.wxml-->
-<text>pages/school/detail/detail.wxml</text>
+<scroll-view scroll-y="true" class="scrollPage">
+
+  <swiper class="screen-swiper top-swiper" style="height: 544rpx;" indicator-dots="false" circular="true"
+    autoplay="true" interval="5000" duration="500" indicator-active-color='#3E66D5'>
+    <swiper-item wx:for="{{pics}}" bindtap="tapSwiper" data-url="{{item}}" wx:key="id">
+      <image src="{{item}}" mode="aspectFill"></image>
+    </swiper-item>
+  </swiper>
+
+  <view class="bars">
+    <view class="statusbar" style="height: {{tabbarHeight}}px;"></view>
+    <view class="tabbar">
+      <text class="cuIcon-back left" bindtap="tapLeft"></text>
+      <text class="center">{{schoolExt.school.name}}</text>
+      <!-- <text class="cuIcon-more right" bindtap="tapRight"></text> -->
+      <view style="width: 200rpx;"></view>
+    </view>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="basic">
+
+    <view class="hflex-container">
+      <view class="title">{{schoolExt.school.name}}</view>
+      <view class="holder"></view>
+      <view class="blue-btn" bindtap="tapDetail">详情</view>
+    </view>
+
+    <view class="hflex-container" style="margin-top: 26rpx;">
+      <view class="hflex-container">
+        <view class="blue-tag">
+          <image src="/images/school_nature.png" />
+          <view style="margin-left: 10rpx">性质: {{nature}}</view>
+        </view>
+        <view class="blue-tag" style="margin-left: 20rpx;">{{typeStr}}</view>
+      </view>
+      <view class="holder"></view>
+      <view class="blue-btn" bindtap="tapSignUp">报名</view>
+    </view>
+
+    <!-- 入学方式、官方电话 -->
+    <view class="hflex-container" style="margin-top: 30rpx; align-items: flex-start;">
+
+      <view class="vflex-container" style="align-items: flex-start;">
+        <!-- 入学方式 -->
+        <view class="hflex-container">
+          <view class="label">入学方式：</view>
+          <view class="label">{{entranceMode}}</view>
+        </view>
+
+        <!-- 官方电话 -->
+        <view class="hflex-container" style="margin-top: 4rpx;">
+          <view class="label">官方电话：</view>
+          <view class="label">{{schoolExt.school.phone}}</view>
+        </view>
+
+        <!-- 学校官网 -->
+        <view class="hflex-container" style="margin-top: 4rpx;">
+          <view class="label">学校官网：</view>
+          <view class="label">{{schoolExt.school.website}}</view>
+        </view>
+
+        <!-- 学校地址 -->
+        <view class="hflex-container" style="margin-top: 4rpx;">
+          <view class="label">学校地址：</view>
+          <view class="label">{{addr}}</view>
+        </view>
+      </view>
+
+      <view class="holder" />
+
+      <image src="/images/school_phone.png" bindtap="tapPhone" style="width: 56rpx; height: 56rpx;" />
+    </view>
+  </view>
+
+  <view style="background-color: #f6f6f6; height: 14rpx;" />
+
+  <!-- 划片范围及小区 -->
+  <view class="vflex-container" style="padding: 30rpx 30rpx;">
+    <view class="hflex-container" style="width: 100%">
+      <image src="/images/location_stroke.png" style="width: 38rpx; height: 38rpx;" />
+      <view class="title" style="margin-left: 10rpx;">划片范围及小区</view>
+      <view class="holder" />
+      <view class="hflex-container" bindtap="tapDivideRangeMore">
+        <view style="color: #CCCCCC; font-size: 20rpx;">更多</view>
+        <text class="cuIcon-right" style="margin-left: 4rpx; color: #cccccc; font-size: 22rpx;" />
+      </view>
+    </view>
+  </view>
+
+  <view style="background-color: #f6f6f6; height: 14rpx;" />
+
+  <!-- 关注更多 -->
+  <view class="vflex-container attention">
+    <view class="hflex-container" style="width: 100%">
+      <image src="/images/attention_stroke.png" style="width: 38rpx; height: 38rpx;" />
+      <view class="title" style="margin-left: 10rpx;">关注更多</view>
+    </view>
+
+    <view class="hflex-container"
+      style="width: 100%; padding-left: 38rpx; margin-top: 36rpx; padding-right: 38rpx; justify-content: space-between;">
+      <view class="vflex-container" bindtap="tapAttenRecruit">
+        <image src="/images/school_detail_recruit.png" />
+        <view style="margin-top: 20rpx;">学校招生信息</view>
+      </view>
+
+      <view class="vflex-container" bindtap="tapAttenSettle">
+        <image src="/images/school_detail_settlement.png" />
+        <view style="margin-top: 20rpx;">落户迁户条件</view>
+      </view>
+
+      <view class="vflex-container" bindtap="tapAttenLottery">
+        <image src="/images/school_detail_lottery.png" />
+        <view style="margin-top: 20rpx;">摇号流程手续</view>
+      </view>
+    </view>
+  </view>
+
+  <view style="background-color: #f6f6f6; height: 14rpx;" />
+
+  <!-- 周边房源 -->
+  <view class="vflex-container house">
+
+    <view class="hflex-container" style="width: 100%">
+      <view class="hflex-container">
+        <image src="/images/house_stroke.png" style="width: 38rpx; height: 38rpx;" />
+        <view class="title" style="margin-left: 10rpx;">周边房源</view>
+      </view>
+
+      <view class="holder" />
+      <view class="hflex-container" bindtap="tapHouseMore">
+        <view style="color: #CCCCCC; font-size: 20rpx;">更多</view>
+        <text class="cuIcon-right" style="margin-left: 4rpx; color: #cccccc; font-size: 22rpx;" />
+      </view>
+    </view>
+  </view>
+
+  <view style="background-color: #f6f6f6; height: 14rpx;" />
+
+  <!-- 学校动态 -->
+  <view class="vflex-container house">
+
+    <view class="hflex-container" style="width: 100%">
+      <view class="hflex-container">
+        <image src="/images/book_stroke.png" style="width: 38rpx; height: 38rpx;" />
+        <view class="title" style="margin-left: 10rpx;">学校动态</view>
+      </view>
+
+      <view class="holder" />
+      <view class="hflex-container" bindtap="tapSchoolDynamicMore">
+        <view style="color: #CCCCCC; font-size: 20rpx;">更多</view>
+        <text class="cuIcon-right" style="margin-left: 4rpx; color: #cccccc; font-size: 22rpx;" />
+      </view>
+    </view>
+  </view>
+
+</scroll-view>

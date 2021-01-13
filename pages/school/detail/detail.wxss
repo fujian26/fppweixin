@@ -1,1 +1,113 @@
 /* pages/school/detail/detail.wxss */
+
+.bars {
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.statusbar {
+  width: 100%;
+}
+
+.tabbar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+}
+
+.tabbar .left {
+  font-size: 36rpx;
+  padding-left: 28rpx;
+  padding-right: 28rpx;
+  color: black;
+}
+
+.tabbar .right {
+  font-size: 36rpx;
+  padding-left: 28rpx;
+  padding-right: 28rpx;
+  color: black;
+}
+
+.tabbar .center {
+  flex: 1;
+  text-align: center;
+  font-size: 30rpx;
+  color: black;
+}
+
+.top-swiper {
+  width: 100%;
+  height: 540rpx;
+}
+
+.title {
+  color: #000000;
+  font-size: 32rpx;
+}
+
+.basic {
+  padding: 34rpx 28rpx;
+}
+
+.blue-btn {
+  padding: 8rpx 20rpx;
+  font-size: 22rpx;
+  color: white;
+  background-color: #3E66D5;
+  border-radius: 20rpx;
+}
+
+.blue-tag {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 12rpx 26rpx;
+  border-style: solid;
+  border-radius: 32rpx;
+  border-width: 1rpx;
+  border-color: #3E66D5;
+  color: #3E66D5;
+  font-size: 22rpx;
+}
+
+.blue-tag image {
+  width: 24rpx;
+  height: 26rpx;
+}
+
+.basic .label {
+  color: #999999;
+  font-size: 22rpx;
+}
+
+.basic .value {
+  flex: 1;
+  margin-left: 4rpx;
+  color: #999999;
+  font-size: 22rpx;
+}
+
+.attention {
+  padding: 28rpx 30rpx;
+  color: #999999;
+  font-size: 20rpx;
+}
+
+.attention image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.house {
+  padding: 28rpx 30rpx;
+}
+
+.school-dynamic {
+  padding: 28rpx 30rpx;
+}

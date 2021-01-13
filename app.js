@@ -74,6 +74,7 @@ App({
     })
     wx.getSystemInfo({
       success: e => {
+        this.globalData.screenWidth = e.screenWidth * e.pixelRatio
         this.globalData.StatusBar = e.statusBarHeight;      
         let capsule = wx.getMenuButtonBoundingClientRect();
         if (capsule) {

@@ -13,13 +13,114 @@
     <view class="right">
       <!-- 学校名称 -->
       <view class="title">{{schoolExt.school.name}}</view>
+
       <!-- 学段 -->
-      <view class="lv-container text-one-line" style="margin-top: 12rpx;">
+      <view class="lv-container" style="margin-top: 12rpx;">
         <view class="label">学段：</view>
-        <view class="value">{{typeStr}}阿发发生发发看看撒放大了发卡阿发发生发发看看撒放大了发卡</view>
+        <text class="value text-one-line" style="width: {{screenW - 206 - 60 - 68 - 50}}rpx;">{{typeStr}}</text>
+      </view>
+
+      <!-- 办学性质 -->
+      <view class="lv-container">
+        <view class="label">办学性质：</view>
+        <text class="value text-one-line" style="width: {{screenW - 206 - 60 - 68 - 50}}rpx;">{{nature}}</text>
+      </view>
+
+      <!-- 入学方式 -->
+      <view class="lv-container">
+        <view class="label">入学方式：</view>
+        <text class="value text-one-line" style="width: {{screenW - 206 - 60 - 68 - 50}}rpx;">{{entranceMode}}</text>
+      </view>
+
+      <!-- 教学质量 -->
+      <view class="lv-container">
+        <view class="label">教学质量：</view>
+        <text class="value text-one-line" style="width: {{screenW - 206 - 60 - 68 - 50}}rpx;">{{teachingQuality}}</text>
+      </view>
+
+      <!-- 创办时间 -->
+      <view class="lv-container">
+        <view class="label">创办时间：</view>
+        <text class="value text-one-line" style="width: {{screenW - 206 - 60 - 68 - 50}}rpx;">{{eatablishTime}}</text>
       </view>
     </view>
 
   </view>
+
+  <view class="divide-line" style="margin-top: 24rpx" />
+
+  <!-- 基本信息 -->
+  <view class="title" style="margin-top: 26rpx; margin-left: 26rpx;">基本信息</view>
+
+  <!-- 学校官网 -->
+  <view class="lv-container" style="margin-left: 26rpx; margin-top: 28rpx;">
+    <view class="label">学校官网：</view>
+    <text class="value">{{schoolExt.school.website}}</text>
+  </view>
+
+  <!-- 官方电话 -->
+  <view class="lv-container" style="margin-left: 26rpx;">
+    <view class="label">官方电话：</view>
+    <text class="value">{{schoolExt.school.phone}}</text>
+  </view>
+
+  <!-- 官方微信 -->
+  <view class="lv-container" style="margin-left: 26rpx;">
+    <view class="label">官方微信：</view>
+    <text class="value">{{schoolExt.school.weixin}}</text>
+  </view>
+
+  <!-- 学校地址 -->
+  <view class="lv-container" style="margin-left: 26rpx;">
+    <view class="label">学校地址：</view>
+    <text class="value">{{addr}}</text>
+  </view>
+
+  <view class="divide-line" style="margin-top: 26rpx;" />
+
+  <!-- 学校荣誉 -->
+  <view class="title" style="margin-top: 30rpx; margin-left: 26rpx;">学校荣誉</view>
+
+  <view class="label" style="margin-top: 26rpx; margin-left: 26rpx; margin-right: 26rpx;">{{schoolExt.school.honor}}
+  </view>
+
+  <view class="divide-line" style="margin-top: 28rpx;" />
+
+  <!-- 学校简介 -->
+  <view class="title" style="margin-top: 30rpx; margin-left: 26rpx;">学校简介</view>
+
+  <view class="label" style="margin-top: 26rpx; margin-left: 26rpx; margin-right: 26rpx;">{{schoolExt.school.brief}}
+  </view>
+
+  <view class="divide-line" style="margin-top: 28rpx;" />
+
+  <!-- 办学条件 -->
+  <view class="title" style="margin-top: 30rpx; margin-left: 26rpx;">办学条件</view>
+
+  <!-- 硬件水平 -->
+  <view class="lv-container-top" style="margin-left: 26rpx; margin-top: 20rpx;">
+    <view class="label">硬件水平：</view>
+    <text class="value">{{schoolExt.school.hardware_level}}</text>
+  </view>
+
+  <!-- 供餐说明 -->
+  <view class="lv-container-top" style="margin-left: 26rpx; margin-top: 20rpx;">
+    <view class="label">供餐说明：</view>
+    <text class="value">{{schoolExt.school.meal_instruction}}</text>
+  </view>
+
+  <!-- 是否寄宿 -->
+  <view class="lv-container-top" style="margin-left: 26rpx; margin-top: 20rpx;">
+    <view class="label">是否寄宿：</view>
+    <text class="value">{{schoolExt.school.boarding == 1 ? '是' : '否'}}</text>
+  </view>
+
+  <!-- 师资水平 -->
+  <view class="lv-container-top" style="margin-left: 26rpx; margin-top: 20rpx;">
+    <view class="label">师资水平：</view>
+    <text class="value">{{schoolExt.school.teacher_level}}</text>
+  </view>
+
+  <view style="height: 14rpx; margin-top: 28rpx; background-color: #F6F6F6"></view>
 
 </scroll-view>

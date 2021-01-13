@@ -8,7 +8,7 @@
   margin-top: 48rpx;
 }
 
-.top-container .left {  
+.top-container .left {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,12 +16,12 @@
 
 .top-container .left image {
   width: 206rpx;
-  height: 206rpx;  
+  height: 206rpx;
 }
 
-.top-container .left .important {  
-  padding: 10rpx 20rpx;
-  font-size: 26rpx;
+.top-container .left .important {
+  padding: 4rpx 20rpx;
+  font-size: 22rpx;
   border-radius: 12rpx;
   color: white;
   background-color: #3E66D5;
@@ -29,6 +29,7 @@
 
 .top-container .right {
   flex: 1;
+  margin-left: 68rpx;
 }
 
 .title {
@@ -40,7 +41,14 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 4rpx;
+  margin-top: 8rpx;  
+}
+
+.lv-container-top {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-top: 8rpx;
 }
 
 .label {
@@ -49,7 +57,15 @@
 }
 
 .value {
+  flex: 1;  
   color: #000000;
   font-size: 26rpx;
   margin-left: 4rpx;
+}
+
+.divide-line {  
+  height: 2rpx;
+  margin-left: 26rpx;
+  margin-right: 26rpx;
+  background-color: #E6E6E6;
 }

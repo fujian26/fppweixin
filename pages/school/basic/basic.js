@@ -6,67 +6,23 @@ Page({
    * 页面的初始数据
    */
   data: {
+    screenW: app.globalData.screenWidth,
     schoolExt: null,
     logoUrl: '',
     importantStr: null,
-    typeStr: ''
+    typeStr: '',
+    nature: '', // 学校性质
+    entranceMode: '', // 入学方式
+    teachingQuality: '', // 教学质量
+    eatablishTime: '', // 创办时间
+    addr: '', // 学校地址
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this
-    wx.getStorage({
-      key: 'schoolExt',
-      success(res) {
-
-        var logoUrl = ''
-
-        for (var i = 0; i < res.data.pics.length; i++) {
-          if (res.data.pics[i].type == 2) {
-            logoUrl = res.data.pics[i].url
-            break
-          }
-        }
-
-        logoUrl = app.globalData.baseUrl + "/file/download/" + logoUrl
-        console.log('logoUrl ' + logoUrl)
-
-        var typeStr = ''
-        switch (res.data.school.type) {
-          case 0:
-            typeStr = '幼儿园'
-            break
-          case 1:
-            typeStr = '小学'
-            break
-          case 2:
-            typeStr = '中学'
-            break
-          case 3:
-            typeStr = '培训机构'
-            break
-          default:
-            typeStr = '学校'
-        }
-
-        var importantStr = null
-        if (res.data.school.is_key == 1) {
-          importantStr = '重点' + typeStr
-        }
-
-        that.setData({
-          schoolExt: res.data,
-          logoUrl: logoUrl,
-          importantStr: importantStr,
-          typeStr: typeStr
-        })
-      },
-      fail(res) {
-        console.log('basic created fail res: ' + res.errMsg)
-      }
-    })
+    this.initSchoolData()
   },
 
   /**
@@ -120,5 +76,88 @@ Page({
 
   rightTapFromBar(event) {
     console.log('basic.js rightTapFromBar')
+  },
+
+  initSchoolData() {
+    let that = this
+    wx.getStorage({
+      key: 'schoolExt',
+      success(res) {
+
+        var logoUrl = ''
+        var schoolExt = res.data
+        var school = res.data.school
+
+        for (var i = 0; i < res.data.pics.length; i++) {
+          if (res.data.pics[i].type == 2) {
+            logoUrl = res.data.pics[i].url
+            break
+          }
+        }
+
+        logoUrl = app.globalData.baseUrl + "/file/download/" + logoUrl
+        console.log('logoUrl ' + logoUrl)
+
+        var typeStr = ''
+        switch (res.data.school.type) {
+          case 0:
+            typeStr = '幼儿园'
+            break
+          case 1:
+            typeStr = '小学'
+            break
+          case 2:
+            typeStr = '中学'
+            break
+          case 3:
+            typeStr = '培训机构'
+            break
+          default:
+            typeStr = '学校'
+        }
+
+        var importantStr = null
+        if (res.data.school.is_key == 1) {
+          importantStr = '重点' + typeStr
+        }
+
+        var nature = '公办'
+        if (school.nature == 1) {
+          nature = '私办'
+        }
+
+        var entranceMode = '户籍划片摇号'
+        if (school.entrance_mode == 1) {
+          entranceMode = '直读'
+        }
+
+        var teachingQuality = '良'
+        if (school.teaching_quality == 1) {
+          teachingQuality = '优'
+        }
+
+        var date = new Date(school.eatablish_time)
+        var eatablishTime = date.getFullYear() + '年'
+
+        var addr = school.province_name + school.city_name +
+          school.area_name + school.street_name +
+          school.detail_addr
+
+        that.setData({
+          schoolExt: res.data,
+          logoUrl: logoUrl,
+          importantStr: importantStr,
+          typeStr: typeStr,
+          nature: nature,
+          entranceMode: entranceMode,
+          teachingQuality: teachingQuality,
+          eatablishTime: eatablishTime,
+          addr: addr
+        })
+      },
+      fail(res) {
+        console.log('basic created fail res: ' + res.errMsg)
+      }
+    })
   }
 })

@@ -155,9 +155,9 @@ Component({
         key: 'schoolExt',
         success(res) {          
           wx.navigateTo({
-            url: '/pages/school/basic/basic',
+            url: '/pages/school/detail/detail',
             fail(res) {
-              console.log('main.js navigateTo fail ' + res.errMsg)
+              console.log('main.js navigateTo school detail fail ' + res.errMsg)
             }
           })
         },
