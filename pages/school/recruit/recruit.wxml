@@ -1,0 +1,14 @@
+<!--pages/school/recruit/recruit.wxml-->
+<!-- 招生简章 -->
+<basebar centerText='招生简章'></basebar>
+<scroll-view scroll-y="true" class="scrollPage">
+
+  <view class="title">{{recruit != null ? recruit.title : ''}}</view>
+
+  <view class="hflex-container" style="margin-top: 20rpx; margin-left: 28rpx; margin-right: 28rpx;">
+    <view class="little-label">招生动态 免责声明</view>
+    <view class="holder" />
+    <view class="little-label">{{time}}</view>
+  </view>
+
+</scroll-view>

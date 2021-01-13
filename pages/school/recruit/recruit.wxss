@@ -1,0 +1,10 @@
+/* pages/school/recruit/recruit.wxss */
+.title {
+  color: #000000;
+  font-size: 32rpx;
+}
+
+.little-label {
+  color: #999999;
+  font-size: 20rpx;
+}

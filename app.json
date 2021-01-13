@@ -8,7 +8,8 @@
     "pages/me/me",
     "pages/school/detail/detail",
     "pages/school/basic/basic",
-    "components/basebar/basebar"
+    "components/basebar/basebar",
+    "pages/school/recruit/recruit"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

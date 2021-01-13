@@ -188,7 +188,12 @@ Page({
   },
 
   tapAttenRecruit(event) {
-
+    wx.navigateTo({
+      url: '/pages/school/recruit/recruit',
+      fail(res) {
+        console.error('detail.js navigateTo school recruit fail ' + res.errMsg)
+      }
+    })
   },
 
   tapAttenSettle(event) {
