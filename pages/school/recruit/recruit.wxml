@@ -3,12 +3,22 @@
 <basebar centerText='招生简章'></basebar>
 <scroll-view scroll-y="true" class="scrollPage">
 
-  <view class="title">{{recruit != null ? recruit.title : ''}}</view>
+  <view class="top-title">{{recruit != null ? recruit.title : ''}}</view>
 
   <view class="hflex-container" style="margin-top: 20rpx; margin-left: 28rpx; margin-right: 28rpx;">
     <view class="little-label">招生动态 免责声明</view>
     <view class="holder" />
     <view class="little-label">{{time}}</view>
   </view>
+
+  <view style="background-color: #e6e6e6; height: 2rpx; margin-left: 28rpx; margin-right: 28rpx; margin-top: 4rpx" />
+
+  <view class="hflex-container" style="margin-top: 32rpx; padding: 0 28rpx;">
+    <image src="{{logoUrl}}" style="width: 68rpx; height: 68rpx;" />
+    <view class="title" style="margin-left: 16rpx;">{{schoolExt.school.name}}</view>
+  </view>
+
+  <!-- 简介 -->
+  <view class="content" style="margin-top: 32rpx">{{recruit != null ? recruit.recruit_instruction : ''}}</view>
 
 </scroll-view>

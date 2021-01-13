@@ -1,4 +1,16 @@
 /* pages/school/recruit/recruit.wxss */
+
+.top-title {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-top: 34rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  color: #000000;
+  font-size: 32rpx;
+}
+
 .title {
   color: #000000;
   font-size: 32rpx;
@@ -7,4 +19,11 @@
 .little-label {
   color: #999999;
   font-size: 20rpx;
+}
+
+.content {
+  margin-left: 28rpx;
+  margin-right: 28rpx;
+  color: #666666;
+  font-size: 26rpx;
 }
