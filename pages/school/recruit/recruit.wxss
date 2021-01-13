@@ -27,3 +27,18 @@
   color: #666666;
   font-size: 26rpx;
 }
+
+.label-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-top: 26rpx;
+  padding-left: 28rpx;
+  padding-right: 28rpx;
+}
+
+.label {
+  color: #333333;
+  font-size: 26rpx;
+}

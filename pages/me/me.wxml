@@ -1,2 +1,15 @@
 <!--pages/me/me.wxml-->
-<text>pages/me/me.wxml</text>
+<basebar centerText='个人中心'></basebar>
+<scroll-view scroll-y="true" class="scrollPage">
+  <view class="top-container" style="background-image: url('/images/me_top_bg.png')">
+    <!-- 头像、昵称 -->
+    <view class="hflex-container">
+      <image src="{{userInfo.avatarUrl}}" class="avatar" />
+      <view class="name">{{userInfo.nickName}}</view>
+      <view class="hflex-container setting" bindtap="tapSetting">
+        <image src="/images/me_setting.png" />
+        <view style="margin-left: 8rpx">设置</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
