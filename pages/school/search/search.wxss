@@ -1,6 +1,6 @@
 /* pages/school/search/search.wxss */
 .top-search {
-  padding: 14rpx 28rpx;  
+  padding: 14rpx 28rpx;
   background-color: #3E66D5;
 }
 
@@ -13,4 +13,13 @@
   margin-left: 12rpx;
   color: white;
   font-size: 32rpx;
+}
+
+.top-search .search {
+  flex: 1;
+  padding: 14rpx 32rpx;
+  min-height: 56rpx;
+  height: 60rpx;
+  margin-left: 28rpx;
+  background-color: white;
 }
