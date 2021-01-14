@@ -91,8 +91,8 @@
 
   <view style="background-color: #f6f6f6; height: 14rpx;" />
 
-  <!-- 关注更多 -->
-  <view class="vflex-container attention">
+  <!-- 关注更多，培训机构没有该项 -->
+  <view wx:if="{{schoolExt.school.type != 3}}" class="vflex-container attention">
     <view class="hflex-container" style="width: 100%">
       <image src="/images/attention_stroke.png" style="width: 38rpx; height: 38rpx;" />
       <view class="title" style="margin-left: 10rpx;">关注更多</view>

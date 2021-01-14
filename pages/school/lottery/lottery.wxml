@@ -1,0 +1,9 @@
+<!--pages/school/lottery/lottery.wxml-->
+<basebar centerText="{{lottery != null ? lottery.title : ''}}"></basebar>
+<scroll-view scroll-y="true" class="scrollPage">  
+  <view class="content">
+    <rich-text
+      nodes="{{lottery != null ? lottery.content : ''}}">
+    </rich-text>
+  </view>
+</scroll-view>

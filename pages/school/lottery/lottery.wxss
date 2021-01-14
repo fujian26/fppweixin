@@ -1,0 +1,5 @@
+/* pages/school/lottery/lottery.wxss */
+.content {
+  width: 100%;
+  padding: 36rpx 28rpx;
+}

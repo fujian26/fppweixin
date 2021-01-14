@@ -10,7 +10,7 @@
     "pages/school/basic/basic",
     "components/basebar/basebar",
     "pages/school/recruit/recruit",
-    "pages/school/registration/condition/condition"
+    "pages/school/lottery/lottery"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

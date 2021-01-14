@@ -18,25 +18,8 @@
     <view class="title" style="margin-left: 16rpx;">{{schoolExt.school.name}}</view>
   </view>
 
-  <!-- 简介 -->
-  <view class="content" style="margin-top: 32rpx">{{recruit != null ? recruit.recruit_instruction : ''}}</view>
-
-  <!-- 招生对象 -->
-  <view class="label-container">
-    <view class="label">招生对象：</view>
-    <view class="content" style="flex: 1; margin-left: 4rpx;">{{recruit != null ? recruit.recruit_obj : ''}}</view>
-  </view>
-
-  <!-- 收费标准 -->
-  <view class="label-container">
-    <view class="label">收费标准：</view>
-    <view class="content" style="flex: 1; margin-left: 4rpx;">{{recruit != null ? recruit.chargin_standard : ''}}</view>
-  </view>
-
-  <!-- 时间节点 -->
-  <view class="label-container">
-    <view class="label">时间节点：</view>
-    <view class="content" style="flex: 1; margin-left: 4rpx;">{{recruit != null ? recruit.time_node : ''}}</view>
-  </view>
+  <view class="content">
+    <rich-text nodes="{{recruit.content}}"/>
+  </view>  
 
 </scroll-view>

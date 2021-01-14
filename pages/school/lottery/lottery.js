@@ -1,25 +1,19 @@
-// pages/school/recruit/recruit.js
+// pages/school/lottery/lottery.js
 let app = getApp()
-const htmlSip = ``
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    schoolExt: null,
-    logoUrl: '',
-    time: '',
-    recruit: null,
-    htmlSip,
-    content: ''
+    lottery: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.initSchoolData()    
+    this.initSchoolData()
   },
 
   /**
@@ -76,36 +70,18 @@ Page({
     wx.getStorage({
       key: 'schoolExt',
       success(res) {        
-
-        var schoolExt = res.data
+        
         var school = res.data.school
 
-        that.getRecruitData(school.id)
-
-        var logoUrl = ''
-        for (var i = 0; i < schoolExt.pics.length; i++) {
-          if (schoolExt.pics[i].type == 2) {
-            var url = schoolExt.pics[i].url;
-            if (!url.startsWith('http://') && !url.startsWith('https://')) {
-              url = app.globalData.baseUrl + "/file/download/" + url
-            }
-            logoUrl = url
-            break
-          }
-        }
-
-        that.setData({
-          schoolExt: res.data,
-          logoUrl: logoUrl          
-        })
+        that.getLotteryData(school, school.city_code)
       },
       fail(res) {
         console.log('basic created fail res: ' + res.errMsg)
       }
     })
-  },
+  },  
 
-  getRecruitData(schoolId) {
+  getLotteryData(school, cityCode) {
 
     let that = this
 
@@ -114,30 +90,36 @@ Page({
     })
 
     wx.request({
-      url: app.globalData.baseUrl + '/school/getRecentRecruit',
+      url: app.globalData.baseUrl + '/school/getCityRecentLottery',
       header: {
         'token': app.globalData.token,
         'content-type': 'application/json'
       },
       data: {
-        schoolId: schoolId
+        cityCode: cityCode,
+        type: school.type
       },
       success(res) {        
         if (res.data.code != 0) {
-          console.error('getRecruitData success code != 0, msg ' + res.data.msg)
+          console.error('getLotteryData success code != 0, msg ' + res.data.msg)
           wx.showToast({
             title: '获取数据失败 ' + res.data.msg,
             icon: 'none'
           })
         } else {        
 
-          var recruit = res.data.data
-          var date = new Date(recruit.recruit_time)
-          var time = (date.getMonth() + 1) + '月' + date.getDate() + '日'
+          var lottery = res.data.data
+          if (lottery == null) {
+            lottery = {
+              title: '没有数据'
+            }
+            wx.showToast({
+              title: '没有数据',
+            })
+          }
 
           that.setData({
-            recruit: recruit,
-            time: time                  
+            lottery: lottery         
           })
         }
       },

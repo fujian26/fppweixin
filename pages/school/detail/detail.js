@@ -202,7 +202,12 @@ Page({
 
   // 摇号流程手续
   tapAttenLottery(event) {
-
+    wx.navigateTo({
+      url: '/pages/school/lottery/lottery',
+      fail(res) {
+        console.error('detail.js navigateTo school lottery fail ' + res.errMsg)
+      }
+    })
   },
 
   // 周边房源 - 更多
