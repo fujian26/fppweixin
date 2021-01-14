@@ -98,25 +98,25 @@
   <view class="title" style="margin-top: 30rpx; margin-left: 26rpx;">办学条件</view>
 
   <!-- 硬件水平 -->
-  <view class="lv-container-top" style="margin-left: 26rpx; margin-top: 20rpx;">
+  <view class="lv-container-top" style="margin-left: 26rpx; margin-right: 26rpx; margin-top: 20rpx;">
     <view class="label">硬件水平：</view>
     <text class="value">{{schoolExt.school.hardware_level}}</text>
   </view>
 
   <!-- 供餐说明 -->
-  <view class="lv-container-top" style="margin-left: 26rpx; margin-top: 20rpx;">
+  <view class="lv-container-top" style="margin-left: 26rpx; margin-right: 26rpx; margin-top: 20rpx;">
     <view class="label">供餐说明：</view>
     <text class="value">{{schoolExt.school.meal_instruction}}</text>
   </view>
 
   <!-- 是否寄宿 -->
-  <view class="lv-container-top" style="margin-left: 26rpx; margin-top: 20rpx;">
+  <view class="lv-container-top" style="margin-left: 26rpx; margin-right: 26rpx; margin-top: 20rpx;">
     <view class="label">是否寄宿：</view>
     <text class="value">{{schoolExt.school.boarding == 1 ? '是' : '否'}}</text>
   </view>
 
   <!-- 师资水平 -->
-  <view class="lv-container-top" style="margin-left: 26rpx; margin-top: 20rpx;">
+  <view class="lv-container-top" style="margin-left: 26rpx; margin-right: 26rpx; margin-top: 20rpx;">
     <view class="label">师资水平：</view>
     <text class="value">{{schoolExt.school.teacher_level}}</text>
   </view>

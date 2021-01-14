@@ -1,0 +1,10 @@
+<!--pages/school/search/search.wxml-->
+<basebar centerText="查学校"></basebar>
+<view class="hflex-container top-search">
+  <image src="/images/search-school-location.png" />
+  <view class="name">{{location}}</view>
+
+</view>
+<scroll-view scroll-y="true" class="scrollPage">
+
+</scroll-view>

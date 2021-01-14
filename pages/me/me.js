@@ -25,7 +25,34 @@ Component({
    */
   data: {
     userInfo: null,
-    nickName: ''
+    nickName: '',
+    floatBarDatas: [
+      {
+        id: 1,
+        image: '/images/me_attention.png',
+        text: '我的关注'
+      },
+      {
+        id: 2,
+        image: '/images/me_certification.png',
+        text: '业主认证'
+      },
+      {
+        id: 3,
+        image: '/images/me_house.png',
+        text: '我的房产'
+      },
+      {
+        id: 4,
+        image: '/images/me_content.png',
+        text: '我的内容'
+      },      
+      {
+        id: 5,
+        image: '/images/me_platform.png',
+        text: '入住平台'
+      },      
+    ]
   },
 
   /**
@@ -34,6 +61,25 @@ Component({
   methods: {
     tapSetting(event) {
       
+    },
+
+    tapFloatBar(event) {
+
+    },
+
+    // 历史记录
+    tapHistory(event) {
+
+    },
+
+    // 内容推送
+    changeContentPush(event) {
+      console.log('changeContentPush value ' + event.detail.value)
+    },
+
+    // 退出登录
+    tapLogout(event) {
+
     }
   }
 })

@@ -36,6 +36,59 @@
   height: 18rpx;
 }
 
+.float-bar-container {
+  width: 100%;
+  padding: 0 28rpx;
+  position: absolute;
+  top: 216rpx;
+}
+
 .float-bar {
-  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 42rpx;
+  border-radius: 16rpx;
+  background-color: white;
+  box-shadow: 0 0 30rpx #13368466;
+}
+
+.float-bar image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.float-bar .text {
+  margin-top: 16rpx;
+  font-size: 20rpx;
+  color: #666666;
+}
+
+.list {
+  padding: 36rpx 40rpx;
+}
+
+.list .label {
+  margin-left: 16rpx;
+  color: #666666;
+  font-size: 20rpx;
+}
+
+.line {
+  height: 2rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  background-color: #f6f6f6;
+}
+
+.switch {
+  transform: scale(0.7, 0.7);
+}
+
+.switch::after {
+	content: "";
+}
+
+.switch::before {
+	content: "";
 }

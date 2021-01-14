@@ -123,7 +123,13 @@ Component({
       console.log('belowSearchItemTap id ' + id)
 
       switch (id) {
-        case 1:
+        case 1: // 查学校
+          wx.navigateTo({
+            url: '/pages/school/search/search',
+            fail(res) {
+              console.error('main.js navigateTo school search fail ' + res.errMsg)
+            }
+          })          
           break;
         case 2:
           break;

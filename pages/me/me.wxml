@@ -12,4 +12,43 @@
       </view>
     </view>
   </view>
+
+  <!-- 我的关注、业主认证... -->
+  <view class="float-bar-container">
+    <view class="float-bar">
+      <view wx:for="{{floatBarDatas}}" data-id="{{item.id}}" bindtap="tapFloatBar" class="vflex-container">
+        <image src="{{item.image}}" />
+        <view class="text">{{item.text}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 列表选项 -->
+  <view class="hflex-container list" style="margin-top: 148rpx;" bindtap="tapHistory">
+    <image src="/images/me_history.png" style="width: 44rpx; height: 34rpx" />
+    <view class="label">历史内容</view>
+    <view class="holder"></view>
+    <view class="cuIcon-right" style="color: #cccccc; font-size: 28rpx;"></view>    
+  </view>
+
+  <view class="line" />
+
+  <view class="hflex-container list">
+    <image src="/images/me_msg.png" style="width: 34rpx; height: 40rpx" />
+    <view class="label" style="margin-left: 26rpx;">内容推送</view>
+    <view class="holder"></view>
+    <switch class="switch blue" bindchange="changeContentPush" />
+  </view>
+
+  <view class="line" />
+
+  <view class="hflex-container list">
+    <image src="/images/me_logout.png" style="width: 38rpx; height: 34rpx" />
+    <view class="label" style="margin-left: 18rpx;">退出账号</view>
+    <view class="holder"></view>
+    <image bindtap="tapLogout" src="/images/me_power.png" style="width: 36rpx; height: 36rpx" />    
+  </view>
+
+  <view class="line" />
+
 </scroll-view>
