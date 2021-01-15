@@ -24,5 +24,10 @@
     "cu-custom": "/colorui/components/cu-custom",
     "basebar": "/components/basebar/basebar"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "申请位置信息"
+    }
+  }
 }
