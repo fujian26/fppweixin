@@ -5,7 +5,39 @@ Page({
    * 页面的初始数据
    */
   data: {
-    location: ''
+    location: '',
+    currentIndex: 0,
+    tabs: [{
+        id: 1,
+        name: '推荐'
+      },
+      {
+        id: 2,
+        name: '热门'
+      },
+      {
+        id: 3,
+        name: '幼儿园'
+      },
+      {
+        id: 4,
+        name: '小学'
+      },
+      {
+        id: 5,
+        name: '中学'
+      },
+      {
+        id: 6,
+        name: '培训机构'
+      }
+    ],
+    recommonds: [], // 推荐
+    hots: [], // 热门
+    kindergartens: [], // 幼儿园
+    primarys: [], // 小学
+    middles: [], // 中学
+    trainings: [] // 培训机构
   },
 
   /**
@@ -64,5 +96,12 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  tapOnTab(event) {
+    console.log('tapOnTab event ' + event.currentTarget.dataset.index)
+    this.setData({
+      currentIndex: event.currentTarget.dataset.index
+    })
   }
 })

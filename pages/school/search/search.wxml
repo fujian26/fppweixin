@@ -9,6 +9,26 @@
       placeholder-style="color: #cccccc" bindconfirm="searchConfirm"></input>
   </view>
 </view>
-<scroll-view scroll-y="true" class="scrollPage">
+
+<scroll-view scroll-y="true" class="scrollPage" style="background-color: #f6f6f6">
+
+  <!-- 导航 -->
+  <scroll-view scroll-x="true">
+    <view class="tabbar">
+      <view wx:for="{{tabs}}" class="item" data-index="{{index}}" bindtap="tapOnTab" wx:key="id">
+        <view class="name" style="color: {{currentIndex == index}} ? #3E66D5 : #666666">{{item.name}}</view>
+        <view wx:if="{{currentIndex == index}}" class="line"></view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <image class="ad" />
+
+  <!-- 热门 -->
+  <view wx:if="{{currentIndex == 0}}" class="school">
+    <view class="item" wx:for="{{recommonds}}" wx:key="id" data-id="{{item.school.id}}">
+      
+    </view>
+  </view>
 
 </scroll-view>
