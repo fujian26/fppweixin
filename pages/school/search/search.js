@@ -1,4 +1,5 @@
 // pages/school/search/search.js
+let app = getApp()
 Page({
 
   /**
@@ -156,10 +157,12 @@ Page({
   },
 
   tapOnTab(event) {
-    console.log('tapOnTab event ' + event.currentTarget.dataset.index)
+    let index = event.currentTarget.dataset.index
+    console.log('tapOnTab event ' + index)
     this.setData({
-      currentIndex: event.currentTarget.dataset.index
+      currentIndex: index
     })
+    this.switchPageData(index)
   },
 
   switchPageData(index) {
@@ -186,12 +189,16 @@ Page({
         break
     }
 
-    if (pageData.length == 0) {
+    console.log('pageData.length ' + pageData.length)
 
+    if (pageData.length == 0) {
+      this.refreshLoadPage(tabData, pageData)
     }
   },
 
   refreshLoadPage(tabData, pageData) {
+
+    let that = this
 
     if (tabData.pageIndex == 0) {
       pageData = []
@@ -203,12 +210,13 @@ Page({
         'token': app.globalData.token,
         'content-type': 'application/json'
       },
+      // 成都 lng 103.92377 lat 30.57447
       data: {
         type: tabData.type,
         pageIndex: tabData.pageIndex,
         pageSize: 20,
-        lng: 0,
-        lat: 0
+        lng: app.globalData.lng,
+        lat: app.globalData.lat
       },
       success(res) {
         if (res.data.code != 0) {
@@ -233,19 +241,61 @@ Page({
               item.school.area_name +
               item.street_name +
               item.detail_addr
-            
+
             if (item.distance > 0) {
               var km = item.distance / 1000
               if (km < 1) {
-                
+                item.distanceStr = '<1km'
+              } else {
+                item.distanceStr = km + 'km'
               }
-            }  
+            } else {
+              item.distanceStr = ''
+            }
 
+            for (var j = 0; j < item.pics; j++) {
+              item.pics[j] = app.globalData.baseUrl +
+                '/file/download/' +
+                item.pics[j];
+            }
+
+            console.log('school name ' + item.school.name)
           }
 
-          that.setData({
+          pageData.push(schoolExts)
 
-          })
+          switch (tabData.id) {
+            case 1:
+              that.setData({
+                recommonds: pageData
+              })
+              break
+            case 2:
+              that.setData({
+                hots: schoolExts
+              })
+              break
+            case 3:
+              that.setData({
+                kindergartens: pageData
+              })
+              break
+            case 4:
+              that.setData({
+                primarys: pageData
+              })
+              break
+            case 5:
+              that.setData({
+                middles: pageData
+              })
+              break
+            case 6:
+              that.setData({
+                trainings: pageData
+              })
+              break
+          }
         }
       },
       fail(res) {
@@ -260,7 +310,5 @@ Page({
       }
     })
 
-  }
-
-},
+  },
 })
