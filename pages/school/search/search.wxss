@@ -39,10 +39,10 @@
   align-items: center;
 }
 
-.tabbar .item .name {  
+.tabbar .item .name {
   height: 86rpx;
   line-height: 86rpx;
-  text-align: center;    
+  text-align: center;
   font-size: 26rpx;
   color: #666666;
 }
@@ -54,7 +54,7 @@
 }
 
 /* 广告 */
-.ad {  
+.ad {
   width: 100%;
   height: 130rpx;
   margin: 12rpx 0;
@@ -62,6 +62,7 @@
 }
 
 .school {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,9 +70,10 @@
 }
 
 .school .item {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  padding-top: 28rpx;
+  padding-top: 36rpx;
   padding-left: 28rpx;
   padding-right: 28rpx;
 }
@@ -84,5 +86,44 @@
 
 .school .item .content image {
   width: 200rpx;
-  height: 160rpx;  
+  height: 160rpx;
+  border-radius: 16rpx;
+}
+
+.school .item .content .tag {
+  width: 72rpx;
+  height: 24rpx;
+  position: absolute;
+  left: 36rpx;
+}
+
+.school .item .content .name {
+  color: #333333;
+  font-size: 32rpx;
+}
+
+.school .item .content .label {
+  width: 100%;
+  margin-top: 10rpx;
+  color: #666666;
+  font-size: 20rpx;
+}
+
+.school .item .content .addr {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.school .item .content .location {
+  margin-left: 8rpx;
+  color: #cccccc;
+  font-size: 16rpx;
+}
+
+.school .item .line {
+  width: 100%;
+  height: 2rpx;
+  margin-top: 32rpx;
+  background-color: #E6E6E6;
 }

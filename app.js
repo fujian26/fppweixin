@@ -86,6 +86,6 @@ App({
   globalData: {
     userInfo: null,
     baseUrl: 'http://localhost:8081',
-    token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmdWppYW4iLCJpYXQiOjE2MTA0NTM1NTgsImV4cCI6MTYxMTA1ODM1OH0.G795S6tfS4VyOT8W3GEPtl_Mdx0ivaqnPoXDkysdAiaBcqWXEyiGw1Uh6Oq4g3aaW9tHKRK2rLZLzjzu6HUm5Q'
+    token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmdWppYW4iLCJpYXQiOjE2MTExMDcyMDQsImV4cCI6MTYxMTcxMjAwNH0.PRxkN9U5Tv2dHUdpx870twkYnIygXuwdFOpckMb9-gWLlpBCTmkee8bKzQ5FX98cSzp6hsa-aU1je-AaRfAEGw'
   }
 })

@@ -25,10 +25,35 @@
   <image class="ad" />
 
   <!-- 热门 -->
-  <view wx:if="{{currentIndex == 0}}" class="school">
-    <view class="item" wx:for="{{recommonds}}" wx:key="id" data-id="{{item.school.id}}">
-      
+  <scroll-view class="school" wx:if="{{currentIndex == 0}}" scroll-y="true" refresher-enabled="true">
+    <view class="vflex-container">
+      <view class="item" wx:for="{{recommonds}}" wx:key="id" data-id="{{item.school.id}}">
+        <!-- 内容 -->
+        <view class="content">
+          <view>
+            <image style="margin-top: 4rpx" src="{{item.pics[0]}}" />
+            <image class="tag" src="{{item.tagSrc}}" />
+          </view>
+          <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
+            <!-- 学校名称 -->
+            <view class="name">{{item.school.name}}</view>
+            <!-- 性质、区域 -->
+            <view class="label">性质：{{item.nature}} 区域：{{item.area}}</view>
+            <view class="label">电话：{{item.school.phone}}</view>
+            <view class="label addr">
+              <view>地址：{{item.addr}}</view>
+              <view style="flex: 1"></view>
+              <image wx:if="{{item.distanceStr != null && item.distanceStr != ''}}" src="/images/search_location.png"
+                style="width: 16rpx; height: 18rpx;" />
+              <view class="location">{{item.distanceStr}}</view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 分割线 -->
+        <view class="line"></view>
+      </view>
     </view>
-  </view>
+  </scroll-view>
 
 </scroll-view>
