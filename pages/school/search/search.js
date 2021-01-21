@@ -8,12 +8,15 @@ Page({
   data: {
     location: '',
     currentIndex: 0,
+    pageHeight: app.globalData.screenHeight * 0.6,
+    isLoad: true,
+    showLoad: false,
     tabs: [{
         id: 1,
         name: '推荐',
         pageIndex: 0,
         type: 100,
-        refreshTrigger: false        
+        refreshTrigger: false 
       },
       {
         id: 2,
@@ -80,6 +83,51 @@ Page({
         addr: '成都高新区蓝岸17号',
         distanceStr: '',
         tagSrc: '/images/primary-school-tag.png'
+      },
+      {
+        school: {
+          id: 33,
+          name: '金苹果中海国际社区幼儿园',
+          phone: '028-87589813'
+        },
+        pics: [{
+          url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.51sxue.com%2Fupload21%2F5560%2F201409091405596533.jpg&refer=http%3A%2F%2Fimg.51sxue.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1612792551&t=130f1249ccab380b3d9f56f6170cf2b1'
+        }],
+        nature: '私立',
+        area: '成都高新区',
+        addr: '成都高新区蓝岸17号',
+        distanceStr: '',
+        tagSrc: '/images/middle-school-tag.png'
+      },
+      {
+        school: {
+          id: 33,
+          name: '金苹果中海国际社区幼儿园',
+          phone: '028-87589813'
+        },
+        pics: [{
+          url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.51sxue.com%2Fupload21%2F5560%2F201409091405596533.jpg&refer=http%3A%2F%2Fimg.51sxue.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1612792551&t=130f1249ccab380b3d9f56f6170cf2b1'
+        }],
+        nature: '私立',
+        area: '成都高新区',
+        addr: '成都高新区蓝岸17号',
+        distanceStr: '',
+        tagSrc: '/images/middle-school-tag.png'
+      },
+      {
+        school: {
+          id: 33,
+          name: '金苹果中海国际社区幼儿园',
+          phone: '028-87589813'
+        },
+        pics: [{
+          url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.51sxue.com%2Fupload21%2F5560%2F201409091405596533.jpg&refer=http%3A%2F%2Fimg.51sxue.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1612792551&t=130f1249ccab380b3d9f56f6170cf2b1'
+        }],
+        nature: '私立',
+        area: '成都高新区',
+        addr: '成都高新区蓝岸17号',
+        distanceStr: '',
+        tagSrc: '/images/middle-school-tag.png'
       },
       {
         school: {
@@ -367,5 +415,27 @@ Page({
     let tabData = this.data.tabs[currentIndex]
 
     console.log('triggerAbort refreshTrigger ' + tabData.refreshTrigger)
+  },
+
+  onScrolllower(event) {
+    
+    console.log('onScrolllower')
+    
+    if (this.data.showLoad) {
+      return
+    }
+
+    this.setData({
+      showLoad: true
+    })
+    setTimeout(() => {
+      this.setData({
+        showLoad: false
+      })
+    }, 1000);
+  },
+
+  onDragging(event) {
+    console.log('onDragging top ' + event.detail.scrollTop)
   }
 })

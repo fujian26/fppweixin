@@ -12,7 +12,7 @@
     </view>
   </view>
 
-  <view style="flex-grow: 1;">
+  <view class="vflex-container" style="flex-grow: 1;">
 
     <!-- 导航 -->
     <scroll-view scroll-x="true">
@@ -27,9 +27,13 @@
     <image class="ad" />
 
     <!-- 推荐 -->
-    <scroll-view class="school" wx:if="{{currentIndex == 0}}" scroll-y="true" refresher-enabled="true"
-      refresher-triggered="{{tabs[currentIndex].refreshTrigger}}" bindrefresherrefresh="triggerRefresh"
-      bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort">
+    <scroll-view class="school" wx:if="{{currentIndex == 0}}" scroll-y="true" style="height: {{pageHeight}}rpx"
+      refresher-enabled="true" refresher-triggered="{{tabs[currentIndex].refreshTrigger}}"
+      bindrefresherrefresh="triggerRefresh" bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort"
+      bindscrolltolower="onScrolllower"
+      lower-threshold="0"
+      enhanced="true"
+      binddragging="onDragging">
       <view class="vflex-container">
         <view class="item" wx:for="{{recommonds}}" wx:key="id" data-id="{{item.school.id}}">
           <!-- 内容 -->
@@ -58,6 +62,8 @@
           <view class="line"></view>
         </view>
       </view>
+
+      <view wx:if="{{showLoad}}" style="width: 100%;" class="cu-load {{isLoad?'loading':'over'}}"></view>
     </scroll-view>
 
     <!-- 热门 -->
