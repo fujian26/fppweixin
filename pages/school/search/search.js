@@ -12,37 +12,43 @@ Page({
         id: 1,
         name: '推荐',
         pageIndex: 0,
-        type: 100
+        type: 100,
+        refreshTrigger: false        
       },
       {
         id: 2,
         name: '热门',
         pageIndex: 0,
-        type: 101
+        type: 101,
+        refreshTrigger: false
       },
       {
         id: 3,
         name: '幼儿园',
         pageIndex: 0,
-        type: 0
+        type: 0,
+        refreshTrigger: false
       },
       {
         id: 4,
         name: '小学',
         pageIndex: 0,
-        type: 1
+        type: 1,
+        refreshTrigger: false
       },
       {
         id: 5,
         name: '中学',
         pageIndex: 0,
-        type: 2
+        type: 2,
+        refreshTrigger: false
       },
       {
         id: 6,
         name: '培训机构',
         pageIndex: 0,
-        type: 3
+        type: 3,
+        refreshTrigger: false
       }
     ],
     recommonds: [{
@@ -51,9 +57,9 @@ Page({
           name: '金苹果中海国际社区幼儿园',
           phone: '028-87589813'
         },
-        pics: [
-          'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.51sxue.com%2Fupload21%2F5560%2F201409091405596533.jpg&refer=http%3A%2F%2Fimg.51sxue.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1612792551&t=130f1249ccab380b3d9f56f6170cf2b1'
-        ],
+        pics: [{
+          url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.51sxue.com%2Fupload21%2F5560%2F201409091405596533.jpg&refer=http%3A%2F%2Fimg.51sxue.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1612792551&t=130f1249ccab380b3d9f56f6170cf2b1'
+        }],
         nature: '私立',
         area: '成都高新区',
         addr: '成都高新区蓝岸17号',
@@ -66,9 +72,9 @@ Page({
           name: '金苹果中海国际社区幼儿园',
           phone: '028-87589813'
         },
-        pics: [
-          'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.51sxue.com%2Fupload21%2F5560%2F201409091405596533.jpg&refer=http%3A%2F%2Fimg.51sxue.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1612792551&t=130f1249ccab380b3d9f56f6170cf2b1'
-        ],
+        pics: [{
+          url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.51sxue.com%2Fupload21%2F5560%2F201409091405596533.jpg&refer=http%3A%2F%2Fimg.51sxue.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1612792551&t=130f1249ccab380b3d9f56f6170cf2b1'
+        }],
         nature: '私立',
         area: '成都高新区',
         addr: '成都高新区蓝岸17号',
@@ -81,9 +87,9 @@ Page({
           name: '金苹果中海国际社区幼儿园',
           phone: '028-87589813'
         },
-        pics: [
-          'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.51sxue.com%2Fupload21%2F5560%2F201409091405596533.jpg&refer=http%3A%2F%2Fimg.51sxue.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1612792551&t=130f1249ccab380b3d9f56f6170cf2b1'
-        ],
+        pics: [{
+          url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.51sxue.com%2Fupload21%2F5560%2F201409091405596533.jpg&refer=http%3A%2F%2Fimg.51sxue.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1612792551&t=130f1249ccab380b3d9f56f6170cf2b1'
+        }],
         nature: '私立',
         area: '成都高新区',
         addr: '成都高新区蓝岸17号',
@@ -215,8 +221,8 @@ Page({
         type: tabData.type,
         pageIndex: tabData.pageIndex,
         pageSize: 20,
-        lng: app.globalData.lng,
-        lat: app.globalData.lat
+        lng: 103.92377,
+        lat: 30.57447
       },
       success(res) {
         if (res.data.code != 0) {
@@ -236,27 +242,45 @@ Page({
             var item = schoolExts[i]
             item.nature = item.school.nature == 0 ? '公办' : '私办'
             item.area = item.school.city_name + item.school.area_name
-            item.addr = item.school.province_name +
-              item.school.city_name +
-              item.school.area_name +
-              item.street_name +
-              item.detail_addr
+            item.addr = item.school.province_name != null ? item.school.province_name : '' +
+              item.school.city_name != null ? item.school.city_name : '' +
+              item.school.area_name != null ? item.school.area_name : '' +
+              item.street_name != null ? item.street_name : '' +
+              item.detail_addr != null ? item.detail_addr : ''
 
             if (item.distance > 0) {
               var km = item.distance / 1000
               if (km < 1) {
                 item.distanceStr = '<1km'
               } else {
+                km = Math.round(km * 100) / 100
                 item.distanceStr = km + 'km'
               }
             } else {
               item.distanceStr = ''
             }
 
-            for (var j = 0; j < item.pics; j++) {
-              item.pics[j] = app.globalData.baseUrl +
+            for (var j = 0; j < item.pics.length; j++) {
+              item.pics[j].url = app.globalData.baseUrl +
                 '/file/download/' +
-                item.pics[j];
+                item.pics[j].url;
+            }
+
+            console.log('item.pics[0].url ' + item.pics[0].url)
+
+            switch (item.school.type) {
+              case 0:
+                item.tagSrc = '/images/kindergarten-tag.png'
+                break
+              case 1:
+                item.tagSrc = '/images/primary-school-tag.png'
+                break
+              case 2:
+                item.tagSrc = '/images/middle-school-tag.png'
+                break
+              case 3:
+                item.tagSrc = '/images/training-school-tag.png'
+                break
             }
 
             console.log('school name ' + item.school.name)
@@ -311,4 +335,37 @@ Page({
     })
 
   },
+
+  triggerRefresh(event) {
+
+    let that = this
+    let tabs = this.data.tabs
+    let currentIndex = this.data.currentIndex    
+    let tabData = this.data.tabs[currentIndex]
+
+    if (tabData.triggerRefresh) {
+      return
+    }    
+    
+    setTimeout(() => {
+      tabData.triggerRefresh = false
+      that.setData({
+        tabs: tabs
+      })
+    }, 1000);
+  },
+
+  triggerRestore(event) {
+    console.log('triggerRestore refreshTrigger ')
+  },
+
+  triggerAbort(event) {
+
+    let that = this
+    let tabs = this.data.tabs
+    let currentIndex = this.data.currentIndex    
+    let tabData = this.data.tabs[currentIndex]
+
+    console.log('triggerAbort refreshTrigger ' + tabData.refreshTrigger)
+  }
 })
