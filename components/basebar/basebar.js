@@ -26,6 +26,10 @@ Component({
       type: String,
       value: 'back'
     },
+    disableLeftAction: {
+      type: Boolean,
+      value: false
+    },
     centerText: String,
     rightIcon: {
       type: String,
@@ -51,7 +55,9 @@ Component({
     tapLeft(event) {
       console.log('basebar left tap')
       this.triggerEvent('tapLeft')
-      wx.navigateBack()
+      if (!this.data.disableLeftAction) {
+        wx.navigateBack()
+      }      
     },
 
     tapRight(event) {

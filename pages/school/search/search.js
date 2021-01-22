@@ -9,7 +9,10 @@ Page({
   data: {
     location: '',
     currentIndex: 0,
+    adData: null,
     pageHeight: app.globalData.screenHeight * 0.6,
+    searchMode: false,
+    searchContent: '', // 搜索的输入内容
     tabs: [{
         id: 1,
         name: '推荐',
@@ -160,7 +163,8 @@ Page({
     kindergartens: [], // 幼儿园
     primarys: [], // 小学
     middles: [], // 中学
-    trainings: [] // 培训机构
+    trainings: [], // 培训机构
+    searchDatas: []
   },
 
   /**
@@ -170,6 +174,15 @@ Page({
     this.setData({
       location: '成都'
     })
+
+    setTimeout(() => {
+      this.setData({
+        adData: {
+          url: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.51sxue.com%2Fupload21%2F5560%2F201409091405596533.jpg&refer=http%3A%2F%2Fimg.51sxue.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1612792551&t=130f1249ccab380b3d9f56f6170cf2b1',
+          school_id: 1
+        }
+      })
+    }, 1000);
   },
 
   /**
@@ -231,6 +244,12 @@ Page({
   },
 
   switchPageData(index) {
+
+    this.setData({
+      searchMode: false
+    })
+
+    let tabs = this.data.tabs
     let tabData = this.data.tabs[index]
     var pageData = null
     switch (index) {
@@ -257,11 +276,56 @@ Page({
     console.log('pageData.length ' + pageData.length)
 
     if (pageData.length == 0) {
-      this.refreshLoadPage(tabData, pageData)
+      this.refreshLoadPage(tabs, tabData, pageData)
     }
   },
 
-  refreshLoadPage(tabData, pageData) {
+  reassempleSchoolExt(item) {
+    item.nature = item.school.nature == 0 ? '公办' : '私办'
+    item.area = item.school.city_name + item.school.area_name
+    item.addr = item.school.province_name != null ? item.school.province_name : '' +
+      item.school.city_name != null ? item.school.city_name : '' +
+      item.school.area_name != null ? item.school.area_name : '' +
+      item.street_name != null ? item.street_name : '' +
+      item.detail_addr != null ? item.detail_addr : ''
+
+    if (item.distance > 0) {
+      var km = item.distance / 1000
+      if (km < 1) {
+        item.distanceStr = '<1km'
+      } else {
+        km = Math.round(km * 100) / 100
+        item.distanceStr = km + 'km'
+      }
+    } else {
+      item.distanceStr = ''
+    }
+
+    for (var j = 0; j < item.pics.length; j++) {
+      item.pics[j].url = app.globalData.baseUrl +
+        '/file/download/' +
+        item.pics[j].url;
+    }
+
+    console.log('item.pics[0].url ' + item.pics[0].url)
+
+    switch (item.school.type) {
+      case 0:
+        item.tagSrc = '/images/kindergarten-tag.png'
+        break
+      case 1:
+        item.tagSrc = '/images/primary-school-tag.png'
+        break
+      case 2:
+        item.tagSrc = '/images/middle-school-tag.png'
+        break
+      case 3:
+        item.tagSrc = '/images/training-school-tag.png'
+        break
+    }
+  },
+
+  refreshLoadPage(tabs, tabData, pageData) {
 
     let that = this
 
@@ -298,49 +362,7 @@ Page({
           }
 
           for (var i = 0; i < schoolExts.length; i++) {
-            var item = schoolExts[i]
-            item.nature = item.school.nature == 0 ? '公办' : '私办'
-            item.area = item.school.city_name + item.school.area_name
-            item.addr = item.school.province_name != null ? item.school.province_name : '' +
-              item.school.city_name != null ? item.school.city_name : '' +
-              item.school.area_name != null ? item.school.area_name : '' +
-              item.street_name != null ? item.street_name : '' +
-              item.detail_addr != null ? item.detail_addr : ''
-
-            if (item.distance > 0) {
-              var km = item.distance / 1000
-              if (km < 1) {
-                item.distanceStr = '<1km'
-              } else {
-                km = Math.round(km * 100) / 100
-                item.distanceStr = km + 'km'
-              }
-            } else {
-              item.distanceStr = ''
-            }
-
-            for (var j = 0; j < item.pics.length; j++) {
-              item.pics[j].url = app.globalData.baseUrl +
-                '/file/download/' +
-                item.pics[j].url;
-            }
-
-            console.log('item.pics[0].url ' + item.pics[0].url)
-
-            switch (item.school.type) {
-              case 0:
-                item.tagSrc = '/images/kindergarten-tag.png'
-                break
-              case 1:
-                item.tagSrc = '/images/primary-school-tag.png'
-                break
-              case 2:
-                item.tagSrc = '/images/middle-school-tag.png'
-                break
-              case 3:
-                item.tagSrc = '/images/training-school-tag.png'
-                break
-            }            
+            that.reassempleSchoolExt(schoolExts[i])
           }
 
           pageData = pageData.concat(schoolExts)
@@ -387,7 +409,11 @@ Page({
         })
       },
       complete(res) {
-        wx.hideLoading()
+        tabData.showLoad = false
+        tabData.triggerRefresh = false
+        that.setData({
+          tabs: tabs
+        })
       }
     })
 
@@ -397,19 +423,21 @@ Page({
 
     let that = this
     let tabs = this.data.tabs
-    let currentIndex = this.data.currentIndex    
+    let currentIndex = this.data.currentIndex
     let tabData = this.data.tabs[currentIndex]
 
     if (tabData.triggerRefresh) {
       return
-    }    
-    
-    setTimeout(() => {
-      tabData.triggerRefresh = false
-      that.setData({
-        tabs: tabs
-      })
-    }, 1000);
+    }
+
+    this.refreshLoadPage(tabs, tabData, this.obtainPageData())
+
+    // setTimeout(() => {
+    //   tabData.triggerRefresh = false
+    //   that.setData({
+    //     tabs: tabs
+    //   })
+    // }, 1000);
   },
 
   triggerRestore(event) {
@@ -454,31 +482,31 @@ Page({
   },
 
   onScrolllower(event) {
-    
+
     console.log('onScrolllower')
-    
+
     let tabs = this.data.tabs
     let currentIndex = this.data.currentIndex
     let tabData = tabs[currentIndex]
     let pageData = this.obtainPageData()
-    
+
     if (tabData.showLoad) {
       return
     }
 
     tabData.showLoad = true
-    if (pageData == null || pageData.length < pageSize) {
-      tabData.isLoad = false
-    } else {
-      tabData.isLoad = true
-    }
+    // if (pageData == null || pageData.length < pageSize) {
+    //   tabData.isLoad = false
+    // } else {
+    //   tabData.isLoad = true
+    // }
 
     this.setData({
       tabs: tabs
     })
 
     tabData.pageIndex++
-    refreshLoadPage(tabData, pageData)
+    this.refreshLoadPage(tabs, tabData, pageData)
   },
 
   tapSchoolItem(event) {
@@ -494,7 +522,7 @@ Page({
     wx.setStorage({
       data: pageData[index],
       key: 'schoolExt',
-      success(res) {          
+      success(res) {
         wx.navigateTo({
           url: '/pages/school/detail/detail',
           fail(res) {
@@ -506,5 +534,173 @@ Page({
         console.log('search.js setStorage school fail ' + res.errMsg)
       }
     })
+  },
+
+  tapAd(event) {
+    let adData = this.data.adData
+    if (adData == null || adData.school_id == null) {
+      return
+    }
+
+    wx.showLoading({
+      title: '正在加载...',
+    })
+
+    wx.request({
+      url: app.globalData.baseUrl + '/school/getDetail',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        id: adData.school_id
+      },
+      success(res) {
+        console.log('tapAd success')
+        if (res.data.code != 0) {
+          console.error('tapAd success code != 0, msg ' + res.data.msg)
+          wx.showToast({
+            title: '数据错误 ' + res.data.msg,
+            icon: 'none'
+          })
+        } else {
+
+          var schoolExt = res.data.data
+          if (schoolExt == null) {
+            console.error('tapAd schoolExt == null')
+            wx.showToast({
+              title: '数据错误',
+              icon: 'none'
+            })
+            return
+          }
+
+          wx.setStorage({
+            data: schoolExt,
+            key: 'schoolExt',
+            success(res) {
+              wx.navigateTo({
+                url: '/pages/school/detail/detail',
+                fail(res) {
+                  wx.showToast({
+                    title: '操作失败',
+                    icon: 'none'
+                  })
+                  console.error('search.js tapAd navigateTo school detail fail ' + res.errMsg)
+                }
+              })
+            },
+            fail(res) {
+              wx.showToast({
+                title: '操作失败',
+                icon: 'none'
+              })
+              console.error('search.js tapAd setStorage school fail ' + res.errMsg)
+            }
+          })
+        }
+      },
+      fail(res) {
+        console.log('tapAd fail res ' + res.errMsg)
+        wx.showToast({
+          title: '数据错误 ' + res.errMsg,
+          icon: 'none'
+        })
+      },
+      complete(res) {
+        wx.hideLoading()
+      }
+    })
+  },
+
+  // 执行搜索
+  doSearch(event) {
+
+    let content = this.data.searchContent
+
+    if (typeof content === 'undefined' || content == null || content == '') {
+      wx.showToast({
+        title: '搜索内容不能为空',
+        icon: 'none'
+      })
+      return
+    }
+
+    let that = this
+    wx.showLoading()
+
+    wx.request({
+      url: app.globalData.baseUrl + '/school/blurSearch',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        keyWord: content,
+        lng: app.globalData.lng,
+        lat: app.globalData.lat
+      },
+      success(res) {
+        console.log('doSearch success')
+        if (res.data.code != 0) {
+          console.error('doSearch success code != 0, msg ' + res.data.msg)
+          wx.showToast({
+            title: '数据错误 ' + res.data.msg,
+            icon: 'none'
+          })
+        } else {
+          var schoolExts = res.data.data
+          if (schoolExts == null || schoolExts.length == 0) {
+            wx.showToast({
+              title: '没有数据',
+              icon: 'none'
+            })
+            return
+          }
+
+          for (var i = 0; i < schoolExts.length; i++) {
+            that.reassempleSchoolExt(schoolExts[i])
+          }
+
+          that.setData({
+            searchDatas: schoolExts
+          })
+        }
+      },
+      fail(res) {
+        console.log('doSearch fail res ' + res.errMsg)
+        wx.showToast({
+          title: '数据错误 ' + res.errMsg,
+          icon: 'none'
+        })
+      },
+      complete(res) {
+        wx.hideLoading()
+      }
+    })
+
+  },
+
+  // 搜索框获得焦点
+  searchFocus(event) {
+    this.setData({
+      searchMode: true
+    })
+  },
+
+  // 监听搜索的输入
+  onSearchInput(event) {
+    this.data.searchContent = event.detail.value
+  },
+
+  // 左上角返回键
+  tapBack(event) {    
+    if (this.data.searchMode) {
+      this.setData({
+        searchMode: false
+      })
+    } else {
+      wx.navigateBack()
+    }
   }
 })

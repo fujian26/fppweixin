@@ -1,14 +1,15 @@
 <!--pages/school/search/search.wxml-->
 <view class="hole">
 
-  <basebar centerText="查学校"></basebar>
+  <basebar disableLeftAction="true" bind:tapLeft="tapBack" centerText="查学校"></basebar>
   <view class="hflex-container top-search">
     <image src="/images/search-school-location.png" />
     <view class="name">{{location}}</view>
     <view class="hflex-container search round">
       <text class="cuIcon-search" style="font-size: 32rpx; color: #cccccc"></text>
-      <input type="text" placeholder="请输入要查询的学校" confirm-type="search" style="font-size: 24rpx; margin-left: 8rpx;"
-        placeholder-style="color: #cccccc" bindconfirm="searchConfirm"></input>
+      <input type="text" bindfocus="searchFocus" bindinput="onSearchInput" placeholder="请输入要查询的学校"
+        bindconfirm="doSearch" confirm-type="search" style="font-size: 24rpx; margin-left: 8rpx;"
+        placeholder-style="color: #cccccc"></input>
     </view>
   </view>
 
@@ -24,18 +25,20 @@
       </view>
     </scroll-view>
 
-    <image class="ad" />
+    <image wx:if="{{adData != null}}" mode="aspectFill" src="{{adData != null ? adData.url : ''}}" bindtap="tapAd"
+      class="ad" />
 
     <!-- 推荐 -->
-    <scroll-view class="school" wx:if="{{currentIndex == 0}}" scroll-y="true" style="height: {{pageHeight}}rpx"
-      refresher-enabled="true" refresher-triggered="{{tabs[currentIndex].refreshTrigger}}"
-      bindrefresherrefresh="triggerRefresh" bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort"
-      bindscrolltolower="onScrolllower" lower-threshold="0">
+    <scroll-view class="school" wx:if="{{!searchMode && currentIndex == 0}}" scroll-y="true"
+      style="height: {{pageHeight + (adData == null ? 130 : 0)}}rpx" refresher-enabled="true"
+      refresher-triggered="{{tabs[currentIndex].refreshTrigger}}" bindrefresherrefresh="triggerRefresh"
+      bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort" bindscrolltolower="onScrolllower"
+      lower-threshold="0">
       <view class="item" wx:for="{{recommonds}}" wx:key="id" data-id="{{item.school.id}}">
         <!-- 内容 -->
         <view class="content" data-index="{{index}}" bindtap="tapSchoolItem">
           <view>
-            <image style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
+            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
             <image class="tag" src="{{item.tagSrc}}" />
           </view>
           <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
@@ -59,14 +62,16 @@
       </view>
       <!-- </view> -->
 
-      <view wx:if="{{showLoad}}" style="width: 100%;" class="cu-load {{isLoad?'loading':'over'}}"></view>
+      <view wx:if="{{tabs[currentIndex].showLoad}}" style="width: 100%;"
+        class="cu-load {{tabs[currentIndex].isLoad?'loading':'over'}}"></view>
     </scroll-view>
 
     <!-- 热门 -->
-    <scroll-view class="school" wx:if="{{currentIndex == 1}}" scroll-y="true" style="height: {{pageHeight}}rpx"
-      refresher-enabled="true" refresher-triggered="{{tabs[currentIndex].refreshTrigger}}"
-      bindrefresherrefresh="triggerRefresh" bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort"
-      bindscrolltolower="onScrolllower" lower-threshold="0">
+    <scroll-view class="school" wx:if="{{!searchMode && currentIndex == 1}}" scroll-y="true"
+      style="height: {{pageHeight}}rpx" refresher-enabled="true"
+      refresher-triggered="{{tabs[currentIndex].refreshTrigger}}" bindrefresherrefresh="triggerRefresh"
+      bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort" bindscrolltolower="onScrolllower"
+      lower-threshold="0">
       <view class="item" wx:for="{{hots}}" wx:key="id" data-id="{{item.school.id}}">
         <!-- 内容 -->
         <view class="content" data-index="{{index}}" bindtap="tapSchoolItem">
@@ -95,14 +100,16 @@
       </view>
       <!-- </view> -->
 
-      <view wx:if="{{showLoad}}" style="width: 100%;" class="cu-load {{isLoad?'loading':'over'}}"></view>
+      <view wx:if="{{tabs[currentIndex].showLoad}}" style="width: 100%;"
+        class="cu-load {{tabs[currentIndex].isLoad?'loading':'over'}}"></view>
     </scroll-view>
 
     <!-- 幼儿园 -->
-    <scroll-view class="school" wx:if="{{currentIndex == 2}}" scroll-y="true" style="height: {{pageHeight}}rpx"
-      refresher-enabled="true" refresher-triggered="{{tabs[currentIndex].refreshTrigger}}"
-      bindrefresherrefresh="triggerRefresh" bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort"
-      bindscrolltolower="onScrolllower" lower-threshold="0">
+    <scroll-view class="school" wx:if="{{!searchMode && currentIndex == 2}}" scroll-y="true"
+      style="height: {{pageHeight}}rpx" refresher-enabled="true"
+      refresher-triggered="{{tabs[currentIndex].refreshTrigger}}" bindrefresherrefresh="triggerRefresh"
+      bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort" bindscrolltolower="onScrolllower"
+      lower-threshold="0">
       <view class="item" wx:for="{{kindergartens}}" wx:key="id" data-id="{{item.school.id}}">
         <!-- 内容 -->
         <view class="content">
@@ -131,14 +138,16 @@
       </view>
       <!-- </view> -->
 
-      <view wx:if="{{showLoad}}" style="width: 100%;" class="cu-load {{isLoad?'loading':'over'}}"></view>
+      <view wx:if="{{tabs[currentIndex].showLoad}}" style="width: 100%;"
+        class="cu-load {{tabs[currentIndex].isLoad?'loading':'over'}}"></view>
     </scroll-view>
 
     <!-- 小学 -->
-    <scroll-view class="school" wx:if="{{currentIndex == 3}}" scroll-y="true" style="height: {{pageHeight}}rpx"
-      refresher-enabled="true" refresher-triggered="{{tabs[currentIndex].refreshTrigger}}"
-      bindrefresherrefresh="triggerRefresh" bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort"
-      bindscrolltolower="onScrolllower" lower-threshold="0">
+    <scroll-view class="school" wx:if="{{!searchMode && currentIndex == 3}}" scroll-y="true"
+      style="height: {{pageHeight}}rpx" refresher-enabled="true"
+      refresher-triggered="{{tabs[currentIndex].refreshTrigger}}" bindrefresherrefresh="triggerRefresh"
+      bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort" bindscrolltolower="onScrolllower"
+      lower-threshold="0">
       <view class="item" wx:for="{{primarys}}" wx:key="id" data-id="{{item.school.id}}">
         <!-- 内容 -->
         <view class="content">
@@ -167,14 +176,16 @@
       </view>
       <!-- </view> -->
 
-      <view wx:if="{{showLoad}}" style="width: 100%;" class="cu-load {{isLoad?'loading':'over'}}"></view>
+      <view wx:if="{{tabs[currentIndex].showLoad}}" style="width: 100%;"
+        class="cu-load {{tabs[currentIndex].isLoad?'loading':'over'}}"></view>
     </scroll-view>
 
     <!-- 中学 -->
-    <scroll-view class="school" wx:if="{{currentIndex == 4}}" scroll-y="true" style="height: {{pageHeight}}rpx"
-      refresher-enabled="true" refresher-triggered="{{tabs[currentIndex].refreshTrigger}}"
-      bindrefresherrefresh="triggerRefresh" bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort"
-      bindscrolltolower="onScrolllower" lower-threshold="0">
+    <scroll-view class="school" wx:if="{{!searchMode && currentIndex == 4}}" scroll-y="true"
+      style="height: {{pageHeight}}rpx" refresher-enabled="true"
+      refresher-triggered="{{tabs[currentIndex].refreshTrigger}}" bindrefresherrefresh="triggerRefresh"
+      bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort" bindscrolltolower="onScrolllower"
+      lower-threshold="0">
       <view class="item" wx:for="{{middles}}" wx:key="id" data-id="{{item.school.id}}">
         <!-- 内容 -->
         <view class="content">
@@ -203,14 +214,16 @@
       </view>
       <!-- </view> -->
 
-      <view wx:if="{{showLoad}}" style="width: 100%;" class="cu-load {{isLoad?'loading':'over'}}"></view>
+      <view wx:if="{{tabs[currentIndex].showLoad}}" style="width: 100%;"
+        class="cu-load {{tabs[currentIndex].isLoad?'loading':'over'}}"></view>
     </scroll-view>
 
     <!-- 培训 -->
-    <scroll-view class="school" wx:if="{{currentIndex == 5}}" scroll-y="true" style="height: {{pageHeight}}rpx"
-      refresher-enabled="true" refresher-triggered="{{tabs[currentIndex].refreshTrigger}}"
-      bindrefresherrefresh="triggerRefresh" bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort"
-      bindscrolltolower="onScrolllower" lower-threshold="0">
+    <scroll-view class="school" wx:if="{{!searchMode && currentIndex == 5}}" scroll-y="true"
+      style="height: {{pageHeight}}rpx" refresher-enabled="true"
+      refresher-triggered="{{tabs[currentIndex].refreshTrigger}}" bindrefresherrefresh="triggerRefresh"
+      bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort" bindscrolltolower="onScrolllower"
+      lower-threshold="0">
       <view class="item" wx:for="{{trainings}}" wx:key="id" data-id="{{item.school.id}}">
         <!-- 内容 -->
         <view class="content">
@@ -239,7 +252,41 @@
       </view>
       <!-- </view> -->
 
-      <view wx:if="{{showLoad}}" style="width: 100%;" class="cu-load {{isLoad?'loading':'over'}}"></view>
+      <view wx:if="{{tabs[currentIndex].showLoad}}" style="width: 100%;"
+        class="cu-load {{tabs[currentIndex].isLoad?'loading':'over'}}"></view>
+    </scroll-view>
+
+
+    <!-- 查询页面 -->
+    <scroll-view class="school" wx:if="{{searchMode}}" scroll-y="true"
+      style="height: {{pageHeight + (adData == null ? 130 : 0)}}rpx">
+      <view class="item" wx:for="{{searchDatas}}" wx:key="id" data-id="{{item.school.id}}">
+        <!-- 内容 -->
+        <view class="content" data-index="{{index}}" bindtap="tapSchoolItem">
+          <view>
+            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
+            <image class="tag" src="{{item.tagSrc}}" />
+          </view>
+          <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
+            <!-- 学校名称 -->
+            <view class="name">{{item.school.name}}</view>
+            <!-- 性质、区域 -->
+            <view class="label">性质：{{item.nature}} 区域：{{item.area}}</view>
+            <view class="label">电话：{{item.school.phone}}</view>
+            <view class="label addr">
+              <view>地址：{{item.addr}}</view>
+              <view style="flex: 1"></view>
+              <image wx:if="{{item.distanceStr != null && item.distanceStr != ''}}" src="/images/search_location.png"
+                style="width: 16rpx; height: 18rpx;" />
+              <view class="location">{{item.distanceStr}}</view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 分割线 -->
+        <view class="line"></view>
+      </view>
+      <!-- </view> -->
     </scroll-view>
 
   </view>
