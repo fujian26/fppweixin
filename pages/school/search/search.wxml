@@ -30,74 +30,216 @@
     <scroll-view class="school" wx:if="{{currentIndex == 0}}" scroll-y="true" style="height: {{pageHeight}}rpx"
       refresher-enabled="true" refresher-triggered="{{tabs[currentIndex].refreshTrigger}}"
       bindrefresherrefresh="triggerRefresh" bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort"
-      bindscrolltolower="onScrolllower"
-      lower-threshold="0"
-      enhanced="true"
-      binddragging="onDragging">
-      <view class="vflex-container">
-        <view class="item" wx:for="{{recommonds}}" wx:key="id" data-id="{{item.school.id}}">
-          <!-- 内容 -->
-          <view class="content">
-            <view>
-              <image style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
-              <image class="tag" src="{{item.tagSrc}}" />
-            </view>
-            <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
-              <!-- 学校名称 -->
-              <view class="name">{{item.school.name}}</view>
-              <!-- 性质、区域 -->
-              <view class="label">性质：{{item.nature}} 区域：{{item.area}}</view>
-              <view class="label">电话：{{item.school.phone}}</view>
-              <view class="label addr">
-                <view>地址：{{item.addr}}</view>
-                <view style="flex: 1"></view>
-                <image wx:if="{{item.distanceStr != null && item.distanceStr != ''}}" src="/images/search_location.png"
-                  style="width: 16rpx; height: 18rpx;" />
-                <view class="location">{{item.distanceStr}}</view>
-              </view>
+      bindscrolltolower="onScrolllower" lower-threshold="0">
+      <view class="item" wx:for="{{recommonds}}" wx:key="id" data-id="{{item.school.id}}">
+        <!-- 内容 -->
+        <view class="content" data-index="{{index}}" bindtap="tapSchoolItem">
+          <view>
+            <image style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
+            <image class="tag" src="{{item.tagSrc}}" />
+          </view>
+          <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
+            <!-- 学校名称 -->
+            <view class="name">{{item.school.name}}</view>
+            <!-- 性质、区域 -->
+            <view class="label">性质：{{item.nature}} 区域：{{item.area}}</view>
+            <view class="label">电话：{{item.school.phone}}</view>
+            <view class="label addr">
+              <view>地址：{{item.addr}}</view>
+              <view style="flex: 1"></view>
+              <image wx:if="{{item.distanceStr != null && item.distanceStr != ''}}" src="/images/search_location.png"
+                style="width: 16rpx; height: 18rpx;" />
+              <view class="location">{{item.distanceStr}}</view>
             </view>
           </view>
-
-          <!-- 分割线 -->
-          <view class="line"></view>
         </view>
+
+        <!-- 分割线 -->
+        <view class="line"></view>
       </view>
+      <!-- </view> -->
 
       <view wx:if="{{showLoad}}" style="width: 100%;" class="cu-load {{isLoad?'loading':'over'}}"></view>
     </scroll-view>
 
     <!-- 热门 -->
-    <scroll-view class="school" wx:if="{{currentIndex == 1}}" scroll-y="true" refresher-enabled="true"
-      refresher-triggered="{{tabs[currentIndex].refreshTrigger}}" bindrefresherrefresh="triggerRefresh"
-      bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort">
-      <view class="vflex-container">
-        <view class="item" wx:for="{{hots}}" wx:key="id" data-id="{{item.school.id}}">
-          <!-- 内容 -->
-          <view class="content">
-            <view>
-              <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
-              <image class="tag" src="{{item.tagSrc}}" />
-            </view>
-            <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
-              <!-- 学校名称 -->
-              <view class="name">{{item.school.name}}</view>
-              <!-- 性质、区域 -->
-              <view class="label">性质：{{item.nature}} 区域：{{item.area}}</view>
-              <view class="label">电话：{{item.school.phone}}</view>
-              <view class="label addr">
-                <view>地址：{{item.addr}}</view>
-                <view style="flex: 1"></view>
-                <image wx:if="{{item.distanceStr != null && item.distanceStr != ''}}" src="/images/search_location.png"
-                  style="width: 16rpx; height: 18rpx;" />
-                <view class="location">{{item.distanceStr}}</view>
-              </view>
+    <scroll-view class="school" wx:if="{{currentIndex == 1}}" scroll-y="true" style="height: {{pageHeight}}rpx"
+      refresher-enabled="true" refresher-triggered="{{tabs[currentIndex].refreshTrigger}}"
+      bindrefresherrefresh="triggerRefresh" bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort"
+      bindscrolltolower="onScrolllower" lower-threshold="0">
+      <view class="item" wx:for="{{hots}}" wx:key="id" data-id="{{item.school.id}}">
+        <!-- 内容 -->
+        <view class="content" data-index="{{index}}" bindtap="tapSchoolItem">
+          <view>
+            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
+            <image class="tag" src="{{item.tagSrc}}" />
+          </view>
+          <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
+            <!-- 学校名称 -->
+            <view class="name">{{item.school.name}}</view>
+            <!-- 性质、区域 -->
+            <view class="label">性质：{{item.nature}} 区域：{{item.area}}</view>
+            <view class="label">电话：{{item.school.phone}}</view>
+            <view class="label addr">
+              <view>地址：{{item.addr}}</view>
+              <view style="flex: 1"></view>
+              <image wx:if="{{item.distanceStr != null && item.distanceStr != ''}}" src="/images/search_location.png"
+                style="width: 16rpx; height: 18rpx;" />
+              <view class="location">{{item.distanceStr}}</view>
             </view>
           </view>
-
-          <!-- 分割线 -->
-          <view class="line"></view>
         </view>
+
+        <!-- 分割线 -->
+        <view class="line"></view>
       </view>
+      <!-- </view> -->
+
+      <view wx:if="{{showLoad}}" style="width: 100%;" class="cu-load {{isLoad?'loading':'over'}}"></view>
+    </scroll-view>
+
+    <!-- 幼儿园 -->
+    <scroll-view class="school" wx:if="{{currentIndex == 2}}" scroll-y="true" style="height: {{pageHeight}}rpx"
+      refresher-enabled="true" refresher-triggered="{{tabs[currentIndex].refreshTrigger}}"
+      bindrefresherrefresh="triggerRefresh" bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort"
+      bindscrolltolower="onScrolllower" lower-threshold="0">
+      <view class="item" wx:for="{{kindergartens}}" wx:key="id" data-id="{{item.school.id}}">
+        <!-- 内容 -->
+        <view class="content">
+          <view>
+            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
+            <image class="tag" src="{{item.tagSrc}}" />
+          </view>
+          <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
+            <!-- 学校名称 -->
+            <view class="name">{{item.school.name}}</view>
+            <!-- 性质、区域 -->
+            <view class="label">性质：{{item.nature}} 区域：{{item.area}}</view>
+            <view class="label">电话：{{item.school.phone}}</view>
+            <view class="label addr">
+              <view>地址：{{item.addr}}</view>
+              <view style="flex: 1"></view>
+              <image wx:if="{{item.distanceStr != null && item.distanceStr != ''}}" src="/images/search_location.png"
+                style="width: 16rpx; height: 18rpx;" />
+              <view class="location">{{item.distanceStr}}</view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 分割线 -->
+        <view class="line"></view>
+      </view>
+      <!-- </view> -->
+
+      <view wx:if="{{showLoad}}" style="width: 100%;" class="cu-load {{isLoad?'loading':'over'}}"></view>
+    </scroll-view>
+
+    <!-- 小学 -->
+    <scroll-view class="school" wx:if="{{currentIndex == 3}}" scroll-y="true" style="height: {{pageHeight}}rpx"
+      refresher-enabled="true" refresher-triggered="{{tabs[currentIndex].refreshTrigger}}"
+      bindrefresherrefresh="triggerRefresh" bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort"
+      bindscrolltolower="onScrolllower" lower-threshold="0">
+      <view class="item" wx:for="{{primarys}}" wx:key="id" data-id="{{item.school.id}}">
+        <!-- 内容 -->
+        <view class="content">
+          <view>
+            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
+            <image class="tag" src="{{item.tagSrc}}" />
+          </view>
+          <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
+            <!-- 学校名称 -->
+            <view class="name">{{item.school.name}}</view>
+            <!-- 性质、区域 -->
+            <view class="label">性质：{{item.nature}} 区域：{{item.area}}</view>
+            <view class="label">电话：{{item.school.phone}}</view>
+            <view class="label addr">
+              <view>地址：{{item.addr}}</view>
+              <view style="flex: 1"></view>
+              <image wx:if="{{item.distanceStr != null && item.distanceStr != ''}}" src="/images/search_location.png"
+                style="width: 16rpx; height: 18rpx;" />
+              <view class="location">{{item.distanceStr}}</view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 分割线 -->
+        <view class="line"></view>
+      </view>
+      <!-- </view> -->
+
+      <view wx:if="{{showLoad}}" style="width: 100%;" class="cu-load {{isLoad?'loading':'over'}}"></view>
+    </scroll-view>
+
+    <!-- 中学 -->
+    <scroll-view class="school" wx:if="{{currentIndex == 4}}" scroll-y="true" style="height: {{pageHeight}}rpx"
+      refresher-enabled="true" refresher-triggered="{{tabs[currentIndex].refreshTrigger}}"
+      bindrefresherrefresh="triggerRefresh" bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort"
+      bindscrolltolower="onScrolllower" lower-threshold="0">
+      <view class="item" wx:for="{{middles}}" wx:key="id" data-id="{{item.school.id}}">
+        <!-- 内容 -->
+        <view class="content">
+          <view>
+            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
+            <image class="tag" src="{{item.tagSrc}}" />
+          </view>
+          <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
+            <!-- 学校名称 -->
+            <view class="name">{{item.school.name}}</view>
+            <!-- 性质、区域 -->
+            <view class="label">性质：{{item.nature}} 区域：{{item.area}}</view>
+            <view class="label">电话：{{item.school.phone}}</view>
+            <view class="label addr">
+              <view>地址：{{item.addr}}</view>
+              <view style="flex: 1"></view>
+              <image wx:if="{{item.distanceStr != null && item.distanceStr != ''}}" src="/images/search_location.png"
+                style="width: 16rpx; height: 18rpx;" />
+              <view class="location">{{item.distanceStr}}</view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 分割线 -->
+        <view class="line"></view>
+      </view>
+      <!-- </view> -->
+
+      <view wx:if="{{showLoad}}" style="width: 100%;" class="cu-load {{isLoad?'loading':'over'}}"></view>
+    </scroll-view>
+
+    <!-- 培训 -->
+    <scroll-view class="school" wx:if="{{currentIndex == 5}}" scroll-y="true" style="height: {{pageHeight}}rpx"
+      refresher-enabled="true" refresher-triggered="{{tabs[currentIndex].refreshTrigger}}"
+      bindrefresherrefresh="triggerRefresh" bindrefresherrestore="triggerRestore" bindrefresherabort="triggerAbort"
+      bindscrolltolower="onScrolllower" lower-threshold="0">
+      <view class="item" wx:for="{{trainings}}" wx:key="id" data-id="{{item.school.id}}">
+        <!-- 内容 -->
+        <view class="content">
+          <view>
+            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
+            <image class="tag" src="{{item.tagSrc}}" />
+          </view>
+          <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
+            <!-- 学校名称 -->
+            <view class="name">{{item.school.name}}</view>
+            <!-- 性质、区域 -->
+            <view class="label">性质：{{item.nature}} 区域：{{item.area}}</view>
+            <view class="label">电话：{{item.school.phone}}</view>
+            <view class="label addr">
+              <view>地址：{{item.addr}}</view>
+              <view style="flex: 1"></view>
+              <image wx:if="{{item.distanceStr != null && item.distanceStr != ''}}" src="/images/search_location.png"
+                style="width: 16rpx; height: 18rpx;" />
+              <view class="location">{{item.distanceStr}}</view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 分割线 -->
+        <view class="line"></view>
+      </view>
+      <!-- </view> -->
+
+      <view wx:if="{{showLoad}}" style="width: 100%;" class="cu-load {{isLoad?'loading':'over'}}"></view>
     </scroll-view>
 
   </view>

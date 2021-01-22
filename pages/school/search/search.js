@@ -1,5 +1,6 @@
 // pages/school/search/search.js
 let app = getApp()
+let pageSize = 20
 Page({
 
   /**
@@ -9,49 +10,59 @@ Page({
     location: '',
     currentIndex: 0,
     pageHeight: app.globalData.screenHeight * 0.6,
-    isLoad: true,
-    showLoad: false,
     tabs: [{
         id: 1,
         name: '推荐',
         pageIndex: 0,
         type: 100,
-        refreshTrigger: false 
+        refreshTrigger: false,
+        isLoad: true,
+        showLoad: false,
       },
       {
         id: 2,
         name: '热门',
         pageIndex: 0,
         type: 101,
-        refreshTrigger: false
+        refreshTrigger: false,
+        isLoad: true,
+        showLoad: false,
       },
       {
         id: 3,
         name: '幼儿园',
         pageIndex: 0,
         type: 0,
-        refreshTrigger: false
+        refreshTrigger: false,
+        isLoad: true,
+        showLoad: false,
       },
       {
         id: 4,
         name: '小学',
         pageIndex: 0,
         type: 1,
-        refreshTrigger: false
+        refreshTrigger: false,
+        isLoad: true,
+        showLoad: false,
       },
       {
         id: 5,
         name: '中学',
         pageIndex: 0,
         type: 2,
-        refreshTrigger: false
+        refreshTrigger: false,
+        isLoad: true,
+        showLoad: false,
       },
       {
         id: 6,
         name: '培训机构',
         pageIndex: 0,
         type: 3,
-        refreshTrigger: false
+        refreshTrigger: false,
+        isLoad: true,
+        showLoad: false,
       }
     ],
     recommonds: [{
@@ -329,12 +340,10 @@ Page({
               case 3:
                 item.tagSrc = '/images/training-school-tag.png'
                 break
-            }
-
-            console.log('school name ' + item.school.name)
+            }            
           }
 
-          pageData.push(schoolExts)
+          pageData = pageData.concat(schoolExts)
 
           switch (tabData.id) {
             case 1:
@@ -344,7 +353,7 @@ Page({
               break
             case 2:
               that.setData({
-                hots: schoolExts
+                hots: pageData
               })
               break
             case 3:
@@ -411,31 +420,91 @@ Page({
 
     let that = this
     let tabs = this.data.tabs
-    let currentIndex = this.data.currentIndex    
+    let currentIndex = this.data.currentIndex
     let tabData = this.data.tabs[currentIndex]
 
     console.log('triggerAbort refreshTrigger ' + tabData.refreshTrigger)
+  },
+
+  obtainPageData() {
+    var pageData = null
+    let index = this.data.currentIndex
+    switch (index) {
+      case 0:
+        pageData = this.data.recommonds
+        break
+      case 1:
+        pageData = this.data.hots
+        break
+      case 2:
+        pageData = this.data.kindergartens
+        break
+      case 3:
+        pageData = this.data.primarys
+        break
+      case 4:
+        pageData = this.data.middles
+        break
+      case 5:
+        pageData = this.data.trainings
+        break
+    }
+
+    return pageData
   },
 
   onScrolllower(event) {
     
     console.log('onScrolllower')
     
-    if (this.data.showLoad) {
+    let tabs = this.data.tabs
+    let currentIndex = this.data.currentIndex
+    let tabData = tabs[currentIndex]
+    let pageData = this.obtainPageData()
+    
+    if (tabData.showLoad) {
       return
     }
 
+    tabData.showLoad = true
+    if (pageData == null || pageData.length < pageSize) {
+      tabData.isLoad = false
+    } else {
+      tabData.isLoad = true
+    }
+
     this.setData({
-      showLoad: true
+      tabs: tabs
     })
-    setTimeout(() => {
-      this.setData({
-        showLoad: false
-      })
-    }, 1000);
+
+    tabData.pageIndex++
+    refreshLoadPage(tabData, pageData)
   },
 
-  onDragging(event) {
-    console.log('onDragging top ' + event.detail.scrollTop)
+  tapSchoolItem(event) {
+    var index = event.currentTarget.dataset.index
+    console.log('tapSchoolItem index ' + index)
+
+    let pageData = this.obtainPageData()
+    if (pageData == null || pageData.length <= index) {
+      console.error('tapSchoolItem error pageData == null || pageData.length <= index')
+      return
+    }
+
+    wx.setStorage({
+      data: pageData[index],
+      key: 'schoolExt',
+      success(res) {          
+        wx.navigateTo({
+          url: '/pages/school/detail/detail',
+          fail(res) {
+            console.log('search.js navigateTo school detail fail ' + res.errMsg)
+          }
+        })
+      },
+      fail(res) {
+        console.log('search.js setStorage school fail ' + res.errMsg)
+      }
+    })
   }
 })
