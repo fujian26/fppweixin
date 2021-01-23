@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <main wx:if="{{pageName == 'main'}}"></main>
-<map wx:if="{{pageName == 'map'}}"></map>
+<mmap wx:if="{{pageName == 'map'}}"></mmap>
 <msg wx:if="{{pageName == 'msg'}}"></msg>
 <me wx:if="{{pageName == 'me'}}"></me>
 <view class="cu-bar tabbar bg-white shadow foot" style="height: 120rpx">

@@ -1,7 +1,7 @@
 {
   "usingComponents": {
     "main": "/pages/main/main",
-    "map": "/pages/map/map",
+    "mmap": "/pages/map/map",
     "msg": "/pages/msg/msg",
     "me": "/pages/me/me"
   }

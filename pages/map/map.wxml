@@ -1,6 +1,3 @@
 <!--pages/map/map.wxml-->
-<scroll-view scroll-y class="scrollPage">
-  <basebar></basebar>
-  <text>pages/map/map.wxml</text>
-  <view style="width: 100%; height: 100rpx; background-color: red" />
-</scroll-view>
+<basebar id="basebar" leftAction="" centerText="地图" show-location></basebar>
+<map class="map" longitude="{{lng}}" latitude="{{lat}}" style="height: {{mapHeight}}rpx"></map>

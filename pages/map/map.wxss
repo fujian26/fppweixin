@@ -1,1 +1,6 @@
 /* pages/map/map.wxss */
+
+.map {
+  width: 100%;
+  /* background-color: tomato; */
+}
