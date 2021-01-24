@@ -1,6 +1,6 @@
 <!--pages/me/me.wxml-->
 <basebar centerText='个人中心'></basebar>
-<scroll-view scroll-y="true" class="scrollPage">
+<scroll-view scroll-y="true" class="scrollPageNav">
   <view class="top-container" style="background-image: url('/images/me_top_bg.png')">
     <!-- 头像、昵称 -->
     <view class="hflex-container">

@@ -1,3 +1,45 @@
 <!--pages/map/map.wxml-->
 <basebar id="basebar" leftAction="" centerText="地图" show-location></basebar>
-<map class="map" longitude="{{lng}}" latitude="{{lat}}" style="height: {{mapHeight}}rpx"></map>
+
+<map id="primaryMap" bindtap="tapMap" polygons="{{polygons}}" bindcallouttap="tapMarker" markers="{{markers}}" show-location longitude="{{lng}}"
+  latitude="{{lat}}" class="map" style="height: {{mapHeight}}rpx">
+
+  <cover-view slot="callout">
+    <cover-view wx:for="{{markers}}" wx:key="id" class="school-marker {{item.selected ? 'school-marker-selected' : ''}}"
+      marker-id="{{item.id}}">
+      {{item.content}}
+    </cover-view>
+  </cover-view>
+</map>
+
+<cover-view class="cover-container">
+  <!-- 房源 -->
+  <cover-view class="item" bindtap="tapHouse">
+    <cover-image src="/images/map_house.png" />
+    <cover-view style="margin-top: 4rpx">房源</cover-view>
+  </cover-view>
+
+  <!-- 列表 -->
+  <cover-view class="item" bindtap="tapList">
+    <cover-image src="/images/map_list.png" />
+    <cover-view style="margin-top: 4rpx">列表</cover-view>
+  </cover-view>
+
+  <!-- 定位 -->
+  <cover-view class="item" bindtap="tapLocation">
+    <cover-image src="/images/map_location.png" />
+  </cover-view>
+</cover-view>
+
+<!-- marker 介绍 -->
+<cover-view wx:if="{{desc != null}}" class="desc">
+  <cover-view class="title">{{desc.name}}</cover-view>
+  <cover-view class="hflex-container" style="margin-top: 8rpx;">
+    <cover-view class="tag">{{desc.typeStr}}</cover-view>
+    <cover-view class="tag" style="margin-left: 7rpx">{{desc.areaStr}}</cover-view>
+    <cover-view class="tag" style="margin-left: 7rpx">{{desc.natureStr}}</cover-view>
+    <cover-view class="holder"></cover-view>
+    <cover-view bindtap="tapDesc" class="btn">详情</cover-view>
+  </cover-view>
+  <cover-view class="intro">{{desc.intro}}</cover-view>
+</cover-view>

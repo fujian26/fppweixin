@@ -1,6 +1,7 @@
 // app.js
 App({
   onLaunch() {
+
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -87,6 +88,8 @@ App({
   globalData: {
     userInfo: null,
     baseUrl: 'http://localhost:8081',
-    token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmdWppYW4iLCJpYXQiOjE2MTExMDcyMDQsImV4cCI6MTYxMTcxMjAwNH0.PRxkN9U5Tv2dHUdpx870twkYnIygXuwdFOpckMb9-gWLlpBCTmkee8bKzQ5FX98cSzp6hsa-aU1je-AaRfAEGw'
+    token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmdWppYW4iLCJpYXQiOjE2MTExMDcyMDQsImV4cCI6MTYxMTcxMjAwNH0.PRxkN9U5Tv2dHUdpx870twkYnIygXuwdFOpckMb9-gWLlpBCTmkee8bKzQ5FX98cSzp6hsa-aU1je-AaRfAEGw',
+    // lng: 103.92377,
+    // lat: 30.57447
   }
 })

@@ -2,5 +2,91 @@
 
 .map {
   width: 100%;
-  /* background-color: tomato; */
+}
+
+.cover-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  padding: 0 16rpx;
+  padding-bottom: 14rpx;
+  right: 10rpx;
+  top: calc(50% - 180rpx);
+  background-color: white;
+  border-radius: 42rpx;
+}
+
+.cover-container .item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 14rpx;
+  font-size: 18rpx;
+  color: #666666;
+}
+
+.cover-container .item cover-image {
+  width: 56rpx;
+  height: 56rpx;
+}
+
+.school-marker {
+  text-align: center;
+  color: #3E66D5;
+  font-size: 20rpx;
+  padding: 12rpx 24rpx;
+  background-color: white;
+  border-radius: 24rpx;
+  border-width: 1rpx;
+  border-style: solid;
+  border-color: #3E66D5;
+}
+
+.school-marker-selected {
+  color: white;
+  background-color: #3E66D5;
+}
+
+.desc {
+  position: absolute;
+  left: calc(7% - 28rpx);
+  top: calc(80% - 120rpx);
+  width: 86%;
+  margin: 0 0;
+  padding: 28rpx 28rpx;
+  background-color: white;
+  border-radius: 42rpx;
+  box-shadow: 0 0 16rpx;
+}
+
+.desc .title {
+  font-size: 32rpx;
+  color: #333333;
+}
+
+.desc .tag {
+  text-align: center;
+  border-width: 1rpx;
+  border-color: #3E66D5;
+  border-style: solid;
+  border-radius: 14rpx;
+  font-size: 20rpx;
+  padding: 4rpx 20rpx;
+  color: #3E66D5;
+}
+
+.desc .btn {
+  border-radius: 28rpx;
+  padding: 14rpx 26rpx;
+  color: white;
+  font-size: 25rpx;
+  background-color: #3E66D5;
+}
+
+.desc .intro {
+  margin-top: 34rpx;
+  color: #999999;
+  font-size: 24rpx;
+  white-space: normal;
 }

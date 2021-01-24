@@ -18,6 +18,12 @@
   background-color: #ffffff;
 }
 
+.scrollPageNav {
+  height: calc(100% - 120rpx);
+  padding-bottom: 100rpx;
+  background-color: #ffffff;
+}
+
 .text-one-line {
   overflow: hidden;
   text-overflow: ellipsis;
