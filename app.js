@@ -74,6 +74,7 @@ App({
       success: e => {
         this.globalData.screenWidth = e.screenWidth * e.pixelRatio
         this.globalData.screenHeight = e.screenHeight * e.pixelRatio
+        this.globalData.pixelRatio = e.pixelRatio
         this.globalData.StatusBar = e.statusBarHeight;
         let capsule = wx.getMenuButtonBoundingClientRect();
         if (capsule) {
@@ -89,7 +90,5 @@ App({
     userInfo: null,
     baseUrl: 'http://localhost:8081',
     token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmdWppYW4iLCJpYXQiOjE2MTExMDcyMDQsImV4cCI6MTYxMTcxMjAwNH0.PRxkN9U5Tv2dHUdpx870twkYnIygXuwdFOpckMb9-gWLlpBCTmkee8bKzQ5FX98cSzp6hsa-aU1je-AaRfAEGw',
-    // lng: 103.92377,
-    // lat: 30.57447
   }
 })

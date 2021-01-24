@@ -16,7 +16,7 @@
   <view class="vflex-container" style="flex-grow: 1;">
 
     <!-- 导航 -->
-    <scroll-view scroll-x="true">
+    <scroll-view wx:if="{{!searchMode}}" scroll-x="true">
       <view class="tabbar">
         <view wx:for="{{tabs}}" class="item" data-index="{{index}}" bindtap="tapOnTab" wx:key="id">
           <view class="name" style="color: {{currentIndex == index}} ? #3E66D5 : #666666">{{item.name}}</view>

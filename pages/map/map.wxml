@@ -1,8 +1,8 @@
 <!--pages/map/map.wxml-->
 <basebar id="basebar" leftAction="" centerText="地图" show-location></basebar>
 
-<map id="primaryMap" bindtap="tapMap" polygons="{{polygons}}" bindcallouttap="tapMarker" markers="{{markers}}" show-location longitude="{{lng}}"
-  latitude="{{lat}}" class="map" style="height: {{mapHeight}}rpx">
+<map id="schoolMap" bindtap="tapMap" polygons="{{polygons}}" bindcallouttap="tapMarker" markers="{{markers}}"
+  show-location longitude="{{lng}}" latitude="{{lat}}" class="map" style="height: {{mapHeight}}rpx">
 
   <cover-view slot="callout">
     <cover-view wx:for="{{markers}}" wx:key="id" class="school-marker {{item.selected ? 'school-marker-selected' : ''}}"
@@ -11,6 +11,12 @@
     </cover-view>
   </cover-view>
 </map>
+
+<cover-view class="type-tab" style="top: {{typeTabTop}}rpx">
+  <cover-view bindtap="tapTabItem" data-index="0" class="item {{currentIndex == 0 ? 'selected' : ''}}">幼儿园</cover-view>
+  <cover-view bindtap="tapTabItem" data-index="1" class="item {{currentIndex == 1 ? 'selected' : ''}}">小学</cover-view>
+  <cover-view bindtap="tapTabItem" data-index="2" class="item {{currentIndex == 2 ? 'selected' : ''}}">中学</cover-view>
+</cover-view>
 
 <cover-view class="cover-container">
   <!-- 房源 -->

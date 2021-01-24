@@ -684,7 +684,8 @@ Page({
   // 搜索框获得焦点
   searchFocus(event) {
     this.setData({
-      searchMode: true
+      searchMode: true,
+      searchDatas: []
     })
   },
 

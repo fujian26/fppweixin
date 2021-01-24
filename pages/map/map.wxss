@@ -1,5 +1,29 @@
 /* pages/map/map.wxss */
 
+.type-tab {
+  width: 100%;
+  height: 82rpx;
+  position: absolute;  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom-left-radius: 56rpx;
+  border-bottom-right-radius: 56rpx;
+  background-color: white;
+  box-shadow: 0 0 16rpx;
+}
+
+.type-tab .item {
+  flex: 1;
+  color: #666666;
+  font-size: 29rpx;
+  text-align: center;
+}
+
+.type-tab .selected {
+  color: #3E66D5;
+}
+
 .map {
   width: 100%;
 }
