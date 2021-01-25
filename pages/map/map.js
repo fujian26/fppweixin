@@ -233,12 +233,19 @@ Component({
       })
     },
 
+    // 点击 房源
     tapHouse(event) {
 
     },
 
+    // 点击 列表
     tapList(event) {
-
+      wx.navigateTo({
+        url: '/pages/school/search/search',
+        fail(res) {
+          console.error(TAG + ' navigateTo school search fail ' + res.errMsg)
+        }
+      })
     },
 
     tapLocation(event) {
