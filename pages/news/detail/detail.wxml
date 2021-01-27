@@ -1,0 +1,16 @@
+<!--pages/news/detail/detail.wxml-->
+<basebar centerText='{{title}}'></basebar>
+<scroll-view wx:if="{{newsDetail != null}}" scroll-y="true" class="scrollPage">
+  <view class="title">{{newsDetail.title}}</view>
+  <view class="hflex-container" style="margin-left: 30rpx; margin-right: 30rpx;">
+    <image style="width: 22rpx; height: 14rpx;" src="/images/ic_watch.png" />
+    <view class="watch-num">{{newsDetail.watch_num}}</view>
+    <view class="holder" />
+    <view wx:if="{{newsDetail.from != null}}" class="from-text">{{newsDetail.from}} | </view>
+    <view class="time-text">{{newsDetail.publish_time}}</view>
+  </view>
+
+  <view class="line" />
+
+  <web-view src="{{newsDetail.file_path}}" style="width: 100%; height: 400rpx;" />
+</scroll-view>

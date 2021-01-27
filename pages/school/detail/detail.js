@@ -1,5 +1,7 @@
 // pages/school/detail/detail.js
+const utils = require('../../../utils/util');
 let app = getApp()
+let TAG = 'detail.js'
 Page({
 
   /**
@@ -12,7 +14,8 @@ Page({
     addr: '',
     nature: '',
     entranceMode: '',
-    typeStr: ''
+    typeStr: '',
+    dynamics: [],
   },
 
   /**
@@ -151,6 +154,8 @@ Page({
           entranceMode: entranceMode,
           typeStr: typeStr
         })
+
+        that.getDynamics(schoolExt.school)
       },
       fail(res) {
         console.log('basic created fail res: ' + res.errMsg)
@@ -218,5 +223,70 @@ Page({
   // 学校动态 - 更多
   tapSchoolDynamicMore(event) {
 
+  },
+
+  // 获取学校动态
+  getDynamics(school) {
+
+    let that = this
+
+    wx.request({
+      url: app.globalData.baseUrl + '/school/getDynamic',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        schoolId: school.id,
+        pageIndex: 0,
+        pageSize: 10
+      },
+      success(res) {
+        console.log(TAG + ' getDynamics success')
+        if (res.data.code != 0) {
+          console.error(TAG + ' getDynamics success code != 0, msg ' + res.data.msg)
+          wx.showToast({
+            title: '动态获取错误 ' + res.data.msg,
+            icon: 'none'
+          })
+        } else {
+          var dynamics = res.data.data
+          if (dynamics != null) {
+            for (var i = 0; i < dynamics.length; i++) {
+              dynamics[i].distanceTime = utils.getDistanceTime(dynamics[i].publish_time)
+            }
+            that.setData({
+              dynamics: dynamics
+            })
+          } else {
+            console.error('getDynamics res.data.data == null')
+          }
+        }
+      },
+      fail(res) {
+        console.log(TAG + ' getDynamics fail res ' + res.errMsg)
+        wx.showToast({
+          title: '动态获取错误 ' + res.errMsg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+
+  // 点击学校动态条目
+  tapDynamicItem(event) {
+    var index = event.currentTarget.dataset.index    
+    console.log('tapDynamicItem index ' + index)
+    let news = this.data.dynamics[index]
+
+    wx.navigateTo({
+      url: '/pages/news/detail/detail?newsId=' + news.id + '&title=学校动态',
+      success: function(res) {
+        
+      },
+      fail(res) {
+        console.error(TAG + ' tapDynamicItem navigateTo fail ' + res.errMsg)
+      }
+    })
   }
 })

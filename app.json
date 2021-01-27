@@ -11,7 +11,8 @@
     "components/basebar/basebar",
     "pages/school/recruit/recruit",
     "pages/school/lottery/lottery",
-    "pages/school/search/search"
+    "pages/school/search/search",
+    "pages/news/detail/detail"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

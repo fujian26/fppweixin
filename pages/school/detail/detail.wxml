@@ -139,9 +139,9 @@
   <view style="background-color: #f6f6f6; height: 14rpx;" />
 
   <!-- 学校动态 -->
-  <view class="vflex-container house">
+  <view class="vflex-container school-dynamic">
 
-    <view class="hflex-container" style="width: 100%">
+    <view class="hflex-container" style="width: 100%; margin-bottom: 34rpx;">
       <view class="hflex-container">
         <image src="/images/book_stroke.png" style="width: 38rpx; height: 38rpx;" />
         <view class="title" style="margin-left: 10rpx;">学校动态</view>
@@ -153,6 +153,22 @@
         <text class="cuIcon-right" style="margin-left: 4rpx; color: #cccccc; font-size: 22rpx;" />
       </view>
     </view>
+
+    <view class="item" data-index="{{index}}" bindtap="tapDynamicItem" wx:if="{{dynamics != null}}" wx:for="{{dynamics}}" wx:key="id">
+
+      <view class="hflex-container">
+        <image src="{{item.pic_path}}" />
+        <view class="content">
+          <view class="title">{{item.title}}</view>
+          <view class="brief">{{item.brief}}</view>
+          <view wx:if="{{item.distanceTime != null}}" class="small">{{item.distanceTime}}</view>
+        </view>
+      </view>
+
+      <view class="line" />
+
+    </view>
+
   </view>
 
 </scroll-view>
