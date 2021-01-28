@@ -12,8 +12,6 @@
 
   <view class="line" />
 
-  <image src="https://s1.res.jxfls.com/20210121/10204094821.png#devtools_refererOrigin" style="width: 100%; height: 100rpx; margin-bottom: 10rpx;" />
-
   <view class="html-content">
     <mp-html content="{{html}}" lazy-load="true" />
   </view>
