@@ -9,8 +9,7 @@ Page({
    */
   data: {
     tabbarHeight: app.globalData.StatusBar,
-    schoolExt: null,
-    pics: [],
+    schoolExt: null,    
     addr: '',
     nature: '',
     entranceMode: '',
@@ -90,18 +89,6 @@ Page({
         var schoolExt = res.data
         var school = res.data.school
 
-        var pics = []
-        for (var i = 0; i < schoolExt.pics.length; i++) {
-          if (schoolExt.pics[i].type != 2) {
-            var url = schoolExt.pics[i].url;
-            if (!url.startsWith('http://') && !url.startsWith('https://')) {
-              url = app.globalData.baseUrl + "/file/download/" + url
-            }
-            pics.push(url)
-          }
-        }
-        console.log('pics length ' + pics.length)
-
         var typeStr = ''
         switch (school.type) {
           case 0:
@@ -147,8 +134,7 @@ Page({
           school.detail_addr
 
         that.setData({
-          schoolExt: res.data,
-          pics: pics,
+          schoolExt: res.data,          
           addr: addr,
           nature: nature,
           entranceMode: entranceMode,

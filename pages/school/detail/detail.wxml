@@ -3,7 +3,7 @@
 
   <swiper class="screen-swiper top-swiper" style="height: 544rpx;" indicator-dots="false" circular="true"
     autoplay="true" interval="5000" duration="500" indicator-active-color='#3E66D5'>
-    <swiper-item wx:for="{{pics}}" bindtap="tapSwiper" data-url="{{item}}" wx:key="id">
+    <swiper-item wx:for="{{schoolExt.picUrls}}" bindtap="tapSwiper" data-url="{{item}}" wx:key="id">
       <image src="{{item}}" mode="aspectFill"></image>
     </swiper-item>
   </swiper>

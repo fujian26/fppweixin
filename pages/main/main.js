@@ -194,20 +194,6 @@ Component({
             })
           } else {
             console.log('获取热门学校成功，数量: ' + res.data.data.length)
-            for (var i = 0; i < res.data.data.length; i++) {
-              var school = res.data.data[i]
-              if (school.pics != null && school.pics.length > 0) {
-                for (var j = 0; j < school.pics.length; j++) {
-                  var schoolPic = school.pics[j]
-                  if (schoolPic.type == 1) { // logo
-                    school.school.logoPicUrl = app.globalData.baseUrl +
-                      '/file/download/' +
-                      schoolPic.url;
-                  }
-                }
-              }
-            }
-
             that.setData({
               hotSchools: res.data.data
             })

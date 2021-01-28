@@ -38,7 +38,7 @@
         <!-- 内容 -->
         <view class="content" data-index="{{index}}" bindtap="tapSchoolItem">
           <view>
-            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
+            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.picUrls[0]}}" />
             <image class="tag" src="{{item.tagSrc}}" />
           </view>
           <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
@@ -76,7 +76,7 @@
         <!-- 内容 -->
         <view class="content" data-index="{{index}}" bindtap="tapSchoolItem">
           <view>
-            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
+            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.picUrls[0]}}" />
             <image class="tag" src="{{item.tagSrc}}" />
           </view>
           <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
@@ -112,9 +112,9 @@
       lower-threshold="0">
       <view class="item" wx:for="{{kindergartens}}" wx:key="id" data-id="{{item.school.id}}">
         <!-- 内容 -->
-        <view class="content">
+        <view class="content" data-index="{{index}}" bindtap="tapSchoolItem">
           <view>
-            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
+            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.picUrls[0]}}" />
             <image class="tag" src="{{item.tagSrc}}" />
           </view>
           <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
@@ -150,9 +150,9 @@
       lower-threshold="0">
       <view class="item" wx:for="{{primarys}}" wx:key="id" data-id="{{item.school.id}}">
         <!-- 内容 -->
-        <view class="content">
+        <view class="content" data-index="{{index}}" bindtap="tapSchoolItem">
           <view>
-            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
+            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.picUrls[0]}}" />
             <image class="tag" src="{{item.tagSrc}}" />
           </view>
           <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
@@ -188,9 +188,9 @@
       lower-threshold="0">
       <view class="item" wx:for="{{middles}}" wx:key="id" data-id="{{item.school.id}}">
         <!-- 内容 -->
-        <view class="content">
+        <view class="content" data-index="{{index}}" bindtap="tapSchoolItem">
           <view>
-            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
+            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.picUrls[0]}}" />
             <image class="tag" src="{{item.tagSrc}}" />
           </view>
           <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
@@ -228,7 +228,7 @@
         <!-- 内容 -->
         <view class="content">
           <view>
-            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
+            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.picUrls[0]}}" />
             <image class="tag" src="{{item.tagSrc}}" />
           </view>
           <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">
@@ -264,7 +264,7 @@
         <!-- 内容 -->
         <view class="content" data-index="{{index}}" bindtap="tapSchoolItem">
           <view>
-            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.pics[0].url}}" />
+            <image mode="aspectFill" style="margin-top: 4rpx" src="{{item.picUrls[0]}}" />
             <image class="tag" src="{{item.tagSrc}}" />
           </view>
           <view class="vflex-container" style="flex: 1; margin-left: 28rpx; align-items: flex-start">

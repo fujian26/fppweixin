@@ -64,9 +64,9 @@
   </view>
   <scroll-view scroll-x="true" style="margin-left: 26rpx; margin-bottom: 36rpx;">
     <view class="hot-schools" style="width: {{hotSchools.length * 338}}rpx">
-      <view class="hot-school" wx:for="{{hotSchools}}" data-index="{{index}}" data-id="{{item.school.id}}" bindtap="hotSchoolItemTap"
-        wx:key="id">
-        <image src="{{item.school.logoPicUrl}}" />
+      <view class="hot-school" wx:for="{{hotSchools}}" data-index="{{index}}" data-id="{{item.school.id}}"
+        bindtap="hotSchoolItemTap" wx:key="id">
+        <image src="{{item.picUrls != null && item.picUrls.length > 0 ? item.picUrls[0] : ''}}" />
         <view class="text">{{item.school.name}}</view>
       </view>
     </view>
@@ -74,7 +74,7 @@
 
   <view style="height:16rpx; background-color: #f6f6f6" />
 
-  
+
 
   <!-- 底部占位 -->
   <view style="height: 100rpx; background-color: #ffffff"></view>
