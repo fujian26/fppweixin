@@ -23,7 +23,8 @@
   "style": "v2",
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
-    "basebar": "/components/basebar/basebar"
+    "basebar": "/components/basebar/basebar",
+    "mp-html": "mp-html"
   },
   "sitemapLocation": "sitemap.json",
   "permission": {

@@ -36,3 +36,81 @@
   height: 2rpx;
   background-color: #E5E5E5;
 }
+
+.html-content {
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-bottom: 30rpx;  
+  width: calc(100% - 60rpx) !important;  
+}
+
+.comments-tip {  
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: flex-start;
+  padding-top: 38rpx;
+  padding-left: 28rpx;
+}
+
+.comments-tip .title {
+  color: #333333;
+  font-size: 32rpx;  
+  padding: 0 0;
+  margin: 0 0;
+  width: auto;
+}
+
+.comments-tip .num {
+  color: #666666;
+  font-size: 24rpx;
+  margin: 0 0;
+  padding: 0 0;
+  width: auto;
+  margin-left: 6rpx;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 28rpx;
+  margin-right: 28rpx;
+  padding-top: 34rpx;
+}
+
+.comments .item {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.comments .item image {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+}
+
+.comments .item .content {
+  flex: 1;
+  flex-grow: 1;
+  margin-left: 16rpx;
+}
+
+.comments .item .content .name {
+  color: #333333;
+  font-size: 26rpx;
+}
+
+.comments .item .content .label {
+  color: #666666;
+  font-size: 26rpx;
+  margin-top: 20rpx;
+}
+
+.comments .line {
+  width: 100%;
+  height: 2rpx;
+  margin-top: 34rpx;
+  background-color: #E5E5E5;
+}

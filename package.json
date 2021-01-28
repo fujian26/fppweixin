@@ -1,0 +1,23 @@
+{
+  "name": "fppweixin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "mp-html": "^2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fujian26/fppweixin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fujian26/fppweixin/issues"
+  },
+  "homepage": "https://github.com/fujian26/fppweixin#readme"
+}

@@ -1,6 +1,6 @@
 <!--pages/news/detail/detail.wxml-->
-<basebar centerText='{{title}}'></basebar>
-<scroll-view wx:if="{{newsDetail != null}}" scroll-y="true" class="scrollPage">
+<basebar id="basebar" centerText='{{title}}'></basebar>
+<scroll-view wx:if="{{newsDetail != null}}" scroll-y="true" class="scrollPage" style="{{scrollHeight}}rpx">
   <view class="title">{{newsDetail.title}}</view>
   <view class="hflex-container" style="margin-left: 30rpx; margin-right: 30rpx;">
     <image style="width: 22rpx; height: 14rpx;" src="/images/ic_watch.png" />
@@ -12,5 +12,30 @@
 
   <view class="line" />
 
-  <web-view src="{{newsDetail.file_path}}" style="width: 100%; height: 400rpx;" />
+  <image src="https://s1.res.jxfls.com/20210121/10204094821.png#devtools_refererOrigin" style="width: 100%; height: 100rpx; margin-bottom: 10rpx;" />
+
+  <view class="html-content">
+    <mp-html content="{{html}}" lazy-load="true" />
+  </view>
+
+  <view style="width: 100%; height: 14rpx; background-color: #F6F6F6" />
+
+  <view class="comments-tip">
+    <view class="title">评论互动</view>
+    <view class="num">({{newsDetail.comment_num}})</view>
+  </view>
+
+  <view class="line" style="margin-top: 20rpx; margin-bottom: 0rpx;"></view>
+
+  <view wx:for="{{comments}}" wx:key="id" class="comments" data-index="{{index}}" bindtap="tapComment">
+    <view class="item">
+      <image src="{{item.avatar}}" />
+      <view class="content">
+        <view class="name">{{item.name}}</view>
+        <view class="label">{{item.content}}</view>
+      </view>
+    </view>
+
+    <view class="line" />
+  </view>
 </scroll-view>

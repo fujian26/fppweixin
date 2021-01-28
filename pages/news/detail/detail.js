@@ -9,12 +9,36 @@ Page({
   data: {
     title: '新闻咨询',
     newsDetail: null,
+    html: '',
+    scrollHeight: 0,
+    comments: [
+      {
+        avatar: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3363295869,2467511306&fm=26&gp=0.jpg',
+        name: '大打发',
+        content: '打开分开打死了开发开放举案说法拉数据库放假啊暗示分离就按数据库了'
+      }
+    ]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    let that = this
+
+    wx.createSelectorQuery()
+    .in(that)
+    .select('#basebar')
+    .boundingClientRect()
+    .exec(function (res) {
+      console.log(TAG + ' createSelectorQuery res ' + res[0].height) // unit is px
+      var basebarHeight = res[0].height * app.globalData.pixelRatio
+      that.setData({
+        scrollHeight: app.globalData.screenHeight - basebarHeight
+      })
+    })
+
     console.log(TAG + ' onLoad id ' + options.newsId + ' title ' + options.title)
     if (options.title != null) {
       this.setData({
@@ -111,6 +135,8 @@ Page({
 
           console.log('newsDetail.file_path ' + newsDetail.file_path)
 
+          that.getHtmlContent(newsDetail.file_path)
+
           that.setData({
             newsDetail: newsDetail
           })
@@ -130,5 +156,35 @@ Page({
       }
     })
 
+  },
+
+  getHtmlContent(url) {
+
+    let that = this
+
+    wx.request({
+      url: url,
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      success(res) {        
+        that.setData({
+          html: res.data
+        })
+      },
+      fail(res) {
+        wx.showToast({
+          title: '数据错误',
+          icon: ''
+        })
+        console.error(TAG + ' getHtmlContent fail ' + res.errMsg)
+      }
+    })
+  },
+
+  tapComment(event) {
+    var index = event.currentTarget.dataset.index
+    console.log(TAG + ' tapComment index ' + index)
   }
 })
