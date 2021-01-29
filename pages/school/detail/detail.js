@@ -9,7 +9,7 @@ Page({
    */
   data: {
     tabbarHeight: app.globalData.StatusBar,
-    schoolExt: null,    
+    schoolExt: null,
     addr: '',
     nature: '',
     entranceMode: '',
@@ -134,7 +134,7 @@ Page({
           school.detail_addr
 
         that.setData({
-          schoolExt: res.data,          
+          schoolExt: res.data,
           addr: addr,
           nature: nature,
           entranceMode: entranceMode,
@@ -142,6 +142,7 @@ Page({
         })
 
         that.getDynamics(schoolExt.school)
+        that.getDetail(schoolExt.school)
       },
       fail(res) {
         console.log('basic created fail res: ' + res.errMsg)
@@ -179,10 +180,25 @@ Page({
   },
 
   tapAttenRecruit(event) {
+
+    let schoolExt = this.data.schoolExt
+
+    if (schoolExt == null ||
+      schoolExt.recruitStudentList == null ||
+      schoolExt.recruitStudentList.length <= 0) {
+      console.error('tapAttenRecruit data error schoolExt.recruitStudentList ' + schoolExt.recruitStudentList)
+      return
+    }
+
+    let news = schoolExt.recruitStudentList[0]
+
     wx.navigateTo({
-      url: '/pages/school/recruit/recruit',
+      url: '/pages/news/detail/detail?newsId=' + news.id + '&title=招生简章',
+      success: function (res) {
+
+      },
       fail(res) {
-        console.error('detail.js navigateTo school recruit fail ' + res.errMsg)
+        console.error(TAG + ' tapAttenRecruit navigateTo fail ' + res.errMsg)
       }
     })
   },
@@ -261,18 +277,76 @@ Page({
 
   // 点击学校动态条目
   tapDynamicItem(event) {
-    var index = event.currentTarget.dataset.index    
+    var index = event.currentTarget.dataset.index
     console.log('tapDynamicItem index ' + index)
     let news = this.data.dynamics[index]
 
     wx.navigateTo({
       url: '/pages/news/detail/detail?newsId=' + news.id + '&title=学校动态',
-      success: function(res) {
-        
+      success: function (res) {
+
       },
       fail(res) {
         console.error(TAG + ' tapDynamicItem navigateTo fail ' + res.errMsg)
       }
     })
-  }
+  },
+
+  // 获取学校详情
+  getDetail(school) {
+
+    let that = this
+
+    wx.request({
+      url: app.globalData.baseUrl + '/school/getDetail',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        id: school.id
+      },
+      success(res) {
+        console.log(TAG + ' getDetail success')
+        if (res.data.code != 0) {
+          console.error(TAG + ' getDetail success code != 0, msg ' + res.data.msg)
+          wx.showToast({
+            title: '数据错误 ' + res.data.msg,
+            icon: 'none'
+          })
+        } else {
+          if (res.data.data == null) {
+            console.error(TAG + ' getDetail res.data.data == null')
+            wx.showToast({
+              title: '数据错误 ' + res.data.msg,
+              icon: 'none'
+            })
+            return
+          }
+
+          that.setData({
+            schoolExt: res.data.data
+          })
+
+          wx.setStorage({
+            data: res.data.data,
+            key: 'schoolExt',
+            success(res) {
+
+            },
+            fail(res) {
+              console.log(TAG + ' getDetail setStorage school fail ' + res.errMsg)
+            }
+          })
+        }
+      },
+      fail(res) {
+        console.log(TAG + ' getDetail fail res ' + res.errMsg)
+        wx.showToast({
+          title: '数据错误 ' + res.errMsg,
+          icon: 'none'
+        })
+      }
+    })
+  },
 })
