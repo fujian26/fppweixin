@@ -209,10 +209,66 @@ Page({
 
   // 摇号流程手续
   tapAttenLottery(event) {
-    wx.navigateTo({
-      url: '/pages/school/lottery/lottery',
+
+    let schoolExt = this.data.schoolExt
+    if (schoolExt == null) {
+      return
+    }
+
+    wx.showLoading({
+      title: '',
+    })
+
+    wx.request({
+      url: app.globalData.baseUrl + '/school/getCityRecentLottery',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        cityCode: schoolExt.school.city_code,
+        type: schoolExt.school.type     
+      },
+      success(res) {
+        console.log(TAG + ' getCityRecentLottery success')
+        if (res.data.code != 0) {
+          console.error(TAG + ' getCityRecentLottery success code != 0, msg ' + res.data.msg)
+          wx.showToast({
+            title: '数据错误 ' + res.data.msg,
+            icon: 'none'
+          })
+        } else {
+          var news = res.data.data
+          if (news == null) {
+            console.error(TAG + ' getCityRecentLottery error news == null')
+            wx.showToast({
+              title: '没有数据',
+              icon: 'none'
+            })
+            return
+          }
+          wx.navigateTo({
+            url: '/pages/news/detail/detail?newsId=' + news.id + '&title=学校动态',
+            success: function (res) {
+      
+            },
+            fail(res) {
+              console.error(TAG + ' tapAttenLottery navigateTo fail ' + res.errMsg)
+            }
+          })
+        }
+      },
       fail(res) {
-        console.error('detail.js navigateTo school lottery fail ' + res.errMsg)
+        console.error(TAG + ' getDynamics fail res ' + res.errMsg)
+        wx.showToast({
+          title: '数据错误 ' + res.errMsg,
+          icon: 'none'
+        })
+      },
+      complete(res) {
+        wx.hideLoading({
+          success: (res) => {},
+        })
       }
     })
   },
