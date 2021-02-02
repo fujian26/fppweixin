@@ -1,0 +1,34 @@
+<!--pages/news/settle/settle.wxml-->
+<basebar id="basebar" centerText='落户迁移指南'></basebar>
+
+<scroll-view wx:if="{{currentPolicy != null}}" scroll-y="true" class="scrollPage" style="{{scrollHeight}}rpx">
+
+  <view class="title">{{currentPolicy.news.title}}</view>
+  <view class="hflex-container" style="margin-left: 30rpx; margin-right: 30rpx;">
+    <image style="width: 22rpx; height: 14rpx;" src="/images/ic_watch.png" />
+    <view class="watch-num">{{currentPolicy.news.watch_num}}</view>
+    <view class="holder" />
+    <view wx:if="{{newsDetail.from != null}}" class="from-text">{{newsDetail.from}} | </view>
+    <view class="time-text">{{currentPolicy.news.publish_time}}</view>
+  </view>
+
+  <view class="line" />
+
+  <view class="html-content">
+    <mp-html content="{{html}}" lazy-load="true" />
+  </view>
+
+</scroll-view>
+
+<view class="cu-modal bottom-modal {{showBottom ? 'show' : ''}}">
+  <view class="cu-dialog" style="border-top-left-radius: 28rpx; border-top-right-radius: 28rpx;">
+    <view class="dialog">
+      <view class="line" />
+      <view wx:for="{{policies}}" bindtap="tapPolicyItem" wx:key="id" data-index="{{index}}"
+        class="vflex-container item {{index == currentIndex ? 'highlight' : ''}}">
+        <view>{{item.settile_name}}</view>
+        <view class="line" />
+      </view>
+    </view>
+  </view>
+</view>

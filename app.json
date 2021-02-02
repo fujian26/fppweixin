@@ -12,7 +12,8 @@
     "pages/school/recruit/recruit",
     "pages/school/lottery/lottery",
     "pages/school/search/search",
-    "pages/news/detail/detail"
+    "pages/news/detail/detail",
+    "pages/news/settle/settle"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

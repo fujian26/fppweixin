@@ -1,6 +1,6 @@
 // pages/main/main.js
 let app = getApp()
-
+let TAG = 'main.js'
 Component({
 
   options: {
@@ -129,7 +129,7 @@ Component({
             fail(res) {
               console.error('main.js navigateTo school search fail ' + res.errMsg)
             }
-          })          
+          })
           break;
         case 2:
           break;
@@ -145,7 +145,22 @@ Component({
     },
 
     cardTap(event) {
-      console.log('cardTap event ' + event.currentTarget.dataset.id)
+      let id = event.currentTarget.dataset.id
+      console.log('cardTap event ' + id)
+      switch (id) {
+        case 4: // 落户拆迁
+          wx.navigateTo({
+            url: '/pages/news/settle/settle?cityCode=5101', // todo 暂定成都
+            success: function (res) {
+
+            },
+            fail(res) {
+              console.error(TAG + ' cardTap 4 navigateTo settle fail ' + res.errMsg)
+            }
+          })
+          break
+
+      }
     },
 
     hotSchoolMoreTap(event) {
@@ -159,7 +174,7 @@ Component({
       wx.setStorage({
         data: shcoolExt,
         key: 'schoolExt',
-        success(res) {          
+        success(res) {
           wx.navigateTo({
             url: '/pages/school/detail/detail',
             fail(res) {

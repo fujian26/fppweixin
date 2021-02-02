@@ -203,8 +203,24 @@ Page({
     })
   },
 
+  // 落户迁户条件
   tapAttenSettle(event) {
 
+    let schoolExt = this.data.schoolExt
+    if (schoolExt == null) {
+      console.error('tapAttenSettle schoolExt == null)')
+      return
+    }
+
+    wx.navigateTo({
+      url: '/pages/news/settle/settle?cityCode=' + schoolExt.school.city_code,
+      success: function (res) {
+
+      },
+      fail(res) {
+        console.error(TAG + ' tapAttenSettle navigateTo fail ' + res.errMsg)
+      }
+    })
   },
 
   // 摇号流程手续
@@ -227,7 +243,7 @@ Page({
       },
       data: {
         cityCode: schoolExt.school.city_code,
-        type: schoolExt.school.type     
+        type: schoolExt.school.type
       },
       success(res) {
         console.log(TAG + ' getCityRecentLottery success')
