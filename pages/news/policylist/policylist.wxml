@@ -1,0 +1,73 @@
+<!--pages/news/policylist/policylist.wxml-->
+<basebar id="basebar" centerText="政策"></basebar>
+<!-- 导航 -->
+<view id="tabbar" class="toptabbar">
+  <view wx:for="{{tabs}}" class="item" data-index="{{index}}" bindtap="tapOnTab" wx:key="id">
+    <view class="name" style="color: {{currentIndex == index}} ? #3E66D5 : #666666">{{item.name}}</view>
+    <view class="line" style="background-color: {{currentIndex != index ? 'white': '#3E66D5'}}"></view>
+  </view>
+</view>
+
+<view class="divid" />
+
+<!-- 购房政策 -->
+<scroll-view wx:if="{{currentIndex == 0}}" scroll-y="true" class="scrollPage"
+  style="padding-top: 20rpx; height: {{scrollHeight}}rpx" refresher-enabled="true"
+  refresher-triggered="{{tabs[currentIndex].refreshTrigger}}" bindrefresherrefresh="triggerRefresh"
+  bindscrolltolower="onScrolllower" lower-threshold="0">
+
+  <view class="vflex-container" bindtap="tapItem" wx:for="{{houseData}}" wx:key="index" data-index="{{index}}">
+
+    <view class="item">
+      <image wx:if="{{item.news.pic_path != null}}" src="{{item.news.pic_path}}" />
+      <view class="vflex-container" style="flex-grow: 1; flex: 1; align-items: flex-start">
+        <view class="title">{{item.news.title}}</view>
+        <view wx:if="{{item.news.brief != null}}" class="brief">{{item.news.brief}}</view>
+        <view class="bottom">
+          <image src="/images/ic_watch_stroke.png" />
+          <view class="watch">{{item.watch_num}}</view>
+          <view class="time">{{item.showTime}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="line" />
+
+  </view>
+
+
+  <view wx:if="{{tabs[currentIndex].showLoad}}" style="width: 100%;"
+    class="cu-load {{tabs[currentIndex].isLoad ? 'loading' : 'over'}}"></view>
+
+</scroll-view>
+
+<!-- 升学政策 -->
+<scroll-view wx:if="{{currentIndex == 1}}" scroll-y="true" class="scrollPage"
+  style="padding-top: 20rpx; height: {{scrollHeight}}rpx" refresher-enabled="true"
+  refresher-triggered="{{tabs[currentIndex].refreshTrigger}}" bindrefresherrefresh="triggerRefresh"
+  bindscrolltolower="onScrolllower" lower-threshold="0">
+
+  <view class="vflex-container" bindtap="tapItem" wx:for="{{schoolData}}" wx:key="index" data-index="{{index}}">
+
+    <view class="item">
+      <image wx:if="{{item.news.pic_path != null}}" src="{{item.news.pic_path}}" />
+      <view class="vflex-container" style="flex-grow: 1; flex: 1; align-items: flex-start">
+        <view class="title">{{item.news.title}}</view>
+        <view wx:if="{{item.news.brief != null}}" class="brief">{{item.news.brief}}</view>
+        <view class="bottom">
+          <image src="/images/ic_watch_stroke.png" />
+          <view class="watch">{{item.watch_num}}</view>
+          <view class="time">{{item.showTime}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="line" />
+
+  </view>
+
+
+  <view wx:if="{{tabs[currentIndex].showLoad}}" style="width: 100%;"
+    class="cu-load {{tabs[currentIndex].isLoad ? 'loading' : 'over'}}"></view>
+
+</scroll-view>

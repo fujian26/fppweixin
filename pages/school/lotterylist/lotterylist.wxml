@@ -8,7 +8,7 @@
 
     <view class="item">
       <image wx:if="{{item.pic_path != null}}" src="{{item.pic_path}}" />
-      <view class="vflex-container" style="flex-grow: 1; align-items: flex-start">
+      <view class="vflex-container" style="flex-grow: 1; flex: 1; align-items: flex-start">
         <view class="title">{{item.title}}</view>
         <view wx:if="{{item.brief != null}}" class="brief">{{item.brief}}</view>
         <view class="bottom">

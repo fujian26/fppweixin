@@ -135,7 +135,13 @@ Component({
           break;
         case 3:
           break;
-        case 4:
+        case 4: // 读政策
+        wx.navigateTo({
+          url: '/pages/news/policylist/policylist',
+          fail(res) {
+            console.error('main.js navigateTo policylist fail ' + res.errMsg)
+          }
+        })
           break;
       }
     },

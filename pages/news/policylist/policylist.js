@@ -1,6 +1,6 @@
-// pages/school/lotterylist/lotterylist.js
+// pages/news/policylist/policylist.js
+let TAG = 'policylist.js'
 let app = getApp()
-let TAG = 'lotterylist.js'
 Page({
 
   /**
@@ -8,28 +8,33 @@ Page({
    */
   data: {
     cityCode: '5101', // todo 暂定成都
-    title: '',    
+    baseBarHeight: 0,
+    tabBarHeight: 0,
     scrollHeight: 0,
-    type: 0,
-    refreshTrigger: false,
-    pageIndex: 0,
-    pageSize: 20,
-    showLoad: false,
-    isLoad: true,
-    pageData: [],
+    tabs: [{
+        name: '购房政策',
+        pageIndex: 0,
+        refreshTrigger: false,
+        showLoad: false,
+        isLoad: true,
+      },
+      {
+        name: '升学政策',
+        pageIndex: 0,
+        refreshTrigger: false,
+        showLoad: false,
+        isLoad: true,
+      }
+    ],
+    currentIndex: 0,
+    houseData: [],
+    schoolData: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-    let type = options.type
-    console.log(TAG + ' onLoad type ' + type)
-    this.setData({
-      title: options.title,
-      type: type
-    })
 
     let that = this
 
@@ -38,10 +43,24 @@ Page({
       .select('#basebar')
       .boundingClientRect()
       .exec(function (res) {
-        console.log(TAG + ' createSelectorQuery res ' + res[0].height) // unit is px
         var basebarHeight = res[0].height * app.globalData.pixelRatio
+        let tabBarHeight = that.data.tabBarHeight
         that.setData({
-          scrollHeight: app.globalData.screenHeight - basebarHeight
+          scrollHeight: app.globalData.screenHeight - basebarHeight - tabBarHeight,
+          basebarHeight: basebarHeight
+        })
+      })
+
+    wx.createSelectorQuery()
+      .in(that)
+      .select('#tabbar')
+      .boundingClientRect()
+      .exec(function (res) {
+        var tabBarHeight = res[0].height * app.globalData.pixelRatio
+        var basebarHeight = that.data.baseBarHeight
+        that.setData({
+          scrollHeight: app.globalData.screenHeight - basebarHeight - tabBarHeight,
+          tabBarHeight: tabBarHeight
         })
       })
 
@@ -97,7 +116,23 @@ Page({
 
   },
 
+  tapOnTab(event) {
+    let index = event.currentTarget.dataset.index
+    console.log('tapOnTab index ' + index)
+    this.setData({
+      currentIndex: index
+    })
+
+    var pageData = index == 0 ? this.data.houseData : this.data.schoolData
+    if (pageData.length == 0 && this.data.tabs[index].pageIndex == 0) {
+      this.data.currentIndex = index
+      this.refreshLoadPage()
+    }
+  },
+
   triggerRefresh(event) {
+
+    console.log('triggerRefresh ' + this.data.refreshTrigger)
 
     if (this.data.refreshTrigger) {
       return
@@ -108,23 +143,29 @@ Page({
     this.refreshLoadPage()
   },
 
+  obtainCurrentTab() {
+    return this.data.tabs[this.data.currentIndex]
+  },
+
   onScrolllower(event) {
 
     console.log('onScrolllower')
 
-    let showLoad = this.data.showLoad
-    let pageIndex = this.data.pageIndex
+    let tabs = this.data.tabs
+    let tabData = tabs[this.data.currentIndex]
+    let showLoad = tabData.showLoad
+    let pageIndex = tabData.pageIndex
 
     if (showLoad) {
       return
     }
 
-    this.data.pageIndex = pageIndex + 1
+    this.data.tabs[this.data.currentIndex].pageIndex = pageIndex + 1
+    tabData.showLoad = true
 
     this.setData({
-      showLoad: true
+      tabs: tabs
     })
-
 
     this.refreshLoadPage()
   },
@@ -132,21 +173,25 @@ Page({
   refreshLoadPage() {
 
     let that = this
-    var type = this.data.type
-    var pageIndex = this.data.pageIndex
-    var pageSize = this.data.pageSize
-    var pageData = this.data.pageData
+    let tabs = this.data.tabs
+    let index = this.data.currentIndex
+    let tabData = tabs[index]
+    var type = index
+    var pageIndex = tabData.pageIndex
+    var pageSize = 20
+    var pageData = index == 0 ? this.data.houseData : this.data.schoolData
     var cityCode = this.data.cityCode
 
     if (pageIndex == 0) {
       pageData = []
+      tabs[index].isLoad = true
       this.setData({
-        isLoad: true
+        tabs: tabs
       })
     }
 
     wx.request({
-      url: app.globalData.baseUrl + '/school/getCityLotterys',
+      url: app.globalData.baseUrl + '/news/getCityPolicies',
       header: {
         'token': app.globalData.token,
         'content-type': 'application/json'
@@ -185,8 +230,9 @@ Page({
             }
 
             if (pageIndex > 0) {
+              tabs[that.data.currentIndex].isLoad = false
               that.setData({
-                isLoad: false
+                tabs: tabs
               })
             }
 
@@ -195,13 +241,19 @@ Page({
 
           for (var i = 0; i < res.data.data.length; i++) {
             var item = res.data.data[i]
-            item.showTime = item.publish_time.split(' ')[0]
+            item.showTime = item.news.publish_time.split(' ')[0]
           }
 
           pageData = pageData.concat(res.data.data)
-          that.setData({
-            pageData: pageData
-          })
+          if (index == 0) {
+            that.setData({
+              houseData: pageData
+            })
+          } else {
+            that.setData({
+              schoolData: pageData
+            })
+          }
         }
       },
       fail(res) {
@@ -212,9 +264,12 @@ Page({
         })
       },
       complete(res) {
+
+        tabData.showLoad = false
+        tabData.refreshTrigger = false
+
         that.setData({
-          showLoad: false,
-          refreshTrigger: false
+          tabs: tabs
         })
       }
     })
@@ -224,18 +279,18 @@ Page({
   tapItem(event) {
     let index = event.currentTarget.dataset.index
     console.log('tapItem index ' + index)
-
-    let that = this
-    var news = this.data.pageData[index]
+    var pageData = this.data.currentIndex == 0 ? this.data.houseData : this.data.schoolData
+    var news = pageData[index].news
+    var tabName = this.data.tabs[this.data.currentIndex].name
 
     wx.navigateTo({
-      url: '/pages/news/detail/detail?newsId=' + news.id + '&title=' + that.data.title,
+      url: '/pages/news/detail/detail?newsId=' + news.id + '&title=' + tabName,
       success: function (res) {
 
       },
       fail(res) {
         console.error(TAG + ' tapItem navigateTo fail ' + res.errMsg)
       }
-    })    
-  },
+    })
+  }
 })
