@@ -144,10 +144,31 @@ Component({
       console.log('hotMsgTap')
     },
 
+    naviToLotteryList(title, type) {
+      wx.navigateTo({
+        url: '/pages/school/lotterylist/lotterylist?title=' + title + '&type=' + type,
+        success: function (res) {
+
+        },
+        fail(res) {
+          console.error(TAG + ' naviToLotteryList fail ' + res.errMsg)
+        }
+      })
+    },
+
     cardTap(event) {
       let id = event.currentTarget.dataset.id
       console.log('cardTap event ' + id)
       switch (id) {
+        case 1: // 小学划片
+          this.naviToLotteryList('小学划片', 1)
+          break
+        case 2: // 小升初
+          this.naviToLotteryList('小升初', 2)
+          break
+        case 3: // 幼儿园专区
+          this.naviToLotteryList('幼儿园专区', 0)
+          break
         case 4: // 落户拆迁
           wx.navigateTo({
             url: '/pages/news/settle/settle?cityCode=5101', // todo 暂定成都

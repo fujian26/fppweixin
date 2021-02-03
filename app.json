@@ -13,7 +13,8 @@
     "pages/school/lottery/lottery",
     "pages/school/search/search",
     "pages/news/detail/detail",
-    "pages/news/settle/settle"
+    "pages/news/settle/settle",
+    "pages/school/lotterylist/lotterylist"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

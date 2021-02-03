@@ -1,7 +1,7 @@
 <!--pages/news/settle/settle.wxml-->
 <basebar id="basebar" centerText='落户迁移指南'></basebar>
 
-<scroll-view wx:if="{{currentPolicy != null}}" scroll-y="true" class="scrollPage" style="{{scrollHeight}}rpx">
+<scroll-view wx:if="{{currentPolicy != null}}" scroll-y="true" class="scrollPage" style="height: {{scrollHeight}}rpx">
 
   <view class="title">{{currentPolicy.news.title}}</view>
   <view class="hflex-container" style="margin-left: 30rpx; margin-right: 30rpx;">

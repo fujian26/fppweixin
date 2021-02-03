@@ -1,0 +1,29 @@
+<!--pages/school/lotterylist/lotterylist.wxml-->
+<basebar id="basebar" centerText="{{title}}"></basebar>
+<scroll-view scroll-y="true" class="scrollPage" style="padding-top: 20rpx; height: {{scrollHeight}}rpx"
+  refresher-enabled="true" refresher-triggered="{{refreshTrigger}}" bindrefresherrefresh="triggerRefresh"
+  bindscrolltolower="onScrolllower" lower-threshold="0">
+
+  <view class="vflex-container" bindtap="tapItem" wx:for="{{pageData}}" wx:key="index" data-index="{{index}}">
+
+    <view class="item">
+      <image wx:if="{{item.pic_path != null}}" src="{{item.pic_path}}" />
+      <view class="vflex-container" style="flex-grow: 1; align-items: flex-start">
+        <view class="title">{{item.title}}</view>
+        <view wx:if="{{item.brief != null}}" class="brief">{{item.brief}}</view>
+        <view class="bottom">
+          <image src="/images/ic_watch_stroke.png" />
+          <view class="watch">{{item.watch_num}}</view>
+          <view class="time">{{item.showTime}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="line" />
+
+  </view>
+
+
+  <view wx:if="{{showLoad}}" style="width: 100%;" class="cu-load {{isLoad ? 'loading' : 'over'}}"></view>
+
+</scroll-view>

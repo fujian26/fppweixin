@@ -1,6 +1,6 @@
 <!--pages/news/detail/detail.wxml-->
 <basebar id="basebar" centerText='{{title}}'></basebar>
-<scroll-view wx:if="{{newsDetail != null}}" scroll-y="true" class="scrollPage" style="{{scrollHeight}}rpx">
+<scroll-view wx:if="{{newsDetail != null}}" scroll-y="true" class="scrollPage" style="height: {{scrollHeight}}rpx">
   <view class="title">{{newsDetail.title}}</view>
   <view class="hflex-container" style="margin-left: 30rpx; margin-right: 30rpx;">
     <image style="width: 22rpx; height: 14rpx;" src="/images/ic_watch.png" />

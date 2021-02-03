@@ -1,0 +1,69 @@
+/* pages/school/lotterylist/lotterylist.wxss */
+
+.item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 28rpx 28rpx;
+  margin-bottom: 0;
+}
+
+.item image {
+  width: 220rpx;
+  height: 170rpx;
+  margin-right: 28rpx;
+  border-radius: 12rpx;
+}
+
+.item .title {
+  color: #333333;
+  font-size: 26rpx;
+}
+
+.item .brief {
+  margin-top: 28rpx;
+  color: #666666;
+  font-size: 20rpx;
+}
+
+.item .bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 20rpx;
+  color: #999999;
+  font-size: 18rpx;
+}
+
+.item .bottom image {
+  width: 22rpx;
+  height: 16rpx;  
+  margin: 0;
+}
+
+.item .bottom .watch {
+  width: auto;
+  height: auto;  
+  margin: 0;
+  padding: 0;
+  margin-left: 5rpx;  
+}
+
+.item .bottom .time {
+  width: auto;
+  height: auto;  
+  margin: 0;
+  padding: 0;
+  margin-left: 10rpx;  
+}
+
+.line {
+  width: calc(100% - 56rpx);
+  height: 2rpx;
+  margin: 0 28rpx;
+  margin-bottom: 0;
+  background-color: #E6E6E6;
+}
