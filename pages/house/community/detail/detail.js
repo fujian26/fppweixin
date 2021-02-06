@@ -24,6 +24,20 @@ Page({
 
         var community = res.data
 
+        var buildTypeStr = ''
+        switch (community.building_type) {
+          case 1:
+            buildTypeStr = '小高层'
+            break
+          case 2:
+            buildTypeStr = '花园洋房'
+            break
+          default:
+            buildTypeStr = '高层'
+            break
+        }
+        community.buildTypeStr = buildTypeStr
+
         that.setData({
           community: community
         })
