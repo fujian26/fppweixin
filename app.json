@@ -15,7 +15,8 @@
     "pages/news/detail/detail",
     "pages/news/settle/settle",
     "pages/school/lotterylist/lotterylist",
-    "pages/news/policylist/policylist"
+    "pages/news/policylist/policylist",
+    "pages/house/community/detail/detail"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

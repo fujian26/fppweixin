@@ -3,6 +3,10 @@ let app = getApp()
 let TAG = 'main.js'
 Component({
 
+  attached() {
+    this.getHotCommunities(false)
+  },
+
   options: {
     addGlobalClass: true,
   },
@@ -96,7 +100,9 @@ Component({
         marginLeft: 16
       },
     ],
-    hotSchools: []
+    hotSchools: [],
+    hotCommunities: [],
+    hotCommunityPageIndex: 0,
   },
 
   created() {
@@ -136,12 +142,12 @@ Component({
         case 3:
           break;
         case 4: // 读政策
-        wx.navigateTo({
-          url: '/pages/news/policylist/policylist',
-          fail(res) {
-            console.error('main.js navigateTo policylist fail ' + res.errMsg)
-          }
-        })
+          wx.navigateTo({
+            url: '/pages/news/policylist/policylist',
+            fail(res) {
+              console.error('main.js navigateTo policylist fail ' + res.errMsg)
+            }
+          })
           break;
       }
     },
@@ -249,6 +255,133 @@ Component({
           })
         }
       })
+    },
+
+    getHotCommunities(showLoading) {
+
+      if (showLoading) {
+        wx.showLoading({
+          title: '',
+        })
+      }
+
+      var pageIndex = this.data.hotCommunityPageIndex
+      var hotCommunities = this.data.hotCommunities
+      let that = this
+
+      if (this.data.hotCommunityPageIndex == 0) {
+        hotCommunities = []
+      }
+
+      wx.request({
+        url: app.globalData.baseUrl + '/house/getCityHotCommunity',
+        header: {
+          'token': app.globalData.token,
+          'content-type': 'application/json'
+        },
+        data: {
+          cityCode: 5101, //todo 暂定成都
+          pageIndex: pageIndex,
+          pageSize: 3
+        },
+        success(res) {
+          if (res.data.code != 0) {
+            console.error('getHotCommunities success code != 0, msg ' + res.data.msg)
+            if (showLoading) {
+              wx.showToast({
+                title: '数据错误 ' + res.data.msg,
+                icon: 'none'
+              })
+            }
+          } else {
+
+            if (res.data.data == null) {
+              console.error('getHotCommunities res.data.data == null')
+              if (showLoading) {
+                wx.showToast({
+                  title: '数据错误',
+                  icon: 'none'
+                })
+              }
+              return
+            }
+
+            if (res.data.data.length == 0) {
+              that.data.hotCommunityPageIndex = 0
+              setTimeout(() => {
+                that.getHotCommunities(true)
+              }, 16);
+              return
+            }
+
+            for (var i = 0; i < res.data.data.length; i++) {
+              var item = res.data.data[i]
+              switch (item.type) {
+                case 1:
+                  item.typeStr = '商住'
+                  break
+                case 2:
+                  item.typeStr = '公寓'
+                  break
+                default:
+                  item.typeStr = '普通住宅'
+                  break
+              }
+            }
+
+            hotCommunities = hotCommunities.concat(res.data.data)            
+
+            that.setData({
+              hotCommunityPageIndex: pageIndex + 1,
+              hotCommunities: hotCommunities
+            })
+          }
+        },
+        fail(res) {
+          console.error('getHotCommunities fail res ' + res.errMsg)
+          if (showLoading) {
+            wx.showToast({
+              title: '数据错误 ' + res.errMsg,
+              icon: 'none'
+            })
+          }
+        },
+        complete(res) {
+          if (showLoading) {
+            wx.hideLoading({
+              success: (res) => {},
+            })
+          }
+        }
+      })
+    },
+
+    // 热门小区-item
+    tapHotCommunityItem(event) {
+      let index = event.currentTarget.dataset.index
+      let that = this
+      console.log('tapHotCommunityItem index ' + index)
+      
+      wx.setStorage({
+        data: that.data.hotCommunities[index],
+        key: 'community',
+        success(res) {
+          wx.navigateTo({
+            url: '/pages/house/community/detail/detail',
+            fail(res) {
+              console.error('main.js navigateTo community detail fail ' + res.errMsg)
+            }
+          })
+        },
+        fail(res) {
+          console.error('main.js setStorage community fail ' + res.errMsg)
+        }
+      })      
+    },
+
+    // 热门小区-换一批
+    tapHotCommunityRefresh(event) {
+      this.getHotCommunities(true)    
     }
-  }
+  },
 })

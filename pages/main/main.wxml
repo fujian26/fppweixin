@@ -74,7 +74,49 @@
 
   <view style="height:16rpx; background-color: #f6f6f6" />
 
+  <!-- 热门小区 -->
+  <view class="hflex-container hot-community-label">
+    <image src="/images/house_stroke.png" />
+    <view style="margin-left: 10rpx;">热门小区</view>
+    <view class="holder"></view>
+    <view class="more">更多</view>
+    <image class="arrow" src="/images/arrow_grey_right.png" />
+  </view>
 
+  <view wx:for="{{hotCommunities}}" class="vflex-container hot-community" wx:key="id" data-index="{{index}}"
+    bindtap="tapHotCommunityItem">
+    <view class="hflex-container item">
+      <image src="{{item.picUrls[0]}}"></image>
+      <view class="content">
+        <view class="title">{{item.name}}</view>
+        <view class="price">{{item.price}}元/㎡</view>
+
+        <view class="hflex-container" style="margin-top: 12rpx">
+          <view style="flex: 1;">建筑年代：{{item.age}}年</view>
+          <view style="flex: 1;">容积率：{{item.volume_rate}}</view>
+        </view>
+
+        <view class="hflex-container" style="margin-top: 8rpx">
+          <view style="flex: 1;">物业费：{{item.property_costs}}元/㎡</view>
+          <view style="flex: 1;">物业类型：{{item.typeStr}}</view>
+        </view>
+
+        <view class="hflex-container" style="margin-top: 8rpx">
+          <view style="flex: 1;">二手房源：{{item.second_source_num}}套</view>
+          <view style="flex: 1;">法拍房源：{{item.legal_source_num}}套</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="line" />
+  </view>
+
+  <view class="hflex-container hot-community-next" bindtap="tapHotCommunityRefresh">
+    <view class="holder" />
+    <image src="/images/refresh.png" />
+    <view>换一批</view>
+    <view class="holder" />
+  </view>
 
   <!-- 底部占位 -->
   <view style="height: 100rpx; background-color: #ffffff"></view>

@@ -1,0 +1,12 @@
+<!--pages/house/community/detail/detail.wxml-->
+<basebar id="basebar" centerText="楼盘详情"></basebar>
+<scroll-view scroll-y="true" class="scrollPage" style="height: {{scrollHeight}}rpx">
+
+  <swiper class="screen-swiper top-swiper" style="height: 410rpx;" indicator-dots="false" circular="true"
+    autoplay="true" interval="5000" duration="500" indicator-active-color='#3E66D5'>
+    <swiper-item wx:for="{{community.picUrls}}" bindtap="tapSwiper" data-url="{{item}}" wx:key="id">
+      <image src="{{item}}" mode="aspectFill"></image>
+    </swiper-item>
+  </swiper>
+
+</scroll-view>
