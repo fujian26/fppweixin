@@ -1,1 +1,78 @@
 /* pages/house/community/detail/detail.wxss */
+.name-tags {
+  margin-top: 30rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
+
+.name-tags .left {
+  flex-grow: 1;
+  align-items: flex-start;
+}
+
+.name-tags .left .title {
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: 550;
+}
+
+.name-tags .left .tags {
+  margin-top: 11rpx;
+  flex-wrap: wrap;
+}
+
+.name-tags .left .tags .tag {
+  text-align: center;
+  padding: 4rpx 16rpx;
+  margin-top: 11rpx;
+  min-width: 104rpx;
+  margin-right: 16rpx;
+  border-radius: 30rpx;
+  font-size: 20rpx;
+}
+
+.name-tags .right {
+  margin-left: 20rpx;
+  min-width: 100rpx;
+  color: #666666;
+  font-size: 20rpx;
+}
+
+.name-tags .right image {
+  width: 40rpx;
+  height: 32rpx;
+}
+
+.addr {
+  color: #999999;
+  font-size: 20rpx;
+  margin-top: 26rpx;
+  margin-left: 28rpx;
+  margin-right: 28rpx;
+  flex-wrap: wrap;
+}
+
+.addr image {
+  width: 14rpx;
+  height: 16rpx;
+}
+
+.addr .arrow {
+  width: 12rpx;
+  height: 20rpx;
+  margin-left: 14rpx;
+}
+
+.prices {
+  margin-top: 30rpx;
+  margin-left: 28rpx;
+  margin-right: 28rpx;
+}
+
+.prices .item {
+  flex: 1;
+  flex-grow: 1;
+  padding: 22rpx 14rpx;
+  background-color: #99CCFF;
+  border-radius: 20rpx;
+}

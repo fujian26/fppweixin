@@ -8,7 +8,11 @@ Page({
    */
   data: {
     scrollHeight: 0,
-    community: null
+    community: null,
+    tagListLocal: [],
+    attentioned: false,
+    attentionNum: 0,
+    locationStr: ''
   },
 
   /**
@@ -36,10 +40,33 @@ Page({
             buildTypeStr = '高层'
             break
         }
+
         community.buildTypeStr = buildTypeStr
 
+        var tags = []
+        tags.push({
+          str: buildTypeStr,
+          color: '#3E66D5',
+          textColor: '#FFFFFF'
+        })
+
+        if (community.tags != null) {
+          for (var i = 0; i < community.tagList.length; i++) {
+            tags.push({
+              str: community.tagList[i],
+              color: '#99CCFF',
+              textColor: '#3E66D5'
+            })
+          }
+        }
+
+        var streetName = community.street_name != null && community.street_name.length > 0 ? ('-' + community.street_name) : ''
+        var locationStr = community.city_name + '-' + community.area_name + streetName
+
         that.setData({
-          community: community
+          community: community,
+          tagListLocal: tags,
+          locationStr: locationStr
         })
       },
       fail(res) {
@@ -111,5 +138,9 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  tapAddr(event) {
+    console.log('tapAddr')
   }
 })

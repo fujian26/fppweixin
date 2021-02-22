@@ -9,4 +9,61 @@
     </swiper-item>
   </swiper>
 
+  <!-- names attention tags... -->
+  <view class="hflex-container name-tags">
+
+    <view class="vflex-container left">
+      <view class="title">{{community.name}}</view>
+      <view class="hflex-container tags">
+        <view class="tag" wx:for="{{tagListLocal}}" wx:key="id"
+          style="background-color: {{item.color}}; color: {{item.textColor}}">
+          {{item.str}}
+        </view>
+      </view>
+    </view>
+
+    <view class="vflex-container right">
+      <image src="{{!attentioned ? '/images/attention_nocircle.png' : '/images/attentioned_nocircle.png'}}" />
+      <view style="margin-top: 8rpx">{{attentionNum}}关注</view>
+    </view>
+  </view>
+
+  <!-- address -->
+  <view class="hflex-container addr" bindtap="tapAddr">
+    <image src="/images/community_location.png" />
+    <view style="margin-left: 4rpx">{{locationStr}}</view>
+    <image class="arrow" src="/images/arrow_grey_right.png" />
+  </view>
+
+  <!-- prices -->
+  <view class="hflex-container prices">
+      <view class="vflex-container item">
+        
+        <view class="hflex-container">
+          <view class="bigtext">{{community.price}}元/㎡</view>
+          <view class="greytext">(参考价)</view>
+        </view>
+
+        <view class="hflex-container">
+          <view class="middletext">{{community.second_source_num}}套</view>
+          <view class="greytext">(在售二手房)</view>
+        </view>
+      </view>
+
+      <view style="width: 28rpx; height: 10rpx"></view>
+
+      <view class="vflex-container item">
+        
+        <view class="hflex-container">
+          <view class="bigtext">{{community.price}}元/㎡</view>
+          <view class="greytext">(参考价)</view>
+        </view>
+
+        <view class="hflex-container">
+          <view class="middletext">{{community.second_source_num}}套</view>
+          <view class="greytext">(在售二手房)</view>
+        </view>
+      </view>
+  </view>
+
 </scroll-view>
