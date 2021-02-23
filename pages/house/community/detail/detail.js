@@ -12,7 +12,12 @@ Page({
     tagListLocal: [],
     attentioned: false,
     attentionNum: 0,
-    locationStr: ''
+    locationStr: '',
+    recommendIndex: 0,
+    recommendTags: [
+      '同小区房源', '周边房源', '划片小区'
+    ],
+    commentsNum: 0,
   },
 
   /**
@@ -142,5 +147,17 @@ Page({
 
   tapAddr(event) {
     console.log('tapAddr')
+  },
+
+  tapRecommendTab(event) {
+    let index = event.currentTarget.dataset.index
+    console.log('tapRecommendTab index: ' + index)
+    this.setData({
+      recommendIndex: index
+    })
+  },
+
+  tapHotTopic(event) {
+    console.log('tapHotTopic');
   }
 })
