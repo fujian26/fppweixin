@@ -14,10 +14,12 @@ Page({
     attentionNum: 0,
     locationStr: '',
     recommendIndex: 0,
+    showEdit: false,
     recommendTags: [
       '同小区房源', '周边房源', '划片小区'
     ],
     commentsNum: 0,
+    comments: []
   },
 
   /**
@@ -73,6 +75,8 @@ Page({
           tagListLocal: tags,
           locationStr: locationStr
         })
+
+        that.getComments(community)
       },
       fail(res) {
         console.error(TAG + ' community get fail res: ' + res.errMsg)
@@ -158,6 +162,165 @@ Page({
   },
 
   tapHotTopic(event) {
-    console.log('tapHotTopic');
+    console.log('tapHotTopic')
+  },
+
+  tapSendComment(event) {
+    console.log('tapSendComment')
+    this.setData({
+      showEdit: true
+    })
+  },
+
+  tapHideEdit(event) {
+
+    console.log('tapHideEdit')
+    let nowEdit = this.data.commentContent
+
+    this.setData({
+      showEdit: false,
+      lastCommentValue: nowEdit
+    })
+  },
+
+  tapAttention(event) {
+    console.log('tapAttention')
+  },
+
+  tapMoreComments(event) {
+    console.log('tapMoreComments')
+  },
+
+  tapCommentFinalSend(event) {
+
+    console.log('tapCommentFinalSend')
+
+    let community = this.data.community
+    let content = this.data.commentContent
+
+    if (content == null || content.length == 0) {
+      console.error('content == null || content.length == 0')
+      wx.showToast({
+        title: '内容不能为空',
+        icon: ''
+      })
+      return
+    }
+
+    this.setData({
+      showEdit: false,
+      lastCommentValue: content
+    })
+
+    let that = this
+
+    wx.showLoading({
+      title: '',
+    })
+
+    wx.request({
+      url: app.globalData.baseUrl + '/comments/addCommunity',
+      method: 'POST',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        "communityId": community.id,
+        "comment": {
+          "content": content
+        }
+      },
+      success(res) {
+        console.log('tapCommentFinalSend success')
+        if (res.data.code != 0) {
+          console.error('tapCommentFinalSend success code != 0, msg ' + res.data.msg)
+          wx.showToast({
+            title: '评论失败 ' + res.data.msg,
+            icon: 'none'
+          })
+        } else {
+
+          wx.showToast({
+            title: '评论成功',
+            icon: 'none'
+          })
+
+          var comments = that.data.comments
+          var commentsNum = that.data.commentsNum
+
+          comments.push(res.data.data)
+
+          that.setData({
+            comments: comments,
+            commentsNum: commentsNum + 1,
+            lastCommentValue: ''
+          })
+        }
+      },
+      fail(res) {
+        console.error('tapCommentFinalSend fail res ' + res.errMsg)
+        wx.showToast({
+          title: '评论失败',
+          icon: 'none'
+        })
+      },
+      complete(res) {
+        wx.hideLoading({
+          success: (res) => {},
+        })
+      }
+    })
+  },
+
+  // 监听评论输入
+  onCommentInput(event) {
+    this.data.commentContent = event.detail.value
+  },
+
+  getComments(community) {
+
+    let that = this
+
+    wx.request({
+      url: app.globalData.baseUrl + '/comments/getCommunity',
+      method: 'GET',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        "communityId": community.id,
+        "pageIndex": 0,
+        "pageSize": 20
+      },
+      success(res) {
+        console.log('getComments success')
+        if (res.data.code != 0) {
+          console.error('getComments success code != 0, msg ' + res.data.msg)
+          wx.showToast({
+            title: '数据拉取失败 ' + res.data.msg,
+            icon: 'none'
+          })
+        } else {
+
+          console.log('getComments res.data.header.total: ' + res.header.total)
+
+          that.setData({
+            comments: res.data.data,
+            commentsNum: res.header.total
+          })
+        }
+      },
+      fail(res) {
+        console.error('getComments fail res ' + res.errMsg)
+        wx.showToast({
+          title: '数据拉取失败',
+          icon: 'none'
+        })
+      },
+      complete(res) {}
+    })
+
   }
 })

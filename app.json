@@ -28,6 +28,8 @@
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
     "basebar": "/components/basebar/basebar",
+    "comments-item": "/components/comments/item/item",
+    "comments-list": "/components/comments/list/list",
     "mp-html": "mp-html"
   },
   "sitemapLocation": "sitemap.json",

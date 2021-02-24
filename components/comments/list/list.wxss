@@ -1,0 +1,17 @@
+/* components/comments/list/list.wxss */
+.comments {
+  background-color: white;
+  padding: 28rpx 28rpx;
+}
+
+.comments .title {
+  color: #333333;
+  font-size: 32rpx;
+}
+
+.comments .num {
+  color: #666666;
+  font-size: 20rpx;
+  margin-left: 8rpx;
+  margin-bottom: 28rpx;
+}

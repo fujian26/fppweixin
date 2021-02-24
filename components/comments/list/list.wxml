@@ -1,0 +1,8 @@
+<!--components/comments/list/list.wxml-->
+<view class="comments">
+  <view class="hflex-container" style="align-items: baseline;">
+    <view class="title">评论互动</view>
+    <view class="num">({{commentsNum}})</view>
+  </view>
+  <comments-item wx:for="{{comments}}" wx:key="id" comment="{{item}}" />
+</view>

@@ -1,0 +1,11 @@
+<!--components/comments/item/item.wxml-->
+<view class="item">
+  <view class="divid" />
+  <view class="hflex-container" style="align-items: flex-start;">
+    <image src="{{comment.user.avatar}}" />
+    <view class="right">
+      <view class="name">{{comment.user.nick}}</view>
+      <view class="content">{{comment.content}}</view>
+    </view>
+  </view>
+</view>
