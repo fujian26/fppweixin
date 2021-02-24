@@ -219,11 +219,11 @@ Component({
       } else {
         markers = this.data.middles
       }
-      
+
       for (var i = 0; i < markers.length; i++) {
         markers[i].selected = false
       }
-      this.hasSelectedMarker = false    
+      this.hasSelectedMarker = false
 
       this.setData({
         currentIndex: index,

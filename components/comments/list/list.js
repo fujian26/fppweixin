@@ -26,22 +26,27 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    showComments: []
   },
 
   attached() {
 
+    setTimeout(() => {
 
-    let limitNum = this.properties.limitNum
-    let oldDatas = this.properties.comments
-    var newDatas = []
-    for (var i = 0; i < limitNum && i < oldDatas.length; i++) {
-      newDatas.push(oldDatas[i])
-    }
+      let limitNum = this.properties.limitNum
+      let oldDatas = this.properties.comments
+      var newDatas = []
 
-    this.setData({
-      comments: newDatas
-    })
+      if (limitNum > 0) {
+        for (var i = 0; i < limitNum && i < oldDatas.length; i++) {
+          newDatas.push(oldDatas[i])
+        }
+
+        this.setData({
+          comments: newDatas
+        })
+      }
+    }, 100);
   },
 
   /**

@@ -149,8 +149,20 @@ Page({
 
   },
 
-  tapAddr(event) {
-    console.log('tapAddr')
+  tapAddr(event) {    
+
+    let community = this.data.community
+    console.log('tapAddr, lng: ' + community.lng + ', lat: ' + community.lat)
+
+    wx.navigateTo({
+      url: '/pages/map/show/show?lng=' + community.lng + '&lat=' + community.lat,
+      success: function (res) {
+
+      },
+      fail(res) {
+        console.error(tag + ' tapAddr fail ' + res.errMsg)
+      }
+    })
   },
 
   tapRecommendTab(event) {
@@ -188,7 +200,20 @@ Page({
   },
 
   tapMoreComments(event) {
+    
     console.log('tapMoreComments')
+    let community = this.data.community
+
+    wx.navigateTo({
+      // url: '/pages/map/show/show?lng=' + community.lng + '&lat=' + community.lat,
+      url: '/pages/comments/comments?id=' + community.id + '&type=0',
+      success: function (res) {
+
+      },
+      fail(res) {
+        console.error(tag + ' tapMoreComments fail ' + res.errMsg)
+      }
+    })
   },
 
   tapCommentFinalSend(event) {

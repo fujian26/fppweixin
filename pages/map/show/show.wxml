@@ -1,0 +1,3 @@
+<!--pages/map/show/show.wxml-->
+<basebar id="basebar" centerText="地图"></basebar>
+<map id="showMap" longitude="{{lng}}" latitude="{{lat}}" show-location style="width: 100%; height: {{mapHeight}}rpx" />

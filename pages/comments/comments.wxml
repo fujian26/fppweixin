@@ -1,0 +1,7 @@
+<!--pages/comments/comments.wxml-->
+<view class="pagecontainer">
+  <basebar id="basebar" centerText="评论列表"></basebar>
+  <scroll-view class="sv">
+    <comments-list limitNum="0" commentsNum="{{commentsNum}}" comments="{{comments}}" />
+  </scroll-view>
+</view>
