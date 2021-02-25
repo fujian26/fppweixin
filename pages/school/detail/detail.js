@@ -15,6 +15,8 @@ Page({
     entranceMode: '',
     typeStr: '',
     dynamics: [],
+    communities: [],
+    communityTotalNum: 0
   },
 
   /**
@@ -143,6 +145,7 @@ Page({
 
         that.getDynamics(schoolExt.school)
         that.getDetail(schoolExt.school)
+        that.getCommunityList(schoolExt.school.id)
       },
       fail(res) {
         console.log('basic created fail res: ' + res.errMsg)
@@ -175,8 +178,26 @@ Page({
 
   },
 
+  // 划片范围及小区 -- 更多
   tapDivideRangeMore(event) {
 
+    console.log('tapDivideRangeMore')
+    if (this.data.schoolExt == null || this.data.schoolExt.school == null) {
+      console.error('tapDivideRangeMore this.data.schoolExt == null || this.data.schoolExt.school == null')
+      return
+    }
+
+    let school = this.data.schoolExt.school
+
+    wx.navigateTo({
+      url: '/pages/school/communities/communities?title=' + school.name + '&schoolId=' + school.id,
+      success: function (res) {
+
+      },
+      fail(res) {
+        console.error(TAG + ' tapDivideRangeMore navigateTo fail ' + res.errMsg)
+      }
+    })
   },
 
   tapAttenRecruit(event) {
@@ -266,7 +287,7 @@ Page({
           wx.navigateTo({
             url: '/pages/news/detail/detail?newsId=' + news.id + '&title=学校动态',
             success: function (res) {
-      
+
             },
             fail(res) {
               console.error(TAG + ' tapAttenLottery navigateTo fail ' + res.errMsg)
@@ -421,4 +442,78 @@ Page({
       }
     })
   },
+
+  tapCommunity(event) {
+    let index = event.currentTarget.dataset.index
+    let community = this.data.communities[index]
+    console.log('tapCommunity index: ' + index)
+
+    wx.setStorage({
+      data: community,
+      key: 'community',
+      success(res) {
+        wx.navigateTo({
+          url: '/pages/house/community/detail/detail',
+          fail(res) {
+            console.error(TAG + ' navigateTo community detail fail ' + res.errMsg)
+          }
+        })
+      },
+      fail(res) {
+        console.error(TAG + ' setStorage community fail ' + res.errMsg)
+      }
+    })
+  },
+
+  getCommunityList(schoolId) {
+
+    let that = this
+
+    wx.request({
+      url: app.globalData.baseUrl + '/school/getCommunityList',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        "schoolId": schoolId
+      },
+      success(res) {
+        console.log(TAG + ' getCommunityList success')
+        if (res.data.code != 0) {
+          console.error(TAG + ' getCommunityList success code != 0, msg ' + res.data.msg)
+          wx.showToast({
+            title: '数据错误 ' + res.data.msg,
+            icon: 'none'
+          })
+        } else {
+
+          var communities = res.data.data
+
+          if (communities == null) {
+            console.error(TAG + ' getCommunityList error communities == null')
+            return
+          }
+
+          var showCommunities = []
+          for (var i = 0; i < 5 && i < communities.length; i++) {
+            showCommunities.push(communities[i])
+          }
+
+          that.setData({
+            communities: showCommunities,
+            communityTotalNum: communities.length
+          })
+        }
+      },
+      fail(res) {
+        console.error(TAG + ' getCommunityList fail res ' + res.errMsg)
+        wx.showToast({
+          title: '数据错误 ' + res.errMsg,
+          icon: 'none'
+        })
+      },
+      complete(res) {}
+    })
+  }
 })

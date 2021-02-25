@@ -376,7 +376,7 @@ Component({
         fail(res) {
           console.error('main.js setStorage community fail ' + res.errMsg)
         }
-      })      
+      })  
     },
 
     // 热门小区-换一批

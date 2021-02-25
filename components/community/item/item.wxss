@@ -1,0 +1,50 @@
+/* components/community/item/item.wxss */
+.community {
+  padding: 36rpx 30rpx;
+  background-color: white;
+  margin-bottom: 12rpx;
+  border-radius: 12rpx;
+}
+
+.community image {
+  width: 36%;
+  height: 190rpx;
+  border-radius: 12rpx;
+}
+
+.community .right {
+  align-items: flex-start;
+  flex: 1;
+  flex-grow: 1;
+  margin-left: 30rpx;
+}
+
+.community .right .name {
+  color: #333333;
+  font-size: 32rpx;
+  margin-bottom: 14rpx;
+}
+
+.community .right .price {
+  color: #3E66D5;
+  font-size: 28rpx;
+  margin-bottom: 14rpx;
+}
+
+.community .right .label {
+  margin-bottom: 4rpx;
+  color: #666666;
+  font-size: 20rpx;
+  width: 100%;
+}
+
+.community .right .label .left {
+  flex: 1;
+  flex-flow: 1;  
+}
+
+.community .right .label .right {
+  flex: 1;
+  flex-flow: 1;
+  margin-left: 8rpx;  
+}

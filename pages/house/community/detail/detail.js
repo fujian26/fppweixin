@@ -76,6 +76,7 @@ Page({
           locationStr: locationStr
         })
 
+        that.getAttentionData(community.id)
         that.getComments(community)
       },
       fail(res) {
@@ -197,6 +198,7 @@ Page({
 
   tapAttention(event) {
     console.log('tapAttention')
+    this.doAttention()
   },
 
   tapMoreComments(event) {
@@ -345,6 +347,118 @@ Page({
         })
       },
       complete(res) {}
+    })
+
+  },
+
+  getAttentionData(communityId) {
+
+    let that = this
+
+    wx.showLoading({
+      title: '',
+    })
+
+    wx.request({
+      url: app.globalData.baseUrl + '/house/queryCommunityAttention',
+      method: 'GET',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        "communityId": communityId
+      },
+      success(res) {
+        console.log('getAttentionData success')
+        if (res.data.code != 0 || res.data.data == null) {
+          console.error('getAttentionData success code != 0, msg ' + res.data.msg)
+          wx.showToast({
+            title: '数据拉取失败'  + res.data.msg,
+            icon: 'none'
+          })
+        } else {        
+
+          that.setData({
+            attentionNum: res.data.data.attentionCount,
+            attentioned: res.data.data.attentioned,            
+          })
+        }
+      },
+      fail(res) {
+        console.error('getAttentionData fail res ' + res.errMsg)
+        wx.showToast({
+          title: '数据拉取失败',
+          icon: 'none'
+        })
+      },
+      complete(res) {
+        wx.hideLoading({
+          success: (res) => {},
+        })
+      }
+    })
+  },
+
+  doAttention() {
+
+    let community = this.data.community  
+    if (community == null) {
+      console.error(TAG + ' doAttention community == null')
+      return
+    }
+
+    let oldAttentioned = this.data.attentioned
+    let that = this
+
+    wx.showLoading({
+      title: '',
+    })
+
+    wx.request({
+      url: app.globalData.baseUrl + '/house/attentionCommunity',
+      method: 'POST',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        "communityId": community.id,
+        "attention": !oldAttentioned
+      },
+      success(res) {
+        console.log(TAG + ' doAttention success')
+        if (res.data.code != 0 || res.data.data == null) {
+          console.error(TAG + ' doAttention success code != 0, msg ' + res.data.msg)
+          wx.showToast({
+            title: '操作失败 '  + res.data.msg,
+            icon: 'none'
+          })
+        } else {        
+
+          wx.showToast({
+            title: '操作成功',
+            icon: 'none'
+          })
+
+          that.setData({
+            attentionNum: res.data.data.attentionCount,
+            attentioned: res.data.data.attentioned,            
+          })
+        }
+      },
+      fail(res) {
+        console.error(TAG + ' doAttention fail res ' + res.errMsg)
+        wx.showToast({
+          title: '操作失败',
+          icon: 'none'
+        })
+      },
+      complete(res) {
+        wx.hideLoading({
+          success: (res) => {},
+        })
+      }
     })
 
   }

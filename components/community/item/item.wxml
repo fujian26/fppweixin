@@ -1,0 +1,26 @@
+<!--components/community/item/item.wxml-->
+<view class="hflex-container community">
+  
+  <image src="{{community.picUrls[0]}}" />
+  
+  <view class="vflex-container right">
+
+    <view class="name">{{showName}}</view>
+    <view class="price">{{community.price}}元/㎡</view>
+    
+    <view class="hflex-container label">
+      <view class="left">建筑年代: {{community.age}}年</view>          
+      <view class="right">容积率: {{community.volume_rate}}</view>
+    </view>
+
+    <view class="hflex-container label">
+      <view class="left">物业费: {{community.property_costs}}元/㎡</view>
+      <view class="right">物业类型: {{typeStr}}</view>
+    </view>
+
+    <view class="hflex-container label">
+      <view class="left">二手房源: {{community.second_source_num}}套</view>
+      <view class="right">法拍房源: {{community.legal_source_num}}套</view>
+    </view>
+  </view>
+</view>

@@ -22,6 +22,11 @@
   padding: 0;
 }
 
+.pagescroll {
+  flex: 1;
+  flex-grow: 1;
+}
+
 .scrollPage {
   height: 100vh;
   padding-bottom: 100rpx;
@@ -47,9 +52,9 @@
   flex-wrap: wrap;
 }
 
-.hflex-container .holder {  
+.hflex-container .holder {
   width: 10rpx;
-  height: 2rpx;  
+  height: 2rpx;
   flex: 1;
 }
 
@@ -62,6 +67,6 @@
 
 .vflex-container .holder {
   width: 2;
-  height: 10rpx;  
+  height: 10rpx;
   flex: 1;
 }

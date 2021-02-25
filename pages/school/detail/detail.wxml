@@ -77,16 +77,28 @@
   <view style="background-color: #f6f6f6; height: 14rpx;" />
 
   <!-- 划片范围及小区 -->
-  <view class="vflex-container" style="padding: 30rpx 30rpx;">
-    <view class="hflex-container" style="width: 100%">
+  <view class="vflex-container" style="padding: 30rpx 30rpx; align-items: stretch;">
+
+    <view class="hflex-container" style="width: 100%; margin-bottom: 28rpx;">
       <image src="/images/location_stroke.png" style="width: 38rpx; height: 38rpx;" />
       <view class="title" style="margin-left: 10rpx;">划片范围及小区</view>
       <view class="holder" />
-      <view class="hflex-container" bindtap="tapDivideRangeMore">
+      <view wx:if="{{communityTotalNum > 5}}" class="hflex-container" bindtap="tapDivideRangeMore">
         <view style="color: #CCCCCC; font-size: 20rpx;">更多</view>
         <text class="cuIcon-right" style="margin-left: 4rpx; color: #cccccc; font-size: 22rpx;" />
       </view>
     </view>
+
+    <scroll-view scroll-x="true">
+      <view class="hflex-container" style="width: {{communities.length * 300}}rpx; flex-wrap: nowrap;">
+        <view class="community" wx:for="{{communities}}" wx:key="id" bindtap="tapCommunity" data-index="{{index}}">
+          <image src="{{item.picUrls[0]}}" />
+          <view class="name">{{item.name}}</view>
+          <view class="smalltext">建筑年代: {{item.age}}年</view>
+          <view class="smalltext">二手房源: {{item.second_source_num}}套 | 法拍房源: {{item.legal_source_num}}套</view>
+        </view>
+      </view>
+    </scroll-view>
   </view>
 
   <view style="background-color: #f6f6f6; height: 14rpx;" />
@@ -154,7 +166,8 @@
       </view>
     </view>
 
-    <view class="item" data-index="{{index}}" bindtap="tapDynamicItem" wx:if="{{dynamics != null}}" wx:for="{{dynamics}}" wx:key="id">
+    <view class="item" data-index="{{index}}" bindtap="tapDynamicItem" wx:if="{{dynamics != null}}"
+      wx:for="{{dynamics}}" wx:key="id">
 
       <view class="hflex-container">
         <image src="{{item.pic_path}}" />
