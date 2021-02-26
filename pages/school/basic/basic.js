@@ -86,16 +86,9 @@ Page({
 
         var logoUrl = ''
         var schoolExt = res.data
-        var school = res.data.school
+        var school = res.data.school  
 
-        for (var i = 0; i < res.data.pics.length; i++) {
-          if (res.data.pics[i].type == 2) {
-            logoUrl = res.data.pics[i].url
-            break
-          }
-        }
-
-        logoUrl = app.globalData.baseUrl + "/file/download/" + logoUrl
+        logoUrl = res.data.logoUrl
         console.log('logoUrl ' + logoUrl)
 
         var typeStr = ''
