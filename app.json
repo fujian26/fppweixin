@@ -19,7 +19,8 @@
     "pages/house/community/detail/detail",
     "pages/map/show/show",
     "pages/comments/comments",
-    "pages/school/communities/communities"
+    "pages/school/communities/communities",
+    "pages/house/list/list"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",
@@ -34,6 +35,7 @@
     "comments-item": "/components/comments/item/item",
     "comments-list": "/components/comments/list/list",
     "community-item": "/components/community/item/item",
+    "house-item": "/components/house/item/item",
     "mp-html": "mp-html"
   },
   "sitemapLocation": "sitemap.json",

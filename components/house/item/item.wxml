@@ -1,0 +1,26 @@
+<!--components/house/item/item.wxml-->
+<view class="vflex-container house">
+
+  <view class="hflex-container" style="width: 100%;">
+
+    <view>
+      <!-- <view style="padding-top: 16rpx;">
+        
+      </view>       -->
+      <image src="{{house.picUrls[0]}}" />
+      <image class="tag"
+        src="{{house.source_type == 1 ? '/images/legal_house.png' : '/images/second_hand_house.png'}}" />
+    </view>
+
+    <view class="vflex-container right">
+      <view class="hflex-container name">
+        <view><span class="type">[{{community.typeStr}}]</span>{{house.name}}</view>
+      </view>
+
+      <view class="content">{{areaStr}}</view>
+      <view class="content">{{line2Str}}</view>
+      <view class="content">{{line3Str}}</view>
+    </view>
+  </view>
+  <view class="divid" />
+</view>

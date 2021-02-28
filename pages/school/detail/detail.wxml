@@ -134,18 +134,21 @@
   <!-- 周边房源 -->
   <view class="vflex-container house">
 
-    <view class="hflex-container" style="width: 100%">
+    <view class="hflex-container" style="width: 100%; padding-left: 30rpx; padding-right: 30rpx;">
       <view class="hflex-container">
         <image src="/images/house_stroke.png" style="width: 38rpx; height: 38rpx;" />
         <view class="title" style="margin-left: 10rpx;">周边房源</view>
       </view>
 
       <view class="holder" />
-      <view class="hflex-container" bindtap="tapHouseMore">
+      <view wx:if="{{houseTotalNum > 5}}" class="hflex-container" bindtap="tapHouseMore">
         <view style="color: #CCCCCC; font-size: 20rpx;">更多</view>
         <text class="cuIcon-right" style="margin-left: 4rpx; color: #cccccc; font-size: 22rpx;" />
       </view>
     </view>
+
+    <house-item bindtap="tapHouse" wx:for="{{houses}}" wx:key="id" data-index="{{index}}" house="{{item}}"
+      community="{{item.community}}" />
   </view>
 
   <view style="background-color: #f6f6f6; height: 14rpx;" />

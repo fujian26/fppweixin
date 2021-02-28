@@ -105,7 +105,7 @@
 }
 
 .house {
-  padding: 28rpx 30rpx;
+  padding: 28rpx 0rpx;
 }
 
 .school-dynamic {

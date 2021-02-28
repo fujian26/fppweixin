@@ -16,7 +16,9 @@ Page({
     typeStr: '',
     dynamics: [],
     communities: [],
-    communityTotalNum: 0
+    communityTotalNum: 0,
+    houses: [],
+    houseTotalNum: 0,
   },
 
   /**
@@ -146,6 +148,7 @@ Page({
         that.getDynamics(schoolExt.school)
         that.getDetail(schoolExt.school)
         that.getCommunityList(schoolExt.school.id)
+        that.getHouses(schoolExt.school.id)
       },
       fail(res) {
         console.log('basic created fail res: ' + res.errMsg)
@@ -312,7 +315,24 @@ Page({
 
   // 周边房源 - 更多
   tapHouseMore(event) {
+    
+    console.log('tapHouseMore')
+    
+    if (this.data.schoolExt == null) {
+      console.error('tapHouseMore this.data.schoolExt == null')
+      return
+    }
 
+    let school = this.data.schoolExt.school
+    wx.navigateTo({
+      url: '/pages/house/list/list?type=0&id=' + school.id,
+      success: function (res) {
+
+      },
+      fail(res) {
+        console.error(TAG + ' tapHouseMore navigateTo fail ' + res.errMsg)
+      }
+    })
   },
 
   // 学校动态 - 更多
@@ -508,6 +528,65 @@ Page({
       },
       fail(res) {
         console.error(TAG + ' getCommunityList fail res ' + res.errMsg)
+        wx.showToast({
+          title: '数据错误 ' + res.errMsg,
+          icon: 'none'
+        })
+      },
+      complete(res) {}
+    })
+  },
+
+  tapHouse(event) {
+    let index = event.currentTarget.dataset.index
+    console.log('tapHouse index: ' + index)
+  },
+
+  getHouses(schoolId) {
+
+    let that = this
+
+    wx.request({
+      url: app.globalData.baseUrl + '/house/getHouseBySchool',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        "schoolId": schoolId,
+        "pageIndex": 0,
+        "pageSize": 20
+      },
+      success(res) {
+        console.log(TAG + ' getHouses success')
+        if (res.data.code != 0) {
+          console.error(TAG + ' getHouses success code != 0, msg ' + res.data.msg)
+          wx.showToast({
+            title: '数据错误 ' + res.data.msg,
+            icon: 'none'
+          })
+        } else {
+
+          var houses = res.data.data
+
+          if (houses == null) {
+            console.error(TAG + ' getHouses error houses == null')
+            return
+          }          
+
+          var showHouses = []
+          for (var i = 0; i < 5 && i < houses.length; i++) {
+            showHouses.push(houses[i])            
+          }
+
+          that.setData({
+            houses: showHouses,
+            houseTotalNum: houses.length
+          })
+        }
+      },
+      fail(res) {
+        console.error(TAG + ' getHouses fail res ' + res.errMsg)
         wx.showToast({
           title: '数据错误 ' + res.errMsg,
           icon: 'none'

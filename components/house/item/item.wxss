@@ -1,0 +1,51 @@
+/* components/house/item/item.wxss */
+.house {
+  background-color: white;
+  padding: 0 28rpx;
+  padding-top: 34rpx;
+}
+
+.house .divid {
+  width: 100%;
+  height: 2rpx;
+  margin-top: 32rpx;
+  background-color: #F6F6F6;
+}
+
+.house image {
+  width: 224rpx;
+  height: 180rpx;
+  border-radius: 16rpx;
+}
+
+.house .tag {
+  width: 78rpx;
+  height: 26rpx;
+  position: relative;
+  left: -212rpx;
+  top: -160rpx;
+}
+
+.house .right {
+  flex: 1;
+  flex-grow: 1;
+  align-items: flex-start;
+  margin-left: -48rpx;
+}
+
+.house .right .name {
+  color: #333333;
+  font-size: 32rpx;
+  margin-bottom: 16rpx;
+}
+
+.house .right .name .type {
+  color: #3E66D5;
+  margin-right: 8rpx;
+}
+
+.house .right .content {
+  margin-bottom: 8rpx;
+  color: #666666;
+  font-size: 20rpx;
+}
