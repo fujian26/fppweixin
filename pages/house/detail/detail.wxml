@@ -1,0 +1,11 @@
+<!--pages/house/detail/detail.wxml-->
+<view class="pagecontainer">
+  <basebar id="basebar" centerText="{{title}}"></basebar>
+
+  <swiper class="screen-swiper top-swiper" style="height: 410rpx;" indicator-dots="false" circular="true"
+    autoplay="true" interval="5000" duration="500" indicator-active-color='#3E66D5'>
+    <swiper-item wx:for="{{house.picUrls}}" bindtap="tapSwiper" data-url="{{item}}" wx:key="id">
+      <image src="{{item}}" mode="aspectFill"></image>
+    </swiper-item>
+  </swiper>
+</view>

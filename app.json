@@ -20,7 +20,8 @@
     "pages/map/show/show",
     "pages/comments/comments",
     "pages/school/communities/communities",
-    "pages/house/list/list"
+    "pages/house/list/list",
+    "pages/house/detail/detail"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",
