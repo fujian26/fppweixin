@@ -10,7 +10,10 @@ Page({
     type: 0, // 0-school
     id: 0,
     pageIndex: 0,
-    houses: []
+    houses: [],
+    normalHouses: [],
+    searchHouses: [],
+    searchStr: ''
   },
 
   /**
@@ -68,6 +71,9 @@ Page({
    */
   onReachBottom: function () {
     console.log('onReachBottom')
+    if (searchStr != null && searchStr.length > 0) {
+      return
+    }
     this.loadDatas();
   },
 
@@ -91,11 +97,86 @@ Page({
     }
   },
 
+  searchDatas() {
+    let type = this.data.type
+    let id = this.data.id
+
+    switch (type) {
+      case '0':
+        this.searchSchoolHouses(id)
+        break
+      default:
+        console.error(tag + ' not support type: ' + type)
+    }
+  },
+
+  searchSchoolHouses(schoolId) {
+
+    let searchContent = this.data.searchStr
+    let that = this
+
+    wx.showLoading({
+      title: '',
+    })
+
+    wx.request({
+      url: app.globalData.baseUrl + '/house/searchHouseBySchool',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        "schoolId": schoolId,
+        "content": searchContent
+      },
+      success(res) {
+        console.log(tag + ' searchSchoolHouses success')
+        if (res.data.code != 0) {
+          console.error(tag + ' searchSchoolHouses success code != 0, msg ' + res.data.msg)
+          wx.showToast({
+            title: '数据错误 ' + res.data.msg,
+            icon: 'none'
+          })
+        } else {
+
+          var houses = res.data.data
+
+          if (houses == null) {
+            console.error(tag + ' searchSchoolHouses error houses == null')
+            wx.showToast({
+              title: '数据错误 ' + res.data.msg,
+              icon: 'none'
+            })
+            return
+          }          
+
+          that.setData({
+            houses: houses,
+            searchHouses: houses    
+          })
+        }
+      },
+      fail(res) {
+        console.error(tag + ' searchSchoolHouses fail res ' + res.errMsg)
+        wx.showToast({
+          title: '数据错误 ' + res.errMsg,
+          icon: 'none'
+        })
+      },
+      complete(res) {
+        wx.hideLoading({
+          success: (res) => {},
+        })
+      }
+    })
+
+  },
+
   getSchoolHouses(schoolId) {
 
     let that = this
     let pageIndex = this.data.pageIndex
-    var nowHouses = this.data.houses
+    var nowHouses = this.data.houses    
 
     wx.showLoading({
       title: '',
@@ -110,7 +191,7 @@ Page({
       data: {
         "schoolId": schoolId,
         "pageIndex": pageIndex,
-        "pageSize": 1
+        "pageSize": 20
       },
       success(res) {
         console.log(tag + ' getSchoolHouses success')
@@ -133,10 +214,11 @@ Page({
             return
           }
 
-          nowHouses = nowHouses.concat(houses)          
+          nowHouses = nowHouses.concat(houses)
 
           that.setData({
             houses: nowHouses,
+            normalHouses: nowHouses,
             pageIndex: pageIndex + 1
           })
         }
@@ -160,5 +242,35 @@ Page({
   tapHouse(event) {
     let index = event.currentTarget.dataset.index
     console.log('tapHouse index: ' + index)
+  },
+
+  onSearchFocused(event) {
+    console.log(tag + ' onSearchFocused')
+  },
+
+  onSearchInput(event) {
+    
+    let value = event.detail.value
+    this.data.searchStr = value
+
+    console.log(tag + ' onSearchInput ' + value)
+    if (value == null || value.length == 0) {
+      let houses = this.data.normalHouses
+      this.setData({
+        houses: houses,
+        searchHouses: []
+      })
+    }
+  },
+
+  doSearch(event) {
+    let value = event.detail.value
+    console.log(tag + ' doSearch ' + value)
+
+    if (value == null || value.length == 0) {
+      return
+    }
+
+    this.searchDatas()
   }
 })

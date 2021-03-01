@@ -36,6 +36,7 @@
     "comments-list": "/components/comments/list/list",
     "community-item": "/components/community/item/item",
     "house-item": "/components/house/item/item",
+    "search-component": "/components/search/search",
     "mp-html": "mp-html"
   },
   "sitemapLocation": "sitemap.json",

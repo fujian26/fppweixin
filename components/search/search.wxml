@@ -1,0 +1,6 @@
+<!--components/search/search.wxml-->
+<view class="hflex-container search-component round">
+  <text class="cuIcon-search icon"></text>
+  <input class="edit" type="text" bindfocus="onFocused" bindinput="onSearchInput" placeholder="{{hint}}"
+    bindconfirm="doSearch" confirm-type="search" placeholder-style="color: #cccccc"></input>
+</view>

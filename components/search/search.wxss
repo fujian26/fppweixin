@@ -1,0 +1,16 @@
+/* components/search/search.wxss */
+.search-component {
+  width: 100%;
+  padding: 8rpx 32rpx;
+  background-color: white;
+}
+
+.search-component .icon {
+  font-size: 32rpx;
+  color: #cccccc
+}
+
+.search-component .edit {
+  font-size: 24rpx;
+  margin-left: 8rpx;
+}

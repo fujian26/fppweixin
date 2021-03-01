@@ -1,1 +1,5 @@
 /* pages/house/list/list.wxss */
+.search {
+  padding: 32rpx 48rpx;
+  background-color: #3E66D5;
+}
