@@ -1,1 +1,123 @@
 /* pages/house/detail/detail.wxss */
+.name {
+  color: #333333;
+  font-size: 32rpx;
+  font-weight: 500;
+  margin: 28rpx 28rpx;
+  margin-bottom: 0rpx;
+}
+
+.name span {
+  color: #3E66D5;
+}
+
+.addr {
+  color: #999999;
+  font-size: 20rpx;
+  margin-top: 22rpx;
+  margin-left: 28rpx;
+  margin-right: 28rpx;
+  flex-wrap: wrap;
+}
+
+.addr image {
+  width: 14rpx;
+  height: 16rpx;
+}
+
+.addr .arrow {
+  width: 12rpx;
+  height: 20rpx;
+  margin-left: 14rpx;
+}
+
+.tags {
+  margin: 20rpx 28rpx;
+  margin-bottom: 0rpx;
+}
+
+.tags .tag {
+  min-width: 104rpx;
+  padding: 6rpx 12rpx;
+  background-color: #99CCFF;
+  color: #3E66D5;
+  font-size: 20rpx;
+  text-align: center;
+  margin-right: 14rpx;
+}
+
+.room-squre {
+  margin: 28rpx 28rpx;
+  padding: 24rpx 0rpx;
+  margin-bottom: 0rpx;
+  border-radius: 16rpx;
+  border-width: 2rpx;
+  border-style: solid;
+  border-color: #E5E5E5;
+}
+
+.room-squre .item {
+  flex: 1;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;   
+}
+
+.room-squre .item .name {
+  color: #3E66D5;
+  font-weight: 600;
+  font-size: 28rpx;
+  margin: 0;
+  padding: 0;
+}
+
+.room-squre .item .value {
+  color: #999999;
+  font-size: 20rpx;
+  margin-top: 8rpx;
+}
+
+.room-squre .divid {
+  height: 100rpx;
+  width: 1rpx;
+  background-color: #E5E5E5;
+}
+
+.infos {
+  margin: 28rpx 28rpx;
+  margin-bottom: 0rpx;
+}
+
+.infos .item {
+  width: 100%;
+  margin-bottom: 8rpx;
+}
+
+.infos .item .half {
+  flex: 1;
+  flex-grow: 1;  
+}
+
+.infos .item .half .name {
+  color: #999999;
+  font-size: 26rpx;
+  margin: 0;
+  padding: 0;
+}
+
+.infos .item .half .value {
+  flex: 1;
+  flex-grow: 1;
+  color: #666666;
+  font-size: 26rpx;
+  margin: 0;
+  padding: 0;
+  margin-left: 4rpx;
+}
+
+.infos .item .divid {
+  width: 16rpx;
+  height: 4rpx;
+}
+

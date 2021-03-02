@@ -1,11 +1,75 @@
 <!--pages/house/detail/detail.wxml-->
-<view class="pagecontainer">
+<view class="pagecontainer" style="background-color: white;">
+
   <basebar id="basebar" centerText="{{title}}"></basebar>
 
-  <swiper class="screen-swiper top-swiper" style="height: 410rpx;" indicator-dots="false" circular="true"
-    autoplay="true" interval="5000" duration="500" indicator-active-color='#3E66D5'>
-    <swiper-item wx:for="{{house.picUrls}}" bindtap="tapSwiper" data-url="{{item}}" wx:key="id">
-      <image src="{{item}}" mode="aspectFill"></image>
-    </swiper-item>
-  </swiper>
+  <scroll-view class="pagescroll">
+
+    <swiper class="screen-swiper top-swiper" style="height: 410rpx;" indicator-dots="false" circular="true"
+      autoplay="true" interval="5000" duration="500" indicator-active-color='#3E66D5'>
+      <swiper-item wx:for="{{house.picUrls}}" bindtap="tapSwiper" data-url="{{item}}" wx:key="id">
+        <image src="{{item}}" mode="aspectFill"></image>
+      </swiper-item>
+    </swiper>
+
+    <view class="name"><span>[{{community.typeStr}}]</span>{{house.name}}</view>
+
+    <!-- address -->
+    <view class="hflex-container addr" bindtap="tapAddr">
+      <image src="/images/community_location.png" />
+      <view style="margin-left: 4rpx">{{locationStr}}</view>
+      <image class="arrow" src="/images/arrow_grey_right.png" />
+    </view>
+
+    <view class="hflex-container tags">
+      <view class="tag round" wx:for="{{house.tagList}}" wx:key="id">{{item}}</view>
+    </view>
+
+    <!-- room\squre... -->
+    <view class="hflex-container room-squre">
+
+      <view class="item">
+        <view class="name">{{house.roomShowStr}}</view>
+        <view class="value">户型</view>
+      </view>
+
+      <view class="divid" />
+
+      <view class="item">
+        <view class="name">{{house.square}}</view>
+        <view class="value">面积</view>
+      </view>
+
+      <view class="divid" />
+
+      <view class="item">
+        <view class="name">{{house.towards}}</view>
+        <view class="value">朝向</view>
+      </view>
+
+      <view class="divid" />
+
+      <view class="item">
+        <view class="name">{{house.totalPriceStr}}万</view>
+        <view class="value">挂牌价</view>
+      </view>
+    </view>
+
+    <!-- infos -->
+    <view class="vflex-container infos">
+      <view class="hflex-container item">
+        <view class="hflex-container half" style="flex: 1.5;">
+          <view class="name">小区名称:</view>
+          <view class="value">{{community.name}}</view>
+        </view>
+        <view class="divid"/>        
+        <view class="hflex-container half">
+          <view class="name">房屋类型:</view>
+          <view class="value">{{community.buildingTypeStr}}</view>
+        </view>
+      </view>
+    </view>
+
+  </scroll-view>  
+
 </view>
