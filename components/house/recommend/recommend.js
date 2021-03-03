@@ -28,8 +28,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    tags: [
-      {
+    tags: [{
         name: '同小区房源',
         pageIndex: 0,
         houses: []
@@ -52,9 +51,9 @@ Component({
       let houseId = this.properties.houseId
       let pageSize = this.properties.pageSize
 
-      console.log(tag + ' attached communityId: ' + communityId 
-          + ', houseId: ' + houseId
-          + ', pageSize: ' + pageSize)
+      console.log(tag + ' attached communityId: ' + communityId +
+        ', houseId: ' + houseId +
+        ', pageSize: ' + pageSize)
 
       this.loadDatas(false)
 
@@ -70,11 +69,16 @@ Component({
       console.log(tag + ' tapTagItem index: ' + index)
 
       var houses = this.data.tags[index].houses
+      var pageIndex = this.data.tags[index].pageIndex
 
       this.setData({
         currentTagIndex: index,
         houses: houses
       })
+
+      if (pageIndex == 0) {
+        this.loadDatas(true)
+      }
     },
 
     loadDatas(showLoading) {
@@ -98,8 +102,8 @@ Component({
       var pageIndex = tags[0].pageIndex
       let houseId = this.properties.houseId
       let communityId = this.properties.communityId
-      let pageSize = this.properties.pageSize      
-      
+      let pageSize = this.properties.pageSize
+
       if (showLoading) {
         wx.showLoading({
           title: '',
@@ -129,9 +133,9 @@ Component({
               icon: 'none'
             })
           } else {
-            
+
             var houses = res.data.data
-            
+
             if (houses == null) {
               console.error(tag + ' loadSameCommunityDatas error houses == null')
               return
@@ -143,10 +147,10 @@ Component({
             }
 
             console.log(tag + ' loadSameCommunityDatas houses.length: ' + houses.length)
-  
+
             tags[0].pageIndex = res.header.pageIndex
             tags[0].houses = houses
-  
+
             that.setData({
               tags: tags,
               houses: tags[0].houses = houses
@@ -170,8 +174,80 @@ Component({
       })
     },
 
-    loadNearbyDatas() {
+    loadNearbyDatas(showLoading) {
+      let that = this
+      var tags = this.data.tags
+      var pageIndex = tags[1].pageIndex
+      let communityId = this.properties.communityId
+      let pageSize = this.properties.pageSize
 
+      if (showLoading) {
+        wx.showLoading({
+          title: '',
+        })
+      }
+
+      wx.request({
+        url: app.globalData.baseUrl + '/house/getHouseNearby',
+        header: {
+          'token': app.globalData.token,
+          'content-type': 'application/json'
+        },
+        data: {
+          "excludeCommunityId": communityId,
+          "lng": app.globalData.lng,
+          "lat": app.globalData.lat,
+          'pageIndex': pageIndex,
+          "pageSize": pageSize
+        },
+        success(res) {
+          console.log(tag + ' loadNearbyDatas success')
+          if (res.data.code != 0) {
+            console.error(tag + ' loadNearbyDatas success code != 0, msg ' + res.data.msg)
+            wx.showToast({
+              title: '数据错误 ' + res.data.msg,
+              icon: 'none'
+            })
+          } else {
+
+            var houses = res.data.data
+
+            if (houses == null) {
+              console.error(tag + ' loadNearbyDatas error houses == null')
+              return
+            }
+
+            if (houses.length == 0) {
+              console.log(tag + ' loadNearbyDatas error houses.length == 0')
+              return
+            }
+
+            console.log(tag + ' loadNearbyDatas houses.length: ' + houses.length)
+
+            tags[1].pageIndex++
+            tags[1].houses = houses
+
+            that.setData({
+              tags: tags,
+              houses: tags[1].houses = houses
+            })
+          }
+        },
+        fail(res) {
+          console.error(tag + ' loadNearbyDatas fail res ' + res.errMsg)
+          wx.showToast({
+            title: '数据错误 ' + res.errMsg,
+            icon: 'none'
+          })
+        },
+        complete(res) {
+          if (showLoading) {
+            wx.hideLoading({
+              success: (res) => {},
+            })
+          }
+        }
+      })
     },
 
     tapHouse(event) {
