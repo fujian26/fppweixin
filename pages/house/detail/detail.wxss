@@ -57,11 +57,11 @@
 }
 
 .room-squre .item {
-  flex: 1;  
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;   
+  justify-content: center;
 }
 
 .room-squre .item .name {
@@ -96,7 +96,7 @@
 
 .infos .item .half {
   flex: 1;
-  flex-grow: 1;  
+  flex-grow: 1;
 }
 
 .infos .item .half .name {
@@ -162,7 +162,7 @@
 
 .help .little {
   color: #666666;
-  font-size: 20rpx;  
+  font-size: 20rpx;
   margin-left: 24rpx;
 }
 
@@ -187,4 +187,64 @@
   color: #333333;
   font-size: 32rpx;
   margin-bottom: 28rpx;
+}
+
+.bottom {
+  width: 100%;
+  min-height: 100rpx;
+  margin: 0;
+  padding: 16rpx 28rpx;
+  justify-content: center;
+  background-color: white;
+}
+
+.bottom .comment {
+  color: #666666;
+  font-size: 20rpx;
+  padding: 0;
+  margin: 0;
+}
+
+.bottom .comment image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.bottom .attention {
+  color: #666666;
+  font-size: 20rpx;
+  padding: 0;
+  margin: 0;
+  margin-left: 40rpx;
+}
+
+.bottom .attention image {
+  width: 40rpx;
+  height: 36rpx;
+}
+
+.bottom .consulte {
+  flex: 1;
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+  margin-left: 60rpx;
+  background-color: #3E66D5;
+  color: white;
+  font-size: 32rpx;
+  text-align: center;  
+  padding: 8rpx 0;
+}
+
+.bottom .call {
+  flex: 1;
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+  margin-left: 20rpx;
+  background-color: #33CC99;
+  color: white;
+  font-size: 32rpx;
+  text-align: center;
+  padding: 8rpx 0;
 }
