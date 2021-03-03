@@ -9,7 +9,13 @@ Page({
   data: {
     title: '二手房源详情',
     house: null,
-    community: null
+    community: null,
+    showAddTime: '',
+    recommendTags: [
+      '同小区房源',
+      '周边房源',
+      '划片小区'
+    ]
   },
 
   /**
@@ -40,10 +46,13 @@ Page({
 
         console.log('house name ' + house.name)
 
+        var showAddTime = house.add_time.split(' ')[0]
+
         that.setData({
           house: house,
           community: community,
-          locationStr: locationStr
+          locationStr: locationStr,
+          showAddTime: showAddTime
         })
       },
       fail(res) {
@@ -121,4 +130,39 @@ Page({
       }
     })
   },
+
+  tapHomeMortgage(event) {
+    console.log('tapHomeMortgage')
+  },
+
+  tapHomeProcess(event) {
+    console.log('tapHomeProcess')
+  },
+
+  tapHomeTax(event) {
+    console.log('tapHomeTax')
+  },
+
+  tapCommunity(event) {
+
+    console.log('tapCommunity')
+
+    let community = this.data.community
+
+    wx.setStorage({
+      data: community,
+      key: 'community',
+      success(res) {
+        wx.navigateTo({
+          url: '/pages/house/community/detail/detail',
+          fail(res) {
+            console.error(tag + ' navigateTo community detail fail ' + res.errMsg)
+          }
+        })
+      },
+      fail(res) {
+        console.error(tag + ' setStorage community fail ' + res.errMsg)
+      }
+    })  
+  }
 })

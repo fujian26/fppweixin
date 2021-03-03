@@ -1,0 +1,38 @@
+/* components/house/recommend/recommend.wxss */
+
+.tags {
+  padding: 0;
+  margin: 0;
+}
+
+.tags .tag {
+  color: #3E66D5;
+  font-size: 20rpx;
+  background-color: white;
+  border-radius: 14rpx;
+  border-width: 1rpx;
+  border-color: #3E66D5;
+  border-style: solid;
+  margin: 0;
+  padding: 0;
+  min-width: 140rpx;
+  padding: 8rpx 18rpx;
+  margin-right: 10rpx;
+}
+
+.tags .selected {
+  color: white;
+  background-color: #3E66D5;
+}
+
+.refresh {
+  justify-content: center;
+  color: #3E66D5;
+  font-size: 20rpx;
+  padding: 12rpx 0;
+}
+
+.refresh image {
+  width: 20rpx;
+  height: 18rpx;
+}

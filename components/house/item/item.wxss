@@ -1,7 +1,7 @@
 /* components/house/item/item.wxss */
 .house {
   background-color: white;
-  padding: 0 28rpx;
+  /* padding: 0 28rpx; */
   padding-top: 34rpx;
 }
 
@@ -36,6 +36,8 @@
 .house .right .name {
   color: #333333;
   font-size: 32rpx;
+  margin: 0;
+  padding: 0;
   margin-bottom: 16rpx;
 }
 

@@ -148,7 +148,7 @@
     </view>
 
     <house-item bindtap="tapHouse" wx:for="{{houses}}" wx:key="id" data-index="{{index}}" house="{{item}}"
-      community="{{item.community}}" />
+      community="{{item.community}}" style="padding-left: 28rpx; padding-right: 28rpx"/>
   </view>
 
   <view style="background-color: #f6f6f6; height: 14rpx;" />

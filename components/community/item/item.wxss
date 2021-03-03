@@ -22,6 +22,8 @@
 .community .right .name {
   color: #333333;
   font-size: 32rpx;
+  padding: 0;
+  margin: 0;
   margin-bottom: 14rpx;
 }
 

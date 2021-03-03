@@ -3,7 +3,7 @@
 
   <basebar id="basebar" centerText="{{title}}"></basebar>
 
-  <scroll-view class="pagescroll">
+  <scroll-view class="pagescroll" style="background-color: white;">
 
     <swiper class="screen-swiper top-swiper" style="height: 410rpx;" indicator-dots="false" circular="true"
       autoplay="true" interval="5000" duration="500" indicator-active-color='#3E66D5'>
@@ -62,14 +62,107 @@
           <view class="name">小区名称:</view>
           <view class="value">{{community.name}}</view>
         </view>
-        <view class="divid"/>        
+        <view class="divid" />
         <view class="hflex-container half">
           <view class="name">房屋类型:</view>
           <view class="value">{{community.buildingTypeStr}}</view>
         </view>
       </view>
+
+      <view class="hflex-container item">
+        <view class="hflex-container half" style="flex: 1.5;">
+          <view class="name">建筑年代:</view>
+          <view class="value">{{community.age}}年</view>
+        </view>
+        <view class="divid" />
+        <view class="hflex-container half">
+          <view class="name">产权年限:</view>
+          <view class="value">{{community.property_right}}</view>
+        </view>
+      </view>
+
+      <view class="hflex-container item">
+        <view class="hflex-container half" style="flex: 1.5;">
+          <view class="name">装修情况:</view>
+          <view class="value">{{house.decorationTypeStr}}</view>
+        </view>
+        <view class="divid" />
+        <view class="hflex-container half">
+          <view class="name">楼层:</view>
+          <view class="value">{{house.floor_num}}楼</view>
+        </view>
+      </view>
+
+      <view class="hflex-container item">
+        <view class="hflex-container half" style="flex: 1.5;">
+          <view class="name">所属区域:</view>
+          <view class="value">{{community.area_name}}</view>
+        </view>
+        <view class="divid" />
+        <view class="hflex-container half">
+          <view class="name">总楼层:</view>
+          <view class="value">{{house.floor_total}}楼</view>
+        </view>
+      </view>
+
+      <view class="hflex-container item">
+        <view class="hflex-container half" style="flex: 1.5;">
+          <view class="name">参考价格:</view>
+          <view class="value">{{community.price}}元/㎡</view>
+        </view>
+        <view class="divid" />
+        <view class="hflex-container half">
+          <view class="name">挂牌时间:</view>
+          <view class="value">{{showAddTime}}</view>
+        </view>
+      </view>
     </view>
 
-  </scroll-view>  
+    <view class="divid" />
+
+    <!-- 买房帮帮 -->
+    <view class="help">
+
+      <view class="hflex-container title">
+        <view class="big">买房帮帮</view>
+        <view class="little">让买房变得更简单，让房价变得更便宜</view>
+      </view>
+
+      <view class="hflex-container items">
+
+        <view class="vflex-container item" bindtap="tapHomeMortgage">
+          <image src="/images/home_mortgage.png" style="width: 52rpx; height: 48rpx;" />
+          <view class="middle">购房按揭</view>
+        </view>
+
+        <view class="vflex-container item" bindtap="tapHomeProcess">
+          <image src="/images/home_process.png" style="width: 46rpx; height: 50rpx;" />
+          <view class="middle">办理流程</view>
+        </view>
+
+        <view class="vflex-container item" bindtap="tapHomeTax">
+          <image src="/images/home_tax.png" style="width: 40rpx; height: 46rpx;" />
+          <view class="middle">办理流程</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="divid" />
+
+    <!-- 小区概况 -->
+    <view class="community-info">
+      <view class="title">小区概况</view>
+      <community-item bindtap="tapCommunity" community="{{community}}" />
+    </view>
+
+    <view class="divid" />
+
+    <!-- 更多推荐 -->
+    <view class="more-recommend">
+      <view class="title">更多推荐</view>
+      <house-recommend communityId="{{community.id}}" houseId="{{house.id}}" />
+    </view>
+
+  </scroll-view>
 
 </view>

@@ -38,6 +38,7 @@
     "community-item": "/components/community/item/item",
     "house-item": "/components/house/item/item",
     "search-component": "/components/search/search",
+    "house-recommend": "/components/house/recommend/recommend",
     "mp-html": "mp-html"
   },
   "sitemapLocation": "sitemap.json",
