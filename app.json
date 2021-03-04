@@ -21,7 +21,8 @@
     "pages/comments/comments",
     "pages/school/communities/communities",
     "pages/house/list/list",
-    "pages/house/detail/detail"
+    "pages/house/detail/detail",
+    "pages/house/specialArticles/specialArticles"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

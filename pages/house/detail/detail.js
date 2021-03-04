@@ -138,14 +138,38 @@ Page({
 
   tapHomeMortgage(event) {
     console.log('tapHomeMortgage')
+    let house = this.data.house
+    wx.navigateTo({
+      url: '/pages/house/specialArticles/specialArticles?type=' +
+        house.source_type + '&index=0',
+      fail(res) {
+        console.error(tag + ' tapHomeMortgage navigateTo article detail fail ' + res.errMsg)
+      }
+    })
   },
 
   tapHomeProcess(event) {
     console.log('tapHomeProcess')
+    let house = this.data.house
+    wx.navigateTo({
+      url: '/pages/house/specialArticles/specialArticles?type=' +
+        house.source_type + '&index=1',
+      fail(res) {
+        console.error(tag + ' tapHomeProcess navigateTo article detail fail ' + res.errMsg)
+      }
+    })
   },
 
   tapHomeTax(event) {
     console.log('tapHomeTax')
+    let house = this.data.house
+    wx.navigateTo({
+      url: '/pages/house/specialArticles/specialArticles?type=' +
+        house.source_type + '&index=2',
+      fail(res) {
+        console.error(tag + ' tapHomeTax navigateTo article detail fail ' + res.errMsg)
+      }
+    })
   },
 
   tapCommunity(event) {

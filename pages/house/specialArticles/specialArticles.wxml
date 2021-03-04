@@ -1,0 +1,20 @@
+<!--pages/house/specialArticles/specialArticles.wxml-->
+<view class="pageContainer" style="background-color: white;">
+  <basebar id="basebar" centerText="{{title}}"></basebar>
+
+  <view class="hflex-container tabs">
+
+    <view bindtap="tapTab" data-index="{{index}}" wx:for="{{tabs}}" wx:key="id" class="vflex-container tab">
+
+      <view class="name {{currentIndex == index ? 'selected' : ''}}">{{item}}</view>
+
+      <view class="{{currentIndex == index ? 'line-selected' : 'line'}}" />
+    </view>
+  </view>
+
+  <view class="divid"></view>
+
+  <view class="html-content">
+    <mp-html content="{{htmlContent}}" lazy-load="true" />
+  </view>
+</view>

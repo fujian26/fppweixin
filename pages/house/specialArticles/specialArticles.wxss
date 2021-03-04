@@ -1,0 +1,41 @@
+/* pages/house/specialArticles/specialArticles.wxss */
+.html-content {
+  margin: 34rpx 28rpx;
+}
+
+.divid {
+  background-color: #F6F6F6;
+  height: 14rpx;
+  width: 100%;
+}
+
+.tabs {
+  width: 100%;  
+}
+
+.tabs .tab {
+  color: #666666;
+  font-size: 30rpx;
+  flex: 1;
+  flex-grow: 1;
+}
+
+.tabs .tab .name {
+  margin: 28rpx 0;
+}
+
+.tabs .selected {
+  color: #E60012;
+}
+
+.tabs .line-selected {
+  width: 50%;
+  height: 4rpx;
+  background-color: #E60012;
+}
+
+.tabs .line {
+  width: 50%;
+  height: 4rpx;
+  background-color: white;
+}
