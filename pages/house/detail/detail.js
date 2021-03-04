@@ -196,7 +196,20 @@ Page({
   },
 
   tapComment(event) {
+
     console.log('tapComment')
+
+    let house = this.data.house
+
+    wx.navigateTo({
+      url: '/pages/comments/comments?id=' + house.id + '&type=1',
+      success: function (res) {
+
+      },
+      fail(res) {
+        console.error(tag + ' tapComment fail ' + res.errMsg)
+      }
+    })
   },
 
   tapAttention(event) {

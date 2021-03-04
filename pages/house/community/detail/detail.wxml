@@ -179,7 +179,8 @@
 
   <!-- bottom -->
   <view class="hflex-container bottom">
-    <view class="vflex-container comment">
+    
+    <view bindtap="tapMoreComments" class="vflex-container comment">
       <image src="/images/comment.png" />
       <view style="margin-top: 10rpx;">{{commentsNum}}</view>
     </view>

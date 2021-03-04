@@ -4,4 +4,25 @@
   <scroll-view class="sv">
     <comments-list limitNum="0" commentsNum="{{commentsNum}}" comments="{{comments}}" />
   </scroll-view>
+
+  <view class="hflex-container" style="background-color: white;">
+    <view bindtap="tapSendComment" class="hflex-container btn">
+      <image src="/images/blue_edit.png" />
+      <view>发表评论</view>
+    </view>
+  </view>
+</view>
+
+<view class="cu-modal edit-dialog {{showEdit ? 'show' : ''}}">
+  <view class="cu-dialog">
+    <view class="hflex-container container">
+      <view class="title">请输入评论</view>
+      <view class="action" bindtap="tapHideEdit">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <textarea bindconfirm="tapCommentFinalSend" confirm-type="send" class="input" maxlength="200"
+      value="{{lastCommentValue}}" bindinput="onCommentInput" />
+    <view bindtap="tapCommentFinalSend" class="btn">发送</view>
+    </view>
 </view>
