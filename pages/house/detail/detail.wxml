@@ -12,6 +12,14 @@
       </swiper-item>
     </swiper>
 
+    <view wx:if="{{house.source_type == 1}}" class="hflex-container process-agency">
+      <view class="child round">{{house.houseLegal.process_agency}}</view>
+    </view>
+
+    <view wx:if="{{house.source_type == 1}}" class="hflex-container legal-saling">
+      <view class="saling">拍卖中</view>
+    </view>
+
     <view class="name"><span>[{{community.typeStr}}]</span>{{house.name}}</view>
 
     <!-- address -->
@@ -105,7 +113,7 @@
         </view>
       </view>
 
-      <view class="hflex-container item">
+      <view wx:if="{{house.source_type == 0}}" class="hflex-container item">
         <view class="hflex-container half" style="flex: 1.5;">
           <view class="name">参考价格:</view>
           <view class="value">{{community.price}}元/㎡</view>
@@ -116,12 +124,36 @@
           <view class="value">{{showAddTime}}</view>
         </view>
       </view>
+
+      <view wx:if="{{house.source_type == 1}}" class="hflex-container item">
+        <view class="hflex-container half" style="flex: 1.5;">
+          <view class="name">市场价格:</view>
+          <view class="value">{{house.totalPriceStr}}万({{community.price}}元/㎡)</view>
+        </view>
+        <view class="divid" />
+        <view class="hflex-container half">
+          <view class="name">起拍单价:</view>
+          <view class="value">{{house.houseLegal.start_unitprice}}元/㎡</view>
+        </view>
+      </view>
+
+      <view wx:if="{{house.source_type == 1}}" class="hflex-container item">
+        <view class="hflex-container half" style="flex: 1.5;">
+          <view class="name">保证金:</view>
+          <view class="value">{{house.houseLegal.securityMontyShow}}万</view>
+        </view>
+        <view class="divid" />
+        <view class="hflex-container half">
+          <view class="name">起拍时间:</view>
+          <view class="value">{{house.houseLegal.startTimeStr}}</view>
+        </view>
+      </view>
     </view>
 
     <view class="divid" />
 
     <!-- 买房帮帮 -->
-    <view class="help">
+    <view wx:if="{{house.source_type == 0}}" class="help">
 
       <view class="hflex-container title">
         <view class="big">买房帮帮</view>
@@ -142,7 +174,34 @@
 
         <view class="vflex-container item" bindtap="tapHomeTax">
           <image src="/images/home_tax.png" style="width: 40rpx; height: 46rpx;" />
-          <view class="middle">办理流程</view>
+          <view class="middle">购房税费</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 法拍帮帮 -->
+    <view wx:if="{{house.source_type == 1}}" class="legal-help">
+
+      <view class="hflex-container title">
+        <view class="big">法拍帮帮</view>
+        <view class="little">什么事法拍房？怎么拍法拍房？法拍风险？</view>
+      </view>
+
+      <view class="hflex-container items">
+
+        <view class="vflex-container item" bindtap="tapLegalPolicy">
+          <image src="/images/house_legal_policy.png" style="width: 50rpx; height: 56rpx;" />
+          <view class="middle">政策解读</view>
+        </view>
+
+        <view class="vflex-container item" bindtap="tapLegalProcess">
+          <image src="/images/house_legal_process.png" style="width: 62rpx; height: 64rpx;" />
+          <view class="middle">法拍流程</view>
+        </view>
+
+        <view class="vflex-container item" bindtap="tapLegalCost">
+          <image src="/images/house_legal_cost.png" style="width: 70rpx; height: 62rpx;" />
+          <view class="middle">法拍费用</view>
         </view>
       </view>
     </view>
@@ -166,7 +225,7 @@
   </scroll-view>
 
   <view class="hflex-container bottom">
-    
+
     <view bindtap="tapComment" class="vflex-container comment">
       <image src="/images/comment.png" />
       <view style="margin-top: 8rpx">{{commentNum}}</view>

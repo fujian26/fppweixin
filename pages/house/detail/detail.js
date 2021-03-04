@@ -172,6 +172,42 @@ Page({
     })
   },
 
+  tapLegalPolicy(event) {
+    console.log('tapLegalPolicy')
+    let house = this.data.house
+    wx.navigateTo({
+      url: '/pages/house/specialArticles/specialArticles?type=' +
+        house.source_type + '&index=0',
+      fail(res) {
+        console.error(tag + ' tapLegalPolicy navigateTo article detail fail ' + res.errMsg)
+      }
+    })
+  },
+
+  tapLegalProcess(event) {
+    console.log('tapLegalProcess')
+    let house = this.data.house
+    wx.navigateTo({
+      url: '/pages/house/specialArticles/specialArticles?type=' +
+        house.source_type + '&index=1',
+      fail(res) {
+        console.error(tag + ' tapLegalProcess navigateTo article detail fail ' + res.errMsg)
+      }
+    })
+  },
+
+  tapLegalCost(event) {
+    console.log('tapLegalCost')
+    let house = this.data.house
+    wx.navigateTo({
+      url: '/pages/house/specialArticles/specialArticles?type=' +
+        house.source_type + '&index=2',
+      fail(res) {
+        console.error(tag + ' tapLegalCost navigateTo article detail fail ' + res.errMsg)
+      }
+    })
+  },
+
   tapCommunity(event) {
 
     console.log('tapCommunity')
