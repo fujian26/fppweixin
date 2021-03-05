@@ -17,20 +17,111 @@ Page({
       '划片小区'
     ],
     commentNum: 0,
-    attentioned: false
+    attentioned: false,
+    houseLegalSalingBg: '',
+    countDownDay: 0, // 倒计时天数
+    countDownHour: 0,
+    countDownMin: 0,
+    countDownSec: 0,
+    countDownViewHeight: 0,
+    nameMarginTop: 28,
+    legalSalingExpired: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    setTimeout(() => {
+      let that = this
+      wx.createSelectorQuery()
+        .in(that)
+        .select('#countDown')
+        .boundingClientRect()
+        .exec(function (res) {
+          console.log(tag + ' createSelectorQuery res ' + res[0].height) // unit is px
+          var countDownViewHeight = res[0].height * app.globalData.pixelRatio
+          that.setData({
+            countDownViewHeight: countDownViewHeight
+          })
+        })
+    }, 200);
+
     this.initHouse()
+  },
+
+  startCountDown() {
+
+    let house = this.data.house
+    let nowTimeStamp = Date.parse(new Date())
+    let timeStamp = Date.parse(new Date(house.houseLegal.end_time))
+
+    if (nowTimeStamp >= timeStamp) {
+      this.setData({
+        legalSalingExpired: true,
+        houseLegalSalingBg: app.globalData.baseUrl + '/file/download/house_legal_expired_bg.png'
+      })
+      return
+    }
+
+    setTimeout(() => {
+
+      let house = this.data.house
+      let nowTimeStamp = Date.parse(new Date())
+      let timeStamp = Date.parse(new Date(house.houseLegal.end_time))
+
+      var diffTime = timeStamp - nowTimeStamp
+      if (diffTime <= 0) {
+        this.setData({
+          legalSalingExpired: true,
+          houseLegalSalingBg: app.globalData.baseUrl + '/file/download/house_legal_expired_bg.png'
+        })
+      } else {
+
+        this.startCountDown()
+
+        var day = 0,
+          hour = 0,
+          min = 0,
+          sec = 0
+
+        day = Math.floor(diffTime / (24 * 60 * 60 * 1000))
+        diffTime = diffTime % (24 * 60 * 60 * 1000)
+
+        if (diffTime > 0) {
+          hour = Math.floor(diffTime / (60 * 60 * 1000))
+          diffTime = diffTime % (60 * 60 * 1000)
+
+          if (diffTime > 0) {
+            min = Math.floor(diffTime / (60 * 1000))
+            diffTime = diffTime % (60 * 1000)
+
+            if (diffTime > 0) {
+              sec = Math.floor(diffTime / 1000)
+            }
+          }
+        }
+
+        this.setData({
+          countDownDay: day,
+          countDownHour: hour,
+          countDownMin: min,
+          countDownSec: sec
+        })
+      }
+
+    }, 1000);
   },
 
   initHouse() {
 
     let that = this
     var title = this.data.title
+
+    this.setData({
+      houseLegalSalingBg: app.globalData.baseUrl + '/file/download/house_legal_saling_bg.png'
+    })    
 
     wx.getStorage({
       key: 'house',
@@ -41,6 +132,13 @@ Page({
 
         if (house.source_type == 1) {
           title = '法拍房房源详情'
+          var nameMarginTop = that.data.nameMarginTop
+          nameMarginTop -= 104
+          that.setData({
+            nameMarginTop: nameMarginTop
+          })
+          that.data.house = house
+          that.startCountDown()
         }
 
         var streetName = community.street_name != null && community.street_name.length > 0 ? ('-' + community.street_name) : ''
@@ -398,5 +496,21 @@ Page({
       complete(res) {}
     })
 
+  },
+
+  tapLegalBuy(event) {
+    console.log('tapLegalBuy')
+    let legalSalingExpired = this.data.legalSalingExpired
+    if (legalSalingExpired) {
+      return
+    }
+  },
+
+  tapLegalRisk(event) {
+    console.log('tapLegalRisk')
+    let legalSalingExpired = this.data.legalSalingExpired
+    if (legalSalingExpired) {
+      return
+    }
   }
 })

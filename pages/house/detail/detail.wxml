@@ -17,10 +17,18 @@
     </view>
 
     <view wx:if="{{house.source_type == 1}}" class="hflex-container legal-saling">
-      <view class="saling">拍卖中</view>
+      <view wx:if="{{!legalSalingExpired}}" id="countDown" class="countdown">
+        距离拍卖结束<span>{{countDownDay}}</span>天<span>{{countDownHour}}</span>时<span>{{countDownMin}}</span>分<span>{{countDownSec}}</span>秒
+      </view>
+      <view wx:else id="countDown" class="expired">中标价: {{house.houseLegal.endPriceShow}}万 溢价率:
+        {{house.houseLegal.over_price * 100}}%</view>
+      <view class="saling"
+        style="background-image: url({{houseLegalSalingBg}}); top: {{12 - 104}}rpx; color: {{legalSalingExpired ? 'white' : '#3E66D5'}}">
+        {{legalSalingExpired ? '已成交' : '拍卖中'}}</view>
     </view>
 
-    <view class="name"><span>[{{community.typeStr}}]</span>{{house.name}}</view>
+    <view class="name" style="margin-top: {{nameMarginTop}}rpx"><span>[{{community.typeStr}}]</span>{{house.name}}
+    </view>
 
     <!-- address -->
     <view class="hflex-container addr" bindtap="tapAddr">
@@ -148,6 +156,16 @@
           <view class="value">{{house.houseLegal.startTimeStr}}</view>
         </view>
       </view>
+
+      <!-- 处置单位...我要拍房... -->
+      <view class="legal-more-info" wx:if="{{house.source_type == 1}}">
+        <view class="line"></view>
+        <view class="hflex-container btns">
+          <view bindtap="tapLegalBuy" class="left round {{legalSalingExpired ? 'expired' : ''}}">我要拍房</view>
+          <view bindtap="tapLegalRisk" class="right round {{legalSalingExpired ? 'expired' : ''}}">风险评测</view>
+        </view>
+      </view>
+
     </view>
 
     <view class="divid" />

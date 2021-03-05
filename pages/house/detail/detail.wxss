@@ -19,19 +19,59 @@
 .legal-saling {
   width: 100%;
   height: 104rpx;
-  top: -104rpx;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  left: 0;
+  top: -100rpx;
 }
 
 .legal-saling .saling {
-  width: 210rpx;
+  width: 240rpx;
   height: 104rpx;
   line-height: 104rpx;
   color: #3E66D5;
   font-size: 32rpx;
   text-align: center;
-  background-image: url('/images/house_legal_saling_bg.png');
-  /* background-size: 100% 100%;
-  background-repeat: no-repeat; */
+  margin: 0;
+  padding: 0;
+  margin-left: -8rpx;
+  padding-right: 10rpx;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.legal-saling .countdown {
+  width: 100%;
+  text-align: right;
+  padding: 22rpx 0;
+  padding-right: 30rpx;
+  color: white;
+  font-size: 26rpx;
+  background-color: #3E66D5;
+}
+
+.legal-saling .countdown span {
+  display: inline-block;
+  min-width: 40rpx;
+  padding: 0 4rpx;
+  margin: 0 4rpx;
+  color: #3E66D5;
+  text-align: center;
+  font-size: 26rpx;
+  background-color: #BFDEFD;
+  border-radius: 12rpx;
+}
+
+.legal-saling .expired {
+  width: 100%;
+  text-align: right;
+  padding: 22rpx 0;
+  padding-right: 100rpx;
+  color: white;
+  font-size: 26rpx;
+  background-color: #999999;
 }
 
 .name {
@@ -327,4 +367,45 @@
   font-size: 32rpx;
   text-align: center;
   padding: 8rpx 0;
+}
+
+.legal-more-info {
+  width: 100%;
+}
+
+.legal-more-info .line {
+  width: 100%;
+  height: 2rpx;
+  margin: 26rpx 0;
+  background-color: #E5E5E5;
+}
+
+.legal-more-info .btns {
+  margin-top: 34rpx;
+}
+
+.legal-more-info .btns .left {
+  flex: 1;
+  flex-grow: 1;
+  padding: 20rpx 20rpx;
+  font-size: 30rpx;
+  text-align: center;
+  color: white;
+  background-color: #3E66D5;
+}
+
+.legal-more-info .btns .right {
+  flex: 1;
+  flex-grow: 1;
+  padding: 20rpx 20rpx;
+  margin-left: 20rpx;
+  font-size: 30rpx;
+  text-align: center;
+  color: #3E66D5;
+  background-color: #99CCFF;
+}
+
+.legal-more-info .btns .expired {
+  color: white !important;
+  background-color: #999999 !important;
 }
