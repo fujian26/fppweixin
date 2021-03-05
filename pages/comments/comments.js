@@ -157,13 +157,6 @@ Page({
     })
   },
 
-  tapSendComment(event) {
-    console.log('tapSendComment')
-    this.setData({
-      showEdit: true
-    })
-  },
-
   tapHideEdit(event) {
 
     console.log('tapHideEdit')
@@ -211,8 +204,11 @@ Page({
       case 0: // commnity
         this.sendCommunityComment(content)
         break
-      case 1: //hosue
+      case 1: // hosue
         this.sendHouseComment(content)
+        break
+      case 2: // news
+        this.sendNewsComment(content)
         break
       default:
         console.error('sendComment non support type: ' + type)
@@ -348,5 +344,64 @@ Page({
       }
     })
 
+  },
+
+  sendNewsComment(content) {
+
+    let id = this.data.id
+    let that = this
+
+    wx.showLoading({
+      title: '',
+    })
+
+    wx.request({
+      url: app.globalData.baseUrl + '/comments/addNewsComment',
+      method: 'POST',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        "newsId": Number(id),
+        "comment": {
+          "content": content
+        }
+      },
+      success(res) {
+        console.log(tag + ' sendNewsComment success')
+        if (res.data.code != 0) {
+          console.error(tag + ' sendNewsComment success code != 0, msg ' + res.data.msg)
+          wx.showToast({
+            title: '评论失败 ' + res.data.msg,
+            icon: 'none'
+          })
+        } else {
+
+          var comments = that.data.comments
+          var commentsNum = that.data.commentsNum
+
+          comments.unshift(res.data.data)
+
+          that.setData({
+            comments: comments,
+            commentsNum: commentsNum + 1,
+            lastCommentValue: ''
+          })
+        }
+      },
+      fail(res) {
+        console.error(tag + ' sendNewsComment fail res ' + res.errMsg)
+        wx.showToast({
+          title: '评论失败 ' + res.errMsg,
+          icon: 'none'
+        })
+      },
+      complete(res) {
+        wx.hideLoading({
+          success: (res) => {},
+        })
+      }
+    })
   }
 })

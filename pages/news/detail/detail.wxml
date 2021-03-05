@@ -1,6 +1,6 @@
 <!--pages/news/detail/detail.wxml-->
 <basebar id="basebar" centerText='{{title}}'></basebar>
-<scroll-view wx:if="{{newsDetail != null}}" scroll-y="true" class="scrollPage" style="height: {{scrollHeight}}rpx">
+<scroll-view wx:if="{{newsDetail != null}}" scroll-y="true" class="scrollPage" style="height: {{scrollHeight}}rpx; padding 0; margin: 0;">
   <view class="title">{{newsDetail.title}}</view>
   <view class="hflex-container" style="margin-left: 30rpx; margin-right: 30rpx;">
     <image style="width: 22rpx; height: 14rpx;" src="/images/ic_watch.png" />
@@ -18,22 +18,46 @@
 
   <view style="width: 100%; height: 14rpx; background-color: #F6F6F6" />
 
-  <view class="comments-tip">
+  <view class="hflex-container comments-tip">
     <view class="title">评论互动</view>
-    <view class="num">({{newsDetail.comment_num}})</view>
+    <view class="num">({{commentsTotal}})</view>
+    <view class="holder" />
+    <view wx:if="{{commentsTotal > 5}}" class="hflex-container" bindtap="tapMoreComments">
+      <view style="color: #CCCCCC; font-size: 20rpx;">更多</view>
+      <text class="cuIcon-right" style="margin-left: 4rpx; color: #cccccc; font-size: 22rpx;" />
+    </view>
   </view>
-
-  <view class="line" style="margin-top: 20rpx; margin-bottom: 0rpx;"></view>
 
   <view wx:for="{{comments}}" wx:key="id" class="comments" data-index="{{index}}" bindtap="tapComment">
     <view class="item">
-      <image src="{{item.avatar}}" />
+      <image src="{{item.user.avatar}}" />
       <view class="content">
-        <view class="name">{{item.name}}</view>
+        <view class="name">{{item.user.nick}}</view>
         <view class="label">{{item.content}}</view>
       </view>
     </view>
 
     <view class="line" />
   </view>
+
+  <view class="hflex-container" style="background-color: white;">
+    <view bindtap="tapSendComment" class="hflex-container btn">
+      <image src="/images/blue_edit.png" />
+      <view>发表评论</view>
+    </view>
+  </view>
 </scroll-view>
+
+<view class="cu-modal edit-dialog {{showEdit ? 'show' : ''}}">
+  <view class="cu-dialog">
+    <view class="hflex-container container">
+      <view class="title">请输入评论</view>
+      <view class="action" bindtap="tapHideEdit">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <textarea bindconfirm="tapCommentFinalSend" confirm-type="send" class="input" maxlength="200"
+      value="{{lastCommentValue}}" bindinput="onCommentInput" />
+    <view bindtap="tapCommentFinalSend" class="btn">发送</view>
+    </view>
+</view>

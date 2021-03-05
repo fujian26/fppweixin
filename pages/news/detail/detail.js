@@ -7,17 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id: 0,
     title: '新闻咨询',
     newsDetail: null,
     html: '',
     scrollHeight: 0,
-    comments: [
-      {
-        avatar: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3363295869,2467511306&fm=26&gp=0.jpg',
-        name: '大打发',
-        content: '打开分开打死了开发开放举案说法拉数据库放假啊暗示分离就按数据库了'
-      }
-    ]
+    comments: [],
+    commentsTotal: 0,
+    showEdit: false
   },
 
   /**
@@ -28,16 +25,16 @@ Page({
     let that = this
 
     wx.createSelectorQuery()
-    .in(that)
-    .select('#basebar')
-    .boundingClientRect()
-    .exec(function (res) {
-      console.log(TAG + ' createSelectorQuery res ' + res[0].height) // unit is px
-      var basebarHeight = res[0].height * app.globalData.pixelRatio
-      that.setData({
-        scrollHeight: app.globalData.screenHeight - basebarHeight
+      .in(that)
+      .select('#basebar')
+      .boundingClientRect()
+      .exec(function (res) {
+        console.log(TAG + ' createSelectorQuery res ' + res[0].height) // unit is px
+        var basebarHeight = res[0].height * app.globalData.pixelRatio
+        that.setData({
+          scrollHeight: app.globalData.screenHeight - basebarHeight
+        })
       })
-    })
 
     console.log(TAG + ' onLoad id ' + options.newsId + ' title ' + options.title)
     if (options.title != null) {
@@ -45,6 +42,9 @@ Page({
         title: options.title
       })
     }
+
+    console.log('options.newsId: ' + options.newsId)
+    this.data.id = options.newsId
     this.getNewsDetail(options.newsId)
   },
 
@@ -136,6 +136,7 @@ Page({
           console.log('newsDetail.file_path ' + newsDetail.file_path)
 
           that.getHtmlContent(newsDetail.id, newsDetail.file_path)
+          that.getComments()
 
           that.setData({
             newsDetail: newsDetail
@@ -168,7 +169,7 @@ Page({
         'token': app.globalData.token,
         'content-type': 'application/json'
       },
-      success(res) {        
+      success(res) {
         that.setData({
           html: res.data
         })
@@ -214,4 +215,193 @@ Page({
     })
 
   },
+
+  getComments() {
+
+    let that = this
+    let id = this.data.id
+
+    wx.request({
+      url: app.globalData.baseUrl + '/comments/getList',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        "id": id,
+        "type": 2,
+        "pageIndex": 0,
+        "pageSize": 20
+      },
+      success(res) {
+        console.log(TAG + ' getComments success')
+        if (res.data.code != 0) {
+          console.error(TAG + ' getComments success code != 0, msg ' + res.data.msg)
+          wx.showToast({
+            title: '数据错误 ' + res.data.msg,
+            icon: 'none'
+          })
+        } else {
+          var comments = res.data.data
+          if (comments == null) {
+            console.error(TAG + ' getComments comments == null')
+            wx.showToast({
+              title: '数据错误 ' + res.data.msg,
+              icon: 'none'
+            })
+            return
+          }
+
+          var showComments = []
+
+          for (var i = 0; i < 5 && i < comments.length; i++) {
+            showComments.push(comments[i])
+          }
+
+          that.setData({
+            comments: showComments,
+            commentsTotal: res.header.total
+          })
+        }
+      },
+      fail(res) {
+        console.error(TAG + ' getComments fail res ' + res.errMsg)
+        wx.showToast({
+          title: '数据错误 ' + res.errMsg,
+          icon: 'none'
+        })
+      },
+      complete(res) {}
+    })
+  },
+
+  tapMoreComments(event) {
+    console.log('tapMoreComments')
+    let id = this.data.id
+
+    wx.navigateTo({
+      url: '/pages/comments/comments?id=' + id + '&type=2',
+      success: function (res) {
+
+      },
+      fail(res) {
+        console.error(tag + ' tapMoreComments fail ' + res.errMsg)
+      }
+    })
+  },
+
+  tapSendComment(event) {
+    console.log('tapSendComment')
+    this.setData({
+      showEdit: true
+    })
+  },
+
+  tapHideEdit(event) {
+
+    console.log('tapHideEdit')
+    let nowEdit = this.data.commentContent
+
+    this.setData({
+      showEdit: false,
+      lastCommentValue: nowEdit
+    })
+  },
+
+  tapCommentFinalSend(event) {
+
+    console.log('tapCommentFinalSend')
+
+    let type = this.data.type
+    let content = this.data.commentContent
+
+    if (content == null || content.length == 0) {
+      console.error('content == null || content.length == 0')
+      wx.showToast({
+        title: '内容不能为空',
+        icon: ''
+      })
+      return
+    }
+
+    this.setData({
+      showEdit: false,
+      lastCommentValue: content
+    })
+
+    this.sendComment(content)
+  },
+
+  // 监听评论输入
+  onCommentInput(event) {
+    this.data.commentContent = event.detail.value
+  },
+
+  sendComment(content) {
+
+    let id = this.data.id
+    let that = this
+    let commentsTotal = Number(this.data.commentsTotal)
+    let comments = this.data.comments
+
+    wx.showLoading({
+      title: '',
+    })
+
+    wx.request({
+      url: app.globalData.baseUrl + '/comments/addNewsComment',
+      method: 'POST',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        "newsId": Number(id),
+        "comment": {
+          "content": content
+        }
+      },
+      success(res) {
+        console.log(TAG + ' sendComment success')
+        if (res.data.code != 0) {
+          console.error(TAG + ' sendComment success code != 0, msg ' + res.data.msg)
+          wx.showToast({
+            title: '评论失败 ' + res.data.msg,
+            icon: 'none'
+          })
+        } else {
+          var comment = res.data.data
+          if (comment == null) {
+            console.error(TAG + ' sendComment comment == null')
+            wx.showToast({
+              title: '评论失败 ' + res.data.msg,
+              icon: 'none'
+            })
+            return
+          }
+
+          if (commentsTotal < 5) {
+            comments.unshift(comment)
+          }
+          that.setData({
+            comments: comments,
+            commentsTotal: commentsTotal + 1,
+            lastCommentValue: ''
+          })
+        }
+      },
+      fail(res) {
+        console.error(TAG + ' sendComment fail res ' + res.errMsg)
+        wx.showToast({
+          title: '评论失败 ' + res.errMsg,
+          icon: 'none'
+        })
+      },
+      complete(res) {
+        wx.hideLoading({
+          success: (res) => {},
+        })
+      }
+    })
+  }
 })
