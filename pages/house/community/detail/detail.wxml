@@ -169,8 +169,8 @@
     <comments-list commentsNum="{{commentsNum}}" comments="{{comments}}" />
 
     <!-- divide line -->
-    <view wx:if="{{commentsNum > 3}}" class="divid-margin" />
-    <view wx:if="{{commentsNum > 3}}" bindtap="tapMoreComments" class="more-comments">更多评论</view>
+    <view wx:if="{{commentsNum > 5}}" class="divid-margin" />
+    <view wx:if="{{commentsNum > 5}}" bindtap="tapMoreComments" class="more-comments">更多评论</view>
 
   </scroll-view>
 
