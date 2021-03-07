@@ -1,0 +1,70 @@
+/* components/school/item/item.wxss */
+.school-item {
+  width: 100%;
+}
+
+.school-item image {
+  width: 222rpx;
+  height: 174rpx;
+  border-radius: 16rpx;
+}
+
+.school-item .tag {
+  width: 78rpx;
+  height: 24rpx;
+  position: relative;
+  top: -152rpx;
+  left: -214rpx;
+}
+
+.school-item .right {
+  flex: 1;
+  flex-grow: 1;
+  margin-left: -40rpx;
+  align-items: flex-start;
+}
+
+.school-item .right .name {
+  color: #333333;
+  font-size: 32rpx;
+}
+
+.school-item .right .content {
+  color: #666666;
+  font-size: 20rpx;
+  margin: 0;
+  padding: 0;
+  margin-top: 8rpx;
+}
+
+.school-item .right .addr {
+  color: #CCCCCC;
+  font-size: 16rpx;
+}
+
+.school-item .right .addr image {
+  width: 16rpx;
+  height: 18rpx;
+  margin-right: 8rpx;
+  margin-left: 8rpx;
+}
+
+.school-item .right .bottom {
+  flex-wrap: nowrap;  
+}
+
+.school-item .right .bottom .left {
+  flex: 1;
+  flex-grow: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.divid {
+  background-color: #E6E6E6;
+  height: 2rpx;
+  margin-top: 32rpx;
+}

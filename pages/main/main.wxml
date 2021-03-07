@@ -118,6 +118,27 @@
     <view class="holder" />
   </view>
 
+  <view style="width: 100%; height: 14rpx; background-color: #f6f6f6"></view>
+
+  <!-- 热门房源 -->
+  <view class="hflex-container hot-label">
+    <image src="/images/house_stroke.png" />
+    <view style="margin-left: 10rpx;">热门房源</view>
+    <view class="holder"></view>
+    <view bindtap="tapMoreHouse" class="more">更多</view>
+    <image bindtap="tapMoreHouse" class="arrow" src="/images/arrow_grey_right.png" />
+  </view>
+
+  <view style="margin: 0 28rpx">
+    <house-item wx:for="{{houses}}" wx:key="id" house="{{item}}" community="{{item.community}}" data-index="{{index}}"
+      bindtap="tapHouse" />
+  </view>
+
+  <view class="hflex-container house-refresh" bindtap="tapHouseRefresh">
+    <image src="/images/refresh.png" />
+    <view style="margin-left: 16rpx">换一批</view>
+  </view>
+
   <!-- 底部占位 -->
   <view style="height: 100rpx; background-color: #ffffff"></view>
 </scroll-view>

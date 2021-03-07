@@ -1,0 +1,17 @@
+/* pages/school/search/inner/inner.wxss */
+.top-search {
+  padding: 14rpx 28rpx;
+  background-color: #3E66D5;
+}
+
+.top-search image {
+  width: 22rpx;
+  height: 24rpx;
+}
+
+.top-search .name {
+  margin-left: 12rpx;
+  margin-right: 30rpx;
+  color: white;
+  font-size: 32rpx;
+}

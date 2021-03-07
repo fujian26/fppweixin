@@ -409,3 +409,8 @@
   color: white !important;
   background-color: #999999 !important;
 }
+
+.expired {
+  color: white !important;
+  background-color: #999999 !important;
+}

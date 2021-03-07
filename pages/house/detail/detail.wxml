@@ -254,7 +254,7 @@
       <view style="margin-top: 8rpx">{{attentioned ? '已关注' : '关注房源'}}</view>
     </view>
 
-    <view bindtap="tapConsulte" class="consulte round">在线咨询</view>
-    <view bindtap="tapCall" class="call round">打电话</view>
+    <view bindtap="tapConsulte" class="consulte round {{legalSalingExpired ? 'expired' : ''}}">在线咨询</view>
+    <view bindtap="tapCall" class="call round {{(legalSalingExpired || !house.allow_call) ? 'expired' : ''}}">打电话</view>
   </view>
 </view>

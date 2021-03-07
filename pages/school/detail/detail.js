@@ -178,7 +178,15 @@ Page({
   },
 
   tapPhone(event) {
+    let school = this.data.schoolExt.school
 
+    if (school.phone == null && school.phone.length == 0) {
+      return
+    }
+
+    wx.makePhoneCall({
+      phoneNumber: school.phone,
+    })
   },
 
   // 划片范围及小区 -- 更多
@@ -315,9 +323,9 @@ Page({
 
   // 周边房源 - 更多
   tapHouseMore(event) {
-    
+
     console.log('tapHouseMore')
-    
+
     if (this.data.schoolExt == null) {
       console.error('tapHouseMore this.data.schoolExt == null')
       return
@@ -590,11 +598,11 @@ Page({
           if (houses == null) {
             console.error(TAG + ' getHouses error houses == null')
             return
-          }          
+          }
 
           var showHouses = []
           for (var i = 0; i < 5 && i < houses.length; i++) {
-            showHouses.push(houses[i])            
+            showHouses.push(houses[i])
           }
 
           that.setData({

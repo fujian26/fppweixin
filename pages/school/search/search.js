@@ -11,61 +11,41 @@ Page({
     currentIndex: 0,
     adData: null,
     pageHeight: app.globalData.screenHeight * 0.6,
-    searchMode: false,
-    searchContent: '', // 搜索的输入内容
     tabs: [{
         id: 1,
         name: '推荐',
         pageIndex: 0,
-        type: 100,
-        refreshTrigger: false,
-        isLoad: true,
-        showLoad: false,
+        type: 100
       },
       {
         id: 2,
         name: '热门',
         pageIndex: 0,
-        type: 101,
-        refreshTrigger: false,
-        isLoad: true,
-        showLoad: false,
+        type: 101
       },
       {
         id: 3,
         name: '幼儿园',
         pageIndex: 0,
-        type: 0,
-        refreshTrigger: false,
-        isLoad: true,
-        showLoad: false,
+        type: 0
       },
       {
         id: 4,
         name: '小学',
         pageIndex: 0,
-        type: 1,
-        refreshTrigger: false,
-        isLoad: true,
-        showLoad: false,
+        type: 1
       },
       {
         id: 5,
         name: '中学',
         pageIndex: 0,
-        type: 2,
-        refreshTrigger: false,
-        isLoad: true,
-        showLoad: false,
+        type: 2
       },
       {
         id: 6,
         name: '培训机构',
         pageIndex: 0,
-        type: 3,
-        refreshTrigger: false,
-        isLoad: true,
-        showLoad: false,
+        type: 3
       }
     ],
     recommonds: [], // 推荐
@@ -73,8 +53,7 @@ Page({
     kindergartens: [], // 幼儿园
     primarys: [], // 小学
     middles: [], // 中学
-    trainings: [], // 培训机构
-    searchDatas: []
+    trainings: [], // 培训机构    
   },
 
   /**
@@ -84,6 +63,7 @@ Page({
     this.setData({
       location: '成都'
     })
+    this.switchPageData(false)
   },
 
   /**
@@ -125,7 +105,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    console.log('onReachBottom')
+    this.switchPageData(false)
   },
 
   /**
@@ -137,19 +118,18 @@ Page({
 
   tapOnTab(event) {
     let index = event.currentTarget.dataset.index
-    console.log('tapOnTab event ' + index)
+    console.log('tapOnTab index: ' + index)
+    this.data.currentTarget = index
     this.setData({
       currentIndex: index
     })
-    this.switchPageData(index)
+
+    this.switchPageData(true)
   },
 
-  switchPageData(index) {
+  switchPageData(fromTab) {
 
-    this.setData({
-      searchMode: false
-    })
-
+    let index = this.data.currentIndex
     let tabs = this.data.tabs
     let tabData = this.data.tabs[index]
     var pageData = null
@@ -176,54 +156,26 @@ Page({
 
     console.log('pageData.length ' + pageData.length)
 
-    if (pageData.length == 0) {
+    if (fromTab && pageData.length == 0) {
       this.refreshLoadPage(tabs, tabData, pageData)
-    }
-  },
-
-  reassempleSchoolExt(item) {
-    item.nature = item.school.nature == 0 ? '公办' : '私办'
-    item.area = item.school.city_name + item.school.area_name
-    item.addr = item.school.province_name != null ? item.school.province_name : '' +
-      item.school.city_name != null ? item.school.city_name : '' +
-      item.school.area_name != null ? item.school.area_name : '' +
-      item.street_name != null ? item.street_name : '' +
-      item.detail_addr != null ? item.detail_addr : ''
-
-    if (item.distance > 0) {
-      var km = item.distance / 1000
-      if (km < 1) {
-        item.distanceStr = '<1km'
-      } else {
-        km = Math.round(km * 100) / 100
-        item.distanceStr = km + 'km'
-      }
-    } else {
-      item.distanceStr = ''
-    }
-
-    switch (item.school.type) {
-      case 0:
-        item.tagSrc = '/images/kindergarten-tag.png'
-        break
-      case 1:
-        item.tagSrc = '/images/primary-school-tag.png'
-        break
-      case 2:
-        item.tagSrc = '/images/middle-school-tag.png'
-        break
-      case 3:
-        item.tagSrc = '/images/training-school-tag.png'
-        break
+    } else if (!fromTab) {
+      this.refreshLoadPage(tabs, tabData, pageData)
     }
   },
 
   refreshLoadPage(tabs, tabData, pageData) {
 
     let that = this
+    var showLoading = tabData.pageIndex
 
     if (tabData.pageIndex == 0) {
       pageData = []
+    }
+
+    if (showLoading) {
+      wx.showLoading({
+        title: '',
+      })
     }
 
     wx.request({
@@ -237,8 +189,8 @@ Page({
         type: tabData.type,
         pageIndex: tabData.pageIndex,
         pageSize: 20,
-        lng: 103.92377,
-        lat: 30.57447
+        lng: 103.92377, // todo 暂定成都
+        lat: 30.57447 // todo 暂定成都
       },
       success(res) {
         if (res.data.code != 0) {
@@ -250,15 +202,14 @@ Page({
         } else {
 
           var schoolExts = res.data.data
-          if (schoolExts == null) {
+          if (schoolExts == null || schoolExts.length == 0) {
             return
           }
 
-          for (var i = 0; i < schoolExts.length; i++) {
-            that.reassempleSchoolExt(schoolExts[i])
-          }
+          tabData.pageIndex++
+          that.data.tabs = tabs
 
-          pageData = pageData.concat(schoolExts)
+          pageData = pageData.concat(schoolExts)          
 
           switch (tabData.id) {
             case 1:
@@ -302,49 +253,14 @@ Page({
         })
       },
       complete(res) {
-        tabData.showLoad = false
-        tabData.triggerRefresh = false
-        that.setData({
-          tabs: tabs
-        })
+        if (showLoading) {
+          wx.hideLoading({
+            success: (res) => {},
+          })
+        }
       }
     })
 
-  },
-
-  triggerRefresh(event) {
-
-    let that = this
-    let tabs = this.data.tabs
-    let currentIndex = this.data.currentIndex
-    let tabData = this.data.tabs[currentIndex]
-
-    if (tabData.triggerRefresh) {
-      return
-    }
-
-    this.refreshLoadPage(tabs, tabData, this.obtainPageData())
-
-    // setTimeout(() => {
-    //   tabData.triggerRefresh = false
-    //   that.setData({
-    //     tabs: tabs
-    //   })
-    // }, 1000);
-  },
-
-  triggerRestore(event) {
-    console.log('triggerRestore refreshTrigger ')
-  },
-
-  triggerAbort(event) {
-
-    let that = this
-    let tabs = this.data.tabs
-    let currentIndex = this.data.currentIndex
-    let tabData = this.data.tabs[currentIndex]
-
-    console.log('triggerAbort refreshTrigger ' + tabData.refreshTrigger)
   },
 
   obtainPageData() {
@@ -372,34 +288,6 @@ Page({
     }
 
     return pageData
-  },
-
-  onScrolllower(event) {
-
-    console.log('onScrolllower')
-
-    let tabs = this.data.tabs
-    let currentIndex = this.data.currentIndex
-    let tabData = tabs[currentIndex]
-    let pageData = this.obtainPageData()
-
-    if (tabData.showLoad) {
-      return
-    }
-
-    tabData.showLoad = true
-    // if (pageData == null || pageData.length < pageSize) {
-    //   tabData.isLoad = false
-    // } else {
-    //   tabData.isLoad = true
-    // }
-
-    this.setData({
-      tabs: tabs
-    })
-
-    tabData.pageIndex++
-    this.refreshLoadPage(tabs, tabData, pageData)
   },
 
   tapSchoolItem(event) {
@@ -506,95 +394,13 @@ Page({
     })
   },
 
-  // 执行搜索
-  doSearch(event) {
-
-    let content = this.data.searchContent
-
-    if (typeof content === 'undefined' || content == null || content == '') {
-      wx.showToast({
-        title: '搜索内容不能为空',
-        icon: 'none'
-      })
-      return
-    }
-
-    let that = this
-    wx.showLoading()
-
-    wx.request({
-      url: app.globalData.baseUrl + '/school/blurSearch',
-      header: {
-        'token': app.globalData.token,
-        'content-type': 'application/json'
-      },
-      data: {
-        keyWord: content,
-        lng: app.globalData.lng,
-        lat: app.globalData.lat
-      },
-      success(res) {
-        console.log('doSearch success')
-        if (res.data.code != 0) {
-          console.error('doSearch success code != 0, msg ' + res.data.msg)
-          wx.showToast({
-            title: '数据错误 ' + res.data.msg,
-            icon: 'none'
-          })
-        } else {
-          var schoolExts = res.data.data
-          if (schoolExts == null || schoolExts.length == 0) {
-            wx.showToast({
-              title: '没有数据',
-              icon: 'none'
-            })
-            return
-          }
-
-          for (var i = 0; i < schoolExts.length; i++) {
-            that.reassempleSchoolExt(schoolExts[i])
-          }
-
-          that.setData({
-            searchDatas: schoolExts
-          })
-        }
-      },
+  tapSearch(event) {
+    console.log('tapSearch')
+    wx.navigateTo({
+      url: '/pages/school/search/inner/inner',
       fail(res) {
-        console.log('doSearch fail res ' + res.errMsg)
-        wx.showToast({
-          title: '数据错误 ' + res.errMsg,
-          icon: 'none'
-        })
-      },
-      complete(res) {
-        wx.hideLoading()
+        console.error('navigate to inner error ' + res.errMsg)
       }
     })
-
-  },
-
-  // 搜索框获得焦点
-  searchFocus(event) {
-    this.setData({
-      searchMode: true,
-      searchDatas: []
-    })
-  },
-
-  // 监听搜索的输入
-  onSearchInput(event) {
-    this.data.searchContent = event.detail.value
-  },
-
-  // 左上角返回键
-  tapBack(event) {    
-    if (this.data.searchMode) {
-      this.setData({
-        searchMode: false
-      })
-    } else {
-      wx.navigateBack()
-    }
   }
 })

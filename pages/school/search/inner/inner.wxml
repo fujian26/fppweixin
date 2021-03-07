@@ -1,0 +1,14 @@
+<!--pages/school/search/inner/inner.wxml-->
+<view class="pageContainer" style="background-color: white;">
+  <basebar centerText="查学校"></basebar>
+  <view class="hflex-container top-search">
+    <image src="/images/search-school-location.png" />
+    <view class="name">{{locationName}}</view>
+    <search-component bindtap="tapSearch" bind:onFocused="onSearchFocused" bind:onSearchInput="onSearchInput" bind:doSearch="doSearch" hint='请输入学校名称' style="flex: 1; flex-grow: 1;" />
+  </view>
+
+  <view style="padding-left: 28rpx; padding-right: 28rpx;">
+    <school-item ext="{{item}}" wx:for="{{schoolExts}}" wx:key="id" />
+  </view>
+  
+</view>

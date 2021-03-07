@@ -121,7 +121,7 @@ Page({
 
     this.setData({
       houseLegalSalingBg: app.globalData.baseUrl + '/file/download/house_legal_saling_bg.png'
-    })    
+    })
 
     wx.getStorage({
       key: 'house',
@@ -401,11 +401,22 @@ Page({
 
   tapConsulte(event) {
     console.log('tapConsulte')
+    let legalSalingExpired = this.data.legalSalingExpired
+    if (legalSalingExpired) {
+      return
+    }
   },
 
   tapCall(event) {
     console.log('tapCall')
+
     let house = this.data.house
+    let legalSalingExpired = this.data.legalSalingExpired
+
+    if (!house.allow_call || legalSalingExpired) {
+      return
+    }
+
     if (house.phone_num != null && house.phone_num.length > 0) {
       wx.makePhoneCall({
         phoneNumber: house.phone_num,

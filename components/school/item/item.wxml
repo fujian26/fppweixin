@@ -1,0 +1,31 @@
+<!--components/school/item/item.wxml-->
+<view class="background-color: white; width: 100%; padding-top: 32rpx;">
+
+  <view bindtap="tapItem" class="hflex-container school-item">
+
+    <view>
+      <image src="{{ext.picUrls[0]}}" />
+      <image class="tag" src="{{tagUrl}}" />
+    </view>
+
+    <view class="vflex-container right">
+
+      <view class="name">{{ext.school.name}}</view>
+
+      <view class="content" style="margin-top: 18rpx !important;">性质: {{ext.school.natureStr}} 区域:
+        {{ext.school.area_name}}</view>
+      <view class="content">电话: {{ext.school.phone}}</view>
+
+      <view class="hflex-container content bottom" style="width: 100%;">
+        <view class="left">地址: {{ext.school.addrShow}}</view> 
+        <view class="hflex-container addr" wx:if="{{showAddr}}">
+          <image src="/images/search_location.png" />
+          <view>{{ext.distanceShow}}</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+  <view class="divid" />
+</view>

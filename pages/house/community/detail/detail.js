@@ -13,11 +13,7 @@ Page({
     attentioned: false,
     attentionNum: 0,
     locationStr: '',
-    recommendIndex: 0,
     showEdit: false,
-    recommendTags: [
-      '同小区房源', '周边房源', '划片小区'
-    ],
     commentsNum: 0,
     comments: []
   },
@@ -163,14 +159,6 @@ Page({
       fail(res) {
         console.error(tag + ' tapAddr fail ' + res.errMsg)
       }
-    })
-  },
-
-  tapRecommendTab(event) {
-    let index = event.currentTarget.dataset.index
-    console.log('tapRecommendTab index: ' + index)
-    this.setData({
-      recommendIndex: index
     })
   },
 

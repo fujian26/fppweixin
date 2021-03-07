@@ -1,0 +1,74 @@
+/* pages/house/search/search.wxss */
+.search-out {
+  padding: 14rpx 28rpx;
+  background-color: #3E66D5;
+}
+
+.search-out image {
+  width: 22rpx;
+  height: 24rpx;
+}
+
+.search-out .location {
+  margin-left: 12rpx;
+  margin-right: 30rpx;
+  color: white;
+  font-size: 32rpx;
+}
+
+.tabs {
+  padding: 0;
+  margin: 0;
+  background-color: white;
+}
+
+.tabs .tab {
+  flex: 1;
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+  margin-top: 34rpx;
+  text-align: center;
+  color: #666666;
+  font-size: 30rpx;
+}
+
+.tabs .selected-tab {
+  color: #3E66D5 !important;
+}
+
+.tabs .line {
+  margin: 0 auto;
+  width: 30%;
+  height: 5rpx;
+  margin-top: 28rpx;
+  background-color: white;
+}
+
+.tabs .selected-line {
+  background-color: #3E66D5;
+}
+
+.filters {
+  justify-content: space-evenly;
+  padding: 30rpx 0;
+  background-color: #F6F6F6;
+}
+
+.filters .item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #666666;
+  font-size: 26rpx;
+}
+
+.filters .selected {
+  color: #3E66D5 !important;
+}
+
+.filters .item image {
+  width: 14rpx;
+  height: 8rpx;
+  margin-left: 18rpx;
+}

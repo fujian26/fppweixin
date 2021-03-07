@@ -22,7 +22,9 @@
     "pages/school/communities/communities",
     "pages/house/list/list",
     "pages/house/detail/detail",
-    "pages/house/specialArticles/specialArticles"
+    "pages/house/specialArticles/specialArticles",
+    "pages/house/search/search",
+    "pages/school/search/inner/inner"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",
@@ -40,6 +42,7 @@
     "house-item": "/components/house/item/item",
     "search-component": "/components/search/search",
     "house-recommend": "/components/house/recommend/recommend",
+    "school-item": "/components/school/item/item",
     "mp-html": "mp-html"
   },
   "sitemapLocation": "sitemap.json",

@@ -1,13 +1,13 @@
 /* pages/school/search/search.wxss */
 
-.hole {  
+.hole {
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 0rpx 0rpx;
   margin: 0rpx 0rpx;
-  background-color: #f6f6f6;
+  background-color: white;
 }
 
 .top-search {
@@ -22,17 +22,9 @@
 
 .top-search .name {
   margin-left: 12rpx;
+  margin-right: 30rpx;
   color: white;
   font-size: 32rpx;
-}
-
-.top-search .search {
-  flex: 1;
-  padding: 14rpx 32rpx;
-  min-height: 56rpx;
-  height: 60rpx;
-  margin-left: 28rpx;
-  background-color: white;
 }
 
 .tabbar {
@@ -76,9 +68,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
-  overflow: scroll !important;
-  -webkit-overflow-scrolling: touch;
+  background-color: white;  
 }
 
 .school .item {

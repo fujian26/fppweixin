@@ -13,6 +13,10 @@ Component({
     hint: {
       type: String,
       value: '请输入要查询的内容'
+    },
+    isDisabled: {
+      type: Boolean,
+      value: false
     }
   },
 

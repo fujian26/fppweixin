@@ -103,10 +103,13 @@ Component({
     hotSchools: [],
     hotCommunities: [],
     hotCommunityPageIndex: 0,
+    houses: [], // 热门房源
+    houseIndex: 0,
   },
 
   created() {
     this.getHotSchools()
+    this.getHotHouses(false)
   },
 
   /**
@@ -137,7 +140,13 @@ Component({
             }
           })
           break;
-        case 2:
+        case 2: // 找房屋
+          wx.navigateTo({
+            url: '/pages/house/search/search',
+            fail(res) {
+              console.error('main.js navigateTo house search fail ' + res.errMsg)
+            }
+          })
           break;
         case 3:
           break;
@@ -329,7 +338,7 @@ Component({
               }
             }
 
-            hotCommunities = hotCommunities.concat(res.data.data)            
+            hotCommunities = hotCommunities.concat(res.data.data)
 
             that.setData({
               hotCommunityPageIndex: pageIndex + 1,
@@ -361,7 +370,7 @@ Component({
       let index = event.currentTarget.dataset.index
       let that = this
       console.log('tapHotCommunityItem index ' + index)
-      
+
       wx.setStorage({
         data: that.data.hotCommunities[index],
         key: 'community',
@@ -376,12 +385,105 @@ Component({
         fail(res) {
           console.error('main.js setStorage community fail ' + res.errMsg)
         }
-      })  
+      })
     },
 
     // 热门小区-换一批
     tapHotCommunityRefresh(event) {
-      this.getHotCommunities(true)    
+      this.getHotCommunities(true)
+    },
+
+    tapMoreHouse(event) {
+      console.log('tapMoreHouse')
+    },
+
+    tapHouse(event) {
+
+      let index = event.currentTarget.dataset.index
+      console.log('tapHouse index: ' + index)
+
+      let house = this.data.houses[index]
+
+      wx.setStorage({
+        data: house,
+        key: 'house',
+        success(res) {
+          wx.navigateTo({
+            url: '/pages/house/detail/detail',
+            fail(res) {
+              console.error('navigateTo house detail fail ' + res.errMsg)
+            }
+          })
+        },
+        fail(res) {
+          console.log('setStorage house fail ' + res.errMsg)
+        }
+      })
+    },
+
+    getHotHouses(showLoading) {
+
+      let that = this
+      let houseIndex = this.data.houseIndex
+
+      if (showLoading) {
+        wx.showLoading({
+          title: '',
+        })
+      }
+
+      wx.request({
+        url: app.globalData.baseUrl + '/house/getCityHot',
+        header: {
+          'token': app.globalData.token,
+          'content-type': 'application/json'
+        },
+        data: {
+          "cityCode": "5101", //todo 暂定成都
+          "pageIndex": houseIndex,
+          "pageSize": 3
+        },
+        success(res) {
+          console.log('getHotHouses success')
+          if (res.data.code != 0) {
+            console.error('getHotHouses success code != 0, msg ' + res.data.msg)
+            wx.showToast({
+              title: '数据错误 ' + res.data.msg,
+              icon: 'none'
+            })
+          } else {
+            that.setData({
+              houses: res.data.data,
+              houseIndex: houseIndex + 1
+            })
+          }
+        },
+        fail(res) {
+          console.error('getHotHouses fail res ' + res.errMsg)
+          wx.showToast({
+            title: '数据错误 ' + res.errMsg,
+            icon: 'none'
+          })
+        },
+        complete(res) {
+          if (showLoading) {
+            wx.hideLoading({
+              success: (res) => {},
+            })
+          }
+        }
+      })
+    },
+
+    tapHouseRefresh(event) {
+
+      console.log('tapHouseRefresh')
+
+      if (this.data.houses.length == 0) {
+        this.data.houseIndex = 0
+      }
+
+      this.getHotHouses(true)
     }
   },
 })

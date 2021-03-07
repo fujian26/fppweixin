@@ -1,0 +1,46 @@
+<!--pages/house/search/search.wxml-->
+<view class="pagecontainer" style="background-color: white;">
+  <basebar id="basebar" centerText="找房屋"></basebar>
+  <view class="hflex-container search-out">
+    <image src="/images/search-school-location.png" />
+    <view class="location">{{cityName}}</view>
+    <search-component hint='请输入要查询的学校' bind:onFocused="onSearchFocused" bind:onSearchInput="onSearchInput"
+      bind:doSearch="doSearch" style="flex: 1; flex-grow: 1;" />
+  </view>
+
+  <view class="hflex-container tabs">
+    <view class="vflex-container tab {{currentIndex == index ? 'selected-tab' : ''}}" wx:for="{{tabs}}" wx:key="id">
+      <view data-index="{{index}}" bindtap="tapTab">{{item.name}}</view>
+      <view class="line {{currentIndex == index ? 'selected-line' : ''}}" />
+    </view>
+  </view>
+
+  <!-- 筛选条件 -->
+  <view class="hflex-container filters">
+
+    <!-- 区域 -->
+    <view bindtap="tapFilterArea" class="item {{selectArea != null ? 'selected' : ''}}">
+      <view>{{selectArea != null ? selectArea.area_name : '区域'}}</view>
+      <image src="/images/arrow_grey_bottom.png" />
+    </view>
+
+    <!-- 户型 -->
+    <view bindtap="tapFilterRoomType" class="item {{selectRoomType != null ? 'selected' : ''}}">
+      <view>{{selectRoomType != null ? selectRoomType.name : '户型'}}</view>
+      <image src="/images/arrow_grey_bottom.png" />
+    </view>
+
+    <!-- 总价 -->
+    <view bindtap="tapFilterPrice" class="item {{selectPrice != null ? 'selected' : ''}}">
+      <view>{{selectPrice != null ? selectPrice.name : '总价'}}</view>
+      <image src="/images/arrow_grey_bottom.png" />
+    </view>
+
+    <!-- 更多 -->
+    <view bindtap="tapFilterMore" class="item {{(selectSquare != null || selectToward != null) ? 'selected' : ''}}">
+      <view>更多</view>
+      <image src="/images/arrow_grey_bottom.png" />
+    </view>
+
+  </view>
+</view>
