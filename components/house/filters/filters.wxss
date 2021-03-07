@@ -1,0 +1,24 @@
+/* components/house/filters/filters.wxss */
+.filters {
+  justify-content: space-evenly;
+  padding: 30rpx 0;
+  background-color: #F6F6F6;
+}
+
+.filters .item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #666666;
+  font-size: 26rpx;
+}
+
+.filters .selected {
+  color: #3E66D5 !important;
+}
+
+.filters .item image {
+  width: 14rpx;
+  height: 8rpx;
+  margin-left: 18rpx;
+}

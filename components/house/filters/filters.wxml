@@ -1,0 +1,32 @@
+<!--components/house/filters/filters.wxml-->
+<view class="hflex-container filters">
+
+  <!-- 区域 -->
+  <view bindtap="tapFilterArea" class="item {{selectArea != null ? 'selected' : ''}}">
+    <view>{{selectArea != null ? selectArea.area_name : '区域'}}</view>
+    <image src="/images/arrow_grey_bottom.png" />
+  </view>
+
+  <!-- 户型 -->
+  <view bindtap="tapFilterRoomType" class="item {{selectRoomType != null ? 'selected' : ''}}">
+    <view>{{selectRoomType != null ? selectRoomType.name : '户型'}}</view>
+    <image src="/images/arrow_grey_bottom.png" />
+  </view>
+
+  <!-- 总价 -->
+  <view bindtap="tapFilterPrice" class="item {{selectPrice != null ? 'selected' : ''}}">
+    <view>{{selectPrice != null ? selectPrice.name : '总价'}}</view>
+    <image src="/images/arrow_grey_bottom.png" />
+  </view>
+
+  <!-- 更多 -->
+  <view bindtap="tapFilterMore" class="item {{(selectSquare != null || selectToward != null) ? 'selected' : ''}}">
+    <view>更多</view>
+    <image src="/images/arrow_grey_bottom.png" />
+  </view>
+
+</view>
+
+<view style="padding: 0; margin: 0;">
+  <house-filter-area wx:if="{{selectIndex == 0}}" />
+</view>

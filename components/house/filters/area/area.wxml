@@ -1,0 +1,24 @@
+<!--components/house/filters/area/area.wxml-->
+<view class="hflex-container container">
+
+  <scroll-view scroll-y="true" class="left">
+    <view bindtap="tapArea" class="area {{selectAreaIndex == index ? 'selected' : ''}}" data-index="{{index}}"
+      wx:for="{{areas}}" wx:key="id">{{item.name}}</view>
+  </scroll-view>
+
+  <scroll-view scroll-y="true" class="right">
+    <view bindtap="tapStreet" class="hflex-container street {{selectStreetIndex == index ? 'selected' : ''}}"
+      wx:for="{{streets}}" wx:key="id" data-index="{{index}}">
+      <view>{{item.name}}</view>
+      <view class="holder" />
+      <text class="cuIcon-check check" style="opacity: {{selectStreetIndex == index ? 1 : 0}}"></text>
+    </view>
+  </scroll-view>
+
+</view>
+
+<view class="divid" />
+
+<view class="btn-container">
+  <view bindtap="tapConfirm" class="btn">确定</view>
+</view>

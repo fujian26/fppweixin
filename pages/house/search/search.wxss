@@ -1,4 +1,10 @@
 /* pages/house/search/search.wxss */
+
+.float-filters {
+  width: 100%;
+  position: fixed;  
+}
+
 .search-out {
   padding: 14rpx 28rpx;
   background-color: #3E66D5;

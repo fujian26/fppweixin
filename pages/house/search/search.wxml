@@ -1,11 +1,13 @@
 <!--pages/house/search/search.wxml-->
 <view class="pagecontainer" style="background-color: white;">
+
   <basebar id="basebar" centerText="找房屋"></basebar>
+
   <view class="hflex-container search-out">
     <image src="/images/search-school-location.png" />
     <view class="location">{{cityName}}</view>
-    <search-component hint='请输入要查询的学校' bind:onFocused="onSearchFocused" bind:onSearchInput="onSearchInput"
-      bind:doSearch="doSearch" style="flex: 1; flex-grow: 1;" />
+    <search-component wx:if="{{!showFilters}}" isDisabled="true" hint='请输入要查询的学校' bind:onFocused="onSearchFocused"
+      bind:onSearchInput="onSearchInput" bind:doSearch="doSearch" style="flex: 1; flex-grow: 1;" />
   </view>
 
   <view class="hflex-container tabs">
@@ -42,5 +44,11 @@
       <image src="/images/arrow_grey_bottom.png" />
     </view>
 
+  </view>
+</view>
+
+<view class="cu-modal float-filters {{showFilters ? 'show' : ''}}" style="top: {{basebarHeight}}rpx;">
+  <view class="cu-dialog bg-white">
+    <house-filter />
   </view>
 </view>

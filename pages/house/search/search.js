@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    basebarHeight: 0,
     cityCode: '5101', //todo 暂定成都
     cityName: '成都', //todo 暂定成都
     tabs: [{
@@ -123,13 +124,30 @@ Page({
       }
     ],
     selectSquare: null,
+    showFilters: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    setTimeout(() => {
 
+      let that = this
+
+      wx.createSelectorQuery()
+        .in(that)
+        .select('#basebar')
+        .boundingClientRect()
+        .exec(function (res) {
+          console.log(tag + ' createSelectorQuery res ' + res[0].height) // unit is px
+          var basebarHeight = res[0].height * app.globalData.pixelRatio
+          that.setData({
+            basebarHeight: basebarHeight
+          })
+        })
+
+    }, 100)
   },
 
   /**
@@ -192,17 +210,29 @@ Page({
 
   tapFilterArea(event) {
     console.log('tapFilterArea')
+    this.setData({
+      showFilters: true
+    })
   },
 
   tapFilterRoomType(event) {
     console.log('tapFilterRoomType')
+    this.setData({
+      showFilters: true
+    })
   },
 
   tapFilterPrice(event) {
     console.log('tapFilterPrice')
+    this.setData({
+      showFilters: true
+    })
   },
 
   tapFilterMore(event) {
     console.log('tapFilterMore')
+    this.setData({
+      showFilters: true
+    })
   }
 })
