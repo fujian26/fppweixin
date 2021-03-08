@@ -1,8 +1,12 @@
 /* pages/house/search/search.wxss */
 
 .float-filters {
+  position: relative;
+	display: inline-block;
   width: 100%;
-  position: fixed;  
+  vertical-align: top;
+	background-color: white;	
+	overflow: hidden;
 }
 
 .search-out {

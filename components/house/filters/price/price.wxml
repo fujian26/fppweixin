@@ -1,0 +1,23 @@
+<!--components/house/filters/price/price.wxml-->
+<view class="container">
+
+  <view class="title">价格区间(万)</view>
+
+  <view class="hflex-container">
+    <input type="digit" bindfocus="onEditFocus" bindinput="onLowInput" placeholder="最低价" class="edit" />
+    <view class="edit-text">至</view>
+    <input type="digit" bindfocus="onEditFocus" bindinput="onHighInput" placeholder="最高价" class="edit" />
+  </view>
+
+  <view class="hflex-container tags">
+    <view class="tag {{selectIndex == index ? 'selected' : ''}}" bindtap="tapItem" data-index="{{index}}"
+      wx:for="{{prices}}" wx:key="id">{{item.name}}</view>
+  </view>
+
+  <view class="divid" />
+
+  <view class="btn-container">
+    <view bindtap="tapConfirm" class="btn">确定</view>
+  </view>
+
+</view>

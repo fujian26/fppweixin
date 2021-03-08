@@ -2,31 +2,43 @@
 <view class="hflex-container filters">
 
   <!-- 区域 -->
-  <view bindtap="tapFilterArea" class="item {{selectArea != null ? 'selected' : ''}}">
+  <view bindtap="tapFilterArea" class="item {{selectIndex == 0 ? 'selected' : ''}}">
     <view>{{selectArea != null ? selectArea.area_name : '区域'}}</view>
-    <image src="/images/arrow_grey_bottom.png" />
+    <image src="{{selectIndex == 0 ? '/images/arrow_grey_top.png' : '/images/arrow_grey_bottom.png'}}" />
   </view>
 
   <!-- 户型 -->
-  <view bindtap="tapFilterRoomType" class="item {{selectRoomType != null ? 'selected' : ''}}">
+  <view bindtap="tapFilterRoomType" class="item {{selectIndex == 1 ? 'selected' : ''}}">
     <view>{{selectRoomType != null ? selectRoomType.name : '户型'}}</view>
-    <image src="/images/arrow_grey_bottom.png" />
+    <image src="{{selectIndex == 1 ? '/images/arrow_grey_top.png' : '/images/arrow_grey_bottom.png'}}" />
   </view>
 
   <!-- 总价 -->
-  <view bindtap="tapFilterPrice" class="item {{selectPrice != null ? 'selected' : ''}}">
+  <view bindtap="tapFilterPrice" class="item {{selectIndex == 2 ? 'selected' : ''}}">
     <view>{{selectPrice != null ? selectPrice.name : '总价'}}</view>
-    <image src="/images/arrow_grey_bottom.png" />
+    <image src="{{selectIndex == 2 ? '/images/arrow_grey_top.png' : '/images/arrow_grey_bottom.png'}}" />
   </view>
 
   <!-- 更多 -->
-  <view bindtap="tapFilterMore" class="item {{(selectSquare != null || selectToward != null) ? 'selected' : ''}}">
+  <view bindtap="tapFilterMore" class="item {{(selectIndex == 3 || selectToward != null) ? 'selected' : ''}}">
     <view>更多</view>
-    <image src="/images/arrow_grey_bottom.png" />
+    <image src="{{selectIndex == 3 ? '/images/arrow_grey_top.png' : '/images/arrow_grey_bottom.png'}}" />
   </view>
 
 </view>
 
 <view style="padding: 0; margin: 0;">
-  <house-filter-area wx:if="{{selectIndex == 0}}" />
+  <house-filter-area bind:onConfirmed="onConfirmed" wx:if="{{selectIndex == 0}}" />
+</view>
+
+<view style="padding: 0; margin: 0;">
+  <house-filter-roomtype bind:onConfirmed="onConfirmed" wx:if="{{selectIndex == 1}}" />
+</view>
+
+<view style="padding: 0; margin: 0;">
+  <house-filter-price bind:onConfirmed="onConfirmed" wx:if="{{selectIndex == 2}}" />
+</view>
+
+<view style="padding: 0; margin: 0;">
+  <house-filter-more bind:onConfirmed="onConfirmed" wx:if="{{selectIndex == 3}}" />
 </view>

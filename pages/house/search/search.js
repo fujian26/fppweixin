@@ -20,111 +20,13 @@ Page({
       },
     ],
     currentIndex: 0,
-    areas: [{
-        area_code: '510102',
-        area_name: '高新区'
-      },
-      {
-        area_code: '510104',
-        area_name: '锦江区'
-      },
-      {
-        area_code: '510116',
-        area_name: '双流区'
-      },
-    ],
     selectArea: null,
-    roomTypes: [{
-        name: '一室',
-        num: 1
-      },
-      {
-        name: '二室',
-        num: 2
-      },
-      {
-        name: '三室',
-        num: 3
-      },
-      {
-        name: '四室',
-        num: 4
-      },
-      {
-        name: '四室以上',
-        num: 5
-      }
-    ],
     selectRoomType: null,
-    prices: [{
-        name: '50万以下',
-        startPrice: 500000,
-        endPrice: 0,
-      },
-      {
-        name: '50-90万',
-        startPrice: 500000,
-        endPrice: 900000,
-      },
-      {
-        name: '90-150万',
-        startPrice: 900000,
-        endPrice: 1500000,
-      },
-      {
-        name: '150-200万',
-        startPrice: 1500000,
-        endPrice: 2000000,
-      },
-      {
-        name: '200-300万',
-        startPrice: 2000000,
-        endPrice: 3000000,
-      },
-      {
-        name: '300万以上',
-        startPrice: 3000000,
-        endPrice: -1,
-      }
-    ],
     selectPrice: null,
-    towards: [
-      '南北', '朝南', '朝东', '朝北', '朝西'
-    ],
     selectToward: null,
-    squares: [{
-        name: '50㎡以下',
-        start: 0,
-        end: 50,
-      },
-      {
-        name: '50-80㎡',
-        start: 50,
-        end: 80,
-      },
-      {
-        name: '80-110㎡',
-        start: 80,
-        end: 110,
-      },
-      {
-        name: '110-150㎡',
-        start: 110,
-        end: 150,
-      },
-      {
-        name: '150-200㎡',
-        start: 150,
-        end: 200,
-      },
-      {
-        name: '200㎡以上',
-        start: 200,
-        end: -1,
-      }
-    ],
     selectSquare: null,
     showFilters: false,
+    filterIndex: 0,
   },
 
   /**
@@ -211,28 +113,89 @@ Page({
   tapFilterArea(event) {
     console.log('tapFilterArea')
     this.setData({
-      showFilters: true
+      showFilters: true,
+      filterIndex: 0
     })
   },
 
   tapFilterRoomType(event) {
     console.log('tapFilterRoomType')
     this.setData({
-      showFilters: true
+      showFilters: true,
+      filterIndex: 1
     })
   },
 
   tapFilterPrice(event) {
     console.log('tapFilterPrice')
     this.setData({
-      showFilters: true
+      showFilters: true,
+      filterIndex: 2
     })
   },
 
   tapFilterMore(event) {
     console.log('tapFilterMore')
     this.setData({
-      showFilters: true
+      showFilters: true,
+      filterIndex: 3
     })
+  },
+
+  onFilterConfirmed(event) {
+    let type = event.detail.type
+    let that = this
+    console.log(tag + ' onFilterConfirmed type: ' + type)
+
+    this.setData({
+      showFilters: false
+    })
+
+    switch (type) {
+      case 0: // 区域
+        wx.getStorage({
+          key: 'selectArea',
+          success(res) {
+            that.setData({
+              selectArea: res.data
+            })
+          },
+          fail(res) {
+            console.error('onFilterConfirmed fail: ' + res.errMsg)
+          }
+        })
+        break
+      case 1: // 户型
+        wx.getStorage({
+          key: 'selectRoomType',
+          success(res) {
+            that.setData({
+              selectRoomType: res.data
+            })
+          },
+          fail(res) {
+            console.error('onFilterConfirmed fail: ' + res.errMsg)
+          }
+        })
+        break
+      case 2: // 总价
+        wx.getStorage({
+          key: 'selectPrice',
+          success(res) {
+            that.setData({
+              selectPrice: res.data
+            })
+          },
+          fail(res) {
+            console.error('onFilterConfirmed fail: ' + res.errMsg)
+          }
+        })
+        break
+      case 3: // 更多
+        break
+      default:
+        console.error('onFilterConfirmed unsupport type: ' + type)
+        break
+    }
   }
 })

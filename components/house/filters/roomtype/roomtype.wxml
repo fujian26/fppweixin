@@ -1,0 +1,14 @@
+<!--components/house/filters/roomtype/roomtype.wxml-->
+<view class="hflex-container container">
+  <view bindtap="tapItem" data-index="{{index}}" wx:for="{{types}}"
+    class="type {{selectIndex == index ? 'selected' : ''}}">
+    {{item.name}}
+  </view>
+
+  <view class="divid" />
+
+  <view class="btn-container">
+    <view bindtap="tapConfirm" class="btn">确定</view>
+  </view>
+
+</view>

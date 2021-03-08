@@ -22,7 +22,7 @@
 
     <!-- 区域 -->
     <view bindtap="tapFilterArea" class="item {{selectArea != null ? 'selected' : ''}}">
-      <view>{{selectArea != null ? selectArea.area_name : '区域'}}</view>
+      <view>{{selectArea != null ? selectArea.area.name : '区域'}}</view>
       <image src="/images/arrow_grey_bottom.png" />
     </view>
 
@@ -47,8 +47,8 @@
   </view>
 </view>
 
-<view class="cu-modal float-filters {{showFilters ? 'show' : ''}}" style="top: {{basebarHeight}}rpx;">
-  <view class="cu-dialog bg-white">
-    <house-filter />
+<view class="cu-modal {{showFilters ? 'show' : ''}}" style="top: {{basebarHeight}}rpx;">
+  <view class="float-filters">
+    <house-filter showFilterIndex="{{filterIndex}}" bind:onConfirmed="onFilterConfirmed" />
   </view>
 </view>

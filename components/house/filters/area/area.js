@@ -163,8 +163,11 @@ Component({
           }]
 
           streets = streets.concat(res.data.data)
+          subs[area.code] = streets
+
           that.setData({
-            streets: streets
+            streets: streets,
+            subs: subs
           })
         },
         fail(res) {
@@ -213,6 +216,34 @@ Component({
 
     tapConfirm(event) {
       console.log('tapConfirm')
+      let areas = this.data.areas
+      let streets = this.data.streets
+      let area = areas[this.data.selectAreaIndex]
+      let street = streets[this.data.selectStreetIndex]
+
+      var data = {
+        area: area,
+        street: street
+      }
+
+      let that = this
+
+      wx.setStorage({
+        data: data,
+        key: 'selectArea',
+        success(res) {
+
+          var eventDetail = {
+            type: 0
+          }
+          var eventOption = {}
+          that.triggerEvent('onConfirmed', eventDetail, eventOption)                    
+        },
+        fail(res) {
+          console.error('数据错误 ' + res.errMsg)
+          that.triggerEvent('onConfirmed')
+        }
+      }, )
     }
   },
 })
