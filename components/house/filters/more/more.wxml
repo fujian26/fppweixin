@@ -1,2 +1,21 @@
 <!--components/house/filters/more/more.wxml-->
-<text>components/house/filters/more/more.wxml</text>
+<view class="container">
+
+  <view class="title">建筑面积</view>
+  <view class="hflex-container tags">
+    <view bindtap="tapSquare" class="tag {{squareIndex == index ? 'selected' : ''}}" wx:for="{{squares}}" wx:key="id"
+      data-index="{{index}}">{{item.name}}</view>
+  </view>
+
+  <view class="title">朝向</view>
+  <view class="hflex-container tags">
+    <view bindtap="tapToward" class="tag {{towardIndex == index ? 'selected' : ''}}" wx:for="{{towards}}" wx:key="id"
+      data-index="{{index}}">{{item}}</view>
+  </view>
+
+  <view class="divid" />
+
+<view class="btn-container">
+  <view bindtap="tapConfirm" class="btn">确定</view>
+</view>
+</view>

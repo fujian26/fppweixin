@@ -23,10 +23,11 @@ Page({
     selectArea: null,
     selectRoomType: null,
     selectPrice: null,
-    selectToward: null,
-    selectSquare: null,
+    selectMore: null,
     showFilters: false,
     filterIndex: 0,
+    houses: [],
+    housePageIndex: 0,
   },
 
   /**
@@ -181,7 +182,7 @@ Page({
       case 2: // 总价
         wx.getStorage({
           key: 'selectPrice',
-          success(res) {
+          success(res) {            
             that.setData({
               selectPrice: res.data
             })
@@ -192,10 +193,40 @@ Page({
         })
         break
       case 3: // 更多
+        wx.getStorage({
+          key: 'selectMore',
+          success(res) {
+            that.setData({
+              selectMore: res.data
+            })
+          },
+          fail(res) {
+            console.error('onFilterConfirmed fail: ' + res.errMsg)
+          }
+        })
         break
       default:
         console.error('onFilterConfirmed unsupport type: ' + type)
         break
     }
+  },
+
+  getHouses() {
+
+    let selectArea = this.data.selectArea
+    let selectRoomType = this.data.selectRoomType
+    let selectPrice = this.data.selectPrice
+    let selectMore = this.data.selectMore
+    let housePageIndex = this.data.housePageIndex
+    let that = this
+
+    var areaCode = ''
+    var streetCode = ''
+    
+    wx.showLoading({
+      title: '',
+    })
+
+    
   }
 })

@@ -39,7 +39,8 @@
     </view>
 
     <!-- 更多 -->
-    <view bindtap="tapFilterMore" class="item {{(selectSquare != null || selectToward != null) ? 'selected' : ''}}">
+    <view bindtap="tapFilterMore"
+      class="item {{(selectMore != null && (selectMore.square != null || selectMore.toward != null)) ? 'selected' : ''}}">
       <view>更多</view>
       <image src="/images/arrow_grey_bottom.png" />
     </view>
