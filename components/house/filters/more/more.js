@@ -51,6 +51,53 @@ Component({
     towardIndex: -1,
   },
 
+  attached() {
+
+    let that = this
+    let squares = this.data.squares
+    let towards = this.data.towards
+
+    wx.getStorage({
+      key: 'selectMore',
+      success(res) {
+
+        let more = res.data
+        if (more == null) {
+          return
+        }
+
+        if (more.square != null) {
+
+          for (var i = 0; i < squares.length; i++) {
+            if (squares[i].start == more.square.start &&
+              squares[i].end == more.square.end) {
+              that.setData({
+                squareIndex: i
+              })
+              break
+            }
+          }
+        }
+
+        if (more.toward != null) {
+
+          for (var i = 0; i < towards.length; i++) {
+            if (towards[i] == more.toward) {
+              that.setData({
+                towardIndex: i
+              })
+              break
+            }
+          }
+        }
+      },
+      fail(res) {
+        console.error(tag + ' attached getStorage ' + res.errMsg)
+      }
+    })
+
+  },
+
   /**
    * 组件的方法列表
    */

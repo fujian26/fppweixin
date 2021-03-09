@@ -38,7 +38,91 @@ Component({
 
   attached() {
     console.log(tag + ' attached')
-    this.getAreas()
+
+    let that = this
+
+    wx.getStorage({
+      key: 'areas',
+      success(res) {
+
+        let areas = res.data
+        if (areas == null || areas.length == 0) {
+          console.error(tag + ' areas == null || areas.length == 0')
+          that.getAreas()
+          return
+        }
+
+        that.data.areas = areas
+        that.setData({
+          areas: areas
+        })
+
+        wx.getStorage({
+          key: 'streets',
+          success(res) {
+            let streets = res.data
+            if (streets == null || streets.length == 0) {
+              console.error(tag + ' streets == null || streets.length == 0')
+              that.getAreas()
+              return
+            }
+
+            that.data.streets = streets
+            that.setData({
+              streets: streets
+            })
+
+            wx.getStorage({
+              key: 'selectArea',
+              success(res) {
+                let selectArea = res.data
+                if (selectArea == null) {
+                  console.error(tag + ' selectArea == null')                  
+                  return
+                }
+
+                let areas = that.data.areas
+                let streets = that.data.streets
+
+                if (selectArea.area != null) {
+                  for (var i = 0; i < areas.length; i++) {
+                    if (areas[i].code == selectArea.area.code) {
+                      that.setData({
+                        selectAreaIndex: i
+                      })
+                      break
+                    }
+                  }
+                }
+
+                if (selectArea.street != null) {
+                  for (var i = 0; i < streets.length; i++) {
+                    if (streets[i].code == selectArea.street.code) {
+                      that.setData({
+                        selectStreetIndex: i
+                      })
+                      break
+                    }
+                  }
+                }
+              },
+              fail(res) {
+                console.error(tag + ' attached getStorage selectArea ' + res.errMsg)
+                that.getAreas()
+              }
+            })
+          },
+          fail(res) {
+            console.error(tag + ' attached getStorage streets ' + res.errMsg)
+            that.getAreas()
+          }
+        })
+      },
+      fail(res) {
+        console.error(tag + ' attached getStorage areas ' + res.errMsg)
+        that.getAreas()
+      }
+    })
   },
 
   /**
@@ -80,6 +164,16 @@ Component({
           }
 
           areas = areas.concat(res.data.data)
+          wx.setStorage({
+            data: areas,
+            key: 'areas',
+            success(res) {
+
+            },
+            fail(res) {
+              console.error(tag + ' setStorage areas ' + res.errMsg)
+            }
+          })
 
           that.setData({
             areas: areas
@@ -165,6 +259,17 @@ Component({
           streets = streets.concat(res.data.data)
           subs[area.code] = streets
 
+          wx.setStorage({
+            data: streets,
+            key: 'streets',
+            success(res) {
+
+            },
+            fail(res) {
+              console.error(tag + ' setStorage streets ' + res.errMsg)
+            }
+          })
+
           that.setData({
             streets: streets,
             subs: subs
@@ -237,7 +342,7 @@ Component({
             type: 0
           }
           var eventOption = {}
-          that.triggerEvent('onConfirmed', eventDetail, eventOption)                    
+          that.triggerEvent('onConfirmed', eventDetail, eventOption)
         },
         fail(res) {
           console.error('数据错误 ' + res.errMsg)

@@ -42,6 +42,37 @@ Component({
     selectIndex: -1
   },
 
+  attached() {
+
+    console.log(tag + ' attached')
+
+    let that = this
+    let types = this.data.types
+
+    wx.getStorage({
+      key: 'selectRoomType',
+      success(res) {
+        
+        let type = res.data
+        if (type == null) {
+          return
+        }
+
+        for (var i = 0; i < types.length; i++) {
+          if (types[i].num == type.num) {
+            that.setData({
+              selectIndex: i
+            })
+            break
+          }
+        }
+      },
+      fail(res) {
+        console.error(tag + ' attached getStorage ' + res.errMsg)
+      }
+    })    
+  },
+
   /**
    * 组件的方法列表
    */

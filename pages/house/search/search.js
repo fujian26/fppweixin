@@ -83,6 +83,29 @@ Page({
    */
   onUnload: function () {
 
+    wx.removeStorage({
+      key: 'areas',
+    })
+
+    wx.removeStorage({
+      key: 'streets',
+    })
+
+    wx.removeStorage({
+      key: 'selectArea',
+    })
+
+    wx.removeStorage({
+      key: 'selectRoomType',
+    })
+
+    wx.removeStorage({
+      key: 'selectPrice',
+    })
+
+    wx.removeStorage({
+      key: 'selectMore',
+    })
   },
 
   /**

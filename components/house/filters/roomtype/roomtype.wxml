@@ -1,7 +1,7 @@
 <!--components/house/filters/roomtype/roomtype.wxml-->
 <view class="hflex-container container">
   <view bindtap="tapItem" data-index="{{index}}" wx:for="{{types}}"
-    class="type {{selectIndex == index ? 'selected' : ''}}">
+    class="type {{selectIndex == index ? 'selected' : ''}}" wx:key="id">
     {{item.name}}
   </view>
 

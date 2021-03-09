@@ -1,4 +1,5 @@
 // components/house/filters/price/price.js
+let tag = 'components/house/filters/price/price.js'
 Component({
 
   options: {
@@ -10,6 +11,42 @@ Component({
    */
   properties: {
 
+  },
+
+  attached() {
+    console.log(tag + ' attached')
+
+    let that = this
+    let prices = this.data.prices
+
+    wx.getStorage({
+      key: 'selectPrice',
+      success(res) {
+
+        let price = res.data
+        if (price == null) {
+          return
+        }
+
+        for (var i = 0; i < prices.length; i++) {
+          if (prices[i].startPrice == price.startPrice &&
+            prices[i].endPrice == price.endPrice) {
+            that.setData({
+              selectIndex: i
+            })
+            return
+          }
+        }
+
+        that.setData({
+          lowPrice: Math.floor(price.startPrice / 10000),
+          highPrice: Math.floor(price.endPrice / 10000)
+        })
+      },
+      fail(res) {
+        console.error(tag + ' attached getStorage ' + res.errMsg)
+      }
+    })
   },
 
   /**
@@ -49,7 +86,7 @@ Component({
     ],
     selectIndex: -1,
     lowPrice: 0,
-    highPrice: 0
+    highPrice: 0,
   },
 
   /**

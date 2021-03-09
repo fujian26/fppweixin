@@ -4,9 +4,11 @@
   <view class="title">价格区间(万)</view>
 
   <view class="hflex-container">
-    <input type="digit" bindfocus="onEditFocus" bindinput="onLowInput" placeholder="最低价" class="edit" />
+    <input value="{{lowPrice > 0 ? lowPrice : ''}}" type="digit" bindfocus="onEditFocus" bindinput="onLowInput"
+      placeholder="最低价" class="edit" />
     <view class="edit-text">至</view>
-    <input type="digit" bindfocus="onEditFocus" bindinput="onHighInput" placeholder="最高价" class="edit" />
+    <input value="{{highPrice > 0 ? highPrice : ''}}" type="digit" bindfocus="onEditFocus" bindinput="onHighInput"
+      placeholder="最高价" class="edit" />
   </view>
 
   <view class="hflex-container tags">
