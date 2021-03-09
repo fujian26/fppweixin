@@ -2,6 +2,6 @@
 <view class="pagecontainer" style="background-color: #F6F6F6;">
   <basebar id="basebar" centerText="{{title}}"></basebar>
   <scroll-view scroll-y="true" class="pagescroll" style="padding: 20rpx 28rpx;">
-    <community-item bindtap="tapCommunity" community="{{item}}" wx:for="{{communities}}" wx:key="id" data-index="{{index}}" />
+    <community-item community="{{item}}" wx:for="{{communities}}" wx:key="id" data-index="{{index}}" />
   </scroll-view>
 </view>

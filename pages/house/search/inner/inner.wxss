@@ -1,0 +1,17 @@
+/* pages/house/search/inner/inner.wxss */
+.search-out {
+  padding: 14rpx 28rpx;
+  background-color: #3E66D5;
+}
+
+.search-out image {
+  width: 22rpx;
+  height: 24rpx;
+}
+
+.search-out .location {
+  margin-left: 12rpx;
+  margin-right: 30rpx;
+  color: white;
+  font-size: 32rpx;
+}

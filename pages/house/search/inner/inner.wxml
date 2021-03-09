@@ -1,0 +1,20 @@
+<!--pages/house/search/inner/inner.wxml-->
+<view class="pagecontainer" style="background-color: white;">
+
+  <basebar id="basebar" centerText="找房屋"></basebar>
+
+  <view class="hflex-container search-out">
+    <image src="/images/search-school-location.png" />
+    <view class="location">{{cityName}}</view>
+    <search-component hint="{{hint}}" bind:doSearch="doSearch" style="flex: 1; flex-grow: 1;" />
+  </view>
+
+  <view wx:if="{{currentIndex == 0}}" style="padding-left: 28rpx; padding-right: 28rpx;">
+    <house-item wx:for="{{houses}}" wx:key="id" house="{{item}}" community="{{item.community}}"
+      data-index="{{index}}" />
+  </view>
+
+  <view wx:if="{{currentIndex == 1}}" style="padding-left: 28rpx; padding-right: 28rpx;">
+    <community-item wx:for="{{communities}}" wx:key="id" community="{{item}}" data-index="{{index}}" />
+  </view>
+</view>

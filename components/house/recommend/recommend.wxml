@@ -4,8 +4,7 @@
     data-index="{{index}}">{{item.name}}</view>
 </view>
 
-<house-item wx:for="{{houses}}" wx:key="id" house="{{item}}" community="{{item.community}}" data-index="{{index}}"
-  bindtap="tapHouse" />
+<house-item wx:for="{{houses}}" wx:key="id" house="{{item}}" community="{{item.community}}" data-index="{{index}}"/>
 
 <view wx:if="{{houses.length >= 5}}" class="hflex-container refresh" bindtap="tapRefresh">
   <image src="/images/refresh.png" />

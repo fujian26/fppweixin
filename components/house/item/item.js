@@ -1,4 +1,5 @@
 // components/house/item/item.js
+let tag = 'components/house/item/item.js'
 Component({
 
   options: {
@@ -56,5 +57,26 @@ Component({
    */
   methods: {
 
+    tapItem(event) {
+
+      console.log('tapItem')
+      let house = this.data.house
+  
+      wx.setStorage({
+        data: house,
+        key: 'house',
+        success(res) {
+          wx.navigateTo({
+            url: '/pages/house/detail/detail',
+            fail(res) {
+              console.error(tag + ' navigateTo house detail fail ' + res.errMsg)
+            }
+          })
+        },
+        fail(res) {
+          console.log(tag + ' setStorage house fail ' + res.errMsg)
+        }
+      })
+    },
   }
 })

@@ -239,11 +239,6 @@ Page({
 
   },
 
-  tapHouse(event) {
-    let index = event.currentTarget.dataset.index
-    console.log('tapHouse index: ' + index)
-  },
-
   onSearchFocused(event) {
     console.log(tag + ' onSearchFocused')
   },

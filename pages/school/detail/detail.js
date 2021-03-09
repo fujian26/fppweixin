@@ -545,29 +545,6 @@ Page({
     })
   },
 
-  tapHouse(event) {
-    let index = event.currentTarget.dataset.index
-    console.log('tapHouse index: ' + index)
-
-    let house = this.data.houses[index]
-
-    wx.setStorage({
-      data: house,
-      key: 'house',
-      success(res) {
-        wx.navigateTo({
-          url: '/pages/house/detail/detail',
-          fail(res) {
-            console.error(TAG + ' navigateTo house detail fail ' + res.errMsg)
-          }
-        })
-      },
-      fail(res) {
-        console.log(TAG + ' setStorage house fail ' + res.errMsg)
-      }
-    })
-  },
-
   getHouses(schoolId) {
 
     let that = this

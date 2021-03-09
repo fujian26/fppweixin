@@ -77,29 +77,6 @@ Page({
 
   },
 
-  tapCommunity(event) {
-
-    let index = event.currentTarget.dataset.index
-    let community = this.data.communities[index]
-    console.log('tapCommunity index: ' + index)
-
-    wx.setStorage({
-      data: community,
-      key: 'community',
-      success(res) {
-        wx.navigateTo({
-          url: '/pages/house/community/detail/detail',
-          fail(res) {
-            console.error(tag + ' navigateTo community detail fail ' + res.errMsg)
-          }
-        })
-      },
-      fail(res) {
-        console.error(tag + ' setStorage community fail ' + res.errMsg)
-      }
-    })
-  },
-
   getCommunityList(schoolId) {
 
     let that = this

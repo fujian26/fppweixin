@@ -1,4 +1,5 @@
 // components/community/item/item.js
+let tag = 'components/community/item/item.js'
 Component({
 
   options: {
@@ -62,5 +63,26 @@ Component({
    */
   methods: {
 
+    tapItem(event) {
+      
+      console.log('tapItem')
+      let community = this.data.community      
+
+      wx.setStorage({
+        data: community,
+        key: 'community',
+        success(res) {
+          wx.navigateTo({
+            url: '/pages/house/community/detail/detail',
+            fail(res) {
+              console.error(tag + ' navigateTo community detail fail ' + res.errMsg)
+            }
+          })
+        },
+        fail(res) {
+          console.error(tag + ' setStorage community fail ' + res.errMsg)
+        }
+      })
+    },
   }
 })

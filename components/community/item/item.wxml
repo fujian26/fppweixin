@@ -1,5 +1,5 @@
 <!--components/community/item/item.wxml-->
-<view class="hflex-container community">
+<view bindtap="tapItem" class="hflex-container community">
   
   <image src="{{community.picUrls[0]}}" />
   

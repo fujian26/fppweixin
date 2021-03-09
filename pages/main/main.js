@@ -395,31 +395,7 @@ Component({
 
     tapMoreHouse(event) {
       console.log('tapMoreHouse')
-    },
-
-    tapHouse(event) {
-
-      let index = event.currentTarget.dataset.index
-      console.log('tapHouse index: ' + index)
-
-      let house = this.data.houses[index]
-
-      wx.setStorage({
-        data: house,
-        key: 'house',
-        success(res) {
-          wx.navigateTo({
-            url: '/pages/house/detail/detail',
-            fail(res) {
-              console.error('navigateTo house detail fail ' + res.errMsg)
-            }
-          })
-        },
-        fail(res) {
-          console.log('setStorage house fail ' + res.errMsg)
-        }
-      })
-    },
+    },    
 
     getHotHouses(showLoading) {
 

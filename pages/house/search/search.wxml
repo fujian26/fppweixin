@@ -6,8 +6,8 @@
   <view class="hflex-container search-out">
     <image src="/images/search-school-location.png" />
     <view class="location">{{cityName}}</view>
-    <search-component wx:if="{{!showFilters}}" isDisabled="true" hint='请输入要查询的学校' bind:onFocused="onSearchFocused"
-      bind:onSearchInput="onSearchInput" bind:doSearch="doSearch" style="flex: 1; flex-grow: 1;" />
+    <search-component bindtap="tapSearch" wx:if="{{!showFilters}}" isDisabled="true" hint='请输入要查询的内容'
+      style="flex: 1; flex-grow: 1;" />
   </view>
 
   <view class="hflex-container tabs">
@@ -27,24 +27,36 @@
     </view>
 
     <!-- 户型 -->
-    <view bindtap="tapFilterRoomType" class="item {{selectRoomType != null ? 'selected' : ''}}">
+    <view bindtap="tapFilterRoomType" class="item {{selectRoomType != null ? 'selected' : ''}}"
+      style="opacity: {{currentIndex == 0 ? 1 : 0}}">
       <view>{{selectRoomType != null ? selectRoomType.name : '户型'}}</view>
       <image src="/images/arrow_grey_bottom.png" />
     </view>
 
     <!-- 总价 -->
-    <view bindtap="tapFilterPrice" class="item {{selectPrice != null ? 'selected' : ''}}">
+    <view bindtap="tapFilterPrice" class="item {{selectPrice != null ? 'selected' : ''}}"
+      style="opacity: {{currentIndex == 0 ? 1 : 0}}">
       <view>{{selectPrice != null ? selectPrice.name : '总价'}}</view>
       <image src="/images/arrow_grey_bottom.png" />
     </view>
 
     <!-- 更多 -->
     <view bindtap="tapFilterMore"
-      class="item {{(selectMore != null && (selectMore.square != null || selectMore.toward != null)) ? 'selected' : ''}}">
+      class="item {{(selectMore != null && (selectMore.square != null || selectMore.toward != null)) ? 'selected' : ''}}"
+      style="opacity: {{currentIndex == 0 ? 1 : 0}}">
       <view>更多</view>
       <image src="/images/arrow_grey_bottom.png" />
     </view>
 
+  </view>
+
+  <view wx:if="{{currentIndex == 0}}" style="padding-left: 28rpx; padding-right: 28rpx;">
+    <house-item wx:for="{{houses}}" wx:key="id" house="{{item}}" community="{{item.community}}"
+      data-index="{{index}}" />
+  </view>
+
+  <view wx:if="{{currentIndex == 1}}" style="padding-left: 28rpx; padding-right: 28rpx;">
+    <community-item wx:for="{{communities}}" wx:key="id" community="{{item}}" data-index="{{index}}" />
   </view>
 </view>
 

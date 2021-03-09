@@ -49,9 +49,10 @@ Component({
 
     tapItem(event) {
       let index = event.currentTarget.dataset.index
+      let selectIndex = this.data.selectIndex
       console.log('tapItem index: ' + index)
       this.setData({
-        selectIndex: index
+        selectIndex: selectIndex != index ? index : -1
       })
     },
 

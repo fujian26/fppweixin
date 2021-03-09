@@ -2,10 +2,11 @@
 <view class="pagecontainer">
   <basebar id="basebar" centerText="周边房源"></basebar>
   <view class="search">
-    <search-component hint='请输入房屋名称' bind:onFocused="onSearchFocused" bind:onSearchInput="onSearchInput" bind:doSearch="doSearch" />
+    <search-component hint='请输入房屋名称' bind:onFocused="onSearchFocused" bind:onSearchInput="onSearchInput"
+      bind:doSearch="doSearch" />
   </view>
   <scroll-view class="pagescroll">
     <house-item wx:for="{{houses}}" wx:key="id" house="{{item}}" community="{{item.community}}" data-index="{{index}}"
-      bindtap="tapHouse" style="padding-left: 28rpx; padding-right: 28rpx" />
+      style="padding-left: 28rpx; padding-right: 28rpx" />
   </scroll-view>
 </view>

@@ -18,8 +18,8 @@ Component({
   data: {
     prices: [{
         name: '50万以下',
-        startPrice: 500000,
-        endPrice: 0,
+        startPrice: 0,
+        endPrice: 500000,
       },
       {
         name: '50-90万',

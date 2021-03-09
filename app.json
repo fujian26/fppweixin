@@ -24,7 +24,8 @@
     "pages/house/detail/detail",
     "pages/house/specialArticles/specialArticles",
     "pages/house/search/search",
-    "pages/school/search/inner/inner"
+    "pages/school/search/inner/inner",
+    "pages/house/search/inner/inner"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

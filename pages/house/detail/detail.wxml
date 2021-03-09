@@ -229,7 +229,7 @@
     <!-- 小区概况 -->
     <view class="community-info">
       <view class="title">小区概况</view>
-      <community-item bindtap="tapCommunity" community="{{community}}" />
+      <community-item community="{{community}}" />
     </view>
 
     <view class="divid" />

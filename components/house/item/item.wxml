@@ -1,5 +1,5 @@
 <!--components/house/item/item.wxml-->
-<view class="vflex-container house">
+<view bindtap="tapItem" class="vflex-container house">
 
   <view class="hflex-container" style="width: 100%;">
 
