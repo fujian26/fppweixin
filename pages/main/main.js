@@ -3,10 +3,6 @@ let app = getApp()
 let TAG = 'main.js'
 Component({
 
-  attached() {
-    this.getHotCommunities(false)
-  },
-
   options: {
     addGlobalClass: true,
   },
@@ -109,6 +105,7 @@ Component({
 
   created() {
     this.getHotSchools()
+    this.getHotCommunities(false)
     this.getHotHouses(false)
   },
 
@@ -316,33 +313,19 @@ Component({
             }
 
             if (res.data.data.length == 0) {
+              if (showLoading) {
+                wx.showToast({
+                  title: '没有更多数据',
+                  icon: 'none'
+                })
+              }
               that.data.hotCommunityPageIndex = 0
-              setTimeout(() => {
-                that.getHotCommunities(true)
-              }, 16);
               return
             }
 
-            for (var i = 0; i < res.data.data.length; i++) {
-              var item = res.data.data[i]
-              switch (item.type) {
-                case 1:
-                  item.typeStr = '商住'
-                  break
-                case 2:
-                  item.typeStr = '公寓'
-                  break
-                default:
-                  item.typeStr = '普通住宅'
-                  break
-              }
-            }
-
-            hotCommunities = hotCommunities.concat(res.data.data)
-
             that.setData({
               hotCommunityPageIndex: pageIndex + 1,
-              hotCommunities: hotCommunities
+              hotCommunities: res.data.data
             })
           }
         },
@@ -390,12 +373,38 @@ Component({
 
     // 热门小区-换一批
     tapHotCommunityRefresh(event) {
+
+      console.log('tapHotCommunityRefresh')
+
+      if (this.data.hotCommunities.length == 0) {
+        this.data.hotCommunityPageIndex = 0
+      }
+
       this.getHotCommunities(true)
     },
 
     tapMoreHouse(event) {
       console.log('tapMoreHouse')
-    },    
+
+      wx.navigateTo({
+        url: '/pages/house/search/search?index=0',
+        fail(res) {
+          console.error('main.js navigateTo house search fail ' + res.errMsg)
+        }
+      })
+    },
+
+    tapMoreCommunity(event) {
+
+      console.log('tapMoreCommunity')
+
+      wx.navigateTo({
+        url: '/pages/house/search/search?index=1',
+        fail(res) {
+          console.error('main.js navigateTo house search fail ' + res.errMsg)
+        }
+      })
+    },
 
     getHotHouses(showLoading) {
 
@@ -428,6 +437,18 @@ Component({
               icon: 'none'
             })
           } else {
+
+            if (res.data.data == null || res.data.data.length == 0) {
+              if (showLoading) {
+                wx.showToast({
+                  title: '没有更多数据',
+                  icon: 'none'
+                })
+                that.data.houseIndex = 0
+              }
+              return
+            }
+
             that.setData({
               houses: res.data.data,
               houseIndex: houseIndex + 1

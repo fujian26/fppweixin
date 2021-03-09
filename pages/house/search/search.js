@@ -36,9 +36,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     setTimeout(() => {
 
       let that = this
+
+      let index = options.index
+      console.log(tag + ' onLoad index: ' + index)
+      if (index != undefined) {
+        this.data.currentIndex = index
+        this.refreshDataFromTab()
+        this.setData({
+          currentIndex: index
+        })
+      }
 
       wx.createSelectorQuery()
         .in(that)

@@ -79,8 +79,8 @@
     <image src="/images/house_stroke.png" />
     <view style="margin-left: 10rpx;">热门小区</view>
     <view class="holder"></view>
-    <view class="more">更多</view>
-    <image class="arrow" src="/images/arrow_grey_right.png" />
+    <view bindtap="tapMoreCommunity" class="more">更多</view>
+    <image bindtap="tapMoreCommunity" class="arrow" src="/images/arrow_grey_right.png" />
   </view>
 
   <view wx:for="{{hotCommunities}}" class="vflex-container hot-community" wx:key="id" data-index="{{index}}"
