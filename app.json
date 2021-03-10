@@ -25,7 +25,8 @@
     "pages/house/specialArticles/specialArticles",
     "pages/house/search/search",
     "pages/school/search/inner/inner",
-    "pages/house/search/inner/inner"
+    "pages/house/search/inner/inner",
+    "pages/news/advisories/advisories"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",
@@ -49,6 +50,7 @@
     "search-component": "/components/search/search",
     "house-recommend": "/components/house/recommend/recommend",
     "school-item": "/components/school/item/item",
+    "news-item": "/components/news/item/item",
     "mp-html": "mp-html"
   },
   "sitemapLocation": "sitemap.json",

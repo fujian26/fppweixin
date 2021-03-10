@@ -1,0 +1,37 @@
+<!--pages/news/advisories/advisories.wxml-->
+<view class="pagecontainer" style="background-color: white;">
+
+  <basebar id="basebar" centerText="新闻资讯"></basebar>
+
+  <view class="hflex-container search-out">
+    <image src="/images/search-school-location.png" />
+    <view class="location">{{cityName}}</view>
+    <search-component bindtap="tapSearch" wx:if="{{!showFilters}}" isDisabled="true" hint='请输入要搜索的内容'
+      style="flex: 1; flex-grow: 1;" />
+  </view>
+
+  <view class="hflex-container tabs">
+    <view class="vflex-container tab {{currentIndex == index ? 'selected-tab' : ''}}" wx:for="{{tabs}}" wx:key="id">
+      <view data-index="{{index}}" bindtap="tapTab">{{item.name}}</view>
+      <view class="line {{currentIndex == index ? 'selected-line' : ''}}" />
+    </view>
+  </view>
+
+  <view class="divid"></view>
+
+  <view class="tab-page">
+    <news-item news="{{item.news}}" wx:for="{{tabs[currentIndex].items}}" wx:key="id" />
+  </view>
+
+  <!-- <view wx:if="{{currentIndex == 1}}" class="tab-page">
+    <news-item news="{{item.news}}" wx:for="{{tabs[currentIndex].items}}" wx:key="id" />
+  </view>
+
+  <view wx:if="{{currentIndex == 2}}" class="tab-page">
+    <news-item news="{{item.news}}" wx:for="{{tabs[currentIndex].items}}" wx:key="id" />
+  </view>
+
+  <view wx:if="{{currentIndex == 3}}" class="tab-page">
+    <news-item news="{{item.news}}" wx:for="{{tabs[currentIndex].items}}" wx:key="id" />
+  </view> -->
+</view>

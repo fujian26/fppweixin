@@ -1,0 +1,16 @@
+<!--components/news/item/item.wxml-->
+<view bindtap="tapItem" class="container">
+  <view class="hflex-container">
+
+    <image wx:if="{{news.pic_path != null && news.pic_path.length > 0}}" src="{{news.pic_path}}" />
+    <view class="vflex-container right">
+      <view class="title">{{news.title}}</view>
+      <view class="brief">{{news.brief}}</view>
+      <view class="time">{{bottomStr}}</view>
+    </view>
+
+  </view>
+
+  <view class="divid" />
+
+</view>

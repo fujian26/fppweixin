@@ -145,7 +145,13 @@ Component({
             }
           })
           break;
-        case 3:
+        case 3: // 看资讯
+          wx.navigateTo({
+            url: '/pages/news/advisories/advisories',
+            fail(res) {
+              console.error('navigate to advisories fail: ' + res.errMsg)
+            }
+          })
           break;
         case 4: // 读政策
           wx.navigateTo({
