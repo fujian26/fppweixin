@@ -37,7 +37,7 @@
   flex-grow: 1;
   padding: 0;
   margin: 0;
-  margin-top: 34rpx;
+  margin-top: 18rpx;
   text-align: center;
   color: #666666;
   font-size: 30rpx;
@@ -51,7 +51,7 @@
   margin: 0 auto;
   width: 30%;
   height: 5rpx;
-  margin-top: 28rpx;
+  margin-top: 18rpx;
   background-color: white;
 }
 

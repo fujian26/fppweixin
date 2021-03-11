@@ -14,6 +14,9 @@ Component({
     communityId: {
       type: Number
     },
+    community: {
+      type: Object
+    },
     houseId: {
       type: Number,
       value: -1
@@ -179,7 +182,16 @@ Component({
       var tags = this.data.tags
       var pageIndex = tags[1].pageIndex
       let communityId = this.properties.communityId
+      let community = this.properties.community
       let pageSize = this.properties.pageSize
+
+      var lng = 0
+      var lat = 0
+
+      if (community != null) {
+        lng = community.lng
+        lat = community.lat
+      }
 
       if (showLoading) {
         wx.showLoading({
@@ -195,8 +207,8 @@ Component({
         },
         data: {
           "excludeCommunityId": communityId,
-          "lng": app.globalData.lng,
-          "lat": app.globalData.lat,
+          "lng": lng,
+          "lat": lat,
           'pageIndex': pageIndex,
           "pageSize": pageSize
         },

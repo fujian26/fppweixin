@@ -89,6 +89,6 @@ App({
   globalData: {
     userInfo: null,
     baseUrl: 'http://localhost:8081',
-    token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1YmFiNjU2MS1lZDhmLTRiMDQtYTQyOC1iNTc4M2VlNmMxZmQiLCJpYXQiOjE2MTQ3NDMwMzUsImV4cCI6MTYxNTM0NzgzNX0.koXqVyW7AXhcphRahcNCgkiJ-rXXAKDAyPANUQfAk1s8ojt2PYigCfNbFMQr9ILNwk0VJeJOiBg9RDVhAtJjXg',
+    token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1YmFiNjU2MS1lZDhmLTRiMDQtYTQyOC1iNTc4M2VlNmMxZmQiLCJpYXQiOjE2MTU0NDIzNzksImV4cCI6MTYxNjA0NzE3OX0.9ZyevFs9BBqgRbihrnp1Hk5csqI6R8o2Gbyrw7aUVvWUvXtCDj5Absz_-U4qGydAfLZWQxUh4b_bRpSkVxNJiw',
   }
 })

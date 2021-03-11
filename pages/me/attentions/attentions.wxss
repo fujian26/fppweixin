@@ -1,0 +1,48 @@
+/* pages/me/attentions/attentions.wxss */
+
+.tabs {
+  padding: 0;
+  margin: 0;
+  background-color: white;
+}
+
+.tabs .tab {
+  flex: 1;
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+  margin-top: 24rpx;
+  text-align: center;
+  color: #666666;
+  font-size: 28rpx;
+}
+
+.tabs .selected-tab {
+  color: #3E66D5 !important;
+}
+
+.tabs .line {
+  margin: 0 auto;
+  width: 40%;
+  height: 5rpx;
+  margin-top: 24rpx;
+  background-color: white;
+}
+
+.tabs .selected-line {
+  background-color: #3E66D5;
+}
+
+.divid {
+  width: 100%;
+  height: 14rpx;
+  background-color: #f6f6f6;
+}
+
+.tab-page {
+  padding: 0;
+  margin: 0;
+  padding-left: 28rpx;
+  padding-right: 28rpx;
+  width: 100%;
+}

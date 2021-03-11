@@ -145,7 +145,7 @@
     <!-- 更多推荐 -->
     <view class="more-recommend">
       <view class="title">更多推荐</view>
-      <house-recommend communityId="{{community.id}}" />
+      <house-recommend community="{{community}}" communityId="{{community.id}}" />
     </view>
 
     <!-- divide line -->

@@ -24,7 +24,8 @@ Component({
     setTimeout(() => {
 
       let ext = this.properties.ext
-      console.log(tag + ' attatched school name: ' + ext.school.name)
+      let showAddr = this.properties.showAddr
+      console.log(tag + ' attatched school name: ' + ext.school.name + ', showAddr: ' + showAddr)
 
       var tagUrl = ''
 

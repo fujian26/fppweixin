@@ -1,0 +1,27 @@
+<!--pages/me/attentions/attentions.wxml-->
+<view class="pagecontainer" style="background-color: white; height: auto;">
+
+  <basebar id="basebar" centerText="我的关注"></basebar>
+
+  <view class="hflex-container tabs">
+    <view class="vflex-container tab {{currentIndex == index ? 'selected-tab' : ''}}" wx:for="{{tabs}}" wx:key="id">
+      <view data-index="{{index}}" bindtap="tapTab">{{item.name}}</view>
+      <view class="line {{currentIndex == index ? 'selected-line' : ''}}" />
+    </view>
+  </view>
+
+  <view class="divid" />
+
+  <view wx:if="{{currentIndex == 0}}" class="tab-page">
+    <community-item wx:for="{{communities}}" wx:key="id" community="{{item}}" />
+  </view>
+
+  <view wx:if="{{currentIndex == 1}}" class="tab-page">
+    <house-item wx:for="{{houses}}" wx:key="id" house="{{item}}" community="{{item.community}}" />
+  </view>
+
+  <view wx:if="{{currentIndex == 2}}" class="tab-page">
+    <school-item showAddr="{{false}}" wx:for="{{schools}}" wx:key="id" ext="{{item}}" />
+  </view>
+
+</view>

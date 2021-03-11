@@ -5,7 +5,7 @@ Component({
   created() {
     setInterval(() => {
       this.setData({
-        userInfo: app.globalData.userInfo        
+        userInfo: app.globalData.userInfo
       })
     }, 16)
   },
@@ -26,8 +26,7 @@ Component({
   data: {
     userInfo: null,
     nickName: '',
-    floatBarDatas: [
-      {
+    floatBarDatas: [{
         id: 1,
         image: '/images/me_attention.png',
         text: '我的关注'
@@ -46,12 +45,12 @@ Component({
         id: 4,
         image: '/images/me_content.png',
         text: '我的内容'
-      },      
+      },
       {
         id: 5,
         image: '/images/me_platform.png',
         text: '入住平台'
-      },      
+      },
     ]
   },
 
@@ -60,11 +59,22 @@ Component({
    */
   methods: {
     tapSetting(event) {
-      
+
     },
 
     tapFloatBar(event) {
-
+      var id = event.currentTarget.dataset.id
+      console.log('tapFloatBar id: ' + id)
+      switch (id) {
+        case 1: // 我的关注
+          wx.navigateTo({
+            url: '/pages/me/attentions/attentions',
+            fail(res) {
+              console.error('navigate to attentions fail: ' + res.errMsg)
+            }
+          })
+          break
+      }
     },
 
     // 历史记录

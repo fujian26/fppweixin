@@ -229,7 +229,7 @@
     <!-- 小区概况 -->
     <view class="community-info">
       <view class="title">小区概况</view>
-      <community-item community="{{community}}" />
+      <community-item community="{{community}}" style="padding-left: 28rpx; padding-right: 28rpx;" />
     </view>
 
     <view class="divid" />
@@ -237,7 +237,7 @@
     <!-- 更多推荐 -->
     <view class="more-recommend">
       <view class="title">更多推荐</view>
-      <house-recommend communityId="{{community.id}}" houseId="{{house.id}}" />
+      <house-recommend community="{{community}}" communityId="{{community.id}}" houseId="{{house.id}}" />
     </view>
 
   </scroll-view>
