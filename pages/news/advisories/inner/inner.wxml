@@ -1,0 +1,17 @@
+<!--pages/news/advisories/inner/inner.wxml-->
+<view class="pagecontainer" style="background-color: white; height: auto;">
+
+  <basebar id="basebar" centerText="搜索新闻资讯"></basebar>
+
+  <view class="hflex-container search-out">
+    <image src="/images/search-school-location.png" />
+    <view class="location">{{cityName}}</view>
+    <search-component hint='请输入要搜索的内容' bind:doSearch="doSearch" style="flex: 1; flex-grow: 1;" />
+  </view>
+
+  <view class="divid" />
+
+  <view class="tab-page">
+    <news-item news="{{item.news}}" wx:for="{{items}}" wx:key="id" />
+  </view>
+</view>

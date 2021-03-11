@@ -1,5 +1,5 @@
 <!--pages/house/search/search.wxml-->
-<view class="pagecontainer" style="background-color: white;">
+<view class="pagecontainer" style="background-color: white; height: auto;">
 
   <basebar id="basebar" centerText="找房屋"></basebar>
 

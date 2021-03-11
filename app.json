@@ -26,7 +26,8 @@
     "pages/house/search/search",
     "pages/school/search/inner/inner",
     "pages/house/search/inner/inner",
-    "pages/news/advisories/advisories"
+    "pages/news/advisories/advisories",
+    "pages/news/advisories/inner/inner"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

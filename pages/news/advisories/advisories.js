@@ -137,7 +137,10 @@ Page({
           return
         }
 
-        if (res.data.data.lenght == 0) {
+        console.log(tag + ' loadDatas res.data.data.length: ' + res.data.data.length +
+          ', pageIndex: ' + tabs[index].pageIndex)
+
+        if (res.data.data.length == 0) {
           if (tabs[index].pageIndex == 0) {
             wx.showToast({
               title: '没有数据',
@@ -153,16 +156,14 @@ Page({
         }
 
         var items = tabs[index].items
-        if (tabs[index].pageIndex) {
+        if (tabs[index].pageIndex == 0) {
           items = res.data.data
         } else {
           items = items.concat(res.data.data)
         }
 
         tabs[index].items = items
-        tabs[index].pageIndex++
-
-        console.log('--- items.length ' + items.length + ', data.length ' + res.data.data.length)
+        tabs[index].pageIndex = tabs[index].pageIndex + 1
 
         that.setData({
           tabs: tabs
@@ -179,6 +180,16 @@ Page({
         wx.hideLoading({
           success: (res) => {},
         })
+      }
+    })
+  },
+
+  tapSearch(event) {
+    console.log('tapSearch')
+    wx.navigateTo({
+      url: '/pages/news/advisories/inner/inner',
+      fail(res) {
+        console.error(tag + ' navigate inner fail: ' + res.errMsg)
       }
     })
   }

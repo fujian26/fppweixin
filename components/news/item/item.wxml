@@ -1,5 +1,6 @@
 <!--components/news/item/item.wxml-->
-<view bindtap="tapItem" class="container">
+<view bindtap="tapItem" class="news">
+
   <view class="hflex-container">
 
     <image wx:if="{{news.pic_path != null && news.pic_path.length > 0}}" src="{{news.pic_path}}" />

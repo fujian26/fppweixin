@@ -1,11 +1,12 @@
 /* components/news/item/item.wxss */
-.container {
+.news {
   padding: 0;
   margin: 0;
   width: 100%;
+  background-color: white;
 }
 
-.container image {
+.news image {
   width: 222rpx;
   height: 174rpx;
   border-radius: 14rpx;
@@ -31,6 +32,11 @@
   padding: 0;
   margin: 0;
   margin-top: 28rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .right .time {
