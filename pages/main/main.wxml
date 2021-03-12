@@ -139,6 +139,26 @@
     <view style="margin-left: 16rpx">换一批</view>
   </view>
 
+  <view style="width: 100%; height: 14rpx; background-color: #f6f6f6"></view>
+
+  <!-- 最新资讯 -->
+  <view class="hflex-container hot-label">
+    <image src="/images/house_stroke.png" />
+    <view style="margin-left: 10rpx;">最新资讯</view>
+    <view class="holder"></view>
+    <view bindtap="tapMoreAdvisories" class="more">更多</view>
+    <image bindtap="tapMoreAdvisories" class="arrow" src="/images/arrow_grey_right.png" />
+  </view>
+
+  <view style="margin: 0 28rpx; padding-top: 28rpx;">
+    <news-item news="{{item.news}}" wx:for="{{advisories}}" wx:key="id" />
+  </view>
+
+  <view class="hflex-container house-refresh" bindtap="tapAdvisoryRefresh">
+    <image src="/images/refresh.png" />
+    <view style="margin-left: 16rpx">换一批</view>
+  </view>
+
   <!-- 底部占位 -->
   <view style="height: 100rpx; background-color: #ffffff"></view>
 </scroll-view>

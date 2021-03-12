@@ -18,6 +18,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    cityCode: '5101', //todo 暂定成都
     swiperList: [{
       id: 0,
       type: 'image',
@@ -101,12 +102,15 @@ Component({
     hotCommunityPageIndex: 0,
     houses: [], // 热门房源
     houseIndex: 0,
+    advisories: [],
+    advisoryIndex: 0
   },
 
   created() {
     this.getHotSchools()
     this.getHotCommunities(false)
     this.getHotHouses(false)
+    this.getAdvisories(false)
   },
 
   /**
@@ -487,6 +491,93 @@ Component({
       }
 
       this.getHotHouses(true)
+    },
+
+    getAdvisories(showLoading) {
+      let that = this
+      let cityCode = this.data.cityCode
+      let pageIndex = this.data.advisoryIndex
+      var advisories = this.data.advisories
+
+      if (showLoading) {
+        wx.showLoading({
+          title: '',
+        })
+      }
+
+      wx.request({
+        url: app.globalData.baseUrl + '/news/getAdvisoryList',
+        header: {
+          'token': app.globalData.token,
+          'content-type': 'application/json'
+        },
+        data: {
+          'cityCode': cityCode,
+          'type': -1,
+          'pageIndex': pageIndex,
+          'pageSize': 3
+        },
+        success(res) {
+          if (res.data.code != 0) {
+            console.error('getAdvisories code != 0, msg: ' + res.data.msg)
+            if (showLoading) {
+              wx.showToast({
+                title: '数据错误 ' + res.data.msg,
+                icon: 'none'
+              })
+            }
+            return
+          }
+
+          if (res.data.data.length == 0) {
+            console.error('getAdvisories res.data.data.length == 0')
+            that.data.advisoryIndex = 0            
+            return
+          }
+
+          advisories = res.data.data
+
+          that.setData({
+            advisories: advisories,
+            advisoryIndex: pageIndex + 1
+          })
+        },
+        fail(res) {
+          console.error('getAdvisories fail ' + res.errMsg)
+          if (showLoading) {
+            wx.showToast({
+              title: '数据错误 ' + res.errMsg,
+              icon: 'none'
+            })
+          }
+        },
+        complete(res) {
+          if (showLoading) {
+            wx.hideLoading({
+              success: (res) => {},
+            })
+          }
+        }
+      })
+    },
+
+    tapMoreAdvisories(event) {
+
+      console.log('tapMoreAdvisories')
+
+      wx.navigateTo({
+        url: '/pages/news/advisories/advisories',
+        fail(res) {
+          console.error('tapMoreAdvisories fail ' + res.errMsg)
+        }
+      })
+    },
+
+    tapAdvisoryRefresh(event) {
+
+      console.log('tapAdvisoryRefresh')
+
+      this.getAdvisories(true)
     }
   },
 })
