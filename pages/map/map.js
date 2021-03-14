@@ -102,8 +102,9 @@ Component({
           'content-type': 'application/json'
         },
         data: {
-          lng: app.globalData.lng,
-          lat: app.globalData.lat
+          cityCode: '5101', //todo 暂定成都
+          pageIndex: -1,
+          pageSize: 0
         },
         success(res) {
           if (res.data.code != 0) {
