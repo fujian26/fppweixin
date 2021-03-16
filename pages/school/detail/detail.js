@@ -354,13 +354,14 @@ Page({
     let that = this
 
     wx.request({
-      url: app.globalData.baseUrl + '/school/getDynamic',
+      url: app.globalData.baseUrl + '/news/getVariatyNewsList',
       header: {
         'token': app.globalData.token,
         'content-type': 'application/json'
       },
       data: {
-        schoolId: school.id,
+        id: school.id,
+        type: 0,
         pageIndex: 0,
         pageSize: 10
       },
