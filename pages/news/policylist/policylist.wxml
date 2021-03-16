@@ -19,10 +19,10 @@
   <view class="vflex-container" bindtap="tapItem" wx:for="{{houseData}}" wx:key="index" data-index="{{index}}">
 
     <view class="item">
-      <image wx:if="{{item.news.pic_path != null}}" src="{{item.news.pic_path}}" />
+      <image wx:if="{{item.pic_path != null}}" src="{{item.pic_path}}" />
       <view class="vflex-container" style="flex-grow: 1; flex: 1; align-items: flex-start">
-        <view class="title">{{item.news.title}}</view>
-        <view wx:if="{{item.news.brief != null}}" class="brief">{{item.news.brief}}</view>
+        <view class="title">{{item.title}}</view>
+        <view wx:if="{{item.brief != null}}" class="brief">{{item.brief}}</view>
         <view class="bottom">
           <image src="/images/ic_watch_stroke.png" />
           <view class="watch">{{item.watch_num}}</view>
@@ -50,10 +50,10 @@
   <view class="vflex-container" bindtap="tapItem" wx:for="{{schoolData}}" wx:key="index" data-index="{{index}}">
 
     <view class="item">
-      <image wx:if="{{item.news.pic_path != null}}" src="{{item.news.pic_path}}" />
+      <image wx:if="{{item.pic_path != null}}" src="{{item.pic_path}}" />
       <view class="vflex-container" style="flex-grow: 1; flex: 1; align-items: flex-start">
-        <view class="title">{{item.news.title}}</view>
-        <view wx:if="{{item.news.brief != null}}" class="brief">{{item.news.brief}}</view>
+        <view class="title">{{item.title}}</view>
+        <view wx:if="{{item.brief != null}}" class="brief">{{item.brief}}</view>
         <view class="bottom">
           <image src="/images/ic_watch_stroke.png" />
           <view class="watch">{{item.watch_num}}</view>

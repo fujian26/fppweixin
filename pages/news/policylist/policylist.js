@@ -191,14 +191,14 @@ Page({
     }
 
     wx.request({
-      url: app.globalData.baseUrl + '/news/getCityPolicies',
+      url: app.globalData.baseUrl + '/news/getVariatyNewsList',
       header: {
         'token': app.globalData.token,
         'content-type': 'application/json'
       },
       data: {
-        cityCode: cityCode,
-        type: type,
+        id: type,
+        type: 6,
         pageIndex: pageIndex,
         pageSize: pageSize
       },
@@ -241,7 +241,7 @@ Page({
 
           for (var i = 0; i < res.data.data.length; i++) {
             var item = res.data.data[i]
-            item.showTime = item.news.publish_time.split(' ')[0]
+            item.showTime = item.publish_time.split(' ')[0]
           }
 
           pageData = pageData.concat(res.data.data)
@@ -280,7 +280,7 @@ Page({
     let index = event.currentTarget.dataset.index
     console.log('tapItem index ' + index)
     var pageData = this.data.currentIndex == 0 ? this.data.houseData : this.data.schoolData
-    var news = pageData[index].news
+    var news = pageData[index]
     var tabName = this.data.tabs[this.data.currentIndex].name
 
     wx.navigateTo({
