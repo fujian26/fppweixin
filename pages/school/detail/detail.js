@@ -268,14 +268,16 @@ Page({
     })
 
     wx.request({
-      url: app.globalData.baseUrl + '/school/getCityRecentLottery',
+      url: app.globalData.baseUrl + '/news/getVariatyNewsList',
       header: {
         'token': app.globalData.token,
         'content-type': 'application/json'
       },
       data: {
-        cityCode: schoolExt.school.city_code,
-        type: schoolExt.school.type
+        id: schoolExt.school.type,
+        type: 2,
+        pageIndex: 0,
+        pageSize: 1
       },
       success(res) {
         console.log(TAG + ' getCityRecentLottery success')
@@ -285,9 +287,8 @@ Page({
             title: '数据错误 ' + res.data.msg,
             icon: 'none'
           })
-        } else {
-          var news = res.data.data
-          if (news == null) {
+        } else {          
+          if (res.data.data == null || res.data.data.length == 0) {
             console.error(TAG + ' getCityRecentLottery error news == null')
             wx.showToast({
               title: '没有数据',
@@ -295,6 +296,9 @@ Page({
             })
             return
           }
+          
+          var news = res.data.data[0]
+
           wx.navigateTo({
             url: '/pages/news/detail/detail?newsId=' + news.id + '&title=学校动态',
             success: function (res) {

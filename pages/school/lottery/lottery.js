@@ -90,14 +90,16 @@ Page({
     })
 
     wx.request({
-      url: app.globalData.baseUrl + '/school/getCityRecentLottery',
+      url: app.globalData.baseUrl + '/news/getVariatyNewsList',
       header: {
         'token': app.globalData.token,
         'content-type': 'application/json'
       },
       data: {
-        cityCode: cityCode,
-        type: school.type
+        id: school.type,
+        type: 2,
+        pageIndex: 0,
+        pageSize: 1
       },
       success(res) {        
         if (res.data.code != 0) {
@@ -108,8 +110,8 @@ Page({
           })
         } else {        
 
-          var lottery = res.data.data
-          if (lottery == null) {
+          var lottery = null
+          if (res.data.data == null || res.data.data.length == 0) {
             lottery = {
               title: '没有数据'
             }
@@ -118,6 +120,7 @@ Page({
             })
           }
 
+          lottery = res.data.data[0]
           that.setData({
             lottery: lottery         
           })

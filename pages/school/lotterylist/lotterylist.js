@@ -146,14 +146,14 @@ Page({
     }
 
     wx.request({
-      url: app.globalData.baseUrl + '/school/getCityLotterys',
+      url: app.globalData.baseUrl + '/news/getVariatyNewsList',
       header: {
         'token': app.globalData.token,
         'content-type': 'application/json'
       },
-      data: {
-        cityCode: cityCode,
-        type: type,
+      data: {        
+        id: type,
+        type: 2,
         pageIndex: pageIndex,
         pageSize: pageSize
       },
