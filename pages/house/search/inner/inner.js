@@ -106,6 +106,8 @@ Page({
         'content-type': 'application/json'
       },
       data: {
+        'communityId': 0,
+        'sourceType': -1,
         "content": content,
         "pageIndex": pageIndex,
         "pageSize": 100

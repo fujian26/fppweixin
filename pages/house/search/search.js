@@ -350,6 +350,8 @@ Page({
         'content-type': 'application/json'
       },
       data: {
+        'communityId': 0,
+        'sourceType': -1,
         'cityCode': cityCode,
         'areaCode': areaCode,
         'streetCode': streetCode,
