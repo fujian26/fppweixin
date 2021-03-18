@@ -401,23 +401,6 @@ Page({
     })
   },
 
-  // 点击学校动态条目
-  tapDynamicItem(event) {
-    var index = event.currentTarget.dataset.index
-    console.log('tapDynamicItem index ' + index)
-    let news = this.data.dynamics[index]
-
-    wx.navigateTo({
-      url: '/pages/news/detail/detail?newsId=' + news.id + '&title=学校动态',
-      success: function (res) {
-
-      },
-      fail(res) {
-        console.error(TAG + ' tapDynamicItem navigateTo fail ' + res.errMsg)
-      }
-    })
-  },
-
   // 获取学校详情
   getDetail(school) {
 

@@ -169,7 +169,11 @@
       </view>
     </view>
 
-    <view class="item" data-index="{{index}}" bindtap="tapDynamicItem" wx:if="{{dynamics != null}}"
+    <view style="margin: 0 28rpx; padding-top: 28rpx;">
+      <news-item news="{{item}}" wx:for="{{dynamics}}" wx:key="id" />
+    </view>
+
+    <!-- <view class="item" data-index="{{index}}" bindtap="tapDynamicItem" wx:if="{{dynamics != null}}"
       wx:for="{{dynamics}}" wx:key="id">
 
       <view class="hflex-container">
@@ -183,7 +187,7 @@
 
       <view class="line" />
 
-    </view>
+    </view> -->
 
   </view>
 

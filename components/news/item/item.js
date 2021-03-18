@@ -29,7 +29,7 @@ Component({
       let news = this.properties.news
       var bottomStr = news.from_where
 
-      if (bottomStr != null) {
+      if (bottomStr != null && bottomStr.length > 0) {
         bottomStr += ' | '
         bottomStr += news.publishTimeListShow
       } else {
