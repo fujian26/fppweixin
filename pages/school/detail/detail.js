@@ -492,7 +492,9 @@ Page({
         'content-type': 'application/json'
       },
       data: {
-        "schoolId": schoolId
+        "schoolId": schoolId,
+        'pageIndex': 0,
+        'pageSize': 0
       },
       success(res) {
         console.log(TAG + ' getCommunityList success')
