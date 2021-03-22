@@ -236,7 +236,12 @@ Component({
 
     // 点击 房源
     tapHouse(event) {
-
+      wx.navigateTo({
+        url: '/pages/house/search/search',
+        fail(res) {
+          console.error('main.js navigateTo house search fail ' + res.errMsg)
+        }
+      })
     },
 
     // 点击 列表

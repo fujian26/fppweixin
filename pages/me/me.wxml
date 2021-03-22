@@ -1,7 +1,7 @@
 <!--pages/me/me.wxml-->
-<basebar centerText='个人中心'></basebar>
+<basebar leftAction="" centerText='个人中心'></basebar>
 <scroll-view scroll-y="true" class="scrollPageNav">
-  <view class="top-container" style="background-image: url('/images/me_top_bg.png')">
+  <view class="top-container" style="background-image: url({{topBgUrl}})">
     <!-- 头像、昵称 -->
     <view class="hflex-container">
       <image src="{{userInfo.avatarUrl}}" class="avatar" />

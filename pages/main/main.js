@@ -18,6 +18,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    mainRefreshing: false,
     cityCode: '5101', //todo 暂定成都
     swiperList: [],
 
@@ -88,11 +89,7 @@ Component({
   },
 
   created() {
-    this.getAds()
-    this.getHotSchools()
-    this.getHotCommunities(false)
-    this.getHotHouses(false)
-    this.getAdvisories(false)
+    this.doRefresh()
   },
 
   /**
@@ -258,6 +255,11 @@ Component({
           wx.showToast({
             title: '获取热门学校错误 ' + res.errMsg,
             icon: 'none'
+          })
+        },
+        complete(res) {
+          that.setData({
+            mainRefreshing: false
           })
         }
       })
@@ -602,16 +604,39 @@ Component({
             })
           }
 
-          console.log('--- list: ', list)
-
           that.setData({
             swiperList: list
           })
         },
         fail(res) {
-
+          console.error('getAds error: ' + res.errMsg)
+          wx.showToast({
+            title: '数据错误: ' + res.errMsg,
+            icon: 'none'
+          })          
+        },
+        complete(res) {
+          
         }
       })
+    },
+
+    doRefresh() {
+      this.getAds()
+      this.getHotSchools()
+      this.getHotCommunities(false)
+      this.getHotHouses(false)
+      this.getAdvisories(false)
+    },    
+
+    mainRefresh(event) {
+      console.log('mainRefresh')
+      this.doRefresh()
+      // setTimeout(() => {
+      //   this.setData({
+      //     mainRefreshing: false
+      //   })
+      // }, 2000);
     }
   },
 })

@@ -1,5 +1,5 @@
 <!--pages/main/main.wxml-->
-<scroll-view scroll-y class="scrollPage" bindscroll="onScrolled">
+<scroll-view refresher-enabled="true" refresher-triggered="{{mainRefreshing}}" bindrefresherrefresh="mainRefresh" scroll-y class="scrollPage" bindscroll="onScrolled">
   <!-- 顶部新闻滚动图 -->
   <swiper class="screen-swiper square-dot" style="height: 544rpx;" indicator-dots="false" circular="true"
     autoplay="true" interval="5000" duration="500">

@@ -24,6 +24,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    topBgUrl: app.globalData.baseUrl + '/file/download/me_top_bg.png',
     userInfo: null,
     nickName: '',
     floatBarDatas: [{

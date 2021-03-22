@@ -88,7 +88,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl: 'https://47.107.38.58/fpp',
+    baseUrl: 'https://fang.bigdnsoft.cn/fpp',
     token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1YmFiNjU2MS1lZDhmLTRiMDQtYTQyOC1iNTc4M2VlNmMxZmQiLCJpYXQiOjE2MTYxNjU5NzMsImV4cCI6MTYxNjc3MDc3M30.n6iNHtUGlYifq-5FWwvYfaQ8toRB4hawhoLV3Hv8_MS7MdQKaaATvuIZ8BzvHiekOsBPNqzLbC_PPruRMlxFcQ',
   }
 })
