@@ -3,13 +3,13 @@
   <!-- 顶部新闻滚动图 -->
   <swiper class="screen-swiper square-dot" style="height: 544rpx;" indicator-dots="false" circular="true"
     autoplay="true" interval="5000" duration="500">
-    <swiper-item wx:for="{{swiperList}}" bindtap="tapSwiper" data-id="{{item.id}}" wx:key="id">
+    <swiper-item wx:for="{{swiperList}}" bindtap="tapSwiper" data-index="{{index}}" wx:key="id">
       <image src="{{item.url}}" mode="aspectFill"></image>
     </swiper-item>
   </swiper>
 
   <!-- 搜索框 -->
-  <view class="search-container">
+  <!-- <view class="search-container">
     <view class="cu-bar" style="width: 90%;">
       <view class="search-form round shadow-warp" style="height: 76rpx; width: 100%; background-color: white">
         <text class="cuIcon-search" style="font-size: 36rpx; color: #cccccc"></text>
@@ -17,7 +17,7 @@
           placeholder-style="color: #cccccc" bindconfirm="searchConfirm"></input>
       </view>
     </view>
-  </view>
+  </view> -->
 
   <!-- 差学校、找房屋... -->
   <view class="below-search-items">

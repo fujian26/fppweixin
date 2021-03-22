@@ -13,7 +13,8 @@
 
 .below-search-items {
   display: flex;
-  margin-top: 70rpx;
+  /* margin-top: 70rpx; */
+  margin-top: 36rpx;
   padding-left: 20rpx;
   padding-right: 20rpx;
   padding-bottom: 48rpx;

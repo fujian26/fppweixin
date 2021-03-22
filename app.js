@@ -88,7 +88,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl: 'http://localhost:8081',
-    token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1YmFiNjU2MS1lZDhmLTRiMDQtYTQyOC1iNTc4M2VlNmMxZmQiLCJpYXQiOjE2MTU0NDIzNzksImV4cCI6MTYxNjA0NzE3OX0.9ZyevFs9BBqgRbihrnp1Hk5csqI6R8o2Gbyrw7aUVvWUvXtCDj5Absz_-U4qGydAfLZWQxUh4b_bRpSkVxNJiw',
+    baseUrl: 'https://47.107.38.58/fpp',
+    token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1YmFiNjU2MS1lZDhmLTRiMDQtYTQyOC1iNTc4M2VlNmMxZmQiLCJpYXQiOjE2MTYxNjU5NzMsImV4cCI6MTYxNjc3MDc3M30.n6iNHtUGlYifq-5FWwvYfaQ8toRB4hawhoLV3Hv8_MS7MdQKaaATvuIZ8BzvHiekOsBPNqzLbC_PPruRMlxFcQ',
   }
 })
