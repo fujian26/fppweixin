@@ -55,7 +55,7 @@ Page({
 
     let house = this.data.house
     let nowTimeStamp = Date.parse(new Date())
-    let timeStamp = Date.parse(new Date(house.houseLegal.end_time))
+    let timeStamp = Date.parse(new Date(house.houseLegal.end_time.replace(/-/g, '/')))
 
     if (nowTimeStamp >= timeStamp) {
       this.setData({
@@ -69,7 +69,7 @@ Page({
 
       let house = this.data.house
       let nowTimeStamp = Date.parse(new Date())
-      let timeStamp = Date.parse(new Date(house.houseLegal.end_time))
+      let timeStamp = Date.parse(new Date(house.houseLegal.end_time.replace(/-/g, '/')))
 
       var diffTime = timeStamp - nowTimeStamp
       if (diffTime <= 0) {
@@ -496,6 +496,7 @@ Page({
 
   tapLegalRisk(event) {
     console.log('tapLegalRisk')
+
     let legalSalingExpired = this.data.legalSalingExpired
     if (legalSalingExpired) {
       return

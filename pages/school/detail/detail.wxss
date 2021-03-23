@@ -113,10 +113,11 @@
 }
 
 .community {
-  width: 300rpx;
+  width: 340rpx;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  margin: 12rpx 0;
   padding-bottom: 10rpx;
   margin-right: 14rpx;
   border-bottom-left-radius: 16rpx;

@@ -16,7 +16,7 @@ const formatNumber = n => {
 
 function getDistanceTime(timeStr) {  
 
-  var timeDate = new Date(timeStr)
+  var timeDate = new Date(timeStr.replace(/-/g, '/'))
   var nowTime = new Date().getTime()
   var diffTime = nowTime - timeDate.getTime()
 

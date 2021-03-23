@@ -90,7 +90,7 @@
     </view>
 
     <scroll-view scroll-x="true">
-      <view class="hflex-container" style="width: {{communities.length * 300}}rpx; flex-wrap: nowrap;">
+      <view class="hflex-container" style="width: {{communities.length * 340}}rpx; flex-wrap: nowrap;">
         <view class="community" wx:for="{{communities}}" wx:key="id" bindtap="tapCommunity" data-index="{{index}}">
           <image src="{{item.picUrls[0]}}" />
           <view class="name">{{item.name}}</view>

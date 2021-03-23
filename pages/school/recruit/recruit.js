@@ -132,7 +132,7 @@ Page({
         } else {        
 
           var recruit = res.data.data
-          var date = new Date(recruit.recruit_time)
+          var date = new Date(recruit.recruit_time.replace(/-/g, '/'))
           var time = (date.getMonth() + 1) + '月' + date.getDate() + '日'
 
           that.setData({

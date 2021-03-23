@@ -129,7 +129,7 @@ Page({
           teachingQuality = '优'
         }
 
-        var date = new Date(school.eatablish_time)
+        var date = new Date(school.eatablish_time.replace(/-/g, '/'))
         var eatablishTime = date.getFullYear() + '年'
 
         var addr = school.province_name + school.city_name +
