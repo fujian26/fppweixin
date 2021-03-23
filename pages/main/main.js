@@ -201,6 +201,13 @@ Component({
 
     hotSchoolMoreTap(event) {
       console.log('hotSchoolMoreTap')
+
+      wx.navigateTo({
+        url: '/pages/school/search/search',
+        fail(res) {
+          console.error('navigate to school search fail: ' + res.errMsg)
+        }
+      })
     },
 
     hotSchoolItemTap(event) {

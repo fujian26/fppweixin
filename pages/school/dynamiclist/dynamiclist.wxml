@@ -1,0 +1,10 @@
+<!--pages/school/dynamiclist/dynamiclist.wxml-->
+<view class="pagecontainer" style="background-color: white; height: auto;">
+
+  <basebar id="basebar" centerText="学校动态"></basebar>
+
+  <view style="padding: 0 28rpx; padding-top: 28rpx;">
+    <news-item news="{{item}}" wx:for="{{dynamics}}" wx:key="id" />
+  </view>
+
+</view>

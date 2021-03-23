@@ -29,7 +29,8 @@
     "pages/news/advisories/advisories",
     "pages/news/advisories/inner/inner",
     "pages/me/attentions/attentions",
-    "pages/webpage/webpage"
+    "pages/webpage/webpage",
+    "pages/school/dynamiclist/dynamiclist"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

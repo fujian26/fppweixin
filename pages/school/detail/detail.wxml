@@ -163,7 +163,7 @@
       </view>
 
       <view class="holder" />
-      <view class="hflex-container" bindtap="tapSchoolDynamicMore">
+      <view wx:if="{{dynamicTotalNum > 3}}" class="hflex-container" bindtap="tapSchoolDynamicMore">
         <view style="color: #CCCCCC; font-size: 20rpx;">更多</view>
         <text class="cuIcon-right" style="margin-left: 4rpx; color: #cccccc; font-size: 22rpx;" />
       </view>

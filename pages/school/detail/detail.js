@@ -15,6 +15,7 @@ Page({
     entranceMode: '',
     typeStr: '',
     dynamics: [],
+    dynamicTotalNum: 0,
     communities: [],
     communityTotalNum: 0,
     houses: [],
@@ -287,7 +288,7 @@ Page({
             title: '数据错误 ' + res.data.msg,
             icon: 'none'
           })
-        } else {          
+        } else {
           if (res.data.data == null || res.data.data.length == 0) {
             console.error(TAG + ' getCityRecentLottery error news == null')
             wx.showToast({
@@ -296,7 +297,7 @@ Page({
             })
             return
           }
-          
+
           var news = res.data.data[0]
 
           wx.navigateTo({
@@ -349,7 +350,12 @@ Page({
 
   // 学校动态 - 更多
   tapSchoolDynamicMore(event) {
-
+    wx.navigateTo({
+      url: '/pages/school/dynamiclist/dynamiclist?schoolId=' + this.data.schoolExt.school.id,
+      fail(res) {
+        console.error('navigate to dynamiclist error: ' + res.errMsg)
+      }
+    })
   },
 
   // 获取学校动态
@@ -367,7 +373,7 @@ Page({
         id: school.id,
         type: 0,
         pageIndex: 0,
-        pageSize: 10
+        pageSize: 3
       },
       success(res) {
         console.log(TAG + ' getDynamics success')
@@ -384,7 +390,8 @@ Page({
               dynamics[i].distanceTime = utils.getDistanceTime(dynamics[i].publish_time)
             }
             that.setData({
-              dynamics: dynamics
+              dynamics: dynamics,
+              dynamicTotalNum: Number(res.header.total)
             })
           } else {
             console.error('getDynamics res.data.data == null')
