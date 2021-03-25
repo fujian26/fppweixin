@@ -80,6 +80,7 @@ Component({
       },
     ],
     hotSchools: [],
+    hotSchoolTotal: 0,
     hotCommunities: [],
     hotCommunityPageIndex: 0,
     houses: [], // 热门房源
@@ -240,7 +241,8 @@ Component({
           'content-type': 'application/json'
         },
         data: {
-
+          'pageIndex': 0,
+          'pageSize': 10,
         },
         success(res) {
           console.log('getHotSchools success')
@@ -252,8 +254,15 @@ Component({
             })
           } else {
             console.log('获取热门学校成功，数量: ' + res.data.data.length)
+
+            var showSchools = []
+            for (var i = 0; i < 5 && i < res.data.data.length; i++) {
+              showSchools.push(res.data.data[i])
+            }
+
             that.setData({
-              hotSchools: res.data.data
+              hotSchools: showSchools,
+              hotSchoolTotal: res.data.data.length
             })
           }
         },

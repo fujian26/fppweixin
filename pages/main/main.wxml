@@ -57,7 +57,7 @@
     <image src="/images/hot_school.png" style="width: 34rpx; height: 34rpx;" />
     <view class="label">热门学校</view>
     <view style="flex: 1"></view>
-    <view class="more" bindtap="hotSchoolMoreTap">
+    <view wx:if="{{hotSchoolTotal > 5}}" class="more" bindtap="hotSchoolMoreTap">
       <view>更多</view>
       <image src="/images/arrow_grey_right.png" />
     </view>
