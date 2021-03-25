@@ -1,4 +1,5 @@
 // pages/news/detail/detail.js
+import config from '../../../config.js'
 let app = getApp()
 let TAG = 'news-detail.js'
 Page({
@@ -14,7 +15,8 @@ Page({
     scrollHeight: 0,
     comments: [],
     commentsTotal: 0,
-    showEdit: false
+    showEdit: false,
+    pageShowed: false
   },
 
   /**
@@ -59,7 +61,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (this.data.pageShowed) {
+      this.getComments()
+    }
+    this.data.pageShowed = true
   },
 
   /**
@@ -195,6 +200,10 @@ Page({
     let that = this
 
     console.log('addWatchNum ' + newsId)
+
+    if (app.globalData.token == null || app.globalData.token.length == 0) {
+      return
+    }
 
     wx.request({
       url: app.globalData.baseUrl + '/news/addWatchNum',
@@ -365,10 +374,26 @@ Page({
         console.log(TAG + ' sendComment success')
         if (res.data.code != 0) {
           console.error(TAG + ' sendComment success code != 0, msg ' + res.data.msg)
-          wx.showToast({
-            title: '评论失败 ' + res.data.msg,
-            icon: 'none'
-          })
+
+          if (res.data.code == config.server.tokenCode) {
+            wx.showModal({
+              title: '提示',
+              showCancel: false,
+              content: config.server.tokenExpiredTip,
+              success (res) {
+                if (res.confirm) {
+                  
+                } else if (res.cancel) {
+                  
+                }
+              }
+            })
+          } else {
+            wx.showToast({
+              title: '评论失败 ' + res.data.msg,
+              icon: 'none'
+            })
+          }
         } else {
           var comment = res.data.data
           if (comment == null) {

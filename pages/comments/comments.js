@@ -1,4 +1,5 @@
 // pages/comments/comments.js
+import config from '../../config.js'
 let app = getApp()
 let tag = '/pages/comments/comments.js'
 Page({
@@ -242,10 +243,26 @@ Page({
         console.log('sendCommunityComment success')
         if (res.data.code != 0) {
           console.error('sendCommunityComment success code != 0, msg ' + res.data.msg)
-          wx.showToast({
-            title: '评论失败 ' + res.data.msg,
-            icon: 'none'
-          })
+
+          if (res.data.code == config.server.tokenCode) {
+            wx.showModal({
+              title: '提示',
+              showCancel: false,
+              content: config.server.tokenExpiredTip,
+              success (res) {
+                if (res.confirm) {
+                  
+                } else if (res.cancel) {
+                  
+                }
+              }
+            })           
+          } else {
+            wx.showToast({
+              title: '评论失败 ' + res.data.msg,
+              icon: 'none'
+            })
+          }
         } else {
 
           wx.showToast({
@@ -307,10 +324,26 @@ Page({
         console.log('sendHouseComment success')
         if (res.data.code != 0) {
           console.error('sendHouseComment success code != 0, msg ' + res.data.msg)
-          wx.showToast({
-            title: '评论失败 ' + res.data.msg,
-            icon: 'none'
-          })
+
+          if (res.data.code == config.server.tokenCode) {
+            wx.showModal({
+              title: '提示',
+              showCancel: false,
+              content: config.server.tokenExpiredTip,
+              success (res) {
+                if (res.confirm) {
+                  
+                } else if (res.cancel) {
+                  
+                }
+              }
+            })
+          } else {
+            wx.showToast({
+              title: '评论失败 ' + res.data.msg,
+              icon: 'none'
+            })
+          }
         } else {
 
           wx.showToast({
@@ -372,10 +405,25 @@ Page({
         console.log(tag + ' sendNewsComment success')
         if (res.data.code != 0) {
           console.error(tag + ' sendNewsComment success code != 0, msg ' + res.data.msg)
-          wx.showToast({
-            title: '评论失败 ' + res.data.msg,
-            icon: 'none'
-          })
+          if (res.data.code == config.server.tokenCode) {
+            wx.showModal({
+              title: '提示',
+              showCancel: false,
+              content: config.server.tokenExpiredTip,
+              success (res) {
+                if (res.confirm) {
+                  
+                } else if (res.cancel) {
+                  
+                }
+              }
+            })
+          } else {
+            wx.showToast({
+              title: '评论失败 ' + res.data.msg,
+              icon: 'none'
+            })
+          }
         } else {
 
           var comments = that.data.comments

@@ -4,14 +4,15 @@
   <view class="top-container" style="background-image: url({{topBgUrl}})">
     <!-- 头像、昵称 -->
     <view class="hflex-container">
-      <image src="{{userInfo.avatarUrl}}" class="avatar" />
-      <view class="name">{{userInfo.nickName}}</view>
+      <button class="login-btn" wx:if="{{userInfo == null}}" lang="zh_CN" size="mini" open-type="getUserInfo" bindgetuserinfo="onUserInfoGet">注册/登录</button>   
+      <image wx:if="{{userInfo != null}}" src="{{userInfo.avatarUrl}}" class="avatar" />     
+      <view wx:if="{{userInfo != null}}" class="name">{{userInfo.nickName}}</view>
       <view class="hflex-container setting" bindtap="tapSetting">
         <image src="/images/me_setting.png" />
         <view style="margin-left: 8rpx">设置</view>
       </view>
     </view>
-  </view>
+  </view>  
 
   <!-- 我的关注、业主认证... -->
   <view class="float-bar-container">
@@ -21,7 +22,7 @@
         <view class="text">{{item.text}}</view>
       </view>
     </view>
-  </view>
+  </view>  
 
   <!-- 列表选项 -->
   <view class="hflex-container list" style="margin-top: 148rpx;" bindtap="tapHistory">

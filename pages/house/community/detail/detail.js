@@ -1,4 +1,6 @@
 // pages/house/community/detail/detail.js
+import config from '../../../../config.js'
+
 let TAG = 'community-detail.js'
 let app = getApp()
 Page({
@@ -108,7 +110,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (this.data.community != null) {
+      this.getComments(this.data.community)
+    }
   },
 
   /**
@@ -250,10 +254,26 @@ Page({
         console.log('tapCommentFinalSend success')
         if (res.data.code != 0) {
           console.error('tapCommentFinalSend success code != 0, msg ' + res.data.msg)
-          wx.showToast({
-            title: '评论失败 ' + res.data.msg,
-            icon: 'none'
-          })
+
+          if (res.data.code == config.server.tokenCode) {
+            wx.showModal({
+              title: '提示',
+              showCancel: false,
+              content: config.server.tokenExpiredTip,
+              success (res) {
+                if (res.confirm) {
+                  
+                } else if (res.cancel) {
+                  
+                }
+              }
+            })
+          } else {
+            wx.showToast({
+              title: '评论失败 ' + res.data.msg,
+              icon: 'none'
+            })
+          }
         } else {
 
           wx.showToast({
@@ -418,10 +438,26 @@ Page({
         console.log(TAG + ' doAttention success')
         if (res.data.code != 0 || res.data.data == null) {
           console.error(TAG + ' doAttention success code != 0, msg ' + res.data.msg)
-          wx.showToast({
-            title: '操作失败 '  + res.data.msg,
-            icon: 'none'
-          })
+
+          if (res.data.code == config.server.tokenCode) {
+            wx.showModal({
+              title: '提示',
+              showCancel: false,
+              content: config.server.tokenExpiredTip,
+              success (res) {
+                if (res.confirm) {
+                  
+                } else if (res.cancel) {
+                  
+                }
+              }
+            })
+          } else {
+            wx.showToast({
+              title: '操作失败 '  + res.data.msg,
+              icon: 'none'
+            })
+          }
         } else {        
 
           wx.showToast({

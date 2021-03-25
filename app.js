@@ -1,4 +1,5 @@
 // app.js
+import config from './config'
 App({
   onLaunch() {
 
@@ -8,23 +9,31 @@ App({
     wx.setStorageSync('logs', logs)
     var that = this
 
+    wx.showLoading({
+      title: '',
+    })
+
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         console.log('login success code ' + res.code)
-        var loginCode = res.code        
+        
+        let app = getApp()
+        var loginCode = res.code
+        app.globalData.loginCode = res.code
+
         wx.getUserInfo({
           lang: 'zh_CN',
           success(res) {
             console.log('user info ' + res.userInfo.city +
               ' ' + res.userInfo.province)
-            that.globalData.userInfo = res.userInfo
-            let app = getApp()
+            that.globalData.userInfo = res.userInfo            
+
             wx.request({
               url: app.globalData.baseUrl + '/wx/obtainSession',
+              method: 'POST',
               header: {
-                'token': app.globalData.token,
                 'content-type': 'application/json'
               },
               data: {
@@ -41,18 +50,44 @@ App({
                 city: res.userInfo.city
               },
               success(res) {
-                console.log('obtainSession success res ' + res.data.data)
+                console.log('obtainSession success res ', res.data.data)
                 app.globalData.token = res.data.data
               },
               fail(res) {
-                console.log('obtainSession fail res ' + res.errMsg)
+                console.error('obtainSession fail res ' + res.errMsg)
+              },
+              complete(res) {
+                wx.hideLoading({
+                  success: (res) => {},
+                })
               }
             })
           },
           fail(res) {
-            console.log('get userinfo fail ' + res.errMsg)
-          }
+            console.error('get userinfo fail ' + res.errMsg)
+            wx.hideLoading({
+              success: (res) => {},
+            })
+            
+            wx.showModal({
+              title: '提示',
+              showCancel: false,
+              content: '授权失败，请前往[我的]页面完成授权登录',
+              success (res) {
+              }
+            })            
+          },
         })
+      },
+      fail(res) {
+        console.error('wx.login fail: ' + res.errMsg)
+        wx.showModal({
+          title: '提示',
+          showCancel: false,
+          content: '授权失败，请前往[我的]页面完成授权登录',
+          success (res) {
+          }
+        })        
       }
     })
     
@@ -87,12 +122,13 @@ App({
     })
   },
   globalData: {
+    loginCode: '',
     cityCode: '5101', //todo 暂定成都
     cityName: '成都',
     userInfo: null,
     lng: 103.92377, // todo 暂定成都
     lat: 30.57447, // todo 暂定成都    
     baseUrl: 'https://fang.bigdnsoft.cn/fpp',
-    token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1YmFiNjU2MS1lZDhmLTRiMDQtYTQyOC1iNTc4M2VlNmMxZmQiLCJpYXQiOjE2MTYxNjU5NzMsImV4cCI6MTYxNjc3MDc3M30.n6iNHtUGlYifq-5FWwvYfaQ8toRB4hawhoLV3Hv8_MS7MdQKaaATvuIZ8BzvHiekOsBPNqzLbC_PPruRMlxFcQ',
+    token: '',
   }
 })
