@@ -13,7 +13,7 @@ Component({
   properties: {
     cityCode: {
       type: String,
-      value: '5101', //todo 默认成都
+      value: app.globalData.cityCode
     }
   },
 

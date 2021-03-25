@@ -102,7 +102,7 @@ Component({
           'content-type': 'application/json'
         },
         data: {
-          cityCode: '5101', //todo 暂定成都
+          cityCode: app.globalData.cityCode,
           pageIndex: -1,
           pageSize: 0
         },

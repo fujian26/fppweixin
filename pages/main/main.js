@@ -19,7 +19,7 @@ Component({
    */
   data: {
     mainRefreshing: false,
-    cityCode: '5101', //todo 暂定成都
+    cityCode: app.globalData.cityCode,
     swiperList: [],
 
     belowSearchItems: [{
@@ -187,7 +187,7 @@ Component({
           break
         case 4: // 落户拆迁
           wx.navigateTo({
-            url: '/pages/news/settle/settle?cityCode=5101', // todo 暂定成都
+            url: '/pages/news/settle/settle?cityCode=' + app.globalData.cityCode,
             success: function (res) {
 
             },
@@ -304,7 +304,7 @@ Component({
           'content-type': 'application/json'
         },
         data: {
-          cityCode: 5101, //todo 暂定成都
+          cityCode: app.globalData.cityCode,
           pageIndex: pageIndex,
           pageSize: 3
         },
@@ -442,7 +442,7 @@ Component({
           'content-type': 'application/json'
         },
         data: {
-          "cityCode": "5101", //todo 暂定成都
+          "cityCode": app.globalData.cityCode,
           "pageIndex": houseIndex,
           "pageSize": 3
         },

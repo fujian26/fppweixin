@@ -8,8 +8,8 @@ Page({
    */
   data: {
     basebarHeight: 0,
-    cityCode: '5101', //todo 暂定成都
-    cityName: '成都', //todo 暂定成都
+    cityCode: app.globalData.cityCode,
+    cityName: app.globalData.cityName,
     tabs: [{
         name: '房源',
         pageIndex: 0,

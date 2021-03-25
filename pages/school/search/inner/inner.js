@@ -7,10 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    locationName: '成都', // todo 暂定成都
+    locationName: app.globalData.cityName,
     schoolExts: [],
-    lng: 103.92377, // todo 暂定成都
-    lat: 30.57447, // todo 暂定成都
+    lng: app.globalData.lng,
+    lat: app.globalData.lat
   },
 
   /**

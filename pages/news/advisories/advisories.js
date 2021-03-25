@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cityCode: '5101', //todo 暂定成都
-    cityName: '成都', //todo 暂定成都
+    cityCode: app.globalData.cityCode,
+    cityName: app.globalData.cityName,
     tabs: [{
         name: '推荐',
         type: 100,

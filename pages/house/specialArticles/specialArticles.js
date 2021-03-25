@@ -14,7 +14,7 @@ Page({
     htmlUrls: [],
     htmlContents: ['', '', ''],
     htmlContent: '',
-    cityCode: '5101', //todo 暂时定为成都
+    cityCode: app.globalData.cityCode
   },
 
   /**

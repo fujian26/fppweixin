@@ -189,8 +189,8 @@ Page({
         type: tabData.type,
         pageIndex: tabData.pageIndex,
         pageSize: 20,
-        lng: 103.92377, // todo 暂定成都
-        lat: 30.57447 // todo 暂定成都
+        lng: app.globalData.lng,
+        lat: app.globalData.lat
       },
       success(res) {
         if (res.data.code != 0) {

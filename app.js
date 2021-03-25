@@ -87,7 +87,11 @@ App({
     })
   },
   globalData: {
+    cityCode: '5101', //todo 暂定成都
+    cityName: '成都',
     userInfo: null,
+    lng: 103.92377, // todo 暂定成都
+    lat: 30.57447, // todo 暂定成都    
     baseUrl: 'https://fang.bigdnsoft.cn/fpp',
     token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1YmFiNjU2MS1lZDhmLTRiMDQtYTQyOC1iNTc4M2VlNmMxZmQiLCJpYXQiOjE2MTYxNjU5NzMsImV4cCI6MTYxNjc3MDc3M30.n6iNHtUGlYifq-5FWwvYfaQ8toRB4hawhoLV3Hv8_MS7MdQKaaATvuIZ8BzvHiekOsBPNqzLbC_PPruRMlxFcQ',
   }

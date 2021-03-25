@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cityCode: '5101', // todo 暂定成都
+    cityCode: app.globalData.cityCode,
     baseBarHeight: 0,
     tabBarHeight: 0,
     scrollHeight: 0,
