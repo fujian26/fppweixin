@@ -1,0 +1,86 @@
+/* components/msg/dialogitem/inner/inner.wxss */
+.text {
+  color: #666666;
+  font-size: 24rpx;
+  background-color: white;
+  margin: 0;
+  padding: 20rpx 30rpx;
+  border-radius: 10rpx;
+}
+
+.image {
+  width: 300rpx;
+  height: 420rpx;
+  border-radius: 10rpx;
+}
+
+.house {
+  width: 420rpx;
+  padding-bottom: 26rpx;
+  border-radius: 10rpx;
+  background-color: white;
+}
+
+.house .img {
+  width: 100%;
+  height: 200rpx;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+}
+
+.house .name {
+  color: #333333;
+  font-size: 24rpx;
+  margin: 0 26rpx;
+  margin-top: 22rpx;
+  padding: 0;
+}
+
+.house .tags {
+  margin: 0 24rpx;
+  margin-top: 12rpx;
+  padding: 0;
+}
+
+.tags .tag {
+  color: #3E66D5;
+  font-size: 18rpx;
+  padding: 4rpx 10rpx;
+  background-color: #99CCFF;
+  border-radius: 16rpx;
+  margin: 0;
+  margin-right: 6rpx;
+}
+
+.house .room {
+  margin: 0 26rpx;
+  margin-top: 14rpx;
+  padding: 0;
+  color: #666666;
+  font-size: 20rpx;  
+}
+
+.house .price {
+  color: #3E66D5;
+  font-size: 30rpx;
+  margin: 0 26rpx;
+  margin-top: 16rpx;
+  padding: 0;
+}
+
+.voice {
+  color: #666666;
+  font-size: 24rpx;
+  margin: 0;
+  padding: 0 18rpx;
+  background-color: white;
+  border-radius: 10rpx;
+}
+
+.voice image {
+  width: 100rpx;
+  height: 60rpx;
+  margin: 0;
+  padding: 0;
+  margin-right: 8rpx;
+}

@@ -1,0 +1,18 @@
+<!--components/msg/dialogitem/dialogitem.wxml-->
+<view wx:if="{{!senderIsMe && msg.date == undefined}}" class="item hflex-container">
+  <image class="avatar" src="{{otherUser.avatar}}" />
+  <view class="divid" />
+  <view class="msg hflex-container" style="justify-content: flex-start;">
+    <msg-dialogitem-inner msg="{{msg}}" />
+  </view>
+</view>
+
+<view wx:if="{{senderIsMe && msg.date == undefined}}" class="item hflex-container">
+  <view class="msg hflex-container" style="justify-content: flex-end;">
+    <msg-dialogitem-inner msg="{{msg}}" />
+  </view>
+  <view class="divid" />
+  <image class="avatar" src="{{otherUser.avatar}}" />
+</view>
+
+<view wx:if="{{msg.date != undefined}}" class="time">{{msg.date}}</view>

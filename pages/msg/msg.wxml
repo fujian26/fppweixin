@@ -1,3 +1,7 @@
 <!--pages/msg/msg.wxml-->
-<basebar leftAction="" centerText="消息" bind:tapRight="rightTapFromBar"></basebar>
-<text>pages/msg/msg.wxml</text>
+<view class="pagecontainer">
+  <basebar leftAction="" centerText="消息"></basebar>
+  <scroll-view class="sv" bindscrolltolower="loadMore" bindrefresherrefresh="onRefresh" refresher-triggered="{{refreshTrigger}}" refresher-enabled="true" scroll-y>
+    <msg-listitem wx:for="{{dialogs}}" wx:key="id" recentDialog="{{item}}" />
+  </scroll-view>
+</view>

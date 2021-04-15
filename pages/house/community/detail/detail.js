@@ -66,7 +66,8 @@ Page({
         }
 
         var streetName = community.street_name != null && community.street_name.length > 0 ? ('-' + community.street_name) : ''
-        var locationStr = community.city_name + '-' + community.area_name + streetName
+        var locationStr = community.city_name + '-' + community.area_name +
+          '-' + community.detail_addr
 
         that.setData({
           community: community,
@@ -150,7 +151,7 @@ Page({
 
   },
 
-  tapAddr(event) {    
+  tapAddr(event) {
 
     let community = this.data.community
     console.log('tapAddr, lng: ' + community.lng + ', lat: ' + community.lat)
@@ -194,7 +195,7 @@ Page({
   },
 
   tapMoreComments(event) {
-    
+
     console.log('tapMoreComments')
     let community = this.data.community
 
@@ -260,11 +261,11 @@ Page({
               title: '提示',
               showCancel: false,
               content: config.server.tokenExpiredTip,
-              success (res) {
+              success(res) {
                 if (res.confirm) {
-                  
+
                 } else if (res.cancel) {
-                  
+
                 }
               }
             })
@@ -382,14 +383,14 @@ Page({
         if (res.data.code != 0 || res.data.data == null) {
           console.error('getAttentionData success code != 0, msg ' + res.data.msg)
           wx.showToast({
-            title: '数据拉取失败'  + res.data.msg,
+            title: '数据拉取失败' + res.data.msg,
             icon: 'none'
           })
-        } else {        
+        } else {
 
           that.setData({
             attentionNum: res.data.data.attentionCount,
-            attentioned: res.data.data.attentioned,            
+            attentioned: res.data.data.attentioned,
           })
         }
       },
@@ -410,7 +411,7 @@ Page({
 
   doAttention() {
 
-    let community = this.data.community  
+    let community = this.data.community
     if (community == null) {
       console.error(TAG + ' doAttention community == null')
       return
@@ -444,21 +445,21 @@ Page({
               title: '提示',
               showCancel: false,
               content: config.server.tokenExpiredTip,
-              success (res) {
+              success(res) {
                 if (res.confirm) {
-                  
+
                 } else if (res.cancel) {
-                  
+
                 }
               }
             })
           } else {
             wx.showToast({
-              title: '操作失败 '  + res.data.msg,
+              title: '操作失败 ' + res.data.msg,
               icon: 'none'
             })
           }
-        } else {        
+        } else {
 
           wx.showToast({
             title: '操作成功',
@@ -467,7 +468,7 @@ Page({
 
           that.setData({
             attentionNum: res.data.data.attentionCount,
-            attentioned: res.data.data.attentioned,            
+            attentioned: res.data.data.attentioned,
           })
         }
       },

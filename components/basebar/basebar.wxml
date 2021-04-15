@@ -4,5 +4,5 @@
   <text class="cuIcon-{{leftAction}} left" style="color: {{iconColor}}" bindtap="tapLeft"></text>
   <text class="center" style="color: {{centerColor}}">{{centerText}}</text>
   <!-- <text class="cuIcon-{{rightIcon}} right" style="color: {{iconColor}}" bindtap="tapRight"></text> -->
-  <view style="width: 200rpx;"></view>
+  <!-- <view style="width: 200rpx;"></view> -->
 </view>

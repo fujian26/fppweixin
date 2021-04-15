@@ -62,9 +62,10 @@
         </view>
 
         <!-- 学校地址 -->
-        <view class="hflex-container" style="margin-top: 4rpx;">
+        <view bindtap="tapAddr" class="hflex-container addr" style="margin-top: 4rpx;">
           <view class="label">学校地址：</view>
           <view class="label">{{addr}}</view>
+          <image class="arrow" src="/images/arrow_grey_right.png" />
         </view>
       </view>
 
@@ -146,10 +147,11 @@
         <text class="cuIcon-right" style="margin-left: 4rpx; color: #cccccc; font-size: 22rpx;" />
       </view>
     </view>
-
-    <house-item wx:for="{{houses}}" wx:key="id" data-index="{{index}}" house="{{item}}"
-      community="{{item.community}}" style="padding-left: 28rpx; padding-right: 28rpx"/>
   </view>
+
+  <view style="padding-left: 28rpx; padding-right: 28rpx">
+    <house-item wx:for="{{houses}}" wx:key="id" data-index="{{index}}" house="{{item}}" community="{{item.community}}"/>  
+  </view>  
 
   <view style="background-color: #f6f6f6; height: 14rpx;" />
 
@@ -169,26 +171,10 @@
       </view>
     </view>
 
-    <view style="margin: 0 28rpx; padding-top: 28rpx;">
-      <news-item news="{{item}}" wx:for="{{dynamics}}" wx:key="id" />
-    </view>
+  </view>
 
-    <!-- <view class="item" data-index="{{index}}" bindtap="tapDynamicItem" wx:if="{{dynamics != null}}"
-      wx:for="{{dynamics}}" wx:key="id">
-
-      <view class="hflex-container">
-        <image src="{{item.pic_path}}" />
-        <view class="content">
-          <view class="title">{{item.title}}</view>
-          <view class="brief">{{item.brief}}</view>
-          <view wx:if="{{item.distanceTime != null}}" class="small">{{item.distanceTime}}</view>
-        </view>
-      </view>
-
-      <view class="line" />
-
-    </view> -->
-
+  <view style="margin: 0 28rpx; padding-top: 28rpx;">
+    <news-item news="{{item}}" wx:for="{{dynamics}}" wx:key="id" />
   </view>
 
 </scroll-view>

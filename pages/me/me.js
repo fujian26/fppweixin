@@ -1,12 +1,17 @@
 // pages/me/me.js
+
+import appjs from '../../app.js'
+
 let app = getApp()
 Component({
 
   created() {
-    setInterval(() => {
+
+    setTimeout(() => {
       this.setData({
         userInfo: app.globalData.userInfo
       })
+      console.log('app.globalData.userInfo', app.globalData.userInfo)
     }, 16)
   },
 
@@ -165,7 +170,9 @@ Component({
           city: res.userInfo.city
         },
         success(res) {
-          app.globalData.token = res.data.data
+          app.globalData.token = res.data.data.token
+          app.globalData.uid = res.data.data.uid
+          appjs.initWss(res.data.data, app)
           that.setData({
             userInfo: userInfo
           })
@@ -195,6 +202,6 @@ Component({
       } else {
         this.obtainToken(true, app.globalData.loginCode, res)
       }
-    }
+    },
   }
 })

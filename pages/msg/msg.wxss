@@ -1,1 +1,7 @@
 /* pages/msg/msg.wxss */
+.sv {
+  padding-left: 26rpx;
+  padding-right: 26rpx;
+  flex: 1;
+  flex-grow: 1;
+}

@@ -147,3 +147,9 @@
   margin: 0 20rpx;
   margin-bottom: 4rpx;
 }
+
+.addr .arrow {
+  width: 12rpx;
+  height: 20rpx;
+  margin-left: 14rpx;
+}

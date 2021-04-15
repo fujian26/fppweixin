@@ -15,3 +15,23 @@
   width: 80rpx;
   height: 80rpx;
 }
+
+.nav-msg {
+  
+}
+
+.nav-msg .redpoint {  
+  position: absolute;
+  width: 40rpx;
+  height: 40rpx;
+  display: inline-block;
+  padding: 9rpx 10rpx;
+  background-color: salmon;
+  border-radius: 50%;
+  font-size: 20rpx;
+  color: white;
+  text-align: center;
+  top: -20rpx;
+  left: 100rpx;
+}
+

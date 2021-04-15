@@ -1,0 +1,17 @@
+<!--components/msg/dialogitem/inner/inner.wxml-->
+<view wx:if="{{msg.type == 0}}" class="text">{{msg.contentObj}}</view>
+<image bindtap="tapImg" mode="heightFit" wx:if="{{msg.type == 1}}" src="{{msg.contentObj.url}}" class="image" />
+<video id="mvideo" controls="{{true}}" binderror="onVideoError" bindplay="onVideoPlay" wx:if="{{msg.type == 2}}" object-fit="contain" src="{{msg.contentObj.url}}" class="image" />
+<view bindtap="tapHouse" wx:if="{{msg.type == 3}}" class="house vlfex-container">
+  <image src="{{msg.contentObj.url}}" class="img" />
+  <view class="name">{{msg.contentObj.name}}</view>
+  <view class="tags hflex-container" wx:if="{{msg.contentObj.tags != null && msg.contentObj.tags.length > 0}}">
+    <view class="tag" wx:for="{{msg.contentObj.tags}}" wx:key="id">{{item}}</view>
+  </view>
+  <view class="room">{{msg.contentObj.roomShowStr}} | {{msg.contentObj.square}}㎡</view>
+  <view class="price">{{msg.contentObj.totalPriceStr}}万</view>
+</view>
+<view bindtap="tapVoice" class="hflex-container voice" wx:if="{{msg.type == 5}}">
+  <image src="{{playing ? '/images/voice_playing.png' : '/images/voice.png'}}"/>
+  <view>{{msg.contentObj.duration}}s</view>
+</view>

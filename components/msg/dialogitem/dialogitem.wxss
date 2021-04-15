@@ -1,0 +1,35 @@
+/* components/msg/dialogitem/dialogitem.wxss */
+
+.item {
+  align-items: flex-start;
+  border-radius: 10rpx;
+  margin: 84rpx 0;
+}
+
+.msg {
+  flex: 1;
+  flex-grow: 1;
+}
+
+.avatar {
+  width: 66rpx;
+  height: 66rpx;
+  border-radius: 50%;
+}
+
+.divid {
+  width: 26rpx;
+  height: 2rpx;
+  background-color: transparent;
+}
+
+.time {
+  color: white;
+  font-size: 20rpx;
+  border-radius: 20rpx;
+  padding: 8rpx 16rpx;
+  background-color: #CCCCCC;
+  width: 20%;
+  margin: 84rpx auto;
+  text-align: center;
+}

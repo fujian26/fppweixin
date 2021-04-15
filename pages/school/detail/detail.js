@@ -134,9 +134,9 @@ Page({
           entranceMode = '直读'
         }
 
-        var addr = school.province_name + school.city_name +
-          school.area_name + school.street_name +
-          school.detail_addr
+        var addr = school.city_name + '-'
+          + school.area_name + '-'
+          + school.detail_addr
 
         that.setData({
           schoolExt: res.data,
@@ -594,5 +594,21 @@ Page({
       },
       complete(res) {}
     })
-  }
+  },
+
+  tapAddr(event) {
+
+    let school = this.data.schoolExt.school
+    console.log('tapAddr, lng: ' + school.lng + ', lat: ' + school.lat)
+
+    wx.navigateTo({
+      url: '/pages/map/show/show?lng=' + school.lng + '&lat=' + school.lat,
+      success: function (res) {
+
+      },
+      fail(res) {
+        console.error(tag + ' tapAddr fail ' + res.errMsg)
+      }
+    })
+  },  
 })

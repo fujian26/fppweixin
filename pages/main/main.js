@@ -36,7 +36,7 @@ Component({
 
       {
         id: 3,
-        str: '看咨询',
+        str: '看资讯',
         image: '/images/query_question.png'
       },
 

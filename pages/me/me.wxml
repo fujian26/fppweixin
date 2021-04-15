@@ -43,12 +43,13 @@
 
   <view class="line" />
 
-  <view class="hflex-container list">
+  <!-- 不需要退出登录 -->
+  <!-- <view class="hflex-container list">
     <image src="/images/me_logout.png" style="width: 38rpx; height: 34rpx" />
     <view class="label" style="margin-left: 18rpx;">退出账号</view>
     <view class="holder"></view>
     <image bindtap="tapLogout" src="/images/me_power.png" style="width: 36rpx; height: 36rpx" />    
-  </view>
+  </view> -->
 
   <view class="line" />
 

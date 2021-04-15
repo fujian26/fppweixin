@@ -1,0 +1,18 @@
+<!--components/msg/listitem/listitem.wxml-->
+<view bindtap="tapItem" style="background-color: white;">
+  <view class="item hflex-container">
+    <image src="{{recentDialog.otherUser.avatar}}" class="avatar" />
+    <view class="right vflex-container">
+      <view class="hflex-container" style="width: 100%;">
+        <view class="title">{{recentDialog.otherUser.nick}}</view>
+        <view class="time">{{showTime}}</view>
+      </view>
+
+      <view class="hflex-container" style="margin-top: 4rpx; width: 100%;">
+        <view class="content">{{content}}</view>
+        <view wx:if="{{recentDialog.unread > 0}}" class="redpoint" />
+      </view>
+    </view>
+  </view>
+  <view class="divid" />
+</view>

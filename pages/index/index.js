@@ -11,15 +11,33 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    pageName: 'main'
+    pageName: 'main',
+    unreadNum: 0
   },
+
   // 事件处理函数
   bindViewTap() {
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
+
+  initListeners() {
+    let that = this
+    app.globalData.bus.on('msgNum', () => {
+      that.setData({
+        unreadNum: app.globalData.unReadMsgNum
+      })
+    })
+  },
+
   onLoad() {
+    
+    this.initListeners()
+    this.setData({
+      unreadNum: app.globalData.unReadMsgNum
+    })
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

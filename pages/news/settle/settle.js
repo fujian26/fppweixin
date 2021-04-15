@@ -235,4 +235,11 @@ Page({
     })
 
   },
+
+  tapSwitch(event) {
+    console.log('tapSwitch')
+    this.setData({
+      showBottom: true
+    })
+  }
 })

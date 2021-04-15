@@ -16,7 +16,10 @@ Page({
     comments: [],
     commentsTotal: 0,
     showEdit: false,
-    pageShowed: false
+    pageShowed: false,
+    fromWhere: '',
+    author: '',
+    publishTimeStr: ''
   },
 
   /**
@@ -138,13 +141,32 @@ Page({
             return
           }
 
+          var author = ''
+          if (newsDetail.news_author != null && newsDetail.news_author.length > 0) {
+            author = newsDetail.news_author + ' '
+          }
+
+          var fromWhere = ''
+          if (newsDetail.from_where != null && newsDetail.from_where.length > 0) {
+            fromWhere = '转: ' + newsDetail.from_where
+          }
+
+          var publishTimeStr = ''
+          if (fromWhere.length > 0 || author.length > 0) {
+            publishTimeStr = ' | '
+          }
+          publishTimeStr += newsDetail.publish_time
+
           console.log('newsDetail.file_path ' + newsDetail.file_path)
 
           that.getHtmlContent(newsDetail.id, newsDetail.file_path)
           that.getComments()
 
           that.setData({
-            newsDetail: newsDetail
+            newsDetail: newsDetail,
+            fromWhere: fromWhere,
+            author: author,
+            publishTimeStr: publishTimeStr
           })
         }
       },

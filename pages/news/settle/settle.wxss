@@ -6,7 +6,7 @@
   padding-left: 30rpx;
   padding-right: 30rpx;
   box-sizing: border-box;
-  text-align: center;
+  text-align: left;
   color: #333333;
   font-size: 30rpx;
 }
@@ -79,4 +79,16 @@
   padding: 0;  
   background-color: #E5E5E5;
   margin-top: 40rpx;
+}
+
+.btn {
+  margin: 32rpx auto;
+  width: 60%;
+  padding: 16rpx 8rpx;
+  justify-content: center;
+  background-color: #99CCFF;
+  border-radius: 20rpx;
+  color: #3E66D5;
+  font-size: 30rpx;
+  text-align: center;
 }

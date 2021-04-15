@@ -18,6 +18,10 @@
     <mp-html content="{{html}}" lazy-load="true" />
   </view>
 
+  <view class="hflex-container" style="background-color: white;">
+    <view bindtap="tapSwitch" class="hflex-container btn">选择落户方式</view>
+  </view>
+
 </scroll-view>
 
 <view class="cu-modal bottom-modal {{showBottom ? 'show' : ''}}">

@@ -5,9 +5,9 @@
   <view class="hflex-container" style="margin-left: 30rpx; margin-right: 30rpx;">
     <image style="width: 22rpx; height: 14rpx;" src="/images/ic_watch.png" />
     <view class="watch-num">{{newsDetail.watch_num}}</view>
-    <view class="holder" />
-    <view wx:if="{{newsDetail.from != null}}" class="from-text">{{newsDetail.from}} | </view>
-    <view class="time-text">{{newsDetail.publish_time}}</view>
+    <!-- <view class="holder" /> -->
+    <!-- <view wx:if="{{newsDetail.from != null}}" class="from-text">{{newsDetail.from}} | </view> -->
+    <view class="time-text">{{author}}<span>{{fromWhere}}</span>{{publishTimeStr}}</view>
   </view>
 
   <view class="line" />

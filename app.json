@@ -30,7 +30,8 @@
     "pages/news/advisories/inner/inner",
     "pages/me/attentions/attentions",
     "pages/webpage/webpage",
-    "pages/school/dynamiclist/dynamiclist"
+    "pages/school/dynamiclist/dynamiclist",
+    "pages/msg/dialog/dialog"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",
@@ -55,6 +56,9 @@
     "house-recommend": "/components/house/recommend/recommend",
     "school-item": "/components/school/item/item",
     "news-item": "/components/news/item/item",
+    "msg-listitem": "/components/msg/listitem/listitem",
+    "msg-dialogitem": "/components/msg/dialogitem/dialogitem",
+    "msg-dialogitem-inner": "/components/msg/dialogitem/inner/inner",
     "mp-html": "mp-html"
   },
   "sitemapLocation": "sitemap.json",

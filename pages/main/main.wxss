@@ -19,7 +19,7 @@
   padding-right: 20rpx;
   padding-bottom: 48rpx;
   color: #666666;
-  font-size: 20rpx;
+  font-size: 22rpx;
 }
 
 .below-search-item {

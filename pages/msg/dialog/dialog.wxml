@@ -1,0 +1,32 @@
+<!--pages/msg/dialog/dialog.wxml-->
+<view class="pagecontainer" style="background-color: #F6F6F6;">
+
+  <basebar id="basebar" centerText="{{title}}"></basebar>
+
+  <scroll-view class="sv" scroll-into-view="{{svToView}}" style="height: {{svHeight}}rpx" refresher-triggered="{{refreshTrigger}}" refresher-enabled="true" bindrefresherrefresh="loadMore" scroll-y bindscroll="onSvScroll">
+    <msg-dialogitem id="msg-{{index}}" wx:for="{{msgs}}" wx:key="id" msg="{{item}}" otherUser="{{otherUser}}" />
+  </scroll-view>
+
+  <view class="divid"/>
+  <view class="input-panel hflex-container">
+    <image bindtap="tapRecord" src="/images/dialog_record.png" class="icon" />
+    <view wx:if="{{recordMode}}" bindtouchstart="startRecord" bindtouchend="endRecord" class="recordTip">{{recording ? '松开停止录音' : '按住说话'}}</view>
+    <input class="input" value="{{inputValue}}" bindinput="onInput" wx:if="{{!recordMode}}" />
+    <image bindtap="tapAdd" src="/images/dialog_add.png" class="icon" />
+    <view bindtap="tapSend" class="btn">发送</view>
+  </view>
+
+  <view class="hflex-container more-panel" wx:if="{{showMorePanel}}">
+    <view bindtap="tapImage" class="item">图片</view>
+    <view bindtap="tapVideo" class="item">视频</view>
+  </view>
+</view>
+
+<view class="cu-modal {{recording ? 'show': ''}}">
+  <view class="cu-dialog recording-dialog">
+    <view class="mic-container vflex-container">
+      <image src="/images/mic.png" class="mic" />
+      <view class="text">正在录音</view>
+    </view>    
+  </view>
+</view>
