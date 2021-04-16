@@ -21,7 +21,6 @@ Component({
     mainRefreshing: false,
     cityCode: app.globalData.cityCode,
     swiperList: [],
-
     belowSearchItems: [{
         id: 1,
         str: '查学校',
@@ -46,6 +45,7 @@ Component({
         image: '/images/read_policy.png'
       }
     ],
+    rollNews: [], // 滚动新闻
     hotMsg: '成都发布最新楼市政策，全国楼市变化来袭？',
     cardsline1: [{
         id: 1,
@@ -242,7 +242,7 @@ Component({
         },
         data: {
           'pageIndex': 0,
-          'pageSize': 10,
+          'pageSize': 5,
         },
         success(res) {
           console.log('getHotSchools success')
@@ -539,7 +539,7 @@ Component({
 
           if (res.data.data.length == 0) {
             console.error('getAdvisories res.data.data.length == 0')
-            that.data.advisoryIndex = 0            
+            that.data.advisoryIndex = 0
             return
           }
 
@@ -629,10 +629,10 @@ Component({
           wx.showToast({
             title: '数据错误: ' + res.errMsg,
             icon: 'none'
-          })          
+          })
         },
         complete(res) {
-          
+
         }
       })
     },
@@ -643,7 +643,8 @@ Component({
       this.getHotCommunities(false)
       this.getHotHouses(false)
       this.getAdvisories(false)
-    },    
+      this.getRollNews()
+    },
 
     mainRefresh(event) {
       console.log('mainRefresh')
@@ -653,6 +654,63 @@ Component({
       //     mainRefreshing: false
       //   })
       // }, 2000);
+    },
+
+    getRollNews() {
+
+      let that = this
+
+      wx.request({
+        url: app.globalData.baseUrl + '/news/getVariatyNewsList',
+        method: 'GET',
+        header: {
+          'token': app.globalData.token,
+          'content-type': 'application/json'
+        },
+        data: {
+          id: 0,
+          type: 7,
+          pageIndex: 0,
+          pageSize: 30
+        },
+        success(res) {
+          if (res.data.code != 0 || res.data.data == null) {
+            console.error('getRollNews res.data.code != 0: ', res.data.msg)
+            wx.showToast({
+              title: '数据错误',
+              icon: 'none'
+            })
+            return
+          }
+
+          that.setData({
+            rollNews: res.data.data
+          })
+        },
+        fail(res) {
+          console.error('getRollNews fail: ', res)
+          wx.showToast({
+            title: '数据错误 ' + res.errMsg,
+            icon: 'none'
+          })
+        }
+      })
+    },
+
+    tapHotNews(event) {
+      let index = event.currentTarget.dataset.index
+      let news = this.data.rollNews[index]
+      console.log('tapHotNews index', index)
+
+      wx.navigateTo({
+        url: '/pages/news/detail/detail?newsId=' + news.id + '&title=新闻',
+        success: function (res) {
+
+        },
+        fail(res) {
+          console.error('tapItem navigateTo fail ' + res.errMsg)
+        }
+      })
     }
   },
 })

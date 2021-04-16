@@ -1,5 +1,6 @@
 <!--pages/main/main.wxml-->
-<scroll-view refresher-enabled="true" refresher-triggered="{{mainRefreshing}}" bindrefresherrefresh="mainRefresh" scroll-y class="scrollPage" bindscroll="onScrolled">
+<scroll-view refresher-enabled="true" refresher-triggered="{{mainRefreshing}}" bindrefresherrefresh="mainRefresh"
+  scroll-y class="scrollPage" bindscroll="onScrolled">
   <!-- 顶部新闻滚动图 -->
   <swiper class="screen-swiper square-dot" style="height: 544rpx;" indicator-dots="false" circular="true"
     autoplay="true" interval="5000" duration="500">
@@ -29,11 +30,16 @@
   </view>
 
   <!-- 热点新闻条 -->
-  <view class="hot-msgs">
-    <view class="hot-msg" bindtap="hotMsgTap">
-      <image src="/images/hot_msg.png" style="width: 24rpx; height: 30rpx;" />
-      <text style="margin-left: 14rpx">{{hotMsg}}</text>
-    </view>
+  <view wx:if="{{rollNews.length > 0}}" class="hot-msgs">
+    <swiper indicator-dots="{{false}}" vertical="true" circular="false" autoplay="true" interval="5000" duration="600"
+      style="height: 72rpx;">
+      <swiper-item bindtap="tapHotNews" data-index="{{index}}" wx:for="{{rollNews}}" wx:key>
+        <view class="hot-msg" bindtap="hotMsgTap">
+          <image src="/images/hot_msg.png" style="width: 24rpx; height: 30rpx;" />
+          <view class="text">{{item.title}}</view>
+        </view>
+      </swiper-item>
+    </swiper>
   </view>
 
   <!-- 小学划片、小升初... -->
