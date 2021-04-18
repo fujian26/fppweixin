@@ -56,7 +56,7 @@ Page({
           textColor: '#FFFFFF'
         })
 
-        if (community.tags != null) {
+        if (community.tags != null && community.tagList != null) {
           for (var i = 0; i < community.tagList.length; i++) {
             tags.push({
               str: community.tagList[i],

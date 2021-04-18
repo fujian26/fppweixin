@@ -17,7 +17,7 @@ let initWss = function (token, app) {
   }
 
   wss = wx.connectSocket({
-    url: 'wss://fang.bigdnsoft.cn/websocket/' + token,
+    url: app.globalData.wssUrl + token,
     header: {
       'content-type': 'application/json'
     },
@@ -230,7 +230,8 @@ App({
     userInfo: null,
     lng: 103.92377, // todo 暂定成都
     lat: 30.57447, // todo 暂定成都
-    baseUrl: 'https://fang.bigdnsoft.cn',
+    baseUrl: 'https://fang.bigdnsoft.cn/fpp',
+    wssUrl: 'wss://fang.bigdnsoft.cn/fpp/websocket/',
     token: '',
     uid: '',
     bus: eventbus.eventBus,
