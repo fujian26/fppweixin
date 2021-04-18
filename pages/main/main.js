@@ -256,13 +256,15 @@ Component({
             console.log('获取热门学校成功，数量: ' + res.data.data.length)
 
             var showSchools = []
-            for (var i = 0; i < 5 && i < res.data.data.length; i++) {
+            for (var i = 0; i < res.data.data.length; i++) {
               showSchools.push(res.data.data[i])
             }
 
+            console.log('---', showSchools)
+
             that.setData({
               hotSchools: showSchools,
-              hotSchoolTotal: res.data.data.length
+              hotSchoolTotal: Number(res.header.total)
             })
           }
         },
@@ -318,6 +320,8 @@ Component({
               })
             }
           } else {
+
+            console.log('---热门小区', res.data.data)
 
             if (res.data.data == null) {
               console.error('getHotCommunities res.data.data == null')
@@ -638,6 +642,11 @@ Component({
     },
 
     doRefresh() {
+
+      this.data.hotCommunityPageIndex = 0
+      this.data.houseIndex = 0
+      this.data.advisoryIndex = 0
+
       this.getAds()
       this.getHotSchools()
       this.getHotCommunities(false)

@@ -25,7 +25,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function (options) {    
     wx.setNavigationBarColor({
       frontColor: '#000000',
       backgroundColor: '#00000000',
@@ -93,6 +93,8 @@ Page({
 
         var schoolExt = res.data
         var school = res.data.school
+
+        that.addVisit(school.id)
 
         var typeStr = ''
         switch (school.type) {
@@ -610,5 +612,29 @@ Page({
         console.error(tag + ' tapAddr fail ' + res.errMsg)
       }
     })
-  },  
+  },
+
+  addVisit(schoolId) {
+
+    wx.request({
+      url: app.globalData.baseUrl + '/school/addHotSchoolVisit',
+      method: 'POST',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        schoolId: Number(schoolId)
+      },
+      success(res) {
+        if (res.data.code != 0) {
+          console.error('addVisit res.data.code != 0', res.data.msg)
+          return
+        }
+      },
+      fail(res) {
+        console.error('addVisit fail', res.errMsg)
+      }
+    })
+  }
 })

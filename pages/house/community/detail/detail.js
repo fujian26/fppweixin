@@ -32,6 +32,7 @@ Page({
       success(res) {
 
         var community = res.data
+        that.addVisitCount(community.id)
 
         var buildTypeStr = ''
         switch (community.building_type) {
@@ -486,5 +487,27 @@ Page({
       }
     })
 
-  }
+  },
+
+  addVisitCount(communityId) {
+    wx.request({
+      url: app.globalData.baseUrl + '/house/addCommunityVisit',
+      method: "POST",
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        communityId: Number(communityId)
+      },
+      success(res) {
+        if (res.data.code != 0) {
+          console.error('addVisitCount res.data.code != 0', res.data.msg)
+        }
+      },
+      fail(res) {
+        console.error('addVisitCount fail', res.errMsg)
+      }
+    })
+  }  
 })

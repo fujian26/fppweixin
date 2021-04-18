@@ -131,6 +131,8 @@ Page({
         var house = res.data
         var community = house.community
 
+        that.addVisitCount(house.id)
+
         if (house.source_type == 1) {
           title = '法拍房房源详情'
           var nameMarginTop = that.data.nameMarginTop
@@ -177,7 +179,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**
@@ -357,11 +359,11 @@ Page({
               title: '提示',
               showCancel: false,
               content: config.server.tokenExpiredTip,
-              success (res) {
+              success(res) {
                 if (res.confirm) {
-                  
+
                 } else if (res.cancel) {
-                  
+
                 }
               }
             })
@@ -518,5 +520,27 @@ Page({
     if (legalSalingExpired) {
       return
     }
+  },
+
+  addVisitCount(houseId) {
+    wx.request({
+      url: app.globalData.baseUrl + '/house/addHouseVisit',
+      method: "POST",
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        houseId: Number(houseId)
+      },
+      success(res) {
+        if (res.data.code != 0) {
+          console.error('addVisitCount res.data.code != 0', res.data.msg)
+        }
+      },
+      fail(res) {
+        console.error('addVisitCount fail', res.errMsg)
+      }
+    })
   }
 })
