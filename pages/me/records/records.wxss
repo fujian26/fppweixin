@@ -1,0 +1,13 @@
+/* pages/me/records/records.wxss */
+
+.divid {
+  width: 100%;
+  height: 14rpx;
+  background-color: #f6f6f6;
+}
+
+.item-divid {
+  background-color: #E6E6E6;
+  height: 2rpx;
+  margin-top: 32rpx;
+}

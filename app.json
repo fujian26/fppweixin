@@ -31,7 +31,8 @@
     "pages/me/attentions/attentions",
     "pages/webpage/webpage",
     "pages/school/dynamiclist/dynamiclist",
-    "pages/msg/dialog/dialog"
+    "pages/msg/dialog/dialog",
+    "pages/me/records/records"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

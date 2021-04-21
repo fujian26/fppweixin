@@ -1,4 +1,6 @@
 // pages/school/detail/detail.js
+import config from '../../../config'
+
 const utils = require('../../../utils/util');
 let app = getApp()
 let TAG = 'detail.js'
@@ -20,6 +22,7 @@ Page({
     communityTotalNum: 0,
     houses: [],
     houseTotalNum: 0,
+    attentioned: false
   },
 
   /**
@@ -152,6 +155,7 @@ Page({
         that.getDetail(schoolExt.school)
         that.getCommunityList(schoolExt.school.id)
         that.getHouses(schoolExt.school.id)
+        that.getAttention(schoolExt.school.id)
       },
       fail(res) {
         console.log('basic created fail res: ' + res.errMsg)
@@ -617,8 +621,8 @@ Page({
   addVisit(schoolId) {
 
     wx.request({
-      url: app.globalData.baseUrl + '/school/addHotSchoolVisit',
-      method: 'POST',
+      url: app.globalData.baseUrl + '/user/visitSchool',
+      method: 'GET',
       header: {
         'token': app.globalData.token,
         'content-type': 'application/json'
@@ -634,6 +638,142 @@ Page({
       },
       fail(res) {
         console.error('addVisit fail', res.errMsg)
+      }
+    })
+  },
+
+  getAttention(schoolId) {
+
+    if (utils.isStringEmpty(app.globalData.token)) {
+      console.error('is not logined, no need to getAttention')
+      return
+    }
+
+    let that = this
+
+    wx.showLoading({
+      title: '',
+    })
+
+    wx.request({
+      url: app.globalData.baseUrl + '/school/getAttention',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        schoolId: schoolId
+      },
+      success(res) {
+        if (res.data.code != 0) {
+          console.error('getAttention code != 0', res)
+          wx.showToast({
+            title: '数据错误',
+            icon: 'none'
+          })
+          return
+        }
+
+        that.setData({
+          attentioned: res.data.data
+        })
+      },
+      fail(res) {
+        console.error('getAttention fail', res)
+        wx.showToast({
+          title: '数据错误 ' + res.errMsg,
+          icon: 'none'
+        })        
+      },
+      complete(res) {
+        wx.hideLoading({
+          success: (res) => {},
+        })
+      }
+    })
+  },
+
+  tapAttention(event) {
+
+    console.log('tapAttention')
+
+    if (utils.isStringEmpty(app.globalData.token)) {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: config.server.tokenExpiredTip,
+        success(res) {
+          if (res.confirm) {
+
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+      return
+    }
+
+    let that = this
+    let attentioned = this.data.attentioned
+    let schoolId = this.data.schoolExt.school.id
+
+    wx.showLoading({
+      title: '',
+    })
+
+    wx.request({
+      url: app.globalData.baseUrl + '/school/attention',
+      method: 'POST',
+      header: {
+        'token': app.globalData.token,
+        'content-type': 'application/json'
+      },
+      data: {
+        schoolId: Number(schoolId),
+        attention: !attentioned
+      },
+      success(res) {
+        if (res.data.code != 0) {
+          
+          console.error('tapAttention code != 0', res)
+
+          if (res.data.code == config.server.tokenCode) {
+            wx.showModal({
+              title: '提示',
+              showCancel: false,
+              content: config.server.tokenExpiredTip,
+              success(res) {
+                if (res.confirm) {
+
+                } else if (res.cancel) {
+
+                }
+              }
+            })
+          } else {
+            wx.showToast({
+              title: '操作失败 ' + res.data.msg,
+              icon: 'none'
+            })
+          }          
+          return
+        }
+
+        that.setData({
+          attentioned: !attentioned
+        })
+      },
+      fail(res) {
+        console.error('tapAttention fail', res)
+        wx.showToast({
+          title: '操作失败 ' + res.errMsg,
+          icon: 'none'
+        })
+      },
+      complete(res) {
+        wx.hideLoading({
+          success: (res) => {},
+        })
       }
     })
   }

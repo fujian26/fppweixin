@@ -1,5 +1,5 @@
 <!--components/school/item/item.wxml-->
-<view class="background-color: white; width: 100%; padding-top: 32rpx;">
+<view style="background-color: white; width: 100%; padding-top: {{showPadding ? 32 : 0}}rpx; margin: 0;">
 
   <view bindtap="tapItem" class="hflex-container school-item">
 
@@ -27,5 +27,5 @@
     </view>
   </view>
 
-  <view class="divid" />
+  <view wx:if="{{showPadding}}" class="divid" />
 </view>

@@ -110,11 +110,16 @@ function byteToString(arr) {
   return str;
 }
 
+function isStringEmpty(str) {
+  return str == null || str == undefined || str.length == 0
+}
+
 module.exports = {
   formatTime,
   getDistanceTime,
   isSameDay,
   isToday,
   stringToByte,
-  byteToString
+  byteToString,
+  isStringEmpty
 }

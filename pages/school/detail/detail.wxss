@@ -46,12 +46,26 @@
 }
 
 .title {
+  flex: 1;
+  flex-grow: 1;
   color: #000000;
   font-size: 32rpx;
+  margin-right: 16rpx;
 }
 
 .basic {
   padding: 34rpx 28rpx;
+}
+
+.basic .attention {
+  padding: 0;
+  margin: 0;
+  margin-right: 16rpx;
+}
+
+.basic .attention image {
+  width: 34rpx;
+  height: 32rpx;
 }
 
 .blue-btn {

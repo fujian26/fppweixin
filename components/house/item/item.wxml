@@ -1,5 +1,5 @@
 <!--components/house/item/item.wxml-->
-<view bindtap="tapItem" class="vflex-container house">
+<view bindtap="tapItem" class="vflex-container house" style="padding-top: {{showPadding ? 34 : 0}}rpx">
 
   <view class="hflex-container" style="width: 100%;">
 
@@ -22,5 +22,5 @@
       <view class="content">{{line3Str}}</view>
     </view>
   </view>
-  <view class="divid" />
+  <view wx:if="{{showPadding}}" class="divid" />
 </view>

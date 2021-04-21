@@ -17,6 +17,10 @@ Component({
     showAddr: {
       type: Boolean,
       value: true
+    },
+    showPadding: {
+      type: Boolean,
+      value: true
     }
   },
 

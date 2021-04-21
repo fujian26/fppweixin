@@ -1,5 +1,6 @@
 // pages/house/community/detail/detail.js
 import config from '../../../../config.js'
+import util from '../../../../utils/util'
 
 let TAG = 'community-detail.js'
 let app = getApp()
@@ -174,6 +175,23 @@ Page({
 
   tapSendComment(event) {
     console.log('tapSendComment')
+
+    if (util.isStringEmpty(app.globalData.token)) {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: config.server.tokenExpiredTip,
+        success(res) {
+          if (res.confirm) {
+
+          } else if (res.cancel) {
+
+          }
+        }
+      })      
+      return
+    }
+
     this.setData({
       showEdit: true
     })
@@ -196,6 +214,22 @@ Page({
   },
 
   tapMoreComments(event) {
+
+    if (util.isStringEmpty(app.globalData.token)) {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: config.server.tokenExpiredTip,
+        success(res) {
+          if (res.confirm) {
+
+          } else if (res.cancel) {
+
+          }
+        }
+      })      
+      return
+    }    
 
     console.log('tapMoreComments')
     let community = this.data.community
@@ -365,6 +399,11 @@ Page({
 
     let that = this
 
+    if (util.isStringEmpty(app.globalData.token)) {
+      console.error('token is empty, no need to get getAttentionData')
+      return
+    }
+
     wx.showLoading({
       title: '',
     })
@@ -411,6 +450,22 @@ Page({
   },
 
   doAttention() {
+
+    if (util.isStringEmpty(app.globalData.token)) {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: config.server.tokenExpiredTip,
+        success(res) {
+          if (res.confirm) {
+
+          } else if (res.cancel) {
+
+          }
+        }
+      })      
+      return
+    }
 
     let community = this.data.community
     if (community == null) {
@@ -491,8 +546,8 @@ Page({
 
   addVisitCount(communityId) {
     wx.request({
-      url: app.globalData.baseUrl + '/house/addCommunityVisit',
-      method: "POST",
+      url: app.globalData.baseUrl + '/user/visitCommunity',
+      method: "GET",
       header: {
         'token': app.globalData.token,
         'content-type': 'application/json'

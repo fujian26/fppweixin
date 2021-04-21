@@ -1,5 +1,7 @@
 // pages/house/detail/detail.js
 import config from '../../../config.js'
+import util from '../../../utils/util'
+
 let tag = 'pages/house/detail/detail.js'
 let app = getApp()
 Page({
@@ -313,6 +315,22 @@ Page({
 
     console.log('tapComment')
 
+    if (util.isStringEmpty(app.globalData.token)) {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: config.server.tokenExpiredTip,
+        success(res) {
+          if (res.confirm) {
+
+          } else if (res.cancel) {
+
+          }
+        }
+      })      
+      return
+    }    
+
     let house = this.data.house
 
     wx.navigateTo({
@@ -328,7 +346,23 @@ Page({
 
   tapAttention(event) {
 
-    console.log('tapAttention')
+    console.log('tapAttention')    
+
+    if (util.isStringEmpty(app.globalData.token)) {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: config.server.tokenExpiredTip,
+        success(res) {
+          if (res.confirm) {
+
+          } else if (res.cancel) {
+
+          }
+        }
+      })      
+      return
+    }
 
     let that = this
     var attentioned = this.data.attentioned
@@ -401,6 +435,22 @@ Page({
     if (legalSalingExpired) {
       return
     }
+    
+    if (util.isStringEmpty(app.globalData.token)) {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: config.server.tokenExpiredTip,
+        success(res) {
+          if (res.confirm) {
+
+          } else if (res.cancel) {
+
+          }
+        }
+      })      
+      return
+    }    
   },
 
   tapCall(event) {
@@ -414,6 +464,23 @@ Page({
     }
 
     if (house.phone_num != null && house.phone_num.length > 0) {
+
+      if (util.isStringEmpty(app.globalData.token)) {
+        wx.showModal({
+          title: '提示',
+          showCancel: false,
+          content: config.server.tokenExpiredTip,
+          success(res) {
+            if (res.confirm) {
+  
+            } else if (res.cancel) {
+  
+            }
+          }
+        })      
+        return
+      }
+
       wx.makePhoneCall({
         phoneNumber: house.phone_num,
       })
@@ -423,6 +490,11 @@ Page({
   },
 
   queryAttention(houseId) {
+
+    if (util.isStringEmpty(app.globalData.token)) {
+      console.error('token is empty, no need to get queryAttention')
+      return
+    }    
 
     let that = this
 
@@ -524,8 +596,8 @@ Page({
 
   addVisitCount(houseId) {
     wx.request({
-      url: app.globalData.baseUrl + '/house/addHouseVisit',
-      method: "POST",
+      url: app.globalData.baseUrl + '/user/visitHouse',
+      method: "GET",
       header: {
         'token': app.globalData.token,
         'content-type': 'application/json'

@@ -55,7 +55,7 @@ let initWss = function (token, app) {
 }
 
 // 相当于获取未读数了
-let getRecentDialogs = function(app) {
+let getRecentDialogs = function (app) {
 
   wx.request({
     url: app.globalData.baseUrl + '/msg/getRecentDialogs',
@@ -96,7 +96,7 @@ let getRecentDialogs = function(app) {
       wx.showToast({
         title: '数据错误',
         icon: 'none'
-      })          
+      })
     }
   })
 }
@@ -123,64 +123,69 @@ App({
         var loginCode = res.code
         app.globalData.loginCode = res.code
 
-        wx.getUserInfo({
-          lang: 'zh_CN',
-          success(res) {
-            console.log('user info ' + res.userInfo.city +
-              ' ' + res.userInfo.province)
-            that.globalData.userInfo = res.userInfo
-
-            wx.request({
-              url: app.globalData.baseUrl + '/wx/obtainSession',
-              method: 'POST',
-              header: {
-                'content-type': 'application/json'
-              },
-              data: {
-                loginCode: loginCode,
-                rawData: res.rawData,
-                signature: res.signature,
-                encryptedData: res.encryptedData,
-                iv: res.iv,
-                nickName: res.userInfo.nickName,
-                avatarUrl: res.userInfo.avatarUrl,
-                gender: res.userInfo.gender,
-                country: res.userInfo.gender,
-                province: res.userInfo.province,
-                city: res.userInfo.city
-              },
-              success(res) {
-                console.log('obtainSession success res ', res.data.data)
-                app.globalData.token = res.data.data.token
-                app.globalData.uid = res.data.data.uid
-
-                initWss(res.data.data.token, app)
-                getRecentDialogs(app)
-              },
-              fail(res) {
-                console.error('obtainSession fail res ' + res.errMsg)
-              },
-              complete(res) {
-                wx.hideLoading({
-                  success: (res) => {},
-                })
-              }
-            })
-          },
-          fail(res) {
-            console.error('get userinfo fail ' + res.errMsg)
-            wx.hideLoading({
-              success: (res) => {},
-            })
-
-            wx.showModal({
-              title: '提示',
-              showCancel: false,
-              content: '授权失败，请前往[我的]页面完成授权登录',
-              success(res) {}
-            })
-          },
+        wx.hideLoading({
+          success: (res) => {},
         })
+
+        // wx.getUserInfo({
+        //   lang: 'zh_CN',
+        //   success(res) {
+
+        //     console.log('getUserInfo userInfo', res.userInfo)
+
+        //     that.globalData.userInfo = res.userInfo
+
+        //     wx.request({
+        //       url: app.globalData.baseUrl + '/wx/obtainSession',
+        //       method: 'POST',
+        //       header: {
+        //         'content-type': 'application/json'
+        //       },
+        //       data: {
+        //         loginCode: loginCode,
+        //         rawData: res.rawData,
+        //         signature: res.signature,
+        //         encryptedData: res.encryptedData,
+        //         iv: res.iv,
+        //         nickName: res.userInfo.nickName,
+        //         avatarUrl: res.userInfo.avatarUrl,
+        //         gender: res.userInfo.gender,
+        //         country: res.userInfo.gender,
+        //         province: res.userInfo.province,
+        //         city: res.userInfo.city
+        //       },
+        //       success(res) {
+        //         console.log('obtainSession success res ', res.data.data)
+        //         app.globalData.token = res.data.data.token
+        //         app.globalData.uid = res.data.data.uid
+
+        //         initWss(res.data.data.token, app)
+        //         getRecentDialogs(app)
+        //       },
+        //       fail(res) {
+        //         console.error('obtainSession fail res ' + res.errMsg)
+        //       },
+        //       complete(res) {
+        //         wx.hideLoading({
+        //           success: (res) => {},
+        //         })
+        //       }
+        //     })
+        //   },
+        //   fail(res) {
+        //     console.error('get userinfo fail ' + res.errMsg)
+        //     wx.hideLoading({
+        //       success: (res) => {},
+        //     })
+
+        //     wx.showModal({
+        //       title: '提示',
+        //       showCancel: false,
+        //       content: '授权失败，请前往[我的]页面完成授权登录',
+        //       success(res) {}
+        //     })
+        //   },
+        // })
       },
       fail(res) {
         console.error('wx.login fail: ' + res.errMsg)

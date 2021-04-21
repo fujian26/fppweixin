@@ -2,7 +2,7 @@
 .house {
   background-color: white;
   /* padding: 0 28rpx; */
-  padding-top: 34rpx;
+  /* padding-top: 34rpx; */
 }
 
 .house .divid {

@@ -23,7 +23,9 @@
 
     <view class="hflex-container">
       <view class="title">{{schoolExt.school.name}}</view>
-      <view class="holder"></view>
+      <view bindtap="tapAttention" class="vflex-container attention">
+        <image src="{{!attentioned ? '/images/attention_nocircle.png' : '/images/attentioned_nocircle.png'}}" />
+      </view>      
       <view class="blue-btn" bindtap="tapDetail">详情</view>
     </view>
 

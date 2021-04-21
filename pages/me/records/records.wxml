@@ -1,0 +1,25 @@
+<!--pages/me/records/records.wxml-->
+<view class="pagecontainer" style="background-color: white; height: auto;">
+
+  <basebar id="basebar" centerText="历史记录"></basebar>
+
+  <view class="divid" />
+
+  <view wx:for="{{records}}" wx:key style="padding: 0 28rpx;">
+
+    <view style="width: 100%; height: 28rpx;" />
+
+    <news-item wx:if="{{item.type == 0}}" showPadding="{{false}}" news="{{item.content}}" />
+
+    <school-item wx:if="{{item.type == 1}}" showPadding="{{false}}" showAddr="{{false}}" ext="{{item.content}}" />
+
+    <community-item wx:if="{{item.type == 2}}" showPadding="{{false}}" community="{{item.content}}" />
+
+    <house-item wx:if="{{item.type == 3}}" showPadding="{{false}}" house="{{item.content}}"
+      community="{{item.content.community}}" />
+
+    <view class="item-divid" />
+
+  </view>
+
+</view>

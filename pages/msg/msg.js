@@ -1,4 +1,7 @@
 // pages/msg/msg.js
+import util from '../../utils/util'
+import config from '../../config'
+
 let app = getApp()
 Component({
   options: {
@@ -21,6 +24,23 @@ Component({
   },
 
   created() {
+
+    if (util.isStringEmpty(app.globalData.token)) {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: config.server.tokenExpiredTip,
+        success (res) {
+          if (res.confirm) {
+            
+          } else if (res.cancel) {
+            
+          }
+        }
+      })
+      return
+    }
+
     this.getRecentDialogs()
 
     let that = this

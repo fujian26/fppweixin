@@ -12,6 +12,10 @@ Component({
   properties: {
     community: {
       type: Object
+    },
+    showPadding: {
+      type: Boolean,
+      value: true
     }
   },
 

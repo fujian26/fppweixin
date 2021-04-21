@@ -7,12 +7,12 @@ Component({
 
   created() {
 
-    setTimeout(() => {
-      this.setData({
-        userInfo: app.globalData.userInfo
-      })
-      console.log('app.globalData.userInfo', app.globalData.userInfo)
-    }, 16)
+    // setTimeout(() => {
+    //   this.setData({
+    //     userInfo: app.globalData.userInfo
+    //   })
+    //   console.log('app.globalData.userInfo', app.globalData.userInfo)
+    // }, 16)
   },
 
   options: {
@@ -85,7 +85,12 @@ Component({
 
     // 历史记录
     tapHistory(event) {
-
+      wx.navigateTo({
+        url: '/pages/me/records/records',
+        fail(res) {
+          console.error('tapHistory fail', res.errMsg)
+        }
+      })
     },
 
     // 内容推送
@@ -170,9 +175,19 @@ Component({
           city: res.userInfo.city
         },
         success(res) {
+
+          if (res.data.code != 0) {
+            console.error('obtainToken code != 0', res)
+            wx.showToast({
+              title: '操作失败',
+              icon: 'none'
+            })
+            return
+          }
+
           app.globalData.token = res.data.data.token
           app.globalData.uid = res.data.data.uid
-          appjs.initWss(res.data.data, app)
+          appjs.initWss(res.data.data.token, app)
           that.setData({
             userInfo: userInfo
           })
@@ -192,10 +207,24 @@ Component({
       })
     },
 
-    onUserInfoGet(event) {
+    tapGetUserProfile(event) {
 
-      console.log('onUserInfoGet', event)
-      let res = event.detail
+      let that = this
+
+      wx.getUserProfile({
+        lang: 'zh_CN',
+        desc: '获取用户信息',
+        success(res) {
+          console.log('tapGetUserProfile success', res)
+          that.onUserInfoGet(res)
+        },
+        fail(res) {
+          console.error('tapGetUserProfile fail', res)
+        }
+      })
+    },
+
+    onUserInfoGet(res) {
       
       if (app.globalData.loginCode == null || app.globalData.loginCode.length == 0) {
         this.wxLogin(res)

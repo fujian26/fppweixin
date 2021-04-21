@@ -1,5 +1,5 @@
 <!--components/community/item/item.wxml-->
-<view bindtap="tapItem" class="hflex-container community">
+<view bindtap="tapItem" class="hflex-container community" style="padding: {{showPadding ? 34 : 0}}rpx 0rpx; margin-bottom: {{showPadding ? 12 : 0}}rpx;">
   
   <image src="{{community.picUrls[0]}}" />
   

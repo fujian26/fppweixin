@@ -13,6 +13,10 @@ Component({
   properties: {
     news: {
       type: Object
+    },
+    showPadding: {
+      type: Boolean,
+      value: true
     }
   },
 

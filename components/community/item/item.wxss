@@ -1,15 +1,14 @@
 /* components/community/item/item.wxss */
 .community {
-  padding: 36rpx 0;
+  /* padding: 36rpx 0; */
   background-color: white;
-  margin-bottom: 12rpx;
   border-radius: 12rpx;
 }
 
 .community image {
-  width: 36%;
-  height: 190rpx;
-  border-radius: 12rpx;
+  width: 220rpx;
+  height: 174rpx;
+  border-radius: 16rpx;
 }
 
 .community .right {

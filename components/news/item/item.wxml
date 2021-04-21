@@ -12,6 +12,6 @@
 
   </view>
 
-  <view class="divid" />
+  <view wx:if="{{showPadding}}" class="divid" />
 
 </view>
