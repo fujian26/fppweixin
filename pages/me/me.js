@@ -7,12 +7,12 @@ Component({
 
   created() {
 
-    // setTimeout(() => {
-    //   this.setData({
-    //     userInfo: app.globalData.userInfo
-    //   })
-    //   console.log('app.globalData.userInfo', app.globalData.userInfo)
-    // }, 16)
+    setTimeout(() => {
+      this.setData({
+        userInfo: app.globalData.userInfo
+      })
+      console.log('app.globalData.userInfo', app.globalData.userInfo)
+    }, 16)
   },
 
   options: {

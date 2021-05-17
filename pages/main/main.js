@@ -83,10 +83,13 @@ Component({
     hotSchoolTotal: 0,
     hotCommunities: [],
     hotCommunityPageIndex: 0,
+    hotCommunityTotal: 0,
     houses: [], // 热门房源
     houseIndex: 0,
+    houseTotal: 0,
     advisories: [],
-    advisoryIndex: 0
+    advisoryIndex: 0,
+    advisoryTotal: 0
   },
 
   created() {
@@ -295,6 +298,11 @@ Component({
       var hotCommunities = this.data.hotCommunities
       let that = this
 
+      if (pageIndex * 3 >= this.data.hotCommunityTotal) {
+        pageIndex = 0
+        this.data.hotCommunityPageIndex = 0
+      }
+
       if (this.data.hotCommunityPageIndex == 0) {
         hotCommunities = []
       }
@@ -333,6 +341,8 @@ Component({
               }
               return
             }
+
+            that.data.hotCommunityTotal = Number(res.header.total)
 
             if (res.data.data.length == 0) {
               if (showLoading) {
@@ -431,7 +441,12 @@ Component({
     getHotHouses(showLoading) {
 
       let that = this
-      let houseIndex = this.data.houseIndex
+      var houseIndex = this.data.houseIndex
+
+      if (houseIndex * 3 >= this.data.houseTotal) {
+        houseIndex = 0
+        this.data.houseIndex = 0
+      }
 
       if (showLoading) {
         wx.showLoading({
@@ -460,7 +475,9 @@ Component({
             })
           } else {
 
-            if (res.data.data == null || res.data.data.length == 0) {
+            that.data.houseTotal = Number(res.header.total)
+
+            if (res.data.data == null) {
               if (showLoading) {
                 wx.showToast({
                   title: '没有更多数据',
@@ -471,9 +488,14 @@ Component({
               return
             }
 
+            var expectIndex = houseIndex + 1
+            if (expectIndex * 3 >= that.data.houseTotal) {
+              expectIndex = 0
+            }
+
             that.setData({
               houses: res.data.data,
-              houseIndex: houseIndex + 1
+              houseIndex: expectIndex
             })
           }
         },
@@ -508,8 +530,13 @@ Component({
     getAdvisories(showLoading) {
       let that = this
       let cityCode = this.data.cityCode
-      let pageIndex = this.data.advisoryIndex
+      var pageIndex = this.data.advisoryIndex
       var advisories = this.data.advisories
+
+      if (pageIndex * 3 >= this.data.advisoryTotal) {
+        pageIndex = 0
+        this.data.advisoryIndex = 0
+      }
 
       if (showLoading) {
         wx.showLoading({
@@ -541,17 +568,17 @@ Component({
             return
           }
 
-          if (res.data.data.length == 0) {
-            console.error('getAdvisories res.data.data.length == 0')
-            that.data.advisoryIndex = 0
-            return
+          that.data.advisoryTotal = Number(res.header.total)
+          var expectIndex = pageIndex + 1
+          if (expectIndex * 3 >= that.data.advisoryTotal) {
+            expectIndex = 0            
           }
 
           advisories = res.data.data
 
           that.setData({
             advisories: advisories,
-            advisoryIndex: pageIndex + 1
+            advisoryIndex: expectIndex
           })
         },
         fail(res) {

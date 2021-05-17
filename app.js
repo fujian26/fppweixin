@@ -101,6 +101,64 @@ let getRecentDialogs = function (app) {
   })
 }
 
+let register = function(loginCode, res) {
+
+  wx.showLoading({
+    title: '',
+  })
+
+  wx.request({
+    url: app.globalData.baseUrl + '/wx/obtainSession',
+    method: 'POST',
+    header: {
+      'content-type': 'application/json'
+    },
+    data: {
+      loginCode: loginCode,
+      rawData: res.rawData,
+      signature: res.signature,
+      encryptedData: res.encryptedData,
+      iv: res.iv,
+      nickName: res.userInfo.nickName,
+      avatarUrl: res.userInfo.avatarUrl,
+      gender: res.userInfo.gender,
+      country: res.userInfo.gender,
+      province: res.userInfo.province,
+      city: res.userInfo.city
+    },
+    success(res) {
+
+      if (res.data.code != 0) {
+        console.error('register code != 0', res)
+        wx.showToast({
+          title: '注册失败',
+          icon: 'none'
+        })
+        return
+      }
+
+      app.globalData.token = res.data.data.token
+      app.globalData.uid = res.data.data.uid
+      appjs.initWss(res.data.data.token, app)
+      that.setData({
+        userInfo: userInfo
+      })
+    },
+    fail(res) {
+      console.error('register obtainSession fail res ' + res.errMsg)
+      wx.showToast({
+        title: '注册失败',
+        icon: 'none'
+      })
+    },
+    complete(res) {
+      wx.hideLoading({
+        success: (res) => {},
+      })
+    }
+  })
+}
+
 App({
   onLaunch() {
     // 展示本地存储能力
@@ -127,65 +185,70 @@ App({
           success: (res) => {},
         })
 
-        // wx.getUserInfo({
-        //   lang: 'zh_CN',
-        //   success(res) {
+        wx.request({
+          url: app.globalData.baseUrl + '/wx/obtainSession',
+          method: 'POST',
+          header: {
+            'content-type': 'application/json'
+          },
+          data: {
+            loginCode: loginCode
+          },
+          success(res) {
 
-        //     console.log('getUserInfo userInfo', res.userInfo)
+            if (res.data.code != 0) { // 需要注册
+              wx.showModal({
+                title: '提示',                
+                content: "您需要授权注册",
+                confirmText: "授权",
+                success (res) {
+                  if (res.confirm) {
+                    wx.getUserProfile({
+                      lang: 'zh_CN',
+                      desc: '获取用户信息',
+                      success(res) {
+                        register(loginCode, res)
+                      },
+                      fail(res) {
+                        wx.showToast({
+                          title: '注册失败',
+                          icon: 'none'
+                        })
+                      }
+                    })
+                  } else if (res.cancel) {
+                    
+                  }
+                }
+              })
+              return
+            }
 
-        //     that.globalData.userInfo = res.userInfo
+            console.log('obtainSession success res ', res.data.data)
+            
+            app.globalData.token = res.data.data.token
+            app.globalData.uid = res.data.data.uid
 
-        //     wx.request({
-        //       url: app.globalData.baseUrl + '/wx/obtainSession',
-        //       method: 'POST',
-        //       header: {
-        //         'content-type': 'application/json'
-        //       },
-        //       data: {
-        //         loginCode: loginCode,
-        //         rawData: res.rawData,
-        //         signature: res.signature,
-        //         encryptedData: res.encryptedData,
-        //         iv: res.iv,
-        //         nickName: res.userInfo.nickName,
-        //         avatarUrl: res.userInfo.avatarUrl,
-        //         gender: res.userInfo.gender,
-        //         country: res.userInfo.gender,
-        //         province: res.userInfo.province,
-        //         city: res.userInfo.city
-        //       },
-        //       success(res) {
-        //         console.log('obtainSession success res ', res.data.data)
-        //         app.globalData.token = res.data.data.token
-        //         app.globalData.uid = res.data.data.uid
+            let respData = res.data.data
 
-        //         initWss(res.data.data.token, app)
-        //         getRecentDialogs(app)
-        //       },
-        //       fail(res) {
-        //         console.error('obtainSession fail res ' + res.errMsg)
-        //       },
-        //       complete(res) {
-        //         wx.hideLoading({
-        //           success: (res) => {},
-        //         })
-        //       }
-        //     })
-        //   },
-        //   fail(res) {
-        //     console.error('get userinfo fail ' + res.errMsg)
-        //     wx.hideLoading({
-        //       success: (res) => {},
-        //     })
+            app.globalData.userInfo = {
+              nickName: respData.nickName,
+              avatarUrl: respData.avatar,
+              gender: respData.gender
+            }
 
-        //     wx.showModal({
-        //       title: '提示',
-        //       showCancel: false,
-        //       content: '授权失败，请前往[我的]页面完成授权登录',
-        //       success(res) {}
-        //     })
-        //   },
-        // })
+            initWss(res.data.data.token, app)
+            getRecentDialogs(app)
+          },
+          fail(res) {
+            console.error('obtainSession fail res ' + res.errMsg)
+          },
+          complete(res) {
+            wx.hideLoading({
+              success: (res) => {},
+            })
+          }
+        })
       },
       fail(res) {
         console.error('wx.login fail: ' + res.errMsg)
@@ -235,8 +298,8 @@ App({
     userInfo: null,
     lng: 103.92377, // todo 暂定成都
     lat: 30.57447, // todo 暂定成都
-    baseUrl: 'https://fang.bigdnsoft.cn/fpp',
-    wssUrl: 'wss://fang.bigdnsoft.cn/fpp/websocket/',
+    baseUrl: 'https://fang.bigdnsoft.cn',
+    wssUrl: 'wss://fang.bigdnsoft.cn/websocket/',
     token: '',
     uid: '',
     bus: eventbus.eventBus,
