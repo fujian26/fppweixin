@@ -107,6 +107,8 @@ let register = function(loginCode, res) {
     title: '',
   })
 
+  var app = getApp()
+
   wx.request({
     url: app.globalData.baseUrl + '/wx/obtainSession',
     method: 'POST',
@@ -197,6 +199,7 @@ App({
           success(res) {
 
             if (res.data.code != 0) { // 需要注册
+
               wx.showModal({
                 title: '提示',                
                 content: "您需要授权注册",
