@@ -162,7 +162,7 @@ let register = function(loginCode, res) {
 }
 
 App({
-  onLaunch() {
+  onShow() {
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -294,6 +294,11 @@ App({
       }
     })
   },
+
+  onHide() {
+    wx.closeSocket()
+  },
+
   globalData: {
     loginCode: '',
     cityCode: '5101', //todo 暂定成都
@@ -301,8 +306,8 @@ App({
     userInfo: null,
     lng: 103.92377, // todo 暂定成都
     lat: 30.57447, // todo 暂定成都
-    baseUrl: 'https://fang.bigdnsoft.cn',
-    wssUrl: 'wss://fang.bigdnsoft.cn/websocket/',
+    baseUrl: 'https://fang.bigdnsoft.cn/fpp',
+    wssUrl: 'wss://fang.bigdnsoft.cn/fpp/websocket/',
     token: '',
     uid: '',
     bus: eventbus.eventBus,

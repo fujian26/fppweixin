@@ -226,11 +226,13 @@ Component({
 
     onUserInfoGet(res) {
       
-      if (app.globalData.loginCode == null || app.globalData.loginCode.length == 0) {
-        this.wxLogin(res)
-      } else {
-        this.obtainToken(true, app.globalData.loginCode, res)
-      }
+      // if (app.globalData.loginCode == null || app.globalData.loginCode.length == 0) {
+      //   this.wxLogin(res)
+      // } else {
+      //   this.obtainToken(true, app.globalData.loginCode, res)
+      // }
+
+      this.wxLogin(res) // 每次都去请求最新的 code，因为 code 有效期 5 分钟
     },
   }
 })
