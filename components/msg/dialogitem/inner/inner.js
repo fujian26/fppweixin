@@ -12,6 +12,10 @@ Component({
   properties: {
     msg: {
       type: Object
+    },
+    senderIsMe: {
+      type: Boolean,
+      value: false
     }
   },
 

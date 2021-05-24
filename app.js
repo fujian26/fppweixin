@@ -47,6 +47,10 @@ let initWss = function (token, app) {
         app.globalData.bus.emit('newMsg', JSON.parse(JSON.stringify(data.content)))
         app.globalData.bus.emit('dialogNewMsg', data.content)
         break;
+      case 1: // 已读消息
+        var msgReadData = JSON.parse(JSON.stringify(data.content))
+        app.globalData.bus.emit('msgRead', msgReadData)
+        break
       default:
         console.error('wss unknown message type: ' + data.type)
         break;

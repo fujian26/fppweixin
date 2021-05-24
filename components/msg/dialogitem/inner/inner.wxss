@@ -84,3 +84,19 @@
   padding: 0;
   margin-right: 8rpx;
 }
+
+.read_text {
+  font-size: 20rpx;
+  padding: 0;
+  margin: 0; 
+  margin-top: 2rpx;
+  text-align: right;
+}
+
+.read {
+  color: #cccccc;
+}
+
+.unread {
+  color: salmon;
+}

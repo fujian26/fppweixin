@@ -81,8 +81,48 @@ Page({
 
       app.globalData.unReadMsgNum--
       app.globalData.bus.emit('msgNum')
+      
+      this.sendReadMsgToServer([msg.id], [msg], msg.sender_uid)
 
-      that.updateMsgRead(msg.id)
+      // that.updateMsgRead(msg.id)
+    })
+
+    // 已读通知
+    app.globalData.bus.on('msgRead', (msgReadData) => {
+      var dialogId = that.data.dialogId
+      if (msgReadData.dialogId != dialogId) {
+        console.warn('msgRead dialogId not match, dialogId: ' + dialogId)
+        return
+      }
+
+      let msgs = that.data.msgs
+      var readIdList = msgReadData.msgIdList
+      var hasChanged = false
+
+      for (var i = 0; i < msgs.length; i++) {
+
+        if (readIdList != null && readIdList != 'undefined') {
+          if (readIdList.length == 0) {
+            break
+          }
+
+          var index = readIdList.indexOf(msgs[i].id)
+          if (index >= 0) {
+            msgs[i].receiver_read = true
+            readIdList.splice(index, 1)
+            hasChanged = true
+          }
+        } else {
+          msgs[i].receiver_read = true
+          hasChanged = true
+        }
+      }
+
+      if (hasChanged) {
+        that.setData({
+          msgs: msgs
+        })
+      }
     })
   },
 
@@ -567,8 +607,68 @@ Page({
     })
   },
 
+  sendReadMsgToServer(msgIdList, unReadMsgs, receiverUid) {
+
+    var msgReadData = {
+      dialogId: this.data.dialogId,
+      receiverUid: receiverUid,
+      msgIdList: msgIdList
+    }
+
+    var data = {
+      uid: app.globalData.uid,
+      type: 0,
+      contentJson: JSON.stringify(msgReadData)
+    }
+
+    wx.sendSocketMessage({
+      data: JSON.stringify(data),
+      success(res) {
+        console.log('send read operation success', res)
+        for (var i = 0; i < unReadMsgs.length; i++) {
+          unReadMsgs[i].receiver_read = true
+        }
+      },
+      fail(res) {
+        console.error('send read operation fail', res)
+      }
+    }, )
+
+  },
+
   onSvScroll(event) {
-    // console.log('onSvScroll', event)
+
+    console.log('onSvScroll', event)
+    clearTimeout(this.data.readCheckTimeOut)
+
+    let msgs = this.data.msgs
+    var unReadMsgs = []
+    for (var i = 0; i < msgs.length; i++) {
+      if (msgs[i].receiver_uid == app.globalData.uid && !msgs[i].receiver_read) {
+        unReadMsgs.push(msgs[i])
+      }
+    }
+
+    console.log('unReadMsgs.length', unReadMsgs.length)
+
+    if (unReadMsgs.length == 0) {
+      return
+    }
+
+    this.data.readCheckTimeOut = setTimeout(() => {
+
+
+      var receiverUid = -1
+      var msgIdList = []
+
+      for (var i = 0; i < unReadMsgs.length; i++) {
+        msgIdList.push(unReadMsgs[i].id)
+        receiverUid = unReadMsgs[i].sender_uid
+      }
+
+      this.sendReadMsgToServer(msgIdList, unReadMsgs, receiverUid)
+
+    }, 1000);
   },
 
   switchMorePanel() {

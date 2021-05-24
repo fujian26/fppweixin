@@ -3,7 +3,7 @@
 
   <basebar id="basebar" centerText="{{title}}"></basebar>
 
-  <scroll-view class="sv" scroll-into-view="{{svToView}}" style="height: {{svHeight}}rpx" refresher-triggered="{{refreshTrigger}}" refresher-enabled="true" bindrefresherrefresh="loadMore" scroll-y bindscroll="onSvScroll">
+  <scroll-view class="sv" enhanced="true" scroll-into-view="{{svToView}}" style="height: {{svHeight}}rpx" refresher-triggered="{{refreshTrigger}}" refresher-enabled="true" bindrefresherrefresh="loadMore" scroll-y bindscroll="onSvScroll">
     <msg-dialogitem id="msg-{{index}}" wx:for="{{msgs}}" wx:key="id" msg="{{item}}" otherUser="{{otherUser}}" />
   </scroll-view>
 

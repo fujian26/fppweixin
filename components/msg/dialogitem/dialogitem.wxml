@@ -3,13 +3,13 @@
   <image class="avatar" src="{{otherUser.avatar}}" />
   <view class="divid" />
   <view class="msg hflex-container" style="justify-content: flex-start;">
-    <msg-dialogitem-inner msg="{{msg}}" />
+    <msg-dialogitem-inner msg="{{msg}}" senderIsMe="{{senderIsMe}}" />
   </view>
 </view>
 
 <view wx:if="{{senderIsMe && msg.date == undefined}}" class="item hflex-container">
   <view class="msg hflex-container" style="justify-content: flex-end;">
-    <msg-dialogitem-inner msg="{{msg}}" />
+    <msg-dialogitem-inner msg="{{msg}}" senderIsMe="{{senderIsMe}}" />
   </view>
   <view class="divid" />
   <image class="avatar" src="{{otherUser.avatar}}" />

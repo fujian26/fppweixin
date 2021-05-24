@@ -15,3 +15,4 @@
   <image src="{{playing ? '/images/voice_playing.png' : '/images/voice.png'}}"/>
   <view>{{msg.contentObj.duration}}s</view>
 </view>
+<view wx:if="{{senderIsMe}}" class="read_text {{msg.receiver_read ? 'read' : 'unread'}}">{{msg.receiver_read ? '已读' : '未读'}}</view>
